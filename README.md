@@ -325,7 +325,7 @@ $(JGDS).on("beforeload", function(){
 			// 열매핑은 열매핑을 지원하는 태그에 jg-column을 정의합니다.
 			// 열매핑을 지원하는 태그의 종류
 			// 라벨형식 : label, span, p, 등
-			// 입력형식 : input, select, textarea 등
+			// 입력형식 : input, select, textarea, div[contenteditable] 등
 			
 			// 라벨형식
 			// UI를 통한 데이타수정은 불가능하며
