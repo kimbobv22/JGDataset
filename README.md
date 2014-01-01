@@ -367,30 +367,6 @@ $(JGDS).on("beforeload", function(){
 	</body>
 	</html>
 	
-###열단순참조
-
-행매핑된 태그 안에 <code>##참조명##</code> 형식으로 데이타셋의 행색인이나 열값을 참조할 수 있습니다.
-
-* 표현식에서 <code>##dataset.rowIndex##</code>로 데이타셋 행색인을 가져올 수 있습니다.
-* 표현식에서 <code>##dataset.rowStatus##</code>로 데이타셋 행상태을 가져올 수 있습니다.
-* 해당 행의 열을 <code>##열명##</code>로 참조할 수 있습니다.
-	
-	
-		<div jg-dataset="dataset">
-			<p>
-				
-				// 행색인 참조
-				##dataset.rowIndex##
-				
-				//행상태 참조
-				##dataset.rowStatus##
-				
-				// 열값 참조
-				##col1##
-				
-			</p>
-		</div>
-
 ###표현식
 
 JGDataset for JavaScript는 HTML매핑 시, 간단한 표현식을 지원합니다.<br>
