@@ -11,7 +11,7 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script><!---->
 <!-- JGModule -->
-<script src="../libs/JGDataset.1.0.0.js"></script>
+<script src="../js/JGDataset.1.0.0.js"></script>
 <script type="text/javascript">
 $(JGDS).on("beforeload",function(){
 	var mainData_ = JGDS("mainData");
@@ -33,9 +33,12 @@ $(JGDS).on("beforeload",function(){
 	selectData_.setColumnValues(selectData_.addRow(),["code", "003", "name", "test3"]);
 	selectData_.apply();
 	
+	$("#testDataView").on("datasetmapped",function(event_,rowIndex_){
+		console.log(rowIndex_);
+	});
+	
 	printTotal();
 });
-
 
 function addRow(){JGDS("mainData").addRow();printTotal();}
 function removeRow(){
@@ -69,18 +72,18 @@ function printDataset(){printLog("-------------<br>"+JGDS("mainData").toJSONStri
 <div data-role="page">
 	<div data-role="content">
 	
-	<table jg-dataset="mainData">
-		<tr><!-- row template must be only one child-->
-			<td><label>##fx:##dataset.rowindex##+1</label></td>
-			<td>
-				<input jg-column="col1">
-			</td>
+	<table jg-dataset="mainData" id="testDataView">
+		<tbody>
+		<tr>
+			<td><label test-attr="##col1##" dummy="##fx:console.log('test')">##fx:##dataset.rowindex##+1</label></td>
+			<td><input jg-column="col1" type="text"></td>
 			<td><input jg-column="col2" readonly="##fx:'##col1##' == 'lock' ? readonly : false"></td>
-			<td><label><b>COL2 : </b></label><span jg-column="col2"></span></td>
+			<td><label><b>COL2 : </b></label><div jg-column="col2" contenteditable></div></td>
 			<td><input jg-column="col3"></td>
 			<td><select jg-column="col3" jg-bind-dataset="selectData" jg-display-column="name" jg-value-column="code" jg-blank-title="¼±ÅÃ"></select></td>
 			<td><label>##fx:(##col1##)-(##col2##)</label><label style="font-size: 11px; color:gray;">(*COL1 - COL2)</label></td>
 		</tr>
+		</tbody>
 	</table>
 	<p><label id="dataset-total" style="font-size: 12px;"></label></p>
 	
@@ -93,7 +96,7 @@ function printDataset(){printLog("-------------<br>"+JGDS("mainData").toJSONStri
 	<a href="javascript:printDataset();">print-dataset</a>
 	
 	<div class="jg-logbox">
-		<div class="log-content"></div>
+		<div class="log-content" contenteditable></div>
 		<a href="javascript:clearLog();" class="clear">clear</a>
 	</div>
 	</div>
