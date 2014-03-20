@@ -57,7 +57,7 @@
 		
 		//bind dataset event
 		$(dataset_).on(_JGKeyword.trigger._columnValueChanged, function(event_, columnName_, rowIndex_){
-			that_._singleValidate(columnName_, rowIndex_, function(){});
+			if(that_._options.realtimeCheck) that_._singleValidate(columnName_, rowIndex_, function(){});
 		});
 		$(dataset_).on(_JGKeyword.trigger._columnAdded+" "
 						+_JGKeyword.trigger._columnRemoved+" "
@@ -550,6 +550,7 @@
 		errorMessageTag : "<span style='display:block;' />"
 		,appendErrorMessage : true
 		,stepValidation : true
+		,realtimeCheck : true
 	};
 	_JGValidator.prototype.options = (function(){
 		if($.type(arguments[0]) === "string"){
