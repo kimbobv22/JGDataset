@@ -51,6 +51,14 @@ $(function(){
 	$(dataset_).on("columnvaluechanged",function(){
 		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
 	});
+	
+	$("#realtimeCheck").on("change",function(){
+		datasetView_.JGValidator("options",{
+			realtimeCheck : $(this).prop("checked")
+		});
+		
+	});
+	
 	validate();
 });
 
@@ -82,8 +90,8 @@ function validate(){
 	
 	<p><b>result : <span id="validationResultLabel"></span></b></p>
 	
+	<p><input type="checkbox" id="realtimeCheck" checked/>realtime check</p>
 	<a href="javascript:validate();">validate it(check console)</a>
-	
 	
 </body>
 </html>
