@@ -47,13 +47,6 @@
 		}
 	};
 	
-	
-	/**
-	 * JGSelector
-	 * @constructor
-	 * @param {object} title - The title of the book.
-	 * @param {array} author - The author of the book.
-	 */
 	var _JGSelector = window.JGSelector = (function(target_, args_){
 		if(args_.length === 0) return target_;
 		
@@ -110,9 +103,6 @@
 		this[oIndex_] = this[nIndex_];
 		this[nIndex_] = temp_;
 	};
-	Array.prototype.clone = (function(){
-		return this.slice(0);
-	});
 	
 	var JGDatasetColumn = window.JGDatasetColumn = (function(columnName_){
 		this.name = columnName_.toUpperCase();
@@ -130,6 +120,11 @@
 	});
 	JGDatasetColumn.prototype.setKey = (function(bool_){
 		this._isKey = bool_;
+	});
+	JGDatasetColumn.prototype.clone = (function(bool_){
+		var copy_ = new JGDatasetColumn(this.name);
+		copy_._isKey = this._isKey;
+		return copy_;
 	});
 	
 	var JGDatasetRow = window.JGDatasetRow = (function(){
@@ -186,16 +181,17 @@
 	});
 
 	JGDatasetRow.prototype.apply = (function(fireEvent_){
-		this._orgColumns = {};
 		this._orgColumns = JSON.parse(JSON.stringify(this._columns));
 		this._rowStatus = _JGKeyword.rowStatus.normal;
 		this._columnStatus = {};
 	});
-	JGDatasetRow.prototype.reset = (function(){
-		this._columns = {};
-		this._columns = JSON.parse(JSON.stringify(this._orgColumns));
-		this._rowStatus = _JGKeyword.rowStatus.normal;
-		this._columnStatus = {};
+	JGDatasetRow.prototype.clone = (function(bool_){
+		var copy_ = new JGDatasetRow();
+		copy_._columns = $.extend(true,{},this._columns);
+		copy_._orgColumns = $.extend(true,{},this._orgColumns);
+		copy_._columnStatus = $.extend(true,{},this._columnStatus);
+		copy_._rowStatus = this._rowStatus;
+		return copy_;
 	});
 
 	/**
@@ -488,21 +484,40 @@
 		$(this).trigger(_JGKeyword.trigger._datasetClear, [Object.NVL(arguments[1], true)]);
 	});
 	JGDataset.prototype.apply = (function(fireEvent_){
+		this._orgRowData = new Array();
+		this._orgColumnInfo = new Array();
+		
 		var rowCount_ = this._rowData.length;
 		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
 			var rowItem_ = this.getRow(rowIndex_);
 			rowItem_.apply();
+			this._orgRowData.push(rowItem_.clone());
 		}
+		
+		var colCount_ = this._columnInfo.length;
+		for(var colIndex_=0;colIndex_<colCount_;++colIndex_){
+			this._orgColumnInfo.push(this.getColumn(colIndex_).clone());
+		}
+		
 		this._deletedRowData = new Array();
-		this._orgRowData = this._rowData.clone();
-		this._orgColumnInfo = this._columnInfo.clone();
+		
 		$(this).trigger(_JGKeyword.trigger._datasetApply, [Object.NVL(fireEvent_, true)]);
 	});
 	JGDataset.prototype.reset = (function(fireEvent_){
+		this._columnInfo = new Array();
 		this._rowData = new Array();
+		
+		var rowCount_ = this._orgRowData.length;
+		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
+			this._rowData.push(this._orgRowData[rowIndex_].clone());
+		}
+		
+		var colCount_ = this._orgColumnInfo.length;
+		for(var colIndex_=0;colIndex_<colCount_;++colIndex_){
+			this._columnInfo.push(this._orgColumnInfo[colIndex_].clone());
+		}
+		
 		this._deletedRowData = new Array();
-		this._rowData = this._orgRowData.clone();
-		this._columnInfo = this._orgColumnInfo.clone();
 		$(this).trigger(_JGKeyword.trigger._datasetReset, [Object.NVL(fireEvent_, true)]);
 	});
 	JGDataset.prototype.isModified = (function(){
@@ -737,8 +752,8 @@
 	JGDataset.prototype.exportModifiedData = (function(){
 		var dataset_ = new JGDataset();
 		
-		dataset_._columnInfo = this._columnInfo.clone();
-		dataset_._deletedRowData = this._deletedRowData.clone();
+		dataset_._columnInfo = $.extend(true, [], this._columnInfo);
+		dataset_._deletedRowData = $.extend(true, [], this._deletedRowData);
 		
 		var columnCount_ = this.getColumnCount();
 		var rowCount_ = this.getRowCount();
