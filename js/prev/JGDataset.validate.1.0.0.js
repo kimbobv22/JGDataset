@@ -13,7 +13,7 @@
 	
 	function _getJSONDataWithoutCase(key_, json_){
 		for(var tKey_ in json_){
-			if(tKey_.toUpperCase() == key_.toUpperCase()){
+			if(tKey_.toUpperCase() === key_.toUpperCase()){
 				return json_[tKey_];
 			}
 		}
@@ -21,8 +21,7 @@
 	}
 	
 	$.widget("jg.JGDSValidator",{
-		initSelectr : "[jg-validator]"
-		,_validators : null
+		_validators : null
 		,validators : function(validators_){
 			if(Object.isNull(validators_)){
 				return this._validators;
@@ -72,11 +71,9 @@
 			dataset_.fullValidate = function(callback_){
 				that_.fullValidate(callback_);
 			};
-			dataset_.isValid = function(){
-				return that_.isValid();
-			};
 			
 			this.refresh();
+			
 		},refresh : function(){
 			//auto add validator by mapped view
 			this._isValid = false;
@@ -398,7 +395,7 @@
 			callback_ = Object.NVL(callback_,function(){});
 			
 			if(columnIndex_ == colCount_){
-				callback_.apply(dataset_, this._isValid, this._validationResult);
+				callback_.apply(dataset_, this._validationResult);
 				return;
 			}else if(columnIndex_ < colCount_ && rowIndex_ == rowCount_){
 				this._recursiveFullValidate(columnIndex_+1, 0, callback_);
@@ -441,7 +438,6 @@
 		,range : "range : {from} ~ {to}"
 		,rangeLength : "length : {from} ~ {to}"
 		,equals : "equals : {value}"
-		,notEquals : "not equals : {value}"
 		,pattern : "pattern : {pattern}"
 		,patternWord : "pattern word"
 		,patternAlphabet : "pattern alphabet"
@@ -449,8 +445,6 @@
 		,patternEmail : "pattern email"
 		,patternNumber : "pattern number"
 		,patternPhone : "pattern phone"
-		,columnEquals : "column be equals to {value}"
-		,columnNotEquals : "column be not equals to {value}"
 	};
 	
 	$.jg.JGDSValidator.prototype.validateEngine = {
@@ -463,7 +457,7 @@
 		},minLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			callback_((validatorElement_.length <= _lengthOfChar(Object.NVL(columnValue_,""))));
 		},length : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_((validatorElement_.length === _lengthOfChar(Object.NVL(columnValue_,""))));
+			callback_((validatorElement_.length == _lengthOfChar(Object.NVL(columnValue_,""))));
 		},range : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			var cColumnValue_ = parseInt(columnValue_);
 			callback_(validatorElement_.from <= cColumnValue_ && validatorElement_.to >= cColumnValue_);
@@ -471,9 +465,7 @@
 			var cLength_ = _lengthOfChar(Object.NVL(columnValue_,""));
 			callback_(validatorElement_.from <= cLength_ && validatorElement_.to >= cLength_);
 		},equals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.value === columnValue_);
-		},notEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.value !== columnValue_);
+			callback_(validatorElement_.value == columnValue_);
 		},pattern : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			callback_(_checkRegexp(validatorElement_.pattern, columnValue_));
 		},patternWord : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
@@ -530,4 +522,14 @@
 	
 	$.jg.JGDSValidator.STR_ERRORCOLUMNNAME = "jg-error-column";
 	
+	/**
+	 * validator auto bind
+	 */
+	$(JGDS).on("afterload",function(){
+		var target_ = $("[jg-dataset-validator][jg-dataset]");
+		
+		$.each(target_, function(index_){
+			$(JGDS($(this).attr("jg-dataset"))).JGDSValidator();
+		});
+	});
 })(jQuery);

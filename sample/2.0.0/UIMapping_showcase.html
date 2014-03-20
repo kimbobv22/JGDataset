@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping Showcase</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	dataset_.addRows(3);
+	
+	dataset_.setColumnValue("col1",0,"00001",true);
+	dataset_.setColumnValue("col2",0,true,true);
+	dataset_.setColumnValue("col3",0,null,true);
+	
+	dataset_.setColumnValue("col1",1,"00003",true);
+	dataset_.setColumnValue("col2",1,false,true);
+	
+	dataset_.setColumnValue("col1",2,"00005",true);
+	dataset_.setColumnValue("col2",2,true,true);
+	
+	dataset_.apply();
+	
+	var selectData_ = JGDS("dataset","selectData");
+	selectData_.addRows(3);
+	
+	selectData_.setColumnValues({
+		nm : "option 1"
+		,id : "00001"
+	},0,true);
+	selectData_.setColumnValues({
+		nm : "option 2"
+		,id : "00003"
+	},1,true);
+	selectData_.setColumnValues({
+		nm : "option 3"
+		,id : "00005"
+	},2,true);
+	
+	var datasetView_ = $("[jg-dataset='testDataset']");
+	datasetView_.on("datasetuirowmapped",function(event_, rowIndex_){
+		console.log("row mapped : "+rowIndex_);
+	});
+	datasetView_.JGDatasetUI();
+	
+	printIt();
+});
+function printIt(){
+	var dataset_ = JGDS("dataset","testDataset");
+	$(".logger").text(dataset_.toJSONString(false));
+}
+function addRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.addRow();
+	printIt();
+}
+function removeRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.removeRow(dataset_.getRowCount()-1);
+	printIt();
+}
+function apply(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.apply();
+	printIt();
+}
+function reset(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.reset();
+	printIt();
+}
+function clear(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.clear();
+	printIt();
+}
+function sort(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.sortRowByAsc("col1");
+	//dataset_.sortRowByDesc("col1");
+	printIt();
+}
+function moveRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.moveRow(0,2);
+	printIt();
+}
+</script>
+</head>
+<body>
+	<h2>UI Mapping Showcase</h2>
+	<p><table border="1">
+		<thead>
+			<tr>
+				<th>Row index + 1	</th>
+				<th>Row Status</th>
+				<th>COL1(display)</th>
+				<th>COL1(input)</th>
+				<th>COL1(select)</th>
+				<th>COL2(display)</th>
+				<th>COL2(checkbox)</th>
+				<th>COL2(fx)</th>
+			</tr>
+		</thead>
+		<tbody jg-dataset="testDataset">
+			<tr style="##fx:##dataset.rowStatus## === 1 ? 'background-color:pink;' : (##dataset.rowStatus## === 3 ? 'background-color:yellow;': '')">
+				<td>##fx:##dataset.rowIndex##+1</td>
+				<td>##fx:##dataset.rowStatus##</td>
+				<td jg-column="col1"></td>
+				<td><input type="text" jg-column="col1"></td>
+				<td><select jg-bind-dataset="selectData" jg-display-column="nm" jg-value-column="id" jg-column="col1"></select></td>
+				<td jg-column="col2"></td>
+				<td><input type="checkbox" jg-column="col2"></td>
+				<td>##fx:##col2## === true ? '<b>Yes</b>' : '<i>No</i>'</td>
+			</tr>
+		</tbody>
+	</table></p>
+	
+	<p>
+	<a href="javascript:addRow();">add row</a>
+	<a href="javascript:removeRow();">remove row</a>
+	<a href="javascript:moveRow();">move row(0 -> 2)</a>
+	</p>
+	<p>
+	<a href="javascript:apply();">apply</a>
+	<a href="javascript:reset();">reset</a>
+	<a href="javascript:clear();">clear</a>
+	<a href="javascript:sort();">sort(col1, asc)</a>
+	<a href="javascript:printIt();">print it</a>
+	<div class="logger"></div>
+	</p>
+</body>
+</html>

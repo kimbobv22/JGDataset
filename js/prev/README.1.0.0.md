@@ -1,4 +1,4 @@
-#JGDataset for JAVA (V1.1.0)
+#JGDataset for JAVA
 ###with JGDataset for Javascript
 ###사용하기 전, 반드시 라이센스를 확인하세요
 
@@ -20,8 +20,7 @@
 [javascript.JGDS](#javascript.JGDS)<br>
 
 [javascript.JGDataset](#javascript.JGDataset)<br>
-[javascript.JGDatasetUI](#javascript.JGDatasetUI)<br>
-[javascript.JGDatasetUI.validator](#javascript.JGDatasetUI.validator)<br>
+[javascript.JGDataset.validator](#javascript.JGDataset.validator)<br>
 
 #Documents
 
@@ -261,25 +260,144 @@ JGDataset for JavaScript를 이용하여 Web에서도 행열단위의 작업을 
 
 JGDS는 JGDataset for Javascript 관리를 위한 공유객체입니다.<br>
 JGDS를 통해 생성된 JGDataset는 인스턴스에 남게 되며 필요할 때 호출할 수 있습니다.<br>
+또한, HTML와 JGDataset을 매핑하는 기능을 제공함으로 보다 유연한 JGDataset 작업을 수행할 수 있습니다.
 	
 	//형식
-	JGDS(명령어);
+	JGDS(색인|데이타셋명 [, JSON|JSONString]);
 	
 	//생성
-	var dataset1_ = JGDS("dataset",데이타셋명);
-	var dataset2_ = JGDS("dataset",데이타셋명, JSON|JSONString);
+	var dataset1_ = JGDS(데이타셋명);
+	var dataset2_ = JGDS(데이타셋명, JSON|JSONString);
 	
 	//복수의 데이터셋 생성
-	JGDS("make", 데이터셋명1 [, 데이터셋명2, ...]);
+	JGDS.make(데이터셋명1 [, 데이터셋명2, ...]);
 	
 	//삭제
-	JGDS("remove",데이터셋명);
-	JGDS("remove",색인);
+	JGDS.remove(데이터셋명);
+	JGDS.remove(색인);
 	
 	//가져오기
-	var dataset1_ = JGDS("dataset",색인);
-	var dataset2_ = JGDS("dataset",데이타셋명);
+	var dataset1_ = JGDS(색인);
+	var dataset2_ = JGDS(데이타셋명);
+<br>	
+###JQuery 이벤트 리스너
+
+JGDS가 적재되기 전,후 의 이벤트 리스너를 정의할 수 있습니다.
+
+	//JGDS가 적재되기 전
+	$(JGDS).on("beforeload", function(){
+		// 여기에서 JGDataset을 생성하는 것을 추천합니다.
+	});
+	
+	//JGDS가 적재된 후
+	$(JGDS).on("afterload", function(){
+		// ...
+	});
 <br>
+###HTML에 매핑하기
+JGDataset를 HTML에 매핑하여 보다 편리하게 JGDataset 작업을 수행할 수 있습니다.<br>
+매핑된 JGDataset을 수정하면 즉각적으로 HTML에 반영됩니다.<br>
+HTML태그에 속성값만 추가하면 간단하게 자동으로 HTML과 매핑됩니다.<br>
+
+####JavaScript
+<pre>
+$(JGDS).on("beforeload", function(){
+	// 자동매핑 작업은 "beforeload" 이벤트 직후에 이루어지기 때문에
+	// 여기에 데이타셋을 생성하는 해야만 합니다.
+	
+	var dataset_ = JGDS("매핑데이타셋");
+	dataset_.setColumnValues(dataset_.addRow(),["col1", "testValue", "col2", 123],true);
+});
+</pre>
+####HTML
+
+	<html>
+	<head>...</head>
+	<body>
+	
+	// 특정태그 jg-dataset 속성값에 매핑할 데이타셋명을 정의합니다.
+	// div태그 외, 다른 태그도 사용가능합니다.
+	<div jg-dataset="매핑데이타셋">
+		
+		// 반드시 행데이타가 될 태그 하나만 존재해야 합니다.
+		// 매핑된 태그의 자식태그가 복수로 존재한다면 정상적인 매핑이 이루어지지 않습니다.
+		<p>
+			// 열매핑은 열매핑을 지원하는 태그에 jg-column을 정의합니다.
+			// 열매핑을 지원하는 태그의 종류
+			// 라벨형식 : label, span, p, 등
+			// 입력형식 : input, select, textarea, div[contenteditable] 등
+			
+			// 라벨형식
+			// UI를 통한 데이타수정은 불가능하며
+			// 데이타셋이 수정되면 결과를 UI에 반영합니다.
+			<label jg-column="col1" />
+			<span jg-column="col2" />
+			<p jg-column="col1" />
+			
+			// 입력형식
+			// UI를 통한 데이타수정이 가능하며
+			// UI를 통하여 수정된 데이타는 데이타셋에 반영되며
+			// 데이타셋이 수정되면 역시 UI에 반영됩니다.
+			
+			//input - text,password,checkbox 등
+			<input type="text" jg-column="col1">
+			
+			// select
+			// select 태그의 option 데이타를 외부 데이타셋에 매핑하여 사용할 수 있습니다.
+			// option값을 외부 데이타셋에 동기화하여 자동생성됩니다.
+			
+			//select - 기본
+			<select jg-column="col1">
+				<option value="001">테스트1</option>
+				<option value="002">테스트2</option>
+				...
+			</select>
+			
+			//select - 외부데이타셋 참조
+			<select jg-column="col2"
+				jg-bind-dataset="외부데이타셋"
+				jg-display-column="option에 제목으로 참조할 외부데이타셋 열명"
+				jg-value-column="options에 값으로 참조할 외부데이타셋 열명"
+				[jg-blank-title="options에 null을 추가하며 제목으로 표기할 문자열"] />
+			
+		</p>
+		
+	</div>
+	
+	</body>
+	</html>
+	
+###표현식
+
+JGDataset for JavaScript는 HTML매핑 시, 간단한 표현식을 지원합니다.<br>
+
+####표현식형식
+표현식은 행매핑된 자식태그에 속성값 또는 자식문자열로 정의가 가능합니다.<br>
+jg-column값을 제외한 모든 속성값에 정의할 수 있습니다.<br>
+자식문자열로 정의할 경우 문자열 외 다른 자식태그가 있다면 표현식은 생략됩니다.<br>
+열단순참조도 혼용이 가능합니다.
+
+* 표현식 형식은 <code>##fx:</code>로 시작합니다.<br>
+
+
+		<div jg-dataset="dataset">
+			<p>
+				
+				// 결과값 - (행색인+1)번째 행
+				<label>##fx:(##dataset.rowIndex##+1)+"번째 행"</label>
+				
+				// 행상태가 '삽입'이 아닐 때 readonly 속성값을 'readonly'로 변경
+				<input type="text" jg-column="col1" readonly="##fx:##dataset.rowStatus## != 1 ? 'readonly' : 'false'">
+				
+				// col1 열값을 'lock'으로 입력했을 때 readonly 속성값을 'readonly' 로 변경
+				<input type="text" jg-column="col1" readonly="##fx:##col1## == 'lock' ? 'readonly' : 'false'">
+				
+				// col1 과 col2의 차
+				<label>##fx:##col1## - ##col2##</label>
+	
+			</p>
+		</div>
+
 
 <a name="javascript.JGDataset"></a>
 ##javascript.JGDataset
@@ -289,35 +407,18 @@ JGDS를 통해 생성된 JGDataset는 인스턴스에 남게 되며 필요할 �
 인스턴스를 생성할 때, 옵션인자를 사용합니다.<br>
 옵션인자는 JSON이나 JSONString의 형식을 취합니다.<br>
 옵션인자로 넘어간 값은 JGDataset의 JSON 형식을 취하며 초기화시 적용됩니다.<br>
-JSON형식에 대한 자세한 정보는 [여기](#datasetJSONTemplate)를 참조하세요.<br>
+JSON형식에 대한 자세한 정보는 [여기](#datasetJSONTemplate)를 참조하세요.
 	
 	//멤버변수로 사용 (일회성)
 	var dataset_ = new JGDataset([JSON|JSON문자열]*);
 	
 	//JGDS를 통한 생성, 인스턴스로 사용 (보존성)
-	var dataset_ = JGDS("dataset",데이타셋명 [, JSON|JSON문자열]*);
+	var dataset_ = JGDS(데이타셋명 [, JSON|JSON문자열]*);
 	
 
 ###주요함수
 JGDataset for JAVA와 거의 동일한 함수를 제공합니다.<br>
 JGDataset for JavaScript에서만 사용할 수 있는 주요함수는 아래와 같습니다.<br><br>
-
-
-####행열 제어함수
-데이타셋 내 행,열을 제어하는 함수입니다.
-
-	// 다중 행 추가
-	dataset_.addRows(추가할 행 갯수);
-	
-	// 다중 열 추가
-	dataset_.addColumns(열명1,열명2,...);
-	
-	// 열값 다중 설정 
-	dataset_.setColumnValues({
-		열명1 : 열값1
-		,열명2 : 열값2
-		,열명3 : 열값3
-	}, 행색인[, 열자동추가여부]);
 
 ####행정렬함수
 데이타셋 내 행을 열값의 의거해 정렬합니다.
@@ -386,18 +487,7 @@ JSON형식에 대한 자세한 정보는 [여기](#datasetJSONTemplate)를 참�
 	
 	//가져오기
 	dataset_.applyJSON([JSON|JSON문자열]);
-<br>
-####JGDataset 외부데이타로 확장하기
-JGDataset에 외부데이타로 확장할 수 있습니다.<br>
-
-	//JSON데이타로 확장
-	dataset_.appendJSON(JSON);
-	
-	//Dataset으로 확장
-	dataset_.appendDataset(데이타셋[, 열 병합 여부]);
-
-<br>
-
+<br>	
 ####JQuery 이벤트 리스너 등록
 
 JGDataset for JavaScript는 JQuery 이벤트 리스너등록이 가능합니다.<br>
@@ -413,7 +503,7 @@ JGDataset for JavaScript는 JQuery 이벤트 리스너등록이 가능합니다.
 	});
 	
 	//열이 추가되었을 때
-	$(dataset_).on("columnadded", function(열명){
+	$(dataset_).on("columninserted", function(열명){
 		//...
 	});
 	
@@ -423,7 +513,7 @@ JGDataset for JavaScript는 JQuery 이벤트 리스너등록이 가능합니다.
 	});
 	
 	//열값이 변경 되었을 때
-	$(dataset_).on("columnvaluechanged", function(열명,행색인){
+	$(dataset_).on("columnchanged", function(열명,행색인){
 		//...
 	});
 	
@@ -442,124 +532,56 @@ JGDataset for JavaScript는 JQuery 이벤트 리스너등록이 가능합니다.
 		//...
 	});
 	
-<a name="javascript.JGDatasetUI"></a>
-##javascript.JGDatasetUI
-JGDatasetUI는 JGDataset과 HTML의 매핑을 수행하는 객체입니다.<br>
-JGDataset를 HTML에 매핑하여 보다 편리하게 JGDataset의 데이타 작업을 수행할 수 있습니다.<br>
-매핑된 JGDataset을 수정하면 변경사항이 즉각적으로 HTML에 반영됩니다.<br>
+<a name="javascript.JGDataset.validator"></a>	
+##javascript.JGDataset.validator
 
-###HTML에 매핑하기
-jQuery 함수를 호출함으로 HTML 매핑을 수행할 수 있습니다.
-
-####Java script
-	<script type="text/javascript">
-	$(function(){
-		
-		//매핑할 데이타셋을 미리 정의합니다.(행, 열, 등)
-		var dataset_ = JGDS("dataset",데이타셋명);
-		
-		var datasetView_ = $(매핑할 View).JGDatasetUI();
-	});
-	</script>
-
-####HTML
-
-	<html>
-	<head>...</head>
-	<body>
-	
-	// 특정태그 jg-dataset 속성값에 매핑할 데이타셋명을 정의합니다.
-	// div태그 외, 다른 태그도 사용가능합니다.
-	<div jg-dataset="매핑데이타셋">
-		
-		// 반드시 행데이타가 될 태그 하나만 존재해야 합니다.
-		// 매핑된 태그의 자식태그가 복수로 존재한다면 정상적인 매핑이 이루어지지 않습니다.
-		<p>
-			// 열매핑은 열매핑을 지원하는 태그에 jg-column을 정의합니다.
-			// jg-column에 열을 명시하면 해당 열을 자동으로 생성합니다.
-			// 열매핑을 지원하는 태그의 종류
-			// 라벨형식 : label, span, p, 등
-			// 입력형식 : input, select, textarea, div[contenteditable] 등
-			
-			// 라벨형식
-			// UI를 통한 데이타수정은 불가능하며
-			// 데이타셋이 수정되면 결과를 UI에 반영합니다.
-			<label jg-column="col1"></label>
-			<span jg-column="col2"></span>
-			
-			// 입력형식
-			// UI를 통한 데이타수정이 가능하며
-			// UI를 통하여 수정된 데이타는 데이타셋에 반영되며
-			// 데이타셋이 수정되면 역시 UI에 반영됩니다.
-			
-			//input - text,password,checkbox 등
-			<input type="text" jg-column="col1">
-			
-			// select
-			// select 태그의 option 데이타를 외부 데이타셋에 매핑하여 사용할 수 있습니다.
-			// option값을 외부 데이타셋에 동기화하여 자동생성됩니다.
-			
-			//select - 기본
-			<select jg-column="col1">
-				<option value="001">테스트1</option>
-				<option value="002">테스트2</option>
-				...
-			</select>
-			
-			//select - 외부데이타셋 참조
-			<select jg-column="col2"
-				jg-bind-dataset="외부데이타셋"
-				jg-display-column="option에 제목으로 참조할 외부데이타셋 열명"
-				jg-value-column="options에 값으로 참조할 외부데이타셋 열명"></select>
-			
-		</p>
-		
-	</div>
-	
-	</body>
-	</html>
-	
-###표현식
-
-HTML 매핑 시, 간단한 표현식을 사용할 수 있습니다.<br>
-
-####표현식형식
-표현식은 행매핑된 자식태그에 속성값 또는 자식문자열로 정의가 가능합니다.<br>
-jg-column값을 제외한 모든 속성값에 정의할 수 있습니다.<br>
-자식문자열로 정의할 경우 문자열 외 다른 자식태그가 있다면 표현식은 생략됩니다.<br>
-열단순참조도 혼용이 가능합니다.
-
-* 표현식 형식은 <code>##fx:</code>로 시작합니다.<br>
-
-
-		<div jg-dataset="dataset">
-			<p>
-				
-				// 결과값 - (행색인+1)번째 행
-				<label>##fx:(##dataset.rowIndex##+1)+"번째 행"</label>
-				
-				// 행상태가 '삽입'이 아닐 때 readonly 속성값을 'readonly'로 변경
-				<input type="text" jg-column="col1" readonly="##fx:##dataset.rowStatus## !== 1 ? 'readonly' : 'false'">
-				
-				// col1 열값을 'lock'으로 입력했을 때 readonly 속성값을 'readonly' 로 변경
-				<input type="text" jg-column="col1" readonly="##fx:##col1##== 'lock' ? 'readonly' : 'false'">
-				
-				// col1 과 col2의 차
-				<label>##fx:##col1## - ##col2##</label>
-	
-			</p>
-		</div>
-	
-<a name="javascript.JGDatasetUI.validator"></a>	
-##javascript.JGDatasetUI.validator
-
-JGDatasetUI.validator를 통하여 기본적인 유효양식과 함께 사용자가 정의한 임의의 유효양식을 검사에 사용할 수 있습니다.<br>
+JGDataset.validator는 JQuery widget으로 구현된 JGDataset 유효성검사 라이브러리입니다.<br>
+기본적인 유효양식과 함께 사용자가 정의한 임의의 유효양식을 검사에 사용할 수 있습니다.<br>
 
 ###기본사용법
 
-	var datasetView_ = $(매핑할 View).JGDatasetUI();
-	datasetView_.JGValidator();
+####JavaScript를 이용하여 초기화하는 방법
 
+JGDataset.validator를 초기화,사용하는 2가지 방법을 제공합니다.<br>
+사용자가 편한 방법으로 선택하여 사용하면 됩니다.
+	
+	$(JGDS).on("afterload",function(){
+	
+		JGDS("데이타셋명").validator([JSON옵션]);
+		
+		//OR
+		
+		$(JGDS("데이타셋명")).JGValidator([JSON옵션]);
+		
+	});
+	
+####HTML매핑을 이용하여 초기화하는 방법
+
+	<div jg-dataset="매핑데이타셋" jg-dataset-validator>
+	...
+	</div>
+	
+위 JavaScript를 이용한 방법과 HTML매핑을 이용한 방법의 결과는 서로 동일합니다.<br>
+단, HTML매핑을 이용하는 방법은 생성 시, 옵션을 정의할 수 없는 단점이 있습니다.<br>
+되도록 JavaScript를 이용하는 것을 추천합니다.
+
+###기본옵션설정
+
+JavaScript를 이용하여 초기화를 했을 때, JSON형식의 옵션을 정의할 수 있습니다.<br>
+기본옵션은 아래와 같습니다.<br>
+
+	{options : {
+		errorMessageTag : "<span style='display:block;' />" //오류라벨형식
+		,stepValidation : true //순차유효성 
+		}
+		,failedMessages : {...}
+		,commonFailedMessages : {
+			required : "field is required"
+			,maxLength : "max length : {length}"
+			,minLength : "min length : {length}"		
+			...
+		}
+	};
 	
 인자로 옵션을 별도로 정의하지 않고 초기화하면 기본옵션으로 인식합니다.
 
@@ -568,7 +590,7 @@ JGDatasetUI.validator를 통하여 기본적인 유효양식과 함께 사용자
 JGDataset 열이 매핑된 HTML태그에 원하는 유효성 요소의 이름을 속성값으로 정의하면 유휴성 검사대상으로 등록됩니다.
 
 ####HTML
-	<div jg-dataset="매핑데이타셋">
+	<div jg-dataset="매핑데이타셋" jg-dataset-validator>
 	<p>
 		<input type="text" jg-column="열명" required>
 	</p>	
@@ -577,7 +599,13 @@ JGDataset 열이 매핑된 HTML태그에 원하는 유효성 요소의 이름을
 <pre>
 function checkValidate(){
 	
-	$(유효성검사가매핑된 View).JGValidator("validate", function(유효여부,원인){
+	$(유효성검사가매핑된데이타셋).JGValidator("fullValidate", function(){
+		//유효성 검사 종료 callback	
+	});
+	
+	//OR
+	
+	유효성검사가매핑된데이타셋.validator("fullValidate", function(){
 		//유효성 검사 종료 callback	
 	});
 }
@@ -586,14 +614,18 @@ function checkValidate(){
 JGDataset의 유효성 여부는 데이타셋의 값이 변경될 때마다 수시로 정검합니다.<br>
 사용자가 원하는 때에 유효성 여부를 확인할 수 있습니다.
 
-	var bool_ = $(유효성검사가매핑된 View).validator("isValid");
+	var bool_ = 유효성검사가매핑된데이타셋.validator("isValid");
+	
+	//OR
+	
+	var bool_ = $(유효성검사가매핑된데이타셋).JGValidator("isValid");
 	
 ###오류라벨과 오류메세지
 JGDataset.validator는 오류라벨을 지원합니다.<br>행이 매핑된 HTML태그 안에 에러라벨태그를 정의하면 됩니다.<br>
 유효성 검사 대상 열과 매핑하기 위해서 오류라벨태그에 jg-error-column 속성값을 정의하여 열명과 일치시킵니다.<br>
 
 
-	<div jg-dataset="매핑데이타셋">
+	<div jg-dataset="매핑데이타셋" jg-dataset-validator>
 	<p>
 		<input type="text" jg-column="열명" required>
 		<labal jg-error-column="열명"></label>
@@ -602,14 +634,25 @@ JGDataset.validator는 오류라벨을 지원합니다.<br>행이 매핑된 HTML
 	
 JGDataset.validator의 기본옵션 errorMessageTag 를 변경하여 원하는 오류라벨을 재정의할 수 있습니다.
 
-	유효성검사가매핑된데이타셋.validator("options",{
-		"errorMessageTag","<span></span>"
-	});
+	유효성검사가매핑된데이타셋.validator("errorMessageTag","<span></span>");
+	
+	//OR
+	
+	var bool_ = $(유효성검사가매핑된데이타셋).JGValidator("errorMessageTag","<span></span>");
 	
 JGDataset.validator가 유효성검사를 수행하고 유효하지 않는 값에 대한 오류메세지를 오류라벨에 표기합니다.<br>
 사용자가 원하는 문자열을 등록하여 사용할 수 있습니다.
 
-	$(유효성검사가매핑된 View).validator("failedMessages",{
+	유효성검사가매핑된데이타셋.validator("failedMessages",{
+		"열명" : {
+				"유효성요소명" : "에러메세지"
+		}
+		, ...
+	});
+	
+	//OR
+	
+	var bool_ = $(유효성검사가매핑된데이타셋).JGValidator("failedMessages",{
 		"열명" : {
 				"유효성요소명" : "에러메세지"
 		}
@@ -669,13 +712,6 @@ JGDataset.validator가 유효성검사를 수행하고 유효하지 않는 값�
 
 	//표현식
 	{value} - 유효값
-
-####equals
-값의 불일치 유효성입니다. 값이 같지 않아야 유효합니다.
-
-	//표현식
-	{value} - 유효값
-
 
 ####pattern
 정규식일치 유효성입니다. 값이 정규식에 맞아야 유효합니다.

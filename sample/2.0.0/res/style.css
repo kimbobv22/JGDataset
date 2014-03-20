@@ -1,0 +1,36 @@
+@CHARSET "utf8";
+
+.logger{
+	display: block;
+	position: fixed;
+	width: -webkit-calc(100% - 30px);
+	width: -moz-calc(100% - 30px);
+	width: -ms-calc(100% - 30px);
+	width: -o-calc(100% - 30px);
+	width: calc(100% - 30px);
+	height: 100px;
+	opacity: 0.4;
+	margin:0px;
+	padding: 15px;
+	bottom:15px;
+	
+	border: 1px;
+	border-style: solid;
+	border-color: gray;
+	
+	color: black;
+	font-size: 12px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	overflow-y: auto;
+	overflow-x: auto;
+	
+	z-index: -1;
+}
+
+.logger:HOVER {
+	opacity: 1.0;
+}

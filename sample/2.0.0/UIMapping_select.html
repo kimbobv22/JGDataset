@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping JGSelect Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	$("[jg-dataset='testDataset']").JGDatasetUI();
+	
+	dataset_.addRows(3);
+	
+	dataset_.setColumnValue("id",0,"00001",true);
+	dataset_.setColumnValue("nm",0,"option 1",true);
+	
+	dataset_.setColumnValue("id",1,"00003",true);
+	dataset_.setColumnValue("nm",1,"option 2",true);
+	
+	dataset_.setColumnValue("id",2,"00005",true);
+	dataset_.setColumnValue("nm",2,"option 3",true);
+	
+	dataset_.apply();
+	
+	var selectView_ = $("[jg-bind-dataset='testDataset']");
+	selectView_.JGSelect();
+	selectView_.on("selectreloaded",function(){
+		console.log("reloaded!");
+	});
+	
+	printIt();
+});
+function printIt(){
+	var dataset_ = JGDS("dataset","testDataset");
+	$(".logger").text(dataset_.toJSONString(false));
+}
+function addRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.addRow();
+	printIt();
+}
+function removeRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.removeRow(dataset_.getRowCount()-1);
+	printIt();
+}
+</script>
+</head>
+<body>
+	<h2>Example for JGSelect</h2>
+	<p><table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>NM</th>
+			</tr>
+		</thead>
+		<tbody jg-dataset="testDataset">
+			<tr>
+				<td><input type="text" jg-column="id"></td>
+				<td><input type="text" jg-column="nm"></td>
+			</tr>
+		</tbody>
+	</table></p>
+	<p><select jg-bind-dataset="testDataset" jg-display-column="nm" jg-value-column="id"></select></p>
+	
+	<p>
+	<a href="javascript:addRow();">add row</a>
+	<a href="javascript:removeRow();">remove row</a>
+	<a href="javascript:printIt();">print it</a>
+	<div class="logger"></div>
+	</p>
+</body>
+</html>

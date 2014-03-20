@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping Custom Validator</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.validator.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<style type="text/css">
+#validationResultLabel{
+	color: red;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	dataset_.addRow();
+	
+	dataset_.setColumnValue("col1",0,null,true);
+	dataset_.setColumnValue("col2",0,null,true);
+	dataset_.setColumnValue("col3",0,null,true);
+	
+	dataset_.apply();
+	
+	var datasetView_ = $("[jg-dataset='testDataset']");
+	datasetView_.JGDatasetUI();
+	datasetView_.JGValidator();
+	
+	// add custom validator to engines
+	datasetView_.JGValidator("engine",{
+		"type-harry" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(columnValue_ === "harry");
+		},"type-smile" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(columnValue_ === ":)");
+
+		},"ajax" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			$.ajax({
+				url : "./res/sampleData.json"
+				,type : "json"
+				,success : function(result_){
+					var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
+					callback_(result_);
+				},error : function(){
+					callback_(false);
+				}
+			});
+		}
+	});
+	
+	// add error label for custom validator
+	datasetView_.JGValidator("failedMessages",{
+		col1 : {
+			"type-harry" : "type 'harry'"
+		},col2 : {
+			"type-smile" : "type ':)'"
+		},col3 : {
+			ajax : "Allow mike, jhone, harry"
+		}
+	});
+	
+	datasetView_.JGValidator("options",{
+		errorMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
+	});
+	
+	$(dataset_).on("columnvaluechanged",function(){
+		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
+	});
+	validate();
+});
+
+function validate(){
+	var datasetView_ = $("[jg-dataset='testDataset']");
+	datasetView_.JGValidator("validate",function(isValid_, cause_){
+		console.log("is Valid data ? : "+isValid_);
+		console.log(cause_);
+		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
+	});
+}
+
+</script>
+</head>
+<body>
+	<h2>Example for Custom Validator</h2>
+	
+	<div jg-dataset="testDataset">
+		<div>
+			type "harry" : <input type="text" jg-column="col1" custom-validator-type-harry>
+			<span jg-error-column="col1"></span><br>
+			type ":)" : <input type="text" jg-column="col2" custom-validator-type-smile>
+			<span jg-error-column="col2"></span><br>
+			ajax test : <input type="text" jg-column="col3" custom-validator-ajax>
+			<span jg-error-column="col3"></span><br>
+			<hr>
+		</div>
+	</div>
+	
+	<p><b>result : <span id="validationResultLabel"></span></b></p>
+	
+	<a href="javascript:validate();">validate it(check console)</a>
+	
+	
+</body>
+</html>

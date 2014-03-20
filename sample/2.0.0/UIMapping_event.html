@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping Event Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<style type="text/css">
+.logger{
+	position: inherit;
+	opacity: 1.0;
+	height: 200px;
+	margin-top: 15px; 
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	var tableView_ = $("[jg-dataset='testDataset']");
+	tableView_.JGDatasetUI();
+	tableView_.on("datasetuirowmapped",function(event_, rowIndex_){
+		printIt("row mapped : "+rowIndex_);
+	});
+	tableView_.on("datasetuicolumnrefreshed",function(event_, columnName_, rowIndex_){
+		printIt("column refreshed : "+columnName_+", "+rowIndex_);
+	});
+	tableView_.on("datasetuifxrefreshed",function(event_, rowIndex_){
+		printIt("fx refreshed : "+rowIndex_);
+	});
+	tableView_.on("datasetuirefreshed",function(event_, rowIndex_){
+		printIt("refreshed : "+rowIndex_);
+	});
+	tableView_.on("datasetuimappingreloaded",function(event_, rowIndex_){
+		printIt("mapping reloaded");
+	});
+	
+	dataset_.addRows(2); //fire rowmapped
+	dataset_.addColumns("col1","col2"); //fire columnrefreshed
+	
+	dataset_.moveRow(0,1); //fire datasetuirefreshed
+	
+	tableView_.JGDatasetUI("reload");
+});
+function printIt(str_){
+	$(".logger").html(str_+"<br/>"+$(".logger").html());
+}
+</script>
+</head>
+<body>
+	<h2>Example for Event</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>COL1</th>
+				<th>COL2</th>
+				<th>fx</th>
+			</tr>
+		</thead>
+		<tbody jg-dataset="testDataset">
+			<tr>
+				<td><input type="text" jg-column="col1"></td>
+				<td><input type="text" jg-column="col2"></td>
+				<td>##fx:'##col1##' === "sample" ? "OK" : "type 'sample' to COL1"</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="logger"></div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>JGDataset Event Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<style type="text/css">
+.logger{
+	position: inherit;
+	opacity: 1.0;
+	height: 200px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	$(dataset_).on("rowinserted",function(event_, rowIndex_){
+		appendLog("row inserted : "+rowIndex_);
+	});
+	$(dataset_).on("rowremoved",function(event_, rowIndex_){
+		appendLog("row removed : "+rowIndex_);
+	});
+	$(dataset_).on("rowmoved",function(event_, newRowIndex_, oldRowIndex_){
+		appendLog("row moved : "+oldRowIndex_+" to "+newRowIndex_);
+	});
+	$(dataset_).on("columnadded",function(event_, columnName_){
+		appendLog("column added : "+columnName_);
+	});
+	$(dataset_).on("columnremoved",function(event_, columnName_){
+		appendLog("column removed : "+columnName_);
+	});
+	$(dataset_).on("columnvaluechanged",function(event_, columnName_, rowIndex_){
+		appendLog("column value changed : "+columnName_+","+rowIndex_);
+	});
+	$(dataset_).on("datasetsorted",function(event_, startRowIndex_, endRowIndex_){
+		appendLog("dataset sorted : "+startRowIndex_+" between "+endRowIndex_);
+	});
+	$(dataset_).on("datasetchanged",function(event_){
+		appendLog("dataset chnaged");
+	});
+	$(dataset_).on("datasetclear",function(event_){
+		appendLog("dataset clear");
+	});
+	$(dataset_).on("datasetreset",function(event_){
+		appendLog("dataset reset");
+	});
+	$(dataset_).on("datasetapply",function(event_){
+		appendLog("dataset apply");
+	});
+	
+	dataset_.addRows(3); //fire rowinserted
+	dataset_.removeRow(0); //fire rowremoved
+	dataset_.moveRow(0,1); //fire rowremoved
+	
+	dataset_.addColumns("col1","col2"); //fire columnadded
+	dataset_.removeColumn("col2"); //frie columnremoved
+	
+	dataset_.setColumnValue("col1",0,"Hello"); //fire columnvaluechanged
+	dataset_.setColumnValue("col1",1,"World"); //fire columnvaluechanged
+	
+	dataset_.sortRowByAsc("col1"); //fire datasetsorted
+	
+	dataset_.clear(); //fire datasetclear
+	
+	dataset_.reset(); //fire datasetreset
+	
+	dataset_.applyJSON([{
+		col1 : "Hello"
+	},{
+		col1 : "Again"
+	}]); //fire datasetchanged
+	
+	dataset_.apply();
+});
+
+function appendLog(str_){
+	$(".logger").html(str_+"<br/ >"+$(".logger").html());
+}
+</script>
+</head>
+<body>
+	<h2>Event Sample</h2>
+	
+	<div class="logger"></div>
+</body>
+</html>

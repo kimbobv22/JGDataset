@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping jQuery Mobile Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<script type="text/javascript">
+$(document).on("pagebeforecreate",function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	dataset_.addRows(3);
+	
+	dataset_.setColumnValue("col1",0,"jQuery",true);
+	dataset_.setColumnValue("col2",0,true,true);
+	dataset_.setColumnValue("col3",0,"00001",true);
+	
+	dataset_.setColumnValue("col1",1,"Mobile",true);
+	dataset_.setColumnValue("col2",1,false,true);
+	dataset_.setColumnValue("col3",1,"00003",true);
+	
+	dataset_.setColumnValue("col1",2,"is Awsome",true);
+	dataset_.setColumnValue("col2",2,true,true);
+	dataset_.setColumnValue("col3",2,"00005",true);
+	
+	dataset_.apply();
+	
+	var tableView_ = $("[jg-dataset='testDataset']");
+	tableView_.JGDatasetUI();
+	tableView_.on("datasetuirowmapped",function(event_, rowIndex_){
+		// for creating jquery mobile widget
+		$($(this).children()[rowIndex_]).trigger("create");
+	});
+	tableView_.on("datasetuicolumnrefreshed",function(event_, columnName_, rowIndex_){
+		// for refresh jquery mobile widget
+		$($(this).children()[rowIndex_]).find("select").selectmenu("refresh");
+	});
+	
+	dataset_ = JGDS("dataset","selectDataset")
+	dataset_.addRows(3);
+	
+	dataset_.setColumnValue("id",0,"00001",true);
+	dataset_.setColumnValue("nm",0,"option 1",true);
+	
+	dataset_.setColumnValue("id",1,"00003",true);
+	dataset_.setColumnValue("nm",1,"option 2",true);
+	
+	dataset_.setColumnValue("id",2,"00005",true);
+	dataset_.setColumnValue("nm",2,"option 3",true);
+	
+	dataset_.apply();
+});
+function addRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.addRow();
+}
+function removeRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.removeRow(dataset_.getRowCount()-1);
+}
+</script>
+</head>
+<body>
+	<div data-role="header" data-position="fixed">
+		<h2>Example for jQuery Mobile</h2>
+	</div>
+	<div data-role="content">
+		<div jg-dataset="testDataset">
+			<div class="ui-grid-d ui-responsive">
+				<div class="ui-block-a"><input type="text" jg-column="col1"></div>
+				<div class="ui-block-b"><label>##fx:'fx label : ##col1##'</label></div>
+				<div class="ui-block-c"><label>Checkbox<input type="checkbox" jg-column="col2"></label></div>
+				<div class="ui-block-d"><select jg-column="col3" jg-bind-dataset="selectDataset" jg-display-column="nm" jg-value-column="id"></select></div>
+				<div class="ui-block-e"><input jg-column="col3"></input></div>
+			</div>
+		</div>
+	</div>
+	<div data-role="footer" style="text-align:center;">
+		<a href="javascript:addRow();">add row</a>
+		<a href="javascript:removeRow();">remove row</a>
+	</div>
+</body>
+</html>

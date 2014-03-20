@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>UI Mapping Basic Sample</title>
+<!--JQuery -->
+<!--<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>-->
+<script src="../jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<script src="../../js/JGDatasetUI.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	$("[jg-dataset='testDataset']").JGDatasetUI();
+	
+	dataset_.addRow();dataset_.addRow();dataset_.addRow();
+	
+	dataset_.setColumnValue("col1",0,"Mike",true);
+	dataset_.setColumnValue("col2",0,"ate",true);
+	dataset_.setColumnValue("col3",0,"an apple",true);
+	
+	dataset_.setColumnValue("col1",1,"Jhone",true);
+	dataset_.setColumnValue("col2",1,"ate",true);
+	dataset_.setColumnValue("col3",1,"a pie",true);
+	
+	dataset_.apply();
+	
+	printIt();
+});
+function printIt(){
+	var dataset_ = JGDS("dataset","testDataset");
+	$(".logger").text(dataset_.toJSONString(false));
+}
+function addRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.addRow();
+	printIt();
+}
+function removeRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.removeRow(dataset_.getRowCount()-1);
+	printIt();
+}
+function apply(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.apply();
+	printIt();
+}
+</script>
+</head>
+<body>
+	<h2>Example for UI Mapping</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Row index + 1</th>
+				<th>Row Status</th>
+				<th>COL1</th>
+				<th>COL2</th>
+				<th>COL3(display)</th>
+				<th>COL3(editable)</th>
+			</tr>
+		</thead>
+		<tbody jg-dataset="testDataset">
+			<tr style="##fx:##dataset.rowStatus## === 1 ? 'background-color:pink;' : (##dataset.rowStatus## === 3 ? 'background-color:yellow;': '')">
+				<td>##fx:##dataset.rowIndex##+1</td>
+				<td>##fx:##dataset.rowStatus##</td>
+				<td jg-column="col1"></td>
+				<td jg-column="col2"></td>
+				<td jg-column="col3"></td>
+				<td><input type="text" jg-column="col3"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<p>
+	<a href="javascript:addRow();">add row</a>
+	<a href="javascript:removeRow();">remove row</a>
+	<a href="javascript:apply();">apply</a>
+	<a href="javascript:printIt();">print it</a>
+	<div class="logger"></div>
+	</p>
+</body>
+</html>

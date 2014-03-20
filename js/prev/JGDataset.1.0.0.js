@@ -57,6 +57,12 @@
 		return this.slice(0);
 	});
 	
+	window.jgLoop = (function(length_, loopFunc_){
+		for(var index_=0;index_<length_;++index_){
+			loopFunc_(index_,length_);
+		}
+	});
+	
 	/**
 	 * JQuery Extension
 	 */
@@ -624,20 +630,21 @@
 			var columnCount_ = columnInfo_.length;
 			for(var columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
 				var column_ = columnInfo_[columnIndex_];
-				var columnItem_ = this.addColumn(column_[JGDataset.prototype.STR_NAME]);
+				var columnItem_ = this.insertColumn(column_[JGDataset.prototype.STR_NAME],columnIndex_, false);
 				columnItem_.setKey(column_[JGDataset.prototype.STR_ISKEY]);
 			}
 			
 			//apply row data
 			var rowCount_ = rowData_.length;
 			for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
-				var rowItem_ = this.getRow(this.addRow());
+				this._insertRow(rowIndex_);
+				var rowItem_ = this.getRow(rowIndex_);
 				var row_ = rowData_[rowIndex_][JGDataset.prototype.STR_ROW];
 				
 				for(var columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
 					var columnItem_ = this.getColumn(columnIndex_);
 					var columnValue_ = row_[columnItem_.name];
-					
+			
 					rowItem_.setColumn(columnItem_.name, columnValue_[JGDataset.prototype.STR_VALUE], columnValue_[JGDataset.prototype.STR_MODIFY]);
 				}
 				rowItem_.setRowStatus(rowData_[rowIndex_][JGDataset.prototype.STR_ROWSTATUS]);
@@ -901,7 +908,15 @@
 			//select event
 			else if(tagName_ === "select"){
 				//on change event
-				element_.on("change",eventCommonOnChanged_);
+				element_.on("change",function(event_){
+					var target_ = $(event_.target);
+					var eColumnName_ = target_.attr(JGDataset.prototype.STR_MAP_COLUMNNAME);
+					var eRowIndex_ = that_._mappingElementsList.indexOf(target_.data("jgColumnMappingElemets"));
+					var selectValue_ = target_.children("option:selected").first().attr("value");
+					
+					if(eColumnName_.indexOf(":") >= 0){return;} //fx handle
+					that_.setColumnValue(eColumnName_, eRowIndex_, selectValue_);
+				});
 				
 				var sBindDatasetName_ = element_.attr(JGDataset.prototype.STR_MAP_BINDDATASET);
 				var sBindDisplayColumn_ = element_.attr(JGDataset.prototype.STR_MAP_DISPLAYCOLUMNNAME);
@@ -1193,7 +1208,7 @@
 		select_.children().remove();
 		
 		var funcCreateSelectOption_ = (function(title_,value_){
-			return $("<option "+Object.NVL2(value_,"value='"+value_+"'","")+">"+title_+"</option>");
+			return $("<option "+Object.NVL2(value_,"value='"+value_+"'","value=''")+">"+title_+"</option>");
 		});
 		
 		var rowCount_ = this.getRowCount();

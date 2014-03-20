@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>JGDataset Statistics Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../../js/JGDataset.2.0.0.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	dataset_.addRows(5);
+	
+	dataset_.setColumnValue("col1",0,"Mike",true);
+	dataset_.setColumnValue("col2",0,"have",true);
+	dataset_.setColumnValue("col3",0,1000,true);
+	
+	dataset_.setColumnValue("col1",1,"Jhone",true);
+	dataset_.setColumnValue("col2",1,"have",true);
+	dataset_.setColumnValue("col3",1,1500,true);
+	
+	dataset_.setColumnValue("col1",2,"Sam",true);
+	dataset_.setColumnValue("col2",2,"have",true);
+	dataset_.setColumnValue("col3",2,5000,true);
+	
+	dataset_.setColumnValue("col1",3,"Jane",true);
+	dataset_.setColumnValue("col2",3,"have",true);
+	dataset_.setColumnValue("col3",3,10000,true);
+	
+	dataset_.setColumnValue("col1",4,"Harry",true);
+	dataset_.setColumnValue("col2",4,"have",true);
+	dataset_.setColumnValue("col3",4,100,true);
+	
+	dataset_.apply();
+	
+	var testTableView_ = $("#testTable tbody");
+	var rowCount_ = dataset_.getRowCount();
+	for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
+		var col1Value_ = dataset_.getColumnValue("col1",rowIndex_);
+		var col2Value_ = dataset_.getColumnValue("col2",rowIndex_);
+		var col3Value_ = dataset_.getColumnValue("col3",rowIndex_);
+		
+		testTableView_.append("<tr><td>"+col1Value_+"</td><td>"+col2Value_+"</td><td>"+col3Value_+"</td></tr>");
+	}
+	
+	$("#stc_sum").text(dataset_.sumOfColumnValues("col3"));
+	$("#stc_min").text(dataset_.maxOfColumnValues("col3"));
+	$("#stc_max").text(dataset_.minOfColumnValues("col3"));
+	$("#stc_avg").text(dataset_.avgOfColumnValues("col3"));
+	
+	$(".logger").text(dataset_.toJSONString(false));
+});
+</script>
+</head>
+<body>
+	<h2>Statistics Sample</h2>
+	
+	<table id="testTable" border="1">
+		<thead>
+			<tr>
+				<th>COL1</th>
+				<th>COL2</th>
+				<th>COL3</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<p>
+		sum : <b><span id="stc_sum"></span></b><br>
+		max : <b><span id="stc_min"></span></b><br>
+		min : <b><span id="stc_max"></span></b><br>
+		avg : <b><span id="stc_avg"></span></b>
+	</p>
+	
+	<div class="logger"></div>
+</body>
+</html>
