@@ -44,7 +44,8 @@ $(function(){
 				,dataType : "json"
 				,success : function(result_){
 					var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
-					callback_(message_ === columnValue_);
+					console.log(message_);
+					callback_(message_ !== undefined);
 				},error : function(){
 					callback_(false);
 				}
