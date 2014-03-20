@@ -47,6 +47,13 @@
 		}
 	};
 	
+	
+	/**
+	 * JGSelector
+	 * @constructor
+	 * @param {object} title - The title of the book.
+	 * @param {array} author - The author of the book.
+	 */
 	var _JGSelector = window.JGSelector = (function(target_, args_){
 		if(args_.length === 0) return target_;
 		
