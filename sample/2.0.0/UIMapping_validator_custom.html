@@ -41,10 +41,10 @@ $(function(){
 		},"ajax" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			$.ajax({
 				url : "./res/sampleData.json"
-				,type : "json"
+				,dataType : "json"
 				,success : function(result_){
 					var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
-					callback_(result_);
+					callback_(message_ === columnValue_);
 				},error : function(){
 					callback_(false);
 				}
