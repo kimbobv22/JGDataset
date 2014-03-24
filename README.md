@@ -14,6 +14,7 @@
 [com.jg.vo.JGDataset](#com.jg.vo.JGDataset)<br>
 [com.jg.vo.JGDatasetColumn](#com.jg.vo.JGDatasetColumn)<br>
 [com.jg.vo.JGDatasetRow](#com.jg.vo.JGDatasetRow)<br>
+<br>[API](http://kimbobv22.github.io/JGDataset/doc/java/index.html)<br>
 
 ###[JavaScript](#forJavascript)
 
@@ -22,6 +23,8 @@
 [javascript.JGDataset](#javascript.JGDataset)<br>
 [javascript.JGDatasetUI](#javascript.JGDatasetUI)<br>
 [javascript.JGDatasetUI.validator](#javascript.JGDatasetUI.validator)<br>
+<br>[API](http://kimbobv22.github.io/JGDataset/doc/javaScript/index.html)<br>
+[Sample page](http://kimbobv22.github.io/JGDataset/index.html)<br>
 
 #Documents
 
