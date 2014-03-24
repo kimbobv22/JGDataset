@@ -1,0 +1,2696 @@
+{
+    "project": {
+        "name": "JGDataset for JavaScript",
+        "description": "JGDataset for JavaScript : jQuery 기반 행열작업 라이브러리",
+        "version": "2.0.0",
+        "url": "https://github.com/kimbobv22/JGDataset",
+        "logo": "../logo-small.png"
+    },
+    "files": {
+        "prev/JGDataset.1.0.0.js": {
+            "name": "prev/JGDataset.1.0.0.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "prev/JGDataset.validate.1.0.0.js": {
+            "name": "prev/JGDataset.validate.1.0.0.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "JGDataset.2.0.0.js": {
+            "name": "JGDataset.2.0.0.js",
+            "modules": {},
+            "classes": {
+                "JGDataset": 1,
+                "global.extension": 1,
+                "JGDatasetColumn": 1,
+                "JGDatasetRow": 1,
+                "JGDS": 1
+            },
+            "fors": {
+                "JGDataset": 1
+            },
+            "namespaces": {}
+        },
+        "JGDatasetUI.2.0.0.js": {
+            "name": "JGDatasetUI.2.0.0.js",
+            "modules": {},
+            "classes": {
+                "jQuery.fn.JGDatasetUI": 1,
+                "jQuery.fn.extension": 1,
+                "JGRowContent": 1,
+                "JGFXElement": 1,
+                "jQuery.fn.JGSelect": 1
+            },
+            "fors": {
+                "jQuery.fn.JGDatasetUI": 1,
+                "JGDataset": 1
+            },
+            "namespaces": {}
+        },
+        "JGDatasetUI.validator.2.0.0.js": {
+            "name": "JGDatasetUI.validator.2.0.0.js",
+            "modules": {},
+            "classes": {
+                "jQuery.fn.JGValidator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "JGDataset": {
+            "name": "JGDataset",
+            "shortname": "JGDataset",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDataset.2.0.0.js",
+            "line": 567,
+            "description": "JGDataset은 행열단위 작업을 보다 편리하게 할 수 있도록 합니다.<br>\n아래는 JGDataset의 JSON 포맷입니다.\n\n\t1. 스키마 포함 JSON 포맷\n\t\t{\"columninfo\":\n\t\t\t[{\"name\":\"열1\",\"isKey\":false}\n\t\t\t,{\"name\":\"열2\",\"isKey\":false}]\n\t\t,\"rowdata\":\n\t\t\t[{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}\n\t\t\t,\"status\":0}\n\t\t\t,{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}\n\t\t\t,\"status\":0}\n\t\t\t,...]\n\t\t,\"deletedRowdata\":\n\t\t\t[{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}}\n\t\t\t,...]\n\t\t}\n\t\n\t2. 스키마 미포함 JSON 포맷\n\t\t[{열1 : 열값, 열2 : 열값, ... }\n\t\t,{열1 : 열값, 열2 : 열값, ... }\n\t\t,...]\n\nJGDataset 샘플은 <a href=\"http://kimbobv22.github.io/JGDataset/index.html\" target=\"_blank\">여기</a>에서 확인할 수 있습니다.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "content_",
+                    "description": "데이타",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n\tvar dataset_ = new JGDataset([{열1: \"열값\", 열2 : \"열값\"}]);"
+            ]
+        },
+        "global.extension": {
+            "name": "global.extension",
+            "shortname": "global.extension",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDataset.2.0.0.js",
+            "line": 197,
+            "description": "데이타 제어를 보다 편리하게 하기 위한 확장함수입니다."
+        },
+        "JGDatasetColumn": {
+            "name": "JGDatasetColumn",
+            "shortname": "JGDatasetColumn",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDataset.2.0.0.js",
+            "line": 343,
+            "description": "JGDataset에 열정의 시 생성되는 객체입니다.<br>\n사용자가 임의로 생성할 수 없으며 JGDataset을 통해서만 생성할 수 있습니다.<br>\n*참고 : {{#crossLink \"JGDataset\"}}{{/crossLink}}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ]
+        },
+        "JGDatasetRow": {
+            "name": "JGDatasetRow",
+            "shortname": "JGDatasetRow",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDataset.2.0.0.js",
+            "line": 402,
+            "description": "JGDataset에 행정의 시 생성되는 객체입니다.<br>\n사용자가 임의로 생성할 수 없으며 JGDataset을 통해서만 생성할 수 있습니다.<br>\n*참고 : {{#crossLink \"JGDataset\"}}{{/crossLink}}\n\n\t//행상태\n\t\t0  // normal\n\t\t1  // insert\n\t\t3  // delete",
+            "is_constructor": 1
+        },
+        "JGDS": {
+            "name": "JGDS",
+            "shortname": "JGDS",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDataset.2.0.0.js",
+            "line": 1490,
+            "description": "JGDataset을 생성,관리하는 인스턴스 정적객체입니다.<br>\nJGDS의 모든 함수는 아래와 같은 형태로 호출할 수 있습니다.\n\n\tvar result_ = JGDS(\"함수명\",...);",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "methodName_",
+                    "description": "호출함수명",
+                    "type": "String"
+                },
+                {
+                    "name": "arguments",
+                    "description": "매개변수",
+                    "type": "Object",
+                    "optional": true,
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "반환값",
+                "type": "Object"
+            },
+            "static": 1
+        },
+        "jQuery.fn.JGDatasetUI": {
+            "name": "jQuery.fn.JGDatasetUI",
+            "shortname": "jQuery.fn.JGDatasetUI",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 197,
+            "description": "HTML과 JGDataset의 매핑을 위한 플러그인입니다.<br>\n함수호출 형식은 아래와 같습니다.\n\t\n\t//1. jQuery Plugin Style\n\tvar result_ = $(target_).JGDatasetUI(\"함수명\",...);\n\t\n\t//2. normal Style\n\tvar datasetUI_ = $(target_).JGDatasetUI();\n\tvar result_ = datasetUI_.함수명();\n\nJGDatasetUI 샘플은 <a href=\"http://kimbobv22.github.io/JGDataset/index.html\" target=\"_blank\">여기</a>에서 확인할 수 있습니다.",
+            "is_constructor": 1,
+            "example": [
+                "\n\t//1. 정의되어 있는 속성값을 이용하여 초기화\n\t<div jg-dataset=\"datasetName\" id=\"target\">\n\t\t...\n\t</div>\n\t<script type=\"text/javascript\">\n\t$(\"#target\").JGDatasetUI();\n\t</script>\n\t\n\t//2. 매개변수를 이용하여 초기화\n\t<div id=\"target\">\n\t\t...\n\t</div>\n\t<script type=\"text/javascript\">\n\t$(\"#target\").JGDatasetUI(\"datasetName\");\n\t</script>"
+            ]
+        },
+        "jQuery.fn.extension": {
+            "name": "jQuery.fn.extension",
+            "shortname": "jQuery.fn.extension",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 146,
+            "description": "jQuery 기능확장함수입니다."
+        },
+        "JGRowContent": {
+            "name": "JGRowContent",
+            "shortname": "JGRowContent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 428,
+            "description": "JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.<br>\n사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.<br>\n*참고 : {{#crossLink \"jQuery.fn.JGDatasetUI\"}}{{/crossLink}}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "datasetUI_",
+                    "description": "JGDatasetUI가 매핑된 jQuery Object",
+                    "type": "JQuery Object"
+                },
+                {
+                    "name": "rowContent_",
+                    "description": "원본 행컨텐츠",
+                    "type": "JQuery Object"
+                }
+            ]
+        },
+        "JGFXElement": {
+            "name": "JGFXElement",
+            "shortname": "JGFXElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 653,
+            "description": "JGDatasetUI에서 FX수식을 위한 객체입니다.<br>\n사용자가 임의로 생성할 수 없으며, JGDatasetUI 매핑 시 생성될 수 있습니다.<br>\n*참고 : {{#crossLink \"jQuery.fn.JGDatasetUI\"}}{{/crossLink}}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "rowContent_",
+                    "description": "행컨텐츠",
+                    "type": "JGRowContent"
+                },
+                {
+                    "name": "element_",
+                    "description": "JGDatasetUI가 매핑되어 있는 jQuery 객체",
+                    "type": "JQuery Object"
+                },
+                {
+                    "name": "attrName_",
+                    "description": "FX수식을 매핑할 속성명(Text 매핑 시 생략가능)",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "type_",
+                    "description": "FX수식 매핑 유형(0 - 속성, 1 - Text)",
+                    "type": "Number"
+                }
+            ]
+        },
+        "jQuery.fn.JGSelect": {
+            "name": "jQuery.fn.JGSelect",
+            "shortname": "jQuery.fn.JGSelect",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 750,
+            "description": "select 태그와 매핑을 위한 객체입니다.<br>\n함수호출 형식은 아래와 같습니다.\n\t\n\t//1. jQuery Plugin Style\n\tvar result_ = $(target_).JGSelect(\"함수명\",...);\n\t\n\t//2. normal Style\n\tvar select_ = $(target_).JGSelect();\n\tvar result_ = select_.함수명();",
+            "params": [
+                {
+                    "name": "element_",
+                    "description": "매핑할 jQuery 객체",
+                    "type": "JQuery Object"
+                }
+            ],
+            "is_constructor": 1,
+            "example": [
+                "\n\t//1. 미리 정의된 속성값을 이용하여 초기화\n\t<select jg-bind-dataset=\"datasetName\"\n\t\t\tjg-display-column=\"nm\"\n\t\t\tjg-value-column=\"id\"></select>\n\t<script type=\"text/javascript\">\n\t$(target_).JGSelect();\n\t</script>\n\t\n\t//2. 매개변수를 이용하여 초기화\n\t<select></select>\n\t<script type=\"text/javascript\">\n\t$(target_).JGSelect({datasetName : \"datasetName\"\n\t\t\t\t\t\t,displayColumn : \"nm\"\n\t\t\t\t\t\t,valueColumn : \"id\"});\n\t</script>"
+            ]
+        },
+        "jQuery.fn.JGValidator": {
+            "name": "jQuery.fn.JGValidator",
+            "shortname": "jQuery.fn.JGValidator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 43,
+            "description": "JGDataset이 매핑된 JGDatasetUI의 입력 유효성 검사를 위한 객체입니다.<br>\nJGValidator를 사용하려면 JGDatasetUI가 초기화 되어 있어야합니다.\n\n\t//1. jQuery Plugin Style\n\tvar result_ = $(target_).JGValidator(\"함수명\",...);\n\t\n\t//2. normal Style\n\tvar validator_ = $(target_).JGValidator();\n\tvar result_ = validator_.함수명();\n\nJGValidator 샘플은 <a href=\"http://kimbobv22.github.io/JGDataset/index.html\" target=\"_blank\">여기</a>에서 확인할 수 있습니다.",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "prev/JGDataset.1.0.0.js",
+            "line": 8,
+            "description": "Common",
+            "class": "JGDataset"
+        },
+        {
+            "file": "prev/JGDataset.1.0.0.js",
+            "line": 66,
+            "description": "JQuery Extension",
+            "class": "JGDataset"
+        },
+        {
+            "file": "prev/JGDataset.1.0.0.js",
+            "line": 170,
+            "description": "JGDataset",
+            "class": "JGDataset"
+        },
+        {
+            "file": "prev/JGDataset.1.0.0.js",
+            "line": 1089,
+            "description": "JGDataset Management",
+            "class": "JGDataset"
+        },
+        {
+            "file": "prev/JGDataset.validate.1.0.0.js",
+            "line": 3,
+            "description": "JGDataset extension for validator",
+            "class": "JGDataset"
+        },
+        {
+            "file": "prev/JGDataset.validate.1.0.0.js",
+            "line": 525,
+            "description": "validator auto bind",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 32,
+            "description": "행이 삽입되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "rowinserted",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"rowinserted\",function(event_, rowIndex_){\n\t\tconsole.log(\"row inserted! : \"+rowIndex_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 45,
+            "description": "행이 삭제되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "rowremoved",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"rowremoved\",function(event_, rowIndex_){\n\t\tconsole.log(\"row removed! : \"+rowIndex_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 58,
+            "description": "행간 이동이 발생 되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "rowmoved",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "fromRowIndex_",
+                    "description": "기존 행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "toRowIndex_",
+                    "description": "대상 행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"rowmoved\",function(event_, fromRowIndex_, toRowIndex_){\n\t\tconsole.log(\"row moved : \"+rowIndex_+\" > \"+fromRowIndex_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 72,
+            "description": "열이 추가되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "columnadded",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"columnadded\",function(event_, columnName_){\n\t\tconsole.log(\"column added : \"+columnName_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 85,
+            "description": "열이 삭제되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "columnremoved",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"columnremoved\",function(event_, columnName_){\n\t\tconsole.log(\"column removed: \"+columnName_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 98,
+            "description": "열값이 변경되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "columnvaluechanged",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "columnValue_",
+                    "description": "열값",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"columnvaluechanged\",function(event_, columnName_, rowIndex_, columnValue_){\n\t\tconsole.log(\"column value changed: \"+columnName_+\",\"+rowIndex_+\",\"+columnValue_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 113,
+            "description": "행이 정령되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "datasetsorted",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "fromRowIndex_",
+                    "description": "기존 행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "toRowIndex_",
+                    "description": "대상 행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"datasetsorted\",function(event_, fromRowIndex_, toRowIndex_){\n\t\tconsole.log(\"dataset sorted : \"+fromRowIndex_+\" > \"+toRowIndex_);\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 127,
+            "description": "데이타셋이 다른 데이터로 변경되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "datasetchanged",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"datasetchanged\",function(event_){\n\t\tconsole.log(\"dataset changed\");\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 139,
+            "description": "데이타셋이 전체삭제되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "datasetclear",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"datasetclear\",function(event_){\n\t\tconsole.log(\"dataset clear\");\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 151,
+            "description": "데이타셋이 초기화되었을 때 호출됩니다",
+            "itemtype": "event",
+            "name": "datasetreset",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"datasetreset\",function(event_){\n\t\tconsole.log(\"dataset reset\");\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 163,
+            "description": "데이타셋이 현재상태로 적용되었을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "datasetapply",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\t$(dataset).on(\"datasetapply\",function(event_){\n\t\tconsole.log(\"dataset apply\");\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 203,
+            "description": "객체의 Null여부를 체크합니다.",
+            "itemtype": "method",
+            "name": "isNull",
+            "params": [
+                {
+                    "name": "value_",
+                    "description": "값",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Null여부",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n\tvar result_ = isNull(value_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 216,
+            "description": "객체의 Null여부를 체크하여 Null일 경우 대체값을 반환합니다.",
+            "itemtype": "method",
+            "name": "NVL",
+            "params": [
+                {
+                    "name": "value_",
+                    "description": "값",
+                    "type": "Object"
+                },
+                {
+                    "name": "nullValue_",
+                    "description": "Null 대체값",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "원본값 또는 Null 대체값",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = NVL(value_, nullValue_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 230,
+            "description": "객체의 Null여부를 체크하여 Null일 경우 Null 대체값을 반환하고 Null이 아닐 경우 Not-Null 대체값을 반환합니다.",
+            "itemtype": "method",
+            "name": "NVL2",
+            "params": [
+                {
+                    "name": "value_",
+                    "description": "값",
+                    "type": "Object"
+                },
+                {
+                    "name": "replaceValue_",
+                    "description": "Not-null 대체값",
+                    "type": "Object"
+                },
+                {
+                    "name": "nullValue_",
+                    "description": "Null 대체값",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Not-null 대체값 또는 Null 대체값",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = NVL2(value_,replaceValue_,nullValue_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 245,
+            "description": "문자열의 빈값여부를 체크합니다.",
+            "itemtype": "method",
+            "name": "isBlank",
+            "params": [
+                {
+                    "name": "value_",
+                    "description": "문자열값",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "빈값여부",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n\tvar result_ = isBlank(value_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 258,
+            "description": "문자열이 빈값일 경우 대체값으로 반환합니다.",
+            "itemtype": "method",
+            "name": "BLK",
+            "params": [
+                {
+                    "name": "value_",
+                    "description": "문자열값",
+                    "type": "String"
+                },
+                {
+                    "name": "blkValue_",
+                    "description": "대체문자열값",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "원본값 또는 대체값",
+                "type": "String"
+            },
+            "example": [
+                "\n\tvar result_ = isBlank(value_, blkValue_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 272,
+            "description": "배열에서 객체의 색인을 찾아서 반환합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.indexOf",
+            "params": [
+                {
+                    "name": "object_",
+                    "description": "객체",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "색인",
+                "type": "Number"
+            },
+            "example": [
+                "\n\tvar array_ = new Array();\n\tarray_.push(something...);\n\tvar result_ = array_.indexOf(object_);"
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 293,
+            "description": "객체를 해당 색인에 삽입합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.insert",
+            "params": [
+                {
+                    "name": "object_",
+                    "description": "객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "index_",
+                    "description": "색인",
+                    "type": "Number"
+                }
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 303,
+            "description": "배열에서 해당 색인의 객체를 삭제합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.remove",
+            "params": [
+                {
+                    "name": "index_",
+                    "description": "색인",
+                    "type": "Number"
+                }
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 312,
+            "description": "배열의 모든 객체를 삭제합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.removeAll",
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 320,
+            "description": "배열에서 해당객체를 삭제합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.removeObject",
+            "params": [
+                {
+                    "name": "object_",
+                    "description": "객체",
+                    "type": "Object"
+                }
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 330,
+            "description": "배열에서 색인간이동 합니다.",
+            "itemtype": "method",
+            "name": "Array.prototype.move",
+            "params": [
+                {
+                    "name": "oIndex_",
+                    "description": "기존 색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "nIndex_",
+                    "description": "대상 색인",
+                    "type": "Number"
+                }
+            ],
+            "class": "global.extension"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 352,
+            "description": "열명",
+            "itemtype": "property",
+            "name": "_name",
+            "type": "String",
+            "class": "JGDatasetColumn"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 357,
+            "description": "키여부",
+            "itemtype": "property",
+            "name": "_isKey",
+            "type": "boolean",
+            "class": "JGDatasetColumn"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 367,
+            "description": "열명을 반환합니다",
+            "itemtype": "method",
+            "name": "getName",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "JGDatasetColumn"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 377,
+            "description": "키여부를 반환/설정합니다<br>\n*매개변수가 존재한다면 설정, 존재하지 않는다면 반환",
+            "itemtype": "method",
+            "name": "isKey",
+            "params": [
+                {
+                    "name": "isKey_",
+                    "description": "키여부",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "키여부",
+                "type": "Boolean"
+            },
+            "class": "JGDatasetColumn"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 390,
+            "description": "열을 복제합니다",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "열",
+                "type": "JGDatasetColumn"
+            },
+            "class": "JGDatasetColumn"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 415,
+            "description": "열값",
+            "itemtype": "property",
+            "name": "_columns",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 421,
+            "description": "원본 열값",
+            "itemtype": "property",
+            "name": "_orgColumns",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 427,
+            "description": "열상태",
+            "itemtype": "property",
+            "name": "_columnStatus",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 433,
+            "description": "행상태<br>",
+            "itemtype": "property",
+            "name": "_rowStatus",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 447,
+            "description": "행상태를 반환합니다",
+            "itemtype": "method",
+            "name": "getRowStatus",
+            "return": {
+                "description": "행상태",
+                "type": "Number"
+            },
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 456,
+            "description": "행상태를 설정합니다",
+            "itemtype": "method",
+            "name": "getRowStatus",
+            "params": [
+                {
+                    "name": "rowStatus_",
+                    "description": "행상태",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 477,
+            "description": "열값을 설정합니다.",
+            "itemtype": "method",
+            "name": "setColumn",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "value_",
+                    "description": "열값",
+                    "type": "Object"
+                },
+                {
+                    "name": "isModify_",
+                    "description": "수정여부",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 497,
+            "description": "열을 삭제합니다.",
+            "itemtype": "method",
+            "name": "removeColumn",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 506,
+            "description": "열값을 반환합니다.",
+            "itemtype": "method",
+            "name": "getColumnValue",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "열값",
+                "type": "Object"
+            },
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 517,
+            "description": "열 수정여부를 반환합니다.",
+            "itemtype": "method",
+            "name": "isColumnModified",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "열수정여부",
+                "type": "Boolean"
+            },
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 529,
+            "description": "열 수정여부를 설정합니다.",
+            "itemtype": "method",
+            "name": "setColumnModification",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "bool_",
+                    "description": "열수정여부",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 540,
+            "description": "현재 행상태를 적용합니다.<br>\n행상태가 normal로 변경됩니다.",
+            "itemtype": "method",
+            "name": "apply",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 552,
+            "description": "행을 복사합니다.",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "JGDatasetRow"
+            },
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 602,
+            "description": "열정보",
+            "itemtype": "property",
+            "name": "_columnInfo",
+            "type": "Array",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 607,
+            "description": "원본열정보<br>\n데이타셋을 적용한 시점의 열정보가 이곳에 저장됩니다.",
+            "itemtype": "property",
+            "name": "_orgColumnInfo",
+            "type": "Array",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 613,
+            "description": "행정보<br>",
+            "itemtype": "property",
+            "name": "_rowData",
+            "type": "Array",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 618,
+            "description": "원본행정보<br>\n데이타셋을 적용한 시점의 행정보가 이곳에 저장됩니다.",
+            "itemtype": "property",
+            "name": "_orgRowData",
+            "type": "Array",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 624,
+            "description": "삭제행정보<br>\n삭제한 행정보가 이곳에 저장됩니다.",
+            "itemtype": "property",
+            "name": "_deletedRowData",
+            "type": "Array",
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 680,
+            "description": "데이타셋의 JGDS에 저장된 이름을 반환합니다.",
+            "itemtype": "method",
+            "name": "getName",
+            "return": {
+                "description": "데이타셋이름",
+                "type": "String"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 697,
+            "description": "열갯수를 반환합니다.",
+            "itemtype": "method",
+            "name": "getColumnCount",
+            "return": {
+                "description": "열갯수",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 706,
+            "description": "행갯수를 반환합니다.",
+            "itemtype": "method",
+            "name": "getRowCount",
+            "return": {
+                "description": "행갯수",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 715,
+            "description": "삭제행갯수를 반환합니다.",
+            "itemtype": "method",
+            "name": "getDeletedRowCount",
+            "return": {
+                "description": "삭제행갯수",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 725,
+            "description": "열을 특정색인에 삽입합니다.<br>",
+            "itemtype": "method",
+            "name": "insertColumn",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "columnIndex_",
+                    "description": "삽입열색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "fireEvent_",
+                    "description": "이벤트발생여부(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "열",
+                "type": "JGDatasetColumn"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 756,
+            "description": "열을 마지막 색인에 추가합니다.",
+            "itemtype": "method",
+            "name": "addColumn",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "fireEvent_",
+                    "description": "이벤트발생여부(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "열",
+                "type": "JGDatasetColumn"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 767,
+            "description": "열 마지막 색인에 복수의 열을 추가합니다.",
+            "itemtype": "method",
+            "name": "addColumns",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "복수의 열",
+                    "type": "String",
+                    "multiple": true
+                }
+            ],
+            "example": [
+                "\n\tdataset_.addColumns(\"열1\",\"열2\",\"열3\",...);"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 781,
+            "description": "열을 삭제합니다.",
+            "itemtype": "method",
+            "name": "removeColumn",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 795,
+            "description": "열을 반환합니다.",
+            "itemtype": "method",
+            "name": "getColumn",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 806,
+            "description": "열의 색인을 반환합니다",
+            "itemtype": "method",
+            "name": "indexOfColumn",
+            "params": [
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 837,
+            "description": "행을 특정 색인에 삽입합니다.",
+            "itemtype": "method",
+            "name": "insertRow",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "행",
+                "type": "JGDatasetRow"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 848,
+            "description": "행을 마지막 색인에 추가합니다.",
+            "itemtype": "method",
+            "name": "addRow",
+            "return": {
+                "description": "행",
+                "type": "JGDatasetRow"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 859,
+            "description": "마지막 색인에 복수의 열을 추가합니다.",
+            "itemtype": "method",
+            "name": "addRows",
+            "params": [
+                {
+                    "name": "count_",
+                    "description": "행갯수",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\tdataset_.addRows(5);"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 886,
+            "description": "특정색인의 행을 삭제합니다.",
+            "itemtype": "method",
+            "name": "removeRow",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 896,
+            "description": "행을 반환합니다.",
+            "itemtype": "method",
+            "name": "getRow",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "행",
+                "type": "JGDatasetRow"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 906,
+            "description": "행상태를 설정합니다.",
+            "itemtype": "method",
+            "name": "setRowStatus",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "rowStatus_",
+                    "description": "행상태",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 916,
+            "description": "행상태를 반환합니다.",
+            "itemtype": "method",
+            "name": "getRowStatus",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "행상태",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 926,
+            "description": "삭제행을 반환합니다.",
+            "itemtype": "method",
+            "name": "getDeletedRow",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "삭제행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "행",
+                "type": "JGDatasetRow"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 937,
+            "description": "행간 이동을 수행합니다.",
+            "itemtype": "method",
+            "name": "moveRow",
+            "params": [
+                {
+                    "name": "fromIndex_",
+                    "description": "기존 행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "toIndex_",
+                    "description": "대상 행색인",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 949,
+            "description": "특정 열값과 정렬함수를 통해 행을 정렬합니다.",
+            "itemtype": "method",
+            "name": "sortRow",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "기준 열",
+                    "type": "Number"
+                },
+                {
+                    "name": "sortFunc_",
+                    "description": "정렬함수",
+                    "type": "Function"
+                },
+                {
+                    "name": "fireEvent_",
+                    "description": "이벤트발생여부(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n\tdataset_.sortRow(\"열1\",function(bColumnValue_, columnValue_){\n\t\treturn bColumnValue_ > columnValue_;\n\t});"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 990,
+            "description": "특정 열을 통해 행을 오름차순으로 정렬합니다.",
+            "itemtype": "method",
+            "name": "sortRowByAsc",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "기준 열",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1001,
+            "description": "특정 열을 통해 행을 내림차순으로 정렬합니다.",
+            "itemtype": "method",
+            "name": "sortRowByDesc",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "기준 열",
+                    "type": "Number"
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1028,
+            "description": "열값을 설정합니다.",
+            "itemtype": "method",
+            "name": "setColumnValue",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "value_",
+                    "description": "열값",
+                    "type": "Object"
+                },
+                {
+                    "name": "mergeColumn_",
+                    "description": "열이 존재하지 않을 경우 생성할지에 대한 여부(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1046,
+            "description": "복수의 열값을 설정합니다.",
+            "itemtype": "method",
+            "name": "setColumnValues",
+            "params": [
+                {
+                    "name": "valueMap_",
+                    "description": "복수의 열값",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                },
+                {
+                    "name": "mergeColumn_",
+                    "description": "열이 존재하지 않을 경우 생성할지에 대한 여부(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n\tdataset_.setColumnValues({\n\t\t열1 : \"열값\"\n\t\t열2 : \"열값\"\n\t},0);"
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1064,
+            "description": "열값을 반환합니다.",
+            "itemtype": "method",
+            "name": "getColumnValue",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "열값",
+                "type": "Object"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1075,
+            "description": "열의 수정여부를 반환합니다.",
+            "itemtype": "method",
+            "name": "isColumnModified",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "열의 수정여부",
+                "type": "Boolean"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1086,
+            "description": "삭제된 행의 열값을 반환합니다.",
+            "itemtype": "method",
+            "name": "getDeletedColumnValue",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "열값",
+                "type": "Object"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1098,
+            "description": "데이타셋을 전체삭제합니다.",
+            "itemtype": "method",
+            "name": "clear",
+            "params": [
+                {
+                    "name": "deleteColumn_",
+                    "description": "열 삭제여부 - true일 경우, 모드 열정보가 삭제됩니다.(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1113,
+            "description": "데이타셋의 현재상태를 적용합니다.<br>\n현재상태를 적용 시, 모든 행상태는 normal로, 모든 열수정여부는 false로 설정되며 적용 시점까지 열,행 데이터가 저장됩니다.",
+            "itemtype": "method",
+            "name": "apply",
+            "params": [
+                {
+                    "name": "fireEvent_",
+                    "description": "이벤트발생여부(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1140,
+            "description": "데이타셋의 이전 적용시점으로 되돌립니다.",
+            "itemtype": "method",
+            "name": "reset",
+            "params": [
+                {
+                    "name": "fireEvent_",
+                    "description": "이벤트발생여부(기본 : true)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1164,
+            "description": "데이타셋의 수정여부를 반환합니다.",
+            "itemtype": "method",
+            "name": "isModified",
+            "return": {
+                "description": "수정여부",
+                "type": "Boolean"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1181,
+            "description": "열값의 합계값을 반환합니다.",
+            "itemtype": "method",
+            "name": "sumOfColumnValues",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "filterFunc_",
+                    "description": "여과함수(기본 : function(){return true;})",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "합계값",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1202,
+            "description": "열값의 평균값을 반환합니다.",
+            "itemtype": "method",
+            "name": "avgOfColumnValues",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "filterFunc_",
+                    "description": "여과함수(기본 : function(){return true;})",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "평균값",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1234,
+            "description": "열값의 최대값을 반환합니다.",
+            "itemtype": "method",
+            "name": "maxOfColumnValues",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "filterFunc_",
+                    "description": "여과함수(기본 : function(){return true;})",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "최대값",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1245,
+            "description": "열값의 최소값을 반환합니다.",
+            "itemtype": "method",
+            "name": "minOfColumnValues",
+            "params": [
+                {
+                    "name": "columnKey_",
+                    "description": "열색인 또는 열명",
+                    "type": "Object"
+                },
+                {
+                    "name": "filterFunc_",
+                    "description": "여과함수(기본 : null)",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "최대값",
+                "type": "Number"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1257,
+            "description": "데이타셋을 JSON객체로 반환합니다.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "onlyData_",
+                    "description": "true일 경우 스키마를 생략한 행과 열값의 정보만 추출합니다.(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "JSON객체",
+                "type": "Object"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1341,
+            "description": "데이타셋을 JSON형태의 문자열로 반환합니다.",
+            "itemtype": "method",
+            "name": "toJSONString",
+            "params": [
+                {
+                    "name": "onlyData_",
+                    "description": "true일 경우 스키마를 생략한 행과 열값의 정보만 추출합니다.(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "JSON형태의 문자열",
+                "type": "String"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1351,
+            "description": "JSON객체 또는 JSON형태의 문자열을 데이타셋에 적용합니다.",
+            "itemtype": "method",
+            "name": "applyJSON",
+            "params": [
+                {
+                    "name": "onlyData_",
+                    "description": "true일 경우 열정보를 생략한 행과 열값의 정보만 추출합니다.(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "JSON형태의 문자열",
+                "type": "String"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1423,
+            "description": "타 데이타셋을 현재 데이타셋에 확장합니다.",
+            "itemtype": "method",
+            "name": "appendDataset",
+            "params": [
+                {
+                    "name": "dataset_",
+                    "description": "데이타셋",
+                    "type": "Object"
+                },
+                {
+                    "name": "mergeColumn_",
+                    "description": "열 병합여부(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1450,
+            "description": "JSON객체 또는 JSON형태의 문자열을 현재 데이타셋에 확장합니다.<br>\nJGDataset JSON 포맷과 일치해야 합니다.",
+            "itemtype": "method",
+            "name": "appendDataset",
+            "params": [
+                {
+                    "name": "content_JSON객체",
+                    "description": "또는 JSON형태의 문자열",
+                    "type": "Object"
+                },
+                {
+                    "name": "mergeColumn_",
+                    "description": "열 병합여부(기본 : false)",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1463,
+            "description": "삽입,수정,삭제된 정보를 추출하여 데이타셋으로 반환합니다.",
+            "itemtype": "method",
+            "name": "exportModifiedData",
+            "return": {
+                "description": "데이타셋",
+                "type": "JGDataset"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1527,
+            "description": "데이타셋을 생성,반환합니다.<br>\nSelector가 문자열일 때, 해당 이름의 데이타셋이 없을 경우 생성, 있을 경우에 반환합니다.\nSelector가 숫자일 때, 색인의 데이타셋을 반환합니다.",
+            "itemtype": "method",
+            "name": "dataset",
+            "type": "Function",
+            "params": [
+                {
+                    "name": "selector_",
+                    "description": "데이타셋명 또는 색인",
+                    "type": "Object"
+                },
+                {
+                    "name": "content_",
+                    "description": "데이타셋 스키마 포맷의 JSON객체나 문자열을 해당 데이타셋에 적용합니다.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "데이타셋",
+                "type": "JGDataset"
+            },
+            "example": [
+                "\n\tvar dataset_ = JGDS(\"dataset\",selector_,[content_]);"
+            ],
+            "class": "JGDS"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1558,
+            "description": "데이타셋의 색인을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 -1 을 반환합니다.",
+            "itemtype": "method",
+            "name": "indexOf",
+            "params": [
+                {
+                    "name": "selector_",
+                    "description": "데이타셋명 또는 색인",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "색인",
+                "type": "Number"
+            },
+            "example": [
+                "\n\tvar result_ = JGDS(\"indexOf\",selector_);"
+            ],
+            "class": "JGDS"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1582,
+            "description": "데이타셋명을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 {undefined} 을 반환합니다.",
+            "itemtype": "method",
+            "name": "datasetName",
+            "params": [
+                {
+                    "name": "dataset_",
+                    "description": "데이타셋",
+                    "type": "JGDataset"
+                }
+            ],
+            "return": {
+                "description": "데이타셋명",
+                "type": "String"
+            },
+            "example": [
+                "\n\tvar result_ = JGDS(\"datasetName\",dataset_);"
+            ],
+            "class": "JGDS"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1602,
+            "description": "데이타셋을 삭제합니다.<br>",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "selector_",
+                    "description": "데이타셋명 또는 색인",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\tvar result_ = JGDS(\"remove\",dataset_);"
+            ],
+            "class": "JGDS"
+        },
+        {
+            "file": "JGDataset.2.0.0.js",
+            "line": 1615,
+            "description": "복수의 데이타셋을 생성합니다.<br>",
+            "itemtype": "method",
+            "name": "make",
+            "params": [
+                {
+                    "name": "datasetNames_",
+                    "description": "데이타셋명",
+                    "type": "String",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "데이타셋 배열",
+                "type": "Array"
+            },
+            "example": [
+                "\n\tvar result_ = JGDS(\"make\",[datasetNames_]);"
+            ],
+            "class": "JGDS"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 18,
+            "description": "특정 행과 매핑 시 발생합니다.",
+            "itemtype": "event",
+            "name": "datasetuirowmapped",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "JQuery Event object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(target_).trigger(\"datasetuirowmapped\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 31,
+            "description": "특정 행의 매핑이 새로 고쳐졌을 때 발생합니다.",
+            "itemtype": "event",
+            "name": "datasetuirefreshed",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "JQuery Event object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(target_).trigger(\"datasetuirefreshed\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 44,
+            "description": "매핑된 특정 행의 FX수식이 새로 고쳐졌을 때 발생합니다.",
+            "itemtype": "event",
+            "name": "datasetuifxrefreshed",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "JQuery Event object"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(target_).trigger(\"datasetuifxrefreshed\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 57,
+            "description": "특정 행열의 매핑이 새로 고쳐졌을 때 호출됩니다.",
+            "itemtype": "event",
+            "name": "datasetuicolumnrefreshed",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "JQuery Event object"
+                },
+                {
+                    "name": "columnName_",
+                    "description": "열명",
+                    "type": "String"
+                },
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n\t$(target_).trigger(\"datasetuicolumnrefreshed\",function(event_, columnName_, rowIndex_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 71,
+            "description": "매핑이 재적재되었을 때 발생합니다.",
+            "itemtype": "event",
+            "name": "datasetuimappingreloaded",
+            "params": [
+                {
+                    "name": "event_",
+                    "description": "jQuery 이벤트 객체",
+                    "type": "JQuery Event object"
+                }
+            ],
+            "example": [
+                "\n\t$(target_).trigger(\"datasetuimappingreloaded\",function(event_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 150,
+            "description": "특정색인에 jQuery Element를 삽입합니다.",
+            "itemtype": "method",
+            "name": "insertAtIndex",
+            "params": [
+                {
+                    "name": "element_",
+                    "description": "삽입대상객체",
+                    "type": "JQuery Object"
+                },
+                {
+                    "name": "index_",
+                    "description": "색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "삽입대상",
+                "type": "JQuery Object"
+            },
+            "example": [
+                "\n\t$(target_).insertAtIndex(\"<div>test</div>\",3);"
+            ],
+            "class": "jQuery.fn.extension"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 171,
+            "description": "select 태그의 값을 반환합니다.",
+            "itemtype": "method",
+            "name": "selectValue",
+            "return": {
+                "description": "값",
+                "type": "String"
+            },
+            "example": [
+                "\n\tvar result_ = $(\"<select><option value='testValue'>test</option></select\").selectValue();"
+            ],
+            "class": "jQuery.fn.extension"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 184,
+            "description": "JGDatasetUI의 확장함수입니다.<br>\n데이타셋에 매핑되어 있는 모든 View를 반환합니다.",
+            "itemtype": "method",
+            "name": "datasetUIView",
+            "return": {
+                "description": "배열",
+                "type": "Array"
+            },
+            "class": "JGDataset"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 291,
+            "description": "매핑되어 있는 jQuery 객체를 반환합니다.",
+            "return": {
+                "description": "jQuery 객체",
+                "type": "JQuery Object"
+            },
+            "example": [
+                "\n\tvar element_ = $(target_).JGDatasetUI(\"element\");"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 301,
+            "description": "매핑되어 있는 데이타셋을 반환합니다.",
+            "return": {
+                "description": "데이타셋",
+                "type": "JGDataset"
+            },
+            "example": [
+                "\n\tvar element_ = $(target_).JGDatasetUI(\"dataset\");"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 312,
+            "description": "특정 행색인에 매핑되어 있는 행컨텐츠를 반환합니다.",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행색인",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "행컨텐츠",
+                "type": "JGRowContent"
+            },
+            "example": [
+                "\n\tvar element_ = $(target_).JGDatasetUI(\"rowContent\",rowIndex_);"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 338,
+            "description": "매핑되어 있는 행컨텐츠의 행색인을 반환합니다.",
+            "params": [
+                {
+                    "name": "rowIndex_",
+                    "description": "행컨텐츠",
+                    "type": "JGRowContent"
+                }
+            ],
+            "return": {
+                "description": "행색인",
+                "type": "Number"
+            },
+            "example": [
+                "\n\tvar element_ = $(target_).JGDatasetUI(\"indexOf\",rowContent_);"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 383,
+            "description": "매핑 재적재를 수행합니다.",
+            "example": [
+                "\n\tvar element_ = $(target_).JGDatasetUI(\"reload\");"
+            ],
+            "class": "jQuery.fn.JGDatasetUI"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 551,
+            "description": "매핑되어 있는 JGDatasetUI를 반환합니다.",
+            "itemtype": "method",
+            "name": "datasetUI",
+            "return": {
+                "description": "매핑된 JGDatasetUI",
+                "type": "JGDatasetUI"
+            },
+            "class": "JGRowContent"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 560,
+            "description": "현재 행컨텐츠의 색인을 반환합니다.",
+            "itemtype": "method",
+            "name": "rowIndex",
+            "return": {
+                "description": "색인",
+                "type": "Number"
+            },
+            "class": "JGRowContent"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 569,
+            "description": "원본 행컨텐츠를 반환합니다.",
+            "itemtype": "method",
+            "name": "rowContent",
+            "return": {
+                "description": "jQuery 객체",
+                "type": "JQuery Object"
+            },
+            "class": "JGRowContent"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 578,
+            "description": "열매핑되어 있는 jQuery 객체를 반환합니다.",
+            "itemtype": "method",
+            "name": "mappedElements",
+            "return": {
+                "description": "열매핑되어 있는 jQuery 객체",
+                "type": "Array"
+            },
+            "class": "JGRowContent"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 587,
+            "description": "FX수식매핑되어 있는 jQuery 객체를 반환합니다.",
+            "itemtype": "method",
+            "name": "FXElements",
+            "return": {
+                "description": "FX수식매핑되어 있는 jQuery 객체",
+                "type": "Array"
+            },
+            "class": "JGRowContent"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 684,
+            "description": "매핑되어 있는 행컨텐츠를 반환합니다.",
+            "itemtype": "method",
+            "name": "rowContent",
+            "return": {
+                "description": "행컨텐츠",
+                "type": "JGRowContent"
+            },
+            "class": "JGFXElement"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 693,
+            "description": "매핑되어 있는 jQuery 객체를 반환합니다.",
+            "itemtype": "method",
+            "name": "element",
+            "return": {
+                "description": "jQuery 객체",
+                "type": "JQuery Object"
+            },
+            "class": "JGFXElement"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 702,
+            "description": "매핑되어 있는 속성명을 반환합니다.",
+            "itemtype": "method",
+            "name": "attrName",
+            "return": {
+                "description": "속성명",
+                "type": "String"
+            },
+            "class": "JGFXElement"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 711,
+            "description": "매핑유형을 반환합니다.",
+            "itemtype": "method",
+            "name": "type",
+            "return": {
+                "description": "매핑유형",
+                "type": "Number"
+            },
+            "class": "JGFXElement"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 720,
+            "description": "FX매핑을 새로고침을 수행합니다.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "JGFXElement"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 811,
+            "description": "JGSelect에 매핑되어 있는 jQuery Object를 반환합니다.",
+            "itemtype": "method",
+            "name": "element",
+            "return": {
+                "description": "jQuery 객체",
+                "type": "JQuery Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGSelect(\"element\");"
+            ],
+            "class": "jQuery.fn.JGSelect"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 822,
+            "description": "JGSelect에 매핑되어 있는 JGDataset을 반환합니다.",
+            "itemtype": "method",
+            "name": "dataset",
+            "return": {
+                "description": "데이타셋",
+                "type": "JGDataset"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGSelect(\"dataset\");"
+            ],
+            "class": "jQuery.fn.JGSelect"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 833,
+            "description": "JGSelect에 매핑되어 있는 전시열명을 반환합니다.",
+            "itemtype": "method",
+            "name": "displayColumn",
+            "return": {
+                "description": "전시열명",
+                "type": "String"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGSelect(\"displayColumn\");"
+            ],
+            "class": "jQuery.fn.JGSelect"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 845,
+            "description": "JGSelect에 매핑되어 있는 값열명을 반환합니다.",
+            "itemtype": "method",
+            "name": "valueColumn",
+            "return": {
+                "description": "값열명",
+                "type": "String"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGSelect(\"valueColumn\");"
+            ],
+            "class": "jQuery.fn.JGSelect"
+        },
+        {
+            "file": "JGDatasetUI.2.0.0.js",
+            "line": 856,
+            "description": "JGSelect에 매핑을 재적재합니다.",
+            "itemtype": "method",
+            "name": "reload",
+            "example": [
+                "\n\tvar result_ = $(target_).JGSelect(\"reload\");"
+            ],
+            "class": "jQuery.fn.JGSelect"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 86,
+            "description": "매핑된 JGDatasetUI를 반환합니다.",
+            "itemtype": "method",
+            "name": "datasetUI",
+            "return": {
+                "description": "JGDatasetUI",
+                "type": "JGDatasetUI"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"datasetUI\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 97,
+            "description": "매핑된 데이타셋을 반환합니다.",
+            "itemtype": "method",
+            "name": "dataset",
+            "return": {
+                "description": "데이타셋",
+                "type": "JGDataset"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"dataset\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 109,
+            "description": "매핑된 데이타셋을 반환합니다.",
+            "itemtype": "method",
+            "name": "isValid",
+            "return": {
+                "description": "유효여부",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"isValid\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 137,
+            "description": "유효성엔진 설정/반환합니다.<br>\n매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.\n\n\t//유효성검사 엔진 포멧\n\t{\"custom-validator1\" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){\n\t\t\t//todo\n\t\t},\"custom-validator2\" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){\n\t\t\t//todo\n\t\t}\n\t};",
+            "itemtype": "method",
+            "name": "engine",
+            "params": [
+                {
+                    "name": "유효성엔진",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "유효성엔진",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"engine\",...);"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 161,
+            "description": "유효성검사 실패메세지를 설정/반환합니다.<br>\n매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.\n\n\t//형식\n\t{열명1 : {\n\t\t\t유효성명1 : \"실패메세지\"\n\t\t\t,유효성명2 : \"실패메세지\"\n\t\t},열명2 : {\n\t\t\t유효성명1 : \"실패메세지\"\n\t\t\t,유효성명2 : \"실패메세지\"\n\t\t\t,...\n\t\t},...\n\t}",
+            "itemtype": "method",
+            "name": "validator_",
+            "params": [
+                {
+                    "name": "messages_",
+                    "description": "유효성 검사 실패메세지",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "유효성 검사 실패메세지",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"failedMessages\",...);"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 189,
+            "description": "기본 유효성 검사 실패메세지를 설정/반환합니다.<br>\n매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.\n\n\t//형식\n\t{\n\t\t유효성명1 : \"실패메세지\"\n\t\t,...\n\t}",
+            "itemtype": "method",
+            "name": "commonFailedMessages",
+            "params": [
+                {
+                    "name": "messages_",
+                    "description": "실패메세지",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "실패메세지",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"commonFailedMessages\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 212,
+            "description": "유효성 검사에 대한 실패원인을 반환합니다.\n\n\t//형식\n\t{\n\t열명1 : {\n\t\t행색인 : {\n\t\t\t유효성명1 : {유효성정보}\n\t\t\t,...\n\t\t\t}\n\t\t,...\n\t\t}\n\t,...\n\t}",
+            "itemtype": "method",
+            "name": "cause",
+            "return": {
+                "description": "실패원인",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"cause\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 251,
+            "description": "유효성요소를 재적재합니다.",
+            "itemtype": "method",
+            "name": "refresh",
+            "example": [
+                "\n\t$(target_).JGValidator(\"refresh\");"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 596,
+            "description": "유효성을 검사합니다.",
+            "itemtype": "method",
+            "name": "validate",
+            "params": [
+                {
+                    "name": "callback_",
+                    "description": "콜백함수",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n\t$(dataset_).JGValidator(\"validate\",function(isValid_, cause_){\n\t\t//to do\n\t});"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 691,
+            "description": "옵션을 설정/반환합니다.<br>\n매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.\n\n\t//옵션항목\n\terrorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 \n\tappendErrorMessage = 실패메세지 확장출력여부\n\tstepValidation = 단계별 유효성검사여부\n\trealtimeCheck = 실시간 유효성검사여부",
+            "itemtype": "method",
+            "name": "options",
+            "params": [
+                {
+                    "name": "options_",
+                    "description": "옵션명 또는 옵션객체",
+                    "type": "Object"
+                },
+                {
+                    "name": "options_",
+                    "description": "옵션값",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "옵션",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar result_ = $(target_).JGValidator(\"options\",...);\n\tvar result2_ = $(target_).JGValidator({options : ...});"
+            ],
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 728,
+            "description": "기본 실패매세지입니다.<br>\n유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.<br>\n*참고 : {{#crossLink \"jQuery.fn.JGValidator/commonFailedMessages:method\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "_commonFailedMessages",
+            "type": "Object",
+            "class": "jQuery.fn.JGValidator"
+        },
+        {
+            "file": "JGDatasetUI.validator.2.0.0.js",
+            "line": 761,
+            "description": "유효성 엔진객체입니다.",
+            "itemtype": "property",
+            "name": "_engine",
+            "type": "Object",
+            "class": "jQuery.fn.JGValidator"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nCommon",
+            "line": " prev/JGDataset.1.0.0.js:8"
+        },
+        {
+            "message": "Missing item type\nJQuery Extension",
+            "line": " prev/JGDataset.1.0.0.js:66"
+        },
+        {
+            "message": "Missing item type\nJGDataset",
+            "line": " prev/JGDataset.1.0.0.js:170"
+        },
+        {
+            "message": "Missing item type\nJGDataset Management",
+            "line": " prev/JGDataset.1.0.0.js:1089"
+        },
+        {
+            "message": "Missing item type\nJGDataset extension for validator",
+            "line": " prev/JGDataset.validate.1.0.0.js:3"
+        },
+        {
+            "message": "Missing item type\nvalidator auto bind",
+            "line": " prev/JGDataset.validate.1.0.0.js:525"
+        },
+        {
+            "message": "Missing item type\n매핑되어 있는 jQuery 객체를 반환합니다.",
+            "line": " JGDatasetUI.2.0.0.js:291"
+        },
+        {
+            "message": "Missing item type\n매핑되어 있는 데이타셋을 반환합니다.",
+            "line": " JGDatasetUI.2.0.0.js:301"
+        },
+        {
+            "message": "Missing item type\n특정 행색인에 매핑되어 있는 행컨텐츠를 반환합니다.",
+            "line": " JGDatasetUI.2.0.0.js:312"
+        },
+        {
+            "message": "Missing item type\n매핑되어 있는 행컨텐츠의 행색인을 반환합니다.",
+            "line": " JGDatasetUI.2.0.0.js:338"
+        },
+        {
+            "message": "Missing item type\n매핑 재적재를 수행합니다.",
+            "line": " JGDatasetUI.2.0.0.js:383"
+        }
+    ]
+}
