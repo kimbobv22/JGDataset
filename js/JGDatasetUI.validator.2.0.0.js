@@ -37,14 +37,26 @@
 	_JGKeyword = $.extend(true,_JGKeyword,{
 		validator : {
 			errorColumn : "jg-error-column"
-			,trigger : {
-				refreshed : "validatorrefreshed"
-				,updated : "validatorupdated"
-			}
 		}
 	});
 	
-	var _JGValidator = window.JGValidator = (function(datasetUI_){
+	/**
+	 * JGDataset이 매핑된 JGDatasetUI의 입력 유효성 검사를 위한 객체입니다.<br>
+	 * JGValidator를 사용하려면 JGDatasetUI가 초기화 되어 있어야합니다.
+	 * 
+	 * 	//1. jQuery Plugin Style
+	 * 	var result_ = $(target_).JGValidator("함수명",...);
+	 * 	
+	 * 	//2. normal Style
+	 * 	var validator_ = $(target_).JGValidator();
+	 * 	var result_ = validator_.함수명();
+	 * 
+	 * JGValidator 샘플은 <a href="http://kimbobv22.github.io/JGDataset/index.html" target="_blank">여기</a>에서 확인할 수 있습니다.
+	 * 
+	 * @class jQuery.fn.JGValidator
+	 * @constructor 
+	 */
+	var JGValidator = window.JGValidator = (function(datasetUI_){
 		this._datasetUI = datasetUI_;
 		this._engine = $.extend(true,{},JGValidator.prototype._engine);
 		this._failedMessages = $.extend(true,{},JGValidator.prototype._failedMessages);
@@ -71,14 +83,38 @@
 		this.refresh();
 	});
 	
-	_JGValidator.prototype.datasetUI = (function(){
+	/**
+	 * 매핑된 JGDatasetUI를 반환합니다.
+	 * 
+	 * @method datasetUI
+	 * @return {JGDatasetUI} JGDatasetUI
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("datasetUI");
+	 */
+	JGValidator.prototype.datasetUI = (function(){
 		return this._datasetUI;
 	});
-	_JGValidator.prototype.dataset = (function(){
+	/**
+	 * 매핑된 데이타셋을 반환합니다.
+	 * 
+	 * @method dataset
+	 * @return {JGDataset} 데이타셋
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("dataset");
+	 */
+	JGValidator.prototype.dataset = (function(){
 		return this._datasetUI.dataset();
 	});
 	
-	_JGValidator.prototype.isValid = (function(){
+	/**
+	 * 매핑된 데이타셋을 반환합니다.
+	 * 
+	 * @method isValid
+	 * @return {Boolean} 유효여부
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("isValid");
+	 */
+	JGValidator.prototype.isValid = (function(){
 		var dataset_ = this.dataset();
 		var rowCount_ = dataset_.getRowCount();
 		var validators_ = this._validators;
@@ -92,25 +128,108 @@
 			
 			for(var rowIndex_ in result_){
 				var rowResult_ = result_[rowIndex_];
-				if(Object.isNull(rowResult_) || _jsonDataLength(rowResult_) > 0) return false;
+				if(isNull(rowResult_) || _jsonDataLength(rowResult_) > 0) return false;
 			}
 		}
 	
 		return true;
 	});
-	_JGValidator.prototype.engine = (function(engine_){
+	/**
+	 * 유효성엔진 설정/반환합니다.<br>
+	 * 매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.
+	 * 
+	 * 	//유효성검사 엔진 포멧
+	 * 	{"custom-validator1" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+	 * 			//todo
+	 * 		},"custom-validator2" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+	 * 			//todo
+	 * 		}
+	 * 	};
+	 * 
+	 * @method engine
+	 * @param {Object} 유효성엔진
+	 * @return {Object} 유효성엔진
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("engine",...);
+	 */
+	JGValidator.prototype.engine = (function(engine_){
 		if(engine_ !== undefined){
 			this._engine = $.extend(true,this._engine,engine_);
 		}
 		return this._engine;
 	});
-	_JGValidator.prototype.failedMessages = (function(messages_){
+	/**
+	 * 유효성검사 실패메세지를 설정/반환합니다.<br>
+	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
+	 * 
+	 * 	//형식
+	 * 	{열명1 : {
+	 * 			유효성명1 : "실패메세지"
+	 * 			,유효성명2 : "실패메세지"
+	 * 		},열명2 : {
+	 * 			유효성명1 : "실패메세지"
+	 * 			,유효성명2 : "실패메세지"
+	 *			,...
+	 * 		},...
+	 * 	}
+	 * 
+	 * @method validator_
+	 * @param {Object} messages_ 유효성 검사 실패메세지
+	 * @return {Object} 유효성 검사 실패메세지
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("failedMessages",...);
+	 */
+	JGValidator.prototype.failedMessages = (function(messages_){
 		if(messages_ !== undefined){
 			this._failedMessages = $.extend(true,this._failedMessages,messages_);
 		}
 		return this._failedMessages;
 	});
-	_JGValidator.prototype.cause = (function(){
+	
+	/**
+	 * 기본 유효성 검사 실패메세지를 설정/반환합니다.<br>
+	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
+	 * 
+	 * 	//형식
+	 * 	{
+	 * 		유효성명1 : "실패메세지"
+	 * 		,...
+	 * 	}
+	 * 
+	 * @method commonFailedMessages
+	 * @param {Object} [messages_] 실패메세지
+	 * @return {Object} 실패메세지
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("commonFailedMessages");
+	 */
+	JGValidator.prototype.commonFailedMessages = (function(messages_){
+		if(messages_ !== undefined){
+			this._commonFailedMessages = $.extend(true,this._commonFailedMessages,messages_);
+		}
+		return this._commonFailedMessages;
+	});
+	
+	/**
+	 * 유효성 검사에 대한 실패원인을 반환합니다.
+	 * 
+	 * 	//형식
+	 * 	{
+	 * 	열명1 : {
+	 * 		행색인 : {
+	 * 			유효성명1 : {유효성정보}
+	 * 			,...
+	 * 			}
+	 * 		,...
+	 * 		}
+	 * 	,...
+	 * 	}
+	 * 
+	 * @method cause
+	 * @return {Object} 실패원인
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("cause");
+	 */
+	JGValidator.prototype.cause = (function(){
 		var cause_ = {};
 		
 		for(var columnName_ in this._cause){
@@ -129,8 +248,14 @@
 		
 		return cause_;
 	});
-	
-	_JGValidator.prototype.refresh = (function(){
+	/**
+	 * 유효성요소를 재적재합니다.
+	 * 
+	 * @method refresh
+	 * @example
+	 * 	$(target_).JGValidator("refresh");
+	 */
+	JGValidator.prototype.refresh = (function(){
 		this._validators = {};
 		this._cause = {};
 		
@@ -140,7 +265,7 @@
 		
 		var colCount_ = dataset_.getColumnCount();
 		for(var colIndex_=0;colIndex_<colCount_;++colIndex_){
-			var columnName_ = dataset_.getColumn(colIndex_).name;
+			var columnName_ = dataset_.getColumn(colIndex_).getName();
 			
 			var mappedElements_ = originalRowContent_.find("*["+_JGKeyword.ui.attrColumn+"]").filter(function(){
 				return $(this).attr(_JGKeyword.ui.attrColumn).toUpperCase() === columnName_;
@@ -384,28 +509,28 @@
 				}
 			});
 			
-			this.validate(function(){});	
+			this.validate(function(){});
 		}
 	});
 	
-	_JGValidator.prototype._recursiveSingleValidate = (function(columnName_, rowIndex_, valIndex_ ,callback_){
+	JGValidator.prototype._recursiveSingleValidate = (function(columnName_, rowIndex_, valIndex_ ,callback_){
 		var that_ = this;
 		var datasetUI_ = this.datasetUI();
 		var dataset_ = this.dataset();
 		var columnValue_ = dataset_.getColumnValue(columnName_, rowIndex_);
 		var validatorElements_ = _jsonDataWithoutCase(this._validators, columnName_);
-		callback_ = Object.NVL(callback_,function(){});
+		callback_ = NVL(callback_,function(){});
 		
-		var columnValidData_ = this._cause[columnName_] = Object.NVL(this._cause[columnName_],[]);
+		var columnValidData_ = this._cause[columnName_] = NVL(this._cause[columnName_],[]);
 		this._cause[columnName_][rowIndex_] = $.extend(true,this._cause[columnName_][rowIndex_],{});
 		
-		if(Object.isNull(validatorElements_)){
+		if(isNull(validatorElements_)){
 			var cause_ = this.cause()[columnName_];
 			callback_.apply(datasetUI_.element(), [cause_ === undefined ? null : cause_[rowIndex_]]);
 			return;
 		}
 		
-		valIndex_ = Object.NVL(valIndex_,0);
+		valIndex_ = NVL(valIndex_,0);
 		var valCount_ = _jsonDataLength(validatorElements_);
 		
 		if(valIndex_ === valCount_){
@@ -418,7 +543,7 @@
 		var validatorName_ = validatorElement_.name.toLowerCase();
 		var validatorEngine_ = _jsonDataWithoutCase(this._engine, validatorName_);
 		
-		if(Object.isNull(validatorEngine_)){
+		if(isNull(validatorEngine_)){
 			this._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
 			return;
 		}
@@ -437,23 +562,23 @@
 			that_._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
 		}]);
 	});
-	_JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
+	JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
 		var that_ = this;
 		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
 			that_._updateErrorLabels();
 			callback_.apply(that_.datasetUI().element(),arguments);
 		});
 	});
-	_JGValidator.prototype._recursiveValidate = (function(columnIndex_, rowIndex_, callback_){
+	JGValidator.prototype._recursiveValidate = (function(columnIndex_, rowIndex_, callback_){
 		var that_ = this;
 		var datasetUI_ = this.datasetUI();
 		var dataset_ = this.dataset();
 		var colCount_ = dataset_.getColumnCount();
 		var rowCount_ = dataset_.getRowCount();
 		
-		columnIndex_ = Object.NVL(columnIndex_, 0);
-		rowIndex_ = Object.NVL(rowIndex_,0);
-		callback_ = Object.NVL(callback_,function(){});
+		columnIndex_ = NVL(columnIndex_, 0);
+		rowIndex_ = NVL(rowIndex_,0);
+		callback_ = NVL(callback_,function(){});
 	
 		if(columnIndex_ === colCount_){
 			callback_.apply(datasetUI_.element(), [this.isValid(), this.cause()]);
@@ -462,16 +587,26 @@
 			this._recursiveValidate(columnIndex_+1, 0, callback_);
 			return;
 		}else{
-			this._singleValidate(dataset_.getColumn(columnIndex_).name, rowIndex_, function(result_){
+			this._singleValidate(dataset_.getColumn(columnIndex_).getName(), rowIndex_, function(result_){
 				that_._recursiveValidate(columnIndex_, rowIndex_+1, callback_);
 			});
 			return;
 		}
 	});
-	_JGValidator.prototype.validate = (function(callback_){
+	/**
+	 * 유효성을 검사합니다.
+	 * 
+	 * @method validate
+	 * @param {Function} [callback_] 콜백함수
+	 * @example
+	 * 	$(dataset_).JGValidator("validate",function(isValid_, cause_){
+	 * 		//to do
+	 * 	});
+	 */
+	JGValidator.prototype.validate = (function(callback_){
 		this._recursiveValidate(0,0,callback_);
 	});
-	_JGValidator.prototype._updateErrorLabels = (function(){
+	JGValidator.prototype._updateErrorLabels = (function(){
 		var datasetUI_ = this.datasetUI();
 		var dataset_ = this.dataset();
 		var rowCount_ = dataset_.getRowCount();
@@ -479,7 +614,7 @@
 		// set blank all error label
 		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
 			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-			if(Object.isNull(rowContent_)){
+			if(isNull(rowContent_)){
 				continue;
 			}
 			
@@ -496,7 +631,7 @@
 			for(var rowIndex_ in causeRow_){
 				var causeElements_ = causeRow_[rowIndex_];
 				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-				if(Object.isNull(rowContent_)){
+				if(isNull(rowContent_)){
 					continue;
 				}
 				
@@ -508,14 +643,14 @@
 					var failedMessage_ = "";
 					var messages_ = _jsonDataWithoutCase(this._failedMessages, columnName_);
 					
-					if(!Object.isNull(messages_)){
+					if(!isNull(messages_)){
 						var message_ = _jsonDataWithoutCase(messages_, causeName_);
-						if(!Object.isNull(message_ )){
+						if(!isNull(message_ )){
 							failedMessage_ = message_;
 						}
 					}
-					if(Object.isNull(failedMessage_) || failedMessage_.length === 0){
-						failedMessage_ = Object.NVL(_jsonDataWithoutCase(this.commonFailedMessages, causeName_),"");
+					if(isNull(failedMessage_) || failedMessage_.length === 0){
+						failedMessage_ = BLK(_jsonDataWithoutCase(this._commonFailedMessages, causeName_));
 					}
 					
 					var makeMessagePattern_ = (function(key_){
@@ -537,7 +672,7 @@
 							errorLabel_.show();
 							
 							failedMessage_ = $(this._options.errorMessageTag).html(failedMessage_);
-							if(Object.NVL(this._options.appendErrorMessage,false)) errorLabel_.append(failedMessage_);
+							if(NVL(this._options.appendErrorMessage,false)) errorLabel_.append(failedMessage_);
 							else errorLabel_.html(failedMessage_);
 						}
 					}
@@ -546,13 +681,32 @@
 		}
 	});
 	
-	_JGValidator.prototype._options = {
+	JGValidator.prototype._options = {
 		errorMessageTag : "<span style='display:block;' />"
 		,appendErrorMessage : true
 		,stepValidation : true
 		,realtimeCheck : true
 	};
-	_JGValidator.prototype.options = (function(){
+	
+	/**
+	 * 옵션을 설정/반환합니다.<br>
+	 * 매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.
+	 * 
+	 * 	//옵션항목
+	 * 	errorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
+	 * 	appendErrorMessage = 실패메세지 확장출력여부
+	 * 	stepValidation = 단계별 유효성검사여부
+	 * 	realtimeCheck = 실시간 유효성검사여부
+	 * 
+	 * @method options
+	 * @param {Object} options_ 옵션명 또는 옵션객체
+	 * @param {Object} [options_] 옵션값
+	 * @return {Object} 옵션
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("options",...);
+	 * 	var result2_ = $(target_).JGValidator({options : ...});
+	 */
+	JGValidator.prototype.options = (function(){
 		if($.type(arguments[0]) === "string"){
 			if(arguments.length === 2){
 				this._options[arguments[0]] = arguments[1];
@@ -571,7 +725,15 @@
 		return this._options;
 	});
 	
-	_JGValidator.prototype.commonFailedMessages = {
+	/**
+	 * 기본 실패매세지입니다.<br>
+	 * 유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.<br>
+	 * *참고 : {{#crossLink "jQuery.fn.JGValidator/commonFailedMessages:method"}}{{/crossLink}}
+	 * 
+	 * @property _commonFailedMessages
+	 * @type Object
+	 */
+	JGValidator.prototype._commonFailedMessages = {
 		required : "field is required"
 		,maxLength : "max length : {length}"
 		,minLength : "min length : {length}"
@@ -593,25 +755,31 @@
 	
 	function _checkRegexp(pattern_, value_, option_){
 		var regex_ = new RegExp(pattern_, option_);
-		return regex_.test(Object.NVL(value_,""));
+		return regex_.test(BLK(value_));
 	}
 	
-	_JGValidator.prototype._engine = {
+	/**
+	 * 유효성 엔진객체입니다.
+	 * 
+	 * @property _engine
+	 * @type Object
+	 */
+	JGValidator.prototype._engine = {
 		_customValidate : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			this[validatorElement_.name](validatorElement_, columnName_, rowIndex_, columnValue_, callback_);
 		},required : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(0 < Object.NVL(columnValue_,"").length);
+			callback_(0 < BLK(columnValue_).length);
 		},maxLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length >= Object.NVL(columnValue_,"").length);
+			callback_(validatorElement_.length >= BLK(columnValue_).length);
 		},minLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length <= Object.NVL(columnValue_,"").length);
+			callback_(validatorElement_.length <= BLK(columnValue_).length);
 		},length : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length === Object.NVL(columnValue_,"").length);
+			callback_(validatorElement_.length === BLK(columnValue_).length);
 		},range : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			var cColumnValue_ = parseInt(columnValue_);
 			callback_(validatorElement_.from <= cColumnValue_ && validatorElement_.to >= cColumnValue_);
 		},rangeLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			var cLength_ = Object.NVL(columnValue_,"").length;
+			var cLength_ = BLK(columnValue_).length;
 			callback_(validatorElement_.from <= cLength_ && validatorElement_.to >= cLength_);
 		},equals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			callback_(validatorElement_.value === columnValue_);
@@ -633,10 +801,10 @@
 			callback_(_checkRegexp("^(\\+?\\d{0,2}\\s?\\d{2,3}\\s?\\-?\\s?\\d{3,4}\\s?\\-?\\s?\\d{4})$", columnValue_));
 		},columnEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			var tColumnName_ = validatorElement_.value;
-			callback_(Object.NVL(this.getColumnValue(tColumnName_, rowIndex_),"") === Object.NVL(columnValue_,""));
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) === BLK(columnValue_));
 		},columnNotEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 			var tColumnName_ = validatorElement_.value;
-			callback_(Object.NVL(this.getColumnValue(tColumnName_, rowIndex_),"") !== Object.NVL(columnValue_,""));
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) !== BLK(columnValue_));
 		}
 	};
 	
@@ -646,7 +814,7 @@
 	});
 	$.fn._jgValidatorInitialized = (function(bool_){
 		if(bool_ !== undefined) this.data("jgdataset_jgValidatorInitialized",bool_);
-		return Object.NVL(this.data("jgdataset_jgValidatorInitialized"),false);
+		return NVL(this.data("jgdataset_jgValidatorInitialized"),false);
 	});
 	$.fn.JGValidator = (function(){
 		if(!this._jgValidatorInitialized()){
