@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>jQuery.fn.JGSelect - JGDataset for JavaScript</title>
+    <title>JGRowContent - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../../logo-small.png" title="JGDataset for JavaScript"></h1>
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>jQuery.fn.JGSelect Class</h1>
+                        <h1>JGRowContent Class</h1>
 <div class="box meta">
     
 
@@ -118,22 +118,17 @@
 
 
 <div class="box intro">
-    <p>select 태그와 매핑을 위한 객체입니다.<br>
-함수호출 형식은 아래와 같습니다.</p>
-<pre class="code prettyprint"><code>//1. jQuery Plugin Style
-var result_ = $(target_).JGSelect(&quot;함수명&quot;,...);
-
-//2. normal Style
-var select_ = $(target_).JGSelect();
-var result_ = select_.함수명();</code></pre>
+    <p>JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.<br>
+사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.<br>
+*참고 : <a href="../classes/jQuery.fn.JGDatasetUI.html" class="crosslink">jQuery.fn.JGDatasetUI</a></p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_jQuery.fn.JGSelect" class="method item">
-    <h3 class="name"><code>jQuery.fn.JGSelect</code></h3>
+        <div id="method_JGRowContent" class="method item">
+    <h3 class="name"><code>JGRowContent</code></h3>
 
     
         <div class="args">
@@ -141,7 +136,13 @@ var result_ = select_.함수명();</code></pre>
             
                 <li class="arg">
                     
-                        <code>element_</code>
+                        <code>datasetUI_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>rowContent_</code>
                     
                 </li>
             
@@ -192,14 +193,30 @@ var result_ = select_.함수명();</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">element_</code>
+                        <code class="param-name">datasetUI_</code>
                         <span class="type">JQuery Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>매핑할 jQuery 객체</p>
+                        <p>JGDatasetUI가 매핑된 jQuery Object</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">rowContent_</code>
+                        <span class="type">JQuery Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>원본 행컨텐츠</p>
 
                     </div>
 
@@ -212,29 +229,6 @@ var result_ = select_.함수명();</code></pre>
 
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//1. 미리 정의된 속성값을 이용하여 초기화
-&lt;select jg-bind-dataset=&quot;datasetName&quot;
-        jg-display-column=&quot;nm&quot;
-        jg-value-column=&quot;id&quot;&gt;&lt;/select&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-$(target_).JGSelect();
-&lt;/script&gt;
-
-//2. 매개변수를 이용하여 초기화
-&lt;select&gt;&lt;/select&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-$(target_).JGSelect({datasetName : &quot;datasetName&quot;
-                    ,displayColumn : &quot;nm&quot;
-                    ,valueColumn : &quot;id&quot;});
-&lt;/script&gt;</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
@@ -264,35 +258,35 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_dataset">dataset</a>
+                                <a href="#method_datasetUI">datasetUI</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_displayColumn">displayColumn</a>
+                                <a href="#method_FXElements">FXElements</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_element">element</a>
+                                <a href="#method_mappedElements">mappedElements</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_reload">reload</a>
+                                <a href="#method_rowContent">rowContent</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_valueColumn">valueColumn</a>
+                                <a href="#method_rowIndex">rowIndex</a>
 
                                 
                                 
@@ -314,8 +308,8 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_dataset" class="method item">
-    <h3 class="name"><code>dataset</code></h3>
+                    <div id="method_datasetUI" class="method item">
+    <h3 class="name"><code>datasetUI</code></h3>
 
     
         <span class="paren">()</span>
@@ -323,7 +317,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
 
     
         <span class="returns-inline">
-            <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>
+            <span class="type">JGDatasetUI</span>
         </span>
     
 
@@ -357,7 +351,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
     </div>
 
     <div class="description">
-        <p>JGSelect에 매핑되어 있는 JGDataset을 반환합니다.</p>
+        <p>매핑되어 있는 JGDatasetUI를 반환합니다.</p>
 
     </div>
 
@@ -370,30 +364,21 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>:
+                        <span class="type">JGDatasetUI</span>:
                     
-                    <p>데이타셋</p>
+                    <p>매핑된 JGDatasetUI</p>
 
                 
             </div>
         </div>
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGSelect(&quot;dataset&quot;);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
                 
-                    <div id="method_displayColumn" class="method item">
-    <h3 class="name"><code>displayColumn</code></h3>
+                    <div id="method_FXElements" class="method item">
+    <h3 class="name"><code>FXElements</code></h3>
 
     
         <span class="paren">()</span>
@@ -401,7 +386,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Array</span>
         </span>
     
 
@@ -435,7 +420,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
     </div>
 
     <div class="description">
-        <p>JGSelect에 매핑되어 있는 전시열명을 반환합니다.</p>
+        <p>FX수식매핑되어 있는 jQuery 객체를 반환합니다.</p>
 
     </div>
 
@@ -448,30 +433,90 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
             <div class="returns-description">
                 
                     
-                        <span class="type">String</span>:
+                        <span class="type">Array</span>:
                     
-                    <p>전시열명</p>
+                    <p>FX수식매핑되어 있는 jQuery 객체</p>
 
                 
             </div>
         </div>
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGSelect(&quot;displayColumn&quot;);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
                 
-                    <div id="method_element" class="method item">
-    <h3 class="name"><code>element</code></h3>
+                    <div id="method_mappedElements" class="method item">
+    <h3 class="name"><code>mappedElements</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>열매핑되어 있는 jQuery 객체를 반환합니다.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <p>열매핑되어 있는 jQuery 객체</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_rowContent" class="method item">
+    <h3 class="name"><code>rowContent</code></h3>
 
     
         <span class="paren">()</span>
@@ -513,7 +558,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
     </div>
 
     <div class="description">
-        <p>JGSelect에 매핑되어 있는 jQuery Object를 반환합니다.</p>
+        <p>원본 행컨텐츠를 반환합니다.</p>
 
     </div>
 
@@ -536,80 +581,11 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGSelect(&quot;element&quot;);</code></pre>
-
-            </div>
-        </div>
-    
 </div>
 
                 
-                    <div id="method_reload" class="method item">
-    <h3 class="name"><code>reload</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>JGSelect에 매핑을 재적재합니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGSelect(&quot;reload&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_valueColumn" class="method item">
-    <h3 class="name"><code>valueColumn</code></h3>
+                    <div id="method_rowIndex" class="method item">
+    <h3 class="name"><code>rowIndex</code></h3>
 
     
         <span class="paren">()</span>
@@ -617,7 +593,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Number</span>
         </span>
     
 
@@ -651,7 +627,7 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
     </div>
 
     <div class="description">
-        <p>JGSelect에 매핑되어 있는 값열명을 반환합니다.</p>
+        <p>현재 행컨텐츠의 색인을 반환합니다.</p>
 
     </div>
 
@@ -664,24 +640,15 @@ $(target_).JGSelect({datasetName : &quot;datasetName&quot;
             <div class="returns-description">
                 
                     
-                        <span class="type">String</span>:
+                        <span class="type">Number</span>:
                     
-                    <p>값열명</p>
+                    <p>색인</p>
 
                 
             </div>
         </div>
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGSelect(&quot;valueColumn&quot;);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 

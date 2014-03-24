@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGFXElement - JGDataset for JavaScript</title>
+    <title>JGDatasetColumn - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../../logo-small.png" title="JGDataset for JavaScript"></h1>
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>JGFXElement Class</h1>
+                        <h1>JGDatasetColumn Class</h1>
 <div class="box meta">
     
 
@@ -118,17 +118,17 @@
 
 
 <div class="box intro">
-    <p>JGDatasetUI에서 FX수식을 위한 객체입니다.<br>
-사용자가 임의로 생성할 수 없으며, JGDatasetUI 매핑 시 생성될 수 있습니다.<br>
-*참고 : <a href="../classes/jQuery.fn.JGDatasetUI.html" class="crosslink">jQuery.fn.JGDatasetUI</a></p>
+    <p>JGDataset에 열정의 시 생성되는 객체입니다.<br>
+사용자가 임의로 생성할 수 없으며 JGDataset을 통해서만 생성할 수 있습니다.<br>
+*참고 : <a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_JGFXElement" class="method item">
-    <h3 class="name"><code>JGFXElement</code></h3>
+        <div id="method_JGDatasetColumn" class="method item">
+    <h3 class="name"><code>JGDatasetColumn</code></h3>
 
     
         <div class="args">
@@ -136,25 +136,7 @@
             
                 <li class="arg">
                     
-                        <code>rowContent_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>element_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[attrName_]</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>type_</code>
+                        <code>columnName_</code>
                     
                 </li>
             
@@ -205,63 +187,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">rowContent_</code>
-                        <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>행컨텐츠</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">element_</code>
-                        <span class="type">JQuery Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>JGDatasetUI가 매핑되어 있는 jQuery 객체</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[attrName_]</code>
+                        <code class="param-name">columnName_</code>
                         <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>FX수식을 매핑할 속성명(Text 매핑 시 생략가능)</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">type_</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>FX수식 매핑 유형(0 - 속성, 1 - Text)</p>
+                        <p>열명</p>
 
                     </div>
 
@@ -288,6 +221,8 @@
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
         
         
     </ul>
@@ -303,35 +238,45 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_attrName">attrName</a>
+                                <a href="#method_clone">clone</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_element">element</a>
+                                <a href="#method_getName">getName</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_rowContent">rowContent</a>
+                                <a href="#method_isKey">isKey</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_type">type</a>
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property__isKey">_isKey</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_update">update</a>
+                            <li class="index-item property">
+                                <a href="#property__name">_name</a>
 
                                 
                                 
@@ -344,8 +289,6 @@
             
 
             
-
-            
         </div>
 
         
@@ -353,8 +296,77 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_attrName" class="method item">
-    <h3 class="name"><code>attrName</code></h3>
+                    <div id="method_clone" class="method item">
+    <h3 class="name"><code>clone</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/JGDatasetColumn.html" class="crosslink">JGDatasetColumn</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>열을 복제합니다</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/JGDatasetColumn.html" class="crosslink">JGDatasetColumn</a></span>:
+                    
+                    <p>열</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getName" class="method item">
+    <h3 class="name"><code>getName</code></h3>
 
     
         <span class="paren">()</span>
@@ -396,7 +408,7 @@
     </div>
 
     <div class="description">
-        <p>매핑되어 있는 속성명을 반환합니다.</p>
+        <p>열명을 반환합니다</p>
 
     </div>
 
@@ -411,8 +423,6 @@
                     
                         <span class="type">String</span>:
                     
-                    <p>속성명</p>
-
                 
             </div>
         </div>
@@ -422,16 +432,26 @@
 </div>
 
                 
-                    <div id="method_element" class="method item">
-    <h3 class="name"><code>element</code></h3>
+                    <div id="method_isKey" class="method item">
+    <h3 class="name"><code>isKey</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[isKey_]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
         <span class="returns-inline">
-            <span class="type">JQuery Object</span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -465,10 +485,36 @@
     </div>
 
     <div class="description">
-        <p>매핑되어 있는 jQuery 객체를 반환합니다.</p>
+        <p>키여부를 반환/설정합니다<br>
+*매개변수가 존재한다면 설정, 존재하지 않는다면 반환</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[isKey_]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>키여부</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -478,9 +524,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">JQuery Object</span>:
+                        <span class="type">Boolean</span>:
                     
-                    <p>jQuery 객체</p>
+                    <p>키여부</p>
 
                 
             </div>
@@ -491,22 +537,17 @@
 </div>
 
                 
-                    <div id="method_rowContent" class="method item">
-    <h3 class="name"><code>rowContent</code></h3>
+            </div>
+        
 
-    
-        <span class="paren">()</span>
-    
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>
-        </span>
-    
-
-    
-
-    
+                
+                    <div id="property__isKey" class="property item">
+    <h3 class="name"><code>_isKey</code></h3>
+    <span class="type">Boolean</span>
 
     
 
@@ -527,55 +568,27 @@
         
         </p>
 
-
         
 
         
     </div>
 
     <div class="description">
-        <p>매핑되어 있는 행컨텐츠를 반환합니다.</p>
+        <p>키여부</p>
 
     </div>
 
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>:
-                    
-                    <p>행컨텐츠</p>
-
-                
-            </div>
-        </div>
-    
 
     
 </div>
 
                 
-                    <div id="method_type" class="method item">
-    <h3 class="name"><code>type</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-    
-
-    
-
-    
+                    <div id="property__name" class="property item">
+    <h3 class="name"><code>_name</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -596,79 +609,13 @@
         
         </p>
 
-
         
 
         
     </div>
 
     <div class="description">
-        <p>매핑유형을 반환합니다.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Number</span>:
-                    
-                    <p>매핑유형</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_update" class="method item">
-    <h3 class="name"><code>update</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>FX매핑을 새로고침을 수행합니다.</p>
+        <p>열명</p>
 
     </div>
 
@@ -681,8 +628,6 @@
 
                 
             </div>
-        
-
         
 
         

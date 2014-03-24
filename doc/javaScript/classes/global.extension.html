@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>jQuery.fn.JGValidator - JGDataset for JavaScript</title>
+    <title>global.extension - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../../logo-small.png" title="JGDataset for JavaScript"></h1>
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>jQuery.fn.JGValidator Class</h1>
+                        <h1>global.extension Class</h1>
 <div class="box meta">
     
 
@@ -118,71 +118,10 @@
 
 
 <div class="box intro">
-    <p>JGDataset이 매핑된 JGDatasetUI의 입력 유효성 검사를 위한 객체입니다.<br>
-JGValidator를 사용하려면 JGDatasetUI가 초기화 되어 있어야합니다.</p>
-<pre class="code prettyprint"><code>//1. jQuery Plugin Style
-var result_ = $(target_).JGValidator(&quot;함수명&quot;,...);
-
-//2. normal Style
-var validator_ = $(target_).JGValidator();
-var result_ = validator_.함수명();</code></pre>
-<p>JGValidator 샘플은 <a href="http://kimbobv22.github.io/JGDataset/index.html" target="_blank">여기</a>에서 확인할 수 있습니다.</p>
+    <p>데이타 제어를 보다 편리하게 하기 위한 확장함수입니다.</p>
 
 </div>
 
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_jQuery.fn.JGValidator" class="method item">
-    <h3 class="name"><code>jQuery.fn.JGValidator</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -192,8 +131,6 @@ var result_ = validator_.함수명();</code></pre>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -210,70 +147,77 @@ var result_ = validator_.함수명();</code></pre>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_cause">cause</a>
+                                <a href="#method_Array.prototype.indexOf">Array.prototype.indexOf</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_commonFailedMessages">commonFailedMessages</a>
+                                <a href="#method_Array.prototype.insert">Array.prototype.insert</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_dataset">dataset</a>
+                                <a href="#method_Array.prototype.move">Array.prototype.move</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_datasetUI">datasetUI</a>
+                                <a href="#method_Array.prototype.remove">Array.prototype.remove</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_engine">engine</a>
+                                <a href="#method_Array.prototype.removeAll">Array.prototype.removeAll</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isValid">isValid</a>
+                                <a href="#method_Array.prototype.removeObject">Array.prototype.removeObject</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_options">options</a>
+                                <a href="#method_BLK">BLK</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_refresh">refresh</a>
+                                <a href="#method_isBlank">isBlank</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_validate">validate</a>
+                                <a href="#method_isNull">isNull</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_validator_">validator_</a>
+                                <a href="#method_NVL">NVL</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_NVL2">NVL2</a>
 
                                 
                                 
@@ -283,28 +227,6 @@ var result_ = validator_.함수명();</code></pre>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property__commonFailedMessages">_commonFailedMessages</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property__engine">_engine</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -317,97 +239,8 @@ var result_ = validator_.함수명();</code></pre>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_cause" class="method item">
-    <h3 class="name"><code>cause</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성 검사에 대한 실패원인을 반환합니다.</p>
-<pre class="code prettyprint"><code>//형식
-{
-열명1 : {
-    행색인 : {
-        유효성명1 : {유효성정보}
-        ,...
-        }
-    ,...
-    }
-,...
-}</code></pre>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                    <p>실패원인</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;cause&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_commonFailedMessages" class="method item">
-    <h3 class="name"><code>commonFailedMessages</code></h3>
+                    <div id="method_Array.prototype.indexOf" class="method item">
+    <h3 class="name"><code>Array.prototype.indexOf</code></h3>
 
     
         <div class="args">
@@ -415,7 +248,7 @@ var result_ = validator_.함수명();</code></pre>
             
                 <li class="arg">
                     
-                        <code class="optional">[messages_]</code>
+                        <code>object_</code>
                     
                 </li>
             
@@ -425,7 +258,7 @@ var result_ = validator_.함수명();</code></pre>
 
     
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Number</span>
         </span>
     
 
@@ -459,13 +292,7 @@ var result_ = validator_.함수명();</code></pre>
     </div>
 
     <div class="description">
-        <p>기본 유효성 검사 실패메세지를 설정/반환합니다.<br>
-매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.</p>
-<pre class="code prettyprint"><code>//형식
-{
-    유효성명1 : &quot;실패메세지&quot;
-    ,...
-}</code></pre>
+        <p>배열에서 객체의 색인을 찾아서 반환합니다.</p>
 
     </div>
 
@@ -477,15 +304,14 @@ var result_ = validator_.함수명();</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name optional">[messages_]</code>
+                        <code class="param-name">object_</code>
                         <span class="type">Object</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>실패메세지</p>
+                        <p>객체</p>
 
                     </div>
 
@@ -503,9 +329,9 @@ var result_ = validator_.함수명();</code></pre>
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        <span class="type">Number</span>:
                     
-                    <p>실패메세지</p>
+                    <p>색인</p>
 
                 
             </div>
@@ -517,7 +343,9 @@ var result_ = validator_.함수명();</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;commonFailedMessages&quot;);</code></pre>
+                <pre class="code prettyprint"><code>var array_ = new Array();
+array_.push(something...);
+var result_ = array_.indexOf(object_);</code></pre>
 
             </div>
         </div>
@@ -525,164 +353,8 @@ var result_ = validator_.함수명();</code></pre>
 </div>
 
                 
-                    <div id="method_dataset" class="method item">
-    <h3 class="name"><code>dataset</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>매핑된 데이타셋을 반환합니다.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>:
-                    
-                    <p>데이타셋</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;dataset&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_datasetUI" class="method item">
-    <h3 class="name"><code>datasetUI</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">JGDatasetUI</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>매핑된 JGDatasetUI를 반환합니다.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">JGDatasetUI</span>:
-                    
-                    <p>JGDatasetUI</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;datasetUI&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_engine" class="method item">
-    <h3 class="name"><code>engine</code></h3>
+                    <div id="method_Array.prototype.insert" class="method item">
+    <h3 class="name"><code>Array.prototype.insert</code></h3>
 
     
         <div class="args">
@@ -690,7 +362,13 @@ var result_ = validator_.함수명();</code></pre>
             
                 <li class="arg">
                     
-                        <code>유효성엔진</code>
+                        <code>object_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>index_</code>
                     
                 </li>
             
@@ -699,10 +377,6 @@ var result_ = validator_.함수명();</code></pre>
     
 
     
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
 
     
 
@@ -734,15 +408,7 @@ var result_ = validator_.함수명();</code></pre>
     </div>
 
     <div class="description">
-        <p>유효성엔진 설정/반환합니다.<br>
-매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.</p>
-<pre class="code prettyprint"><code>//유효성검사 엔진 포멧
-{&quot;custom-validator1&quot; : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-        //todo
-    },&quot;custom-validator2&quot; : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-        //todo
-    }
-};</code></pre>
+        <p>객체를 해당 색인에 삽입합니다.</p>
 
     </div>
 
@@ -754,14 +420,470 @@ var result_ = validator_.함수명();</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">유효성엔진</code>
+                        <code class="param-name">object_</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                         
+                        <p>객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">index_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_Array.prototype.move" class="method item">
+    <h3 class="name"><code>Array.prototype.move</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>oIndex_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>nIndex_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>배열에서 색인간이동 합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">oIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>기존 색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">nIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>대상 색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_Array.prototype.remove" class="method item">
+    <h3 class="name"><code>Array.prototype.remove</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>index_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>배열에서 해당 색인의 객체를 삭제합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">index_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_Array.prototype.removeAll" class="method item">
+    <h3 class="name"><code>Array.prototype.removeAll</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>배열의 모든 객체를 삭제합니다.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_Array.prototype.removeObject" class="method item">
+    <h3 class="name"><code>Array.prototype.removeObject</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>object_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>배열에서 해당객체를 삭제합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">object_</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_BLK" class="method item">
+    <h3 class="name"><code>BLK</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>blkValue_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>문자열이 빈값일 경우 대체값으로 반환합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value_</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>문자열값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">blkValue_</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>대체문자열값</p>
+
                     </div>
 
                     
@@ -778,9 +900,9 @@ var result_ = validator_.함수명();</code></pre>
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        <span class="type">String</span>:
                     
-                    <p>유효성엔진</p>
+                    <p>원본값 또는 대체값</p>
 
                 
             </div>
@@ -792,7 +914,7 @@ var result_ = validator_.함수명();</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;engine&quot;,...);</code></pre>
+                <pre class="code prettyprint"><code>var result_ = isBlank(value_, blkValue_);</code></pre>
 
             </div>
         </div>
@@ -800,11 +922,21 @@ var result_ = validator_.함수명();</code></pre>
 </div>
 
                 
-                    <div id="method_isValid" class="method item">
-    <h3 class="name"><code>isValid</code></h3>
+                    <div id="method_isBlank" class="method item">
+    <h3 class="name"><code>isBlank</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -843,10 +975,34 @@ var result_ = validator_.함수명();</code></pre>
     </div>
 
     <div class="description">
-        <p>매핑된 데이타셋을 반환합니다.</p>
+        <p>문자열의 빈값여부를 체크합니다.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value_</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>문자열값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -858,7 +1014,7 @@ var result_ = validator_.함수명();</code></pre>
                     
                         <span class="type">Boolean</span>:
                     
-                    <p>유효여부</p>
+                    <p>빈값여부</p>
 
                 
             </div>
@@ -870,7 +1026,7 @@ var result_ = validator_.함수명();</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;isValid&quot;);</code></pre>
+                <pre class="code prettyprint"><code>var result_ = isBlank(value_);</code></pre>
 
             </div>
         </div>
@@ -878,8 +1034,8 @@ var result_ = validator_.함수명();</code></pre>
 </div>
 
                 
-                    <div id="method_options" class="method item">
-    <h3 class="name"><code>options</code></h3>
+                    <div id="method_isNull" class="method item">
+    <h3 class="name"><code>isNull</code></h3>
 
     
         <div class="args">
@@ -887,13 +1043,125 @@ var result_ = validator_.함수명();</code></pre>
             
                 <li class="arg">
                     
-                        <code>options_</code>
+                        <code>value_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>객체의 Null여부를 체크합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">value_</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>Null여부</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var result_ = isNull(value_);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_NVL" class="method item">
+    <h3 class="name"><code>NVL</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>value_</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code class="optional">[options_]</code>
+                        <code>nullValue_</code>
                     
                 </li>
             
@@ -937,13 +1205,7 @@ var result_ = validator_.함수명();</code></pre>
     </div>
 
     <div class="description">
-        <p>옵션을 설정/반환합니다.<br>
-매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.</p>
-<pre class="code prettyprint"><code>//옵션항목
-errorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
-appendErrorMessage = 실패메세지 확장출력여부
-stepValidation = 단계별 유효성검사여부
-realtimeCheck = 실시간 유효성검사여부</code></pre>
+        <p>객체의 Null여부를 체크하여 Null일 경우 대체값을 반환합니다.</p>
 
     </div>
 
@@ -955,14 +1217,14 @@ realtimeCheck = 실시간 유효성검사여부</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">options_</code>
+                        <code class="param-name">value_</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>옵션명 또는 옵션객체</p>
+                        <p>값</p>
 
                     </div>
 
@@ -971,15 +1233,14 @@ realtimeCheck = 실시간 유효성검사여부</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name optional">[options_]</code>
+                        <code class="param-name">nullValue_</code>
                         <span class="type">Object</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>옵션값</p>
+                        <p>Null 대체값</p>
 
                     </div>
 
@@ -999,7 +1260,7 @@ realtimeCheck = 실시간 유효성검사여부</code></pre>
                     
                         <span class="type">Object</span>:
                     
-                    <p>옵션</p>
+                    <p>원본값 또는 Null 대체값</p>
 
                 
             </div>
@@ -1011,8 +1272,7 @@ realtimeCheck = 실시간 유효성검사여부</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;options&quot;,...);
-var result2_ = $(target_).JGValidator({options : ...});</code></pre>
+                <pre class="code prettyprint"><code>var result_ = NVL(value_, nullValue_);</code></pre>
 
             </div>
         </div>
@@ -1020,68 +1280,8 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
 </div>
 
                 
-                    <div id="method_refresh" class="method item">
-    <h3 class="name"><code>refresh</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성요소를 재적재합니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;refresh&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_validate" class="method item">
-    <h3 class="name"><code>validate</code></h3>
+                    <div id="method_NVL2" class="method item">
+    <h3 class="name"><code>NVL2</code></h3>
 
     
         <div class="args">
@@ -1089,104 +1289,19 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
                 <li class="arg">
                     
-                        <code class="optional">[callback_]</code>
+                        <code>value_</code>
                     
                 </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성을 검사합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[callback_]</code>
-                        <span class="type">Function</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>콜백함수</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>$(dataset_).JGValidator(&quot;validate&quot;,function(isValid_, cause_){
-    //to do
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_validator_" class="method item">
-    <h3 class="name"><code>validator_</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        <code>messages_</code>
+                        <code>replaceValue_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>nullValue_</code>
                     
                 </li>
             
@@ -1230,18 +1345,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
     </div>
 
     <div class="description">
-        <p>유효성검사 실패메세지를 설정/반환합니다.<br>
-매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.</p>
-<pre class="code prettyprint"><code>//형식
-{열명1 : {
-        유효성명1 : &quot;실패메세지&quot;
-        ,유효성명2 : &quot;실패메세지&quot;
-    },열명2 : {
-        유효성명1 : &quot;실패메세지&quot;
-        ,유효성명2 : &quot;실패메세지&quot;
-        ,...
-    },...
-}</code></pre>
+        <p>객체의 Null여부를 체크하여 Null일 경우 Null 대체값을 반환하고 Null이 아닐 경우 Not-Null 대체값을 반환합니다.</p>
 
     </div>
 
@@ -1253,14 +1357,46 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">messages_</code>
+                        <code class="param-name">value_</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>유효성 검사 실패메세지</p>
+                        <p>값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">replaceValue_</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Not-null 대체값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">nullValue_</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Null 대체값</p>
 
                     </div>
 
@@ -1280,7 +1416,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
                     
                         <span class="type">Object</span>:
                     
-                    <p>유효성 검사 실패메세지</p>
+                    <p>Not-null 대체값 또는 Null 대체값</p>
 
                 
             </div>
@@ -1292,7 +1428,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;failedMessages&quot;,...);</code></pre>
+                <pre class="code prettyprint"><code>var result_ = NVL2(value_,replaceValue_,nullValue_);</code></pre>
 
             </div>
         </div>
@@ -1303,96 +1439,6 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             </div>
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property__commonFailedMessages" class="property item">
-    <h3 class="name"><code>_commonFailedMessages</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>기본 실패매세지입니다.<br>
-유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.<br>
-*참고 : <a href="../classes/jQuery.fn.JGValidator.html#method_commonFailedMessages" class="crosslink">commonFailedMessages</a></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__engine" class="property item">
-    <h3 class="name"><code>_engine</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성 엔진객체입니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         

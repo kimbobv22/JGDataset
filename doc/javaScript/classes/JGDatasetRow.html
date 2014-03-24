@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>global.extension - JGDataset for JavaScript</title>
+    <title>JGDatasetRow - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../../logo-small.png" title="JGDataset for JavaScript"></h1>
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>global.extension Class</h1>
+                        <h1>JGDatasetRow Class</h1>
 <div class="box meta">
     
 
@@ -118,10 +118,69 @@
 
 
 <div class="box intro">
-    <p>데이타 제어를 보다 편리하게 하기 위한 확장함수입니다.</p>
+    <p>JGDataset에 행정의 시 생성되는 객체입니다.<br>
+사용자가 임의로 생성할 수 없으며 JGDataset을 통해서만 생성할 수 있습니다.<br>
+*참고 : <a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></p>
+<pre class="code prettyprint"><code>//행상태
+    0  // normal
+    1  // insert
+    3  // delete</code></pre>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_JGDatasetRow" class="method item">
+    <h3 class="name"><code>JGDatasetRow</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -131,6 +190,8 @@
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -147,77 +208,101 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.indexOf">Array.prototype.indexOf</a>
+                                <a href="#method_apply">apply</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.insert">Array.prototype.insert</a>
+                                <a href="#method_clone">clone</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.move">Array.prototype.move</a>
+                                <a href="#method_getColumnValue">getColumnValue</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.remove">Array.prototype.remove</a>
+                                <a href="#method_getRowStatus">getRowStatus</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.removeAll">Array.prototype.removeAll</a>
+                                <a href="#method_getRowStatus">getRowStatus</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Array.prototype.removeObject">Array.prototype.removeObject</a>
+                                <a href="#method_isColumnModified">isColumnModified</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_BLK">BLK</a>
+                                <a href="#method_removeColumn">removeColumn</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isBlank">isBlank</a>
+                                <a href="#method_setColumn">setColumn</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isNull">isNull</a>
+                                <a href="#method_setColumnModification">setColumnModification</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_NVL">NVL</a>
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property private">
+                                <a href="#property__columns">_columns</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_NVL2">NVL2</a>
+                            <li class="index-item property private">
+                                <a href="#property__columnStatus">_columnStatus</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__orgColumns">_orgColumns</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__rowStatus">_rowStatus</a>
 
                                 
                                 
@@ -230,8 +315,6 @@
             
 
             
-
-            
         </div>
 
         
@@ -239,8 +322,127 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_Array.prototype.indexOf" class="method item">
-    <h3 class="name"><code>Array.prototype.indexOf</code></h3>
+                    <div id="method_apply" class="method item">
+    <h3 class="name"><code>apply</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>현재 행상태를 적용합니다.<br>
+행상태가 normal로 변경됩니다.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_clone" class="method item">
+    <h3 class="name"><code>clone</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>행을 복사합니다.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>JGDatasetRow</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getColumnValue" class="method item">
+    <h3 class="name"><code>getColumnValue</code></h3>
 
     
         <div class="args">
@@ -248,12 +450,105 @@
             
                 <li class="arg">
                     
-                        <code>object_</code>
+                        <code>columnName_</code>
                     
                 </li>
             
             </ul><span class="paren">)</span>
         </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>열값을 반환합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">columnName_</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>열명</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>열값</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRowStatus" class="method item">
+    <h3 class="name"><code>getRowStatus</code></h3>
+
+    
+        <span class="paren">()</span>
     
 
     
@@ -292,34 +587,10 @@
     </div>
 
     <div class="description">
-        <p>배열에서 객체의 색인을 찾아서 반환합니다.</p>
+        <p>행상태를 반환합니다</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">object_</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>객체</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -331,7 +602,7 @@
                     
                         <span class="type">Number</span>:
                     
-                    <p>색인</p>
+                    <p>행상태</p>
 
                 
             </div>
@@ -339,22 +610,11 @@
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var array_ = new Array();
-array_.push(something...);
-var result_ = array_.indexOf(object_);</code></pre>
-
-            </div>
-        </div>
-    
 </div>
 
                 
-                    <div id="method_Array.prototype.insert" class="method item">
-    <h3 class="name"><code>Array.prototype.insert</code></h3>
+                    <div id="method_getRowStatus" class="method item">
+    <h3 class="name"><code>getRowStatus</code></h3>
 
     
         <div class="args">
@@ -362,13 +622,7 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="arg">
                     
-                        <code>object_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>index_</code>
+                        <code>rowStatus_</code>
                     
                 </li>
             
@@ -408,7 +662,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     </div>
 
     <div class="description">
-        <p>객체를 해당 색인에 삽입합니다.</p>
+        <p>행상태를 설정합니다</p>
 
     </div>
 
@@ -420,30 +674,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">object_</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>객체</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">index_</code>
+                        <code class="param-name">rowStatus_</code>
                         <span class="type">Number</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>색인</p>
+                        <p>행상태</p>
 
                     </div>
 
@@ -460,8 +698,8 @@ var result_ = array_.indexOf(object_);</code></pre>
 </div>
 
                 
-                    <div id="method_Array.prototype.move" class="method item">
-    <h3 class="name"><code>Array.prototype.move</code></h3>
+                    <div id="method_isColumnModified" class="method item">
+    <h3 class="name"><code>isColumnModified</code></h3>
 
     
         <div class="args">
@@ -469,469 +707,7 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="arg">
                     
-                        <code>oIndex_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>nIndex_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>배열에서 색인간이동 합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">oIndex_</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>기존 색인</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">nIndex_</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>대상 색인</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_Array.prototype.remove" class="method item">
-    <h3 class="name"><code>Array.prototype.remove</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>index_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>배열에서 해당 색인의 객체를 삭제합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">index_</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>색인</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_Array.prototype.removeAll" class="method item">
-    <h3 class="name"><code>Array.prototype.removeAll</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>배열의 모든 객체를 삭제합니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_Array.prototype.removeObject" class="method item">
-    <h3 class="name"><code>Array.prototype.removeObject</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>object_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>배열에서 해당객체를 삭제합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">object_</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>객체</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_BLK" class="method item">
-    <h3 class="name"><code>BLK</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>blkValue_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-            
-        
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>문자열이 빈값일 경우 대체값으로 반환합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">value_</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>문자열값</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">blkValue_</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>대체문자열값</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                    <p>원본값 또는 대체값</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = isBlank(value_, blkValue_);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_isBlank" class="method item">
-    <h3 class="name"><code>isBlank</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>value_</code>
+                        <code>columnName_</code>
                     
                 </li>
             
@@ -975,7 +751,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     </div>
 
     <div class="description">
-        <p>문자열의 빈값여부를 체크합니다.</p>
+        <p>열 수정여부를 반환합니다.</p>
 
     </div>
 
@@ -987,14 +763,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">value_</code>
+                        <code class="param-name">columnName_</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>문자열값</p>
+                        <p>열명</p>
 
                     </div>
 
@@ -1014,28 +790,19 @@ var result_ = array_.indexOf(object_);</code></pre>
                     
                         <span class="type">Boolean</span>:
                     
-                    <p>빈값여부</p>
+                    <p>열수정여부</p>
 
                 
             </div>
         </div>
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = isBlank(value_);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
                 
-                    <div id="method_isNull" class="method item">
-    <h3 class="name"><code>isNull</code></h3>
+                    <div id="method_removeColumn" class="method item">
+    <h3 class="name"><code>removeColumn</code></h3>
 
     
         <div class="args">
@@ -1043,7 +810,7 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="arg">
                     
-                        <code>value_</code>
+                        <code>columnName_</code>
                     
                 </li>
             
@@ -1051,10 +818,6 @@ var result_ = array_.indexOf(object_);</code></pre>
         </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
     
 
     
@@ -1087,7 +850,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     </div>
 
     <div class="description">
-        <p>객체의 Null여부를 체크합니다.</p>
+        <p>열을 삭제합니다.</p>
 
     </div>
 
@@ -1099,14 +862,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">value_</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">columnName_</code>
+                        <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>값</p>
+                        <p>열명</p>
 
                     </div>
 
@@ -1118,40 +881,23 @@ var result_ = array_.indexOf(object_);</code></pre>
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Boolean</span>:
-                    
-                    <p>Null여부</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = isNull(value_);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
                 
-                    <div id="method_NVL" class="method item">
-    <h3 class="name"><code>NVL</code></h3>
+                    <div id="method_setColumn" class="method item">
+    <h3 class="name"><code>setColumn</code></h3>
 
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>columnName_</code>
+                    
+                </li>
             
                 <li class="arg">
                     
@@ -1161,7 +907,7 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="arg">
                     
-                        <code>nullValue_</code>
+                        <code>isModify_</code>
                     
                 </li>
             
@@ -1169,10 +915,6 @@ var result_ = array_.indexOf(object_);</code></pre>
         </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
     
 
     
@@ -1205,7 +947,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     </div>
 
     <div class="description">
-        <p>객체의 Null여부를 체크하여 Null일 경우 대체값을 반환합니다.</p>
+        <p>열값을 설정합니다.</p>
 
     </div>
 
@@ -1217,14 +959,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">value_</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">columnName_</code>
+                        <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>값</p>
+                        <p>열명</p>
 
                     </div>
 
@@ -1233,14 +975,30 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">nullValue_</code>
+                        <code class="param-name">value_</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Null 대체값</p>
+                        <p>열값</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">isModify_</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>수정여부</p>
 
                     </div>
 
@@ -1252,36 +1010,13 @@ var result_ = array_.indexOf(object_);</code></pre>
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                    <p>원본값 또는 Null 대체값</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = NVL(value_, nullValue_);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
                 
-                    <div id="method_NVL2" class="method item">
-    <h3 class="name"><code>NVL2</code></h3>
+                    <div id="method_setColumnModification" class="method item">
+    <h3 class="name"><code>setColumnModification</code></h3>
 
     
         <div class="args">
@@ -1289,19 +1024,13 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="arg">
                     
-                        <code>value_</code>
+                        <code>columnName_</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>replaceValue_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>nullValue_</code>
+                        <code>bool_</code>
                     
                 </li>
             
@@ -1309,10 +1038,6 @@ var result_ = array_.indexOf(object_);</code></pre>
         </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
     
 
     
@@ -1345,7 +1070,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     </div>
 
     <div class="description">
-        <p>객체의 Null여부를 체크하여 Null일 경우 Null 대체값을 반환하고 Null이 아닐 경우 Not-Null 대체값을 반환합니다.</p>
+        <p>열 수정여부를 설정합니다.</p>
 
     </div>
 
@@ -1357,14 +1082,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">value_</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">columnName_</code>
+                        <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>값</p>
+                        <p>열명</p>
 
                     </div>
 
@@ -1373,30 +1098,14 @@ var result_ = array_.indexOf(object_);</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">replaceValue_</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">bool_</code>
+                        <span class="type">Boolean</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Not-null 대체값</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">nullValue_</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Null 대체값</p>
+                        <p>열수정여부</p>
 
                     </div>
 
@@ -1408,30 +1117,7 @@ var result_ = array_.indexOf(object_);</code></pre>
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                    <p>Not-null 대체값 또는 Null 대체값</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = NVL2(value_,replaceValue_,nullValue_);</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
@@ -1439,6 +1125,184 @@ var result_ = array_.indexOf(object_);</code></pre>
             </div>
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__columns" class="property item private">
+    <h3 class="name"><code>_columns</code></h3>
+    <span class="type">JSON</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>열값</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__columnStatus" class="property item private">
+    <h3 class="name"><code>_columnStatus</code></h3>
+    <span class="type">JSON</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>열상태</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__orgColumns" class="property item private">
+    <h3 class="name"><code>_orgColumns</code></h3>
+    <span class="type">JSON</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>원본 열값</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__rowStatus" class="property item private">
+    <h3 class="name"><code>_rowStatus</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>행상태<br></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
