@@ -104,7 +104,7 @@
 		targetStr_ = targetStr_.replace("dataset\\.rowCount"._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
 		
 		//replace with column count
-		targetStr_ = targetStr_.replace("dataset\\.columnCount"._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
+		targetStr_ = targetStr_.replace("dataset\\.columnCount"._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
 		
 		//replace with row stacked sum
 		var sumRegexp_ = "dataset\\.sum\\([\\s\\w\\#\\@\\-\\+\\*\\/\\%]*\\)"._jgFuncConvertToColumnRegexp();
