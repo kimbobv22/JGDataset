@@ -91,6 +91,7 @@ JGDataset
 ##라이브러리 사용을 위한 환경
 
 ###JGDataset for JAVA 라이브러리는<br>
+* JAVA 1.6 이상
 * [JDOM 라이브러리](http://www.jdom.org/)가 필요합니다.<br>
 * [Simple JSON 라이브러리](https://code.google.com/p/json-simple/)가 필요합니다.<br>
 
@@ -102,6 +103,9 @@ JGDataset
 
 <a name="classes"></a>
 #JAVA Classes
+
+<br>
+__[API 문서는 여기!](http://kimbobv22.github.io/JGDataset/doc/java/index.html)__<br>
 
 <a name="com.jg.vo.JGDataset"></a>
 ##com.jg.vo.JGDataset
@@ -259,8 +263,7 @@ JGDataset for JavaScript를 이용하여 Web에서도 행열단위의 작업을 
 <br>
 __[JGDataset 샘플은 여기!](http://kimbobv22.github.io/JGDataset/index.html)__<br>
 <br>
-__[API 문서는 여기!](http://kimbobv22.github.io/JGDataset/api/index.html)__<br>
-<br>
+__[API 문서는 여기!](http://kimbobv22.github.io/JGDataset/doc/javaScript/index.html)__<br>
 
 <a name="javascript.JGDS"></a>
 ##javascript.JGDS

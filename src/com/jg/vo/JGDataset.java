@@ -9,21 +9,22 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * JGDataset for JAVA
+ * JGDataset
  * @author Hyeong yeon. Kim. kimbobv22@gmail.com
+ * @version 1.1.0
  */
 public class JGDataset {
-	static public final String STR_ROOT = "root";
-	static public final String STR_ROW = "row";
-	static public final String STR_COLUMN = "col";
-	static public final String STR_COLUMNINFO = "columninfo";
-	static public final String STR_ROWDATA = "rowdata";
-	static public final String STR_ROWDATA_DELETED = "deletedRowdata";
-	static public final String STR_NAME = "name";
-	static public final String STR_ISKEY = "isKey";
-	static public final String STR_VALUE = "value";
-	static public final String STR_ROWSTATUS = "status";
-	static public final String STR_MODIFY = "modify";
+	static protected final String STR_ROOT = "root";
+	static protected final String STR_ROW = "row";
+	static protected final String STR_COLUMN = "col";
+	static protected final String STR_COLUMNINFO = "columninfo";
+	static protected final String STR_ROWDATA = "rowdata";
+	static protected final String STR_ROWDATA_DELETED = "deletedRowdata";
+	static protected final String STR_NAME = "name";
+	static protected final String STR_ISKEY = "isKey";
+	static protected final String STR_VALUE = "value";
+	static protected final String STR_ROWSTATUS = "status";
+	static protected final String STR_MODIFY = "modify";
 	
 	protected ArrayList<JGDatasetColumn> _columnInfo = new ArrayList<JGDatasetColumn>();
 	protected ArrayList<JGDatasetColumn> _orgColumnInfo = new ArrayList<JGDatasetColumn>();
@@ -34,7 +35,7 @@ public class JGDataset {
 	
 	/**
 	 * 삭제된 행데이타를 반환합니다.
-	 * @return {@link ArrayList} 삭제된 행데이타(복제본)
+	 * @return 삭제된 행데이타(복제본)
 	 */
 	public ArrayList<JGDatasetRow> getDeletedRowData(){
 		ArrayList<JGDatasetRow> copy_ = new ArrayList<JGDatasetRow>();
@@ -43,44 +44,41 @@ public class JGDataset {
 	}
 	/**
 	 * 열갯수를 반환합니다.
-	 * @return int 열갯수
+	 * @return 열갯수
 	 */
 	public int getColumnCount(){
 		return _columnInfo.size();
 	}
 	/**
 	 * 행갯수를 반환합니다.
-	 * @return int 행갯수
+	 * @return 행갯수
 	 */
 	public int getRowCount(){
 		return _rowData.size();
 	}
 	/**
 	 * 삭제된 행 갯수를 반환합니다.
-	 * @return int 삭제된 행갯수
+	 * @return 삭제된 행갯수
 	 */
 	public int getDeletedRowCount(){
 		return _deletedRowData.size();
 	}
 	/**
-	 * JGDataset 생성자
-	 * @return {@link JGDataset}
+	 * JGDataset 생성합니다.
 	 */
 	static public JGDataset dataset(){
 		return new JGDataset();
 	}
 	/**
 	 * JGDataset 생성합니다.
-	 * @param String JSON문자열
-	 * @return {@link JGDataset}
+	 * @param jSONString_ JSON문자열
 	 */
 	static public JGDataset dataset(String jSONString_){
 		return new JGDataset(jSONString_);
 	}
 	/**
 	 * JGDataset 생성합니다.
-	 * @param Object JSON객체
-	 * @return {@link JGDataset}
+	 * @param jsonObject_ JSON객체
 	 */
 	static public JGDataset dataset(Object jsonObject_){
 		return new JGDataset(jsonObject_);
@@ -88,21 +86,18 @@ public class JGDataset {
 	
 	/**
 	 * JGDataset 생성자
-	 * @return {@link JGDataset}
 	 */
 	public JGDataset(){}
 	/**
 	 * JGDataset 생성합니다.
-	 * @param String JSON문자열
-	 * @return {@link JGDataset}
+	 * @param jSONString_ JSON문자열
 	 */
 	public JGDataset(String jSONString_){
 		applyJSON(jSONString_);
 	}
 	/**
 	 * JGDataset 생성합니다.
-	 * @param Object JSON객체
-	 * @return {@link JGDataset}
+	 * @param jsonObject_ JSON객체
 	 */
 	public JGDataset(Object jsonObject_){
 		applyJSON(jsonObject_);
@@ -110,9 +105,9 @@ public class JGDataset {
 	
 	/**
 	 * 특정 열색인에 열을 삽입합니다.
-	 * @param {@link String} 열명
-	 * @param int 열색인
-	 * @return {@link JGDatasetColumn} 열
+	 * @param columnName_ 열명
+	 * @param columnIndex_ 열색인
+	 * @return 열
 	 */
 	public JGDatasetColumn insertColumn(String columnName_, int columnIndex_){
 		JGDatasetColumn columnItem_ = new JGDatasetColumn(columnName_);
@@ -134,15 +129,15 @@ public class JGDataset {
 	}
 	/**
 	 * 마지막 열색인에 열을 추가합니다.
-	 * @param {@link String} 열명
-	 * @return {@link JGDatasetColumn} 열
+	 * @param columnName_ 열명
+	 * @return 열
 	 */
 	public JGDatasetColumn addColumn(String columnName_){
 		return insertColumn(columnName_, _columnInfo.size());
 	}
 	/**
 	 * 마지막 열색인에 복수의 열을 추가합니다.
-	 * @param {@link String...} 열명
+	 * @param columnNames_ 열명
 	 */
 	public void addColumns(String... columnNames_){
 		for(String columnName_ : columnNames_)
@@ -151,7 +146,7 @@ public class JGDataset {
 	
 	/**
 	 * 특정 열색인에 열을 삭제합니다.
-	 * @param int 열명
+	 * @param columnIndex_ 열색인
 	 */
 	public void removeColumn(int columnIndex_){
 		JGDatasetColumn columnItem_ = getColumn(columnIndex_);
@@ -169,14 +164,14 @@ public class JGDataset {
 	}
 	/**
 	 * 특정 열을 삭제합니다.
-	 * @param {@link JGDatasetColumn} 열
+	 * @param column_ 열
 	 */
 	public void removeColumn(JGDatasetColumn column_){
 		removeColumn(indexOfColumn(column_));
 	}
 	/**
 	 * 특정 열명의 열을 삭제합니다.
-	 * @param {@link String} 열명
+	 * @param columnName_ 열명
 	 */
 	public void removeColumn(String columnName_){
 		removeColumn(indexOfColumn(columnName_));
@@ -184,16 +179,16 @@ public class JGDataset {
 	
 	/**
 	 * 특정 열색인의 열을 반환합니다.
-	 * @param int 열색인
-	 * @return {@link JGDatasetColumn} 열
+	 * @param columnIndex_ 열색인
+	 * @return 열
 	 */
 	public JGDatasetColumn getColumn(int columnIndex_){
 		return _columnInfo.get(columnIndex_);
 	}
 	/**
 	 * 특정 열명의 열을 반환합니다.
-	 * @param {@link String} 열명
-	 * @return {@link JGDatasetColumn} 열
+	 * @param columnName_ 열명
+	 * @return 열
 	 */
 	public JGDatasetColumn getColumn(String columnName_){
 		return getColumn(indexOfColumn(columnName_));
@@ -201,16 +196,16 @@ public class JGDataset {
 	
 	/**
 	 * 특정 열색인을 반환합니다.
-	 * @param ({@link JGDatasetColumn}) 열
-	 * @return int 열색인
+	 * @param column_ 열
+	 * @return 열색인
 	 */
 	public int indexOfColumn(JGDatasetColumn column_){
 		return _columnInfo.indexOf(column_);
 	}
 	/**
 	 * 특정 열색인을 반환합니다.
-	 * @param ({@link JGDatasetColumn}) 열
-	 * @return {@link String} 열명
+	 * @param columnName_ 열
+	 * @return 열색인
 	 */
 	public int indexOfColumn(String columnName_){
 		int columnCount_ = _columnInfo.size();
@@ -225,8 +220,8 @@ public class JGDataset {
 	
 	/**
 	 * 특정 열을 키열로 설정합니다.
-	 * @param int 열색인
-	 * @param boolean 키여부
+	 * @param columnIndex_ 열색인
+	 * @param isKey_ 키여부
 	 */
 	public void setKeyColumn(int columnIndex_, boolean isKey_){
 		JGDatasetColumn columnItem_ = getColumn(columnIndex_);
@@ -234,15 +229,15 @@ public class JGDataset {
 	}
 	/**
 	 * 특정 열을 키열로 설정합니다.
-	 * @param {@link String} 열명
-	 * @param boolean 키여부
+	 * @param columnName_ 열명
+	 * @param isKey_ 키여부
 	 */
 	public void setKeyColumn(String columnName_, boolean isKey_){
 		setKeyColumn(indexOfColumn(columnName_), isKey_);
 	}
 	/**
 	 * 키열 내역을 반환합니다.
-	 * @return {@link ArrayList<JGDatasetColumn>} 키열 내역(복사본)
+	 * @return 키열 내역(복사본)
 	 */
 	public ArrayList<JGDatasetColumn> getKeyColumnList(){
 		ArrayList<JGDatasetColumn> columnList_ = new ArrayList<JGDatasetColumn>();
@@ -259,8 +254,8 @@ public class JGDataset {
 	
 	/**
 	 * 행을 생성합니다.
-	 * @param int 행상태
-	 * @return {@link JGDatasetRow} 행
+	 * @param rowStatus_ 행상태
+	 * @return 행
 	 */
 	protected JGDatasetRow createRow(int rowStatus_){
 		JGDatasetRow rowItem_ = new JGDatasetRow();
@@ -274,15 +269,17 @@ public class JGDataset {
 	}
 	/**
 	 * 특정 행색인에 행을 삽입합니다.
-	 * @param int 행색인
-	 * @return {@link JGDatasetRow} 행
+	 * @param rowIndex_ 행색인
+	 * @return 행
 	 */
-	public void insertRow(int rowIndex_){
-		_rowData.add(rowIndex_, createRow(JGDatasetRow.ROWSTATUS_INSERT));
+	public JGDatasetRow insertRow(int rowIndex_){
+		JGDatasetRow rowItem_ = createRow(JGDatasetRow.ROWSTATUS_INSERT);
+		_rowData.add(rowIndex_, rowItem_);
+		return rowItem_;
 	}
 	/**
 	 * 마지막 행색인에 행을 추가합니다.
-	 * @return {@link JGDatasetRow} 행
+	 * @return 행색인
 	 */
 	public int addRow(){
 		int rowIndex_ = _rowData.size();
@@ -291,7 +288,7 @@ public class JGDataset {
 	}
 	/**
 	 * 특정 행색인에 행을 삭제합니다.
-	 * @param int 행색인
+	 * @param rowIndex_ 행색인
 	 */
 	public void removeRow(int rowIndex_){
 		JGDatasetRow rowItem_ = getRow(rowIndex_);
@@ -312,20 +309,29 @@ public class JGDataset {
 	}
 	/**
 	 * 특정 행색인에 행을 반환합니다.
-	 * @param int 행색인
-	 * @return {@link JGDatasetRow} 행
+	 * @param rowIndex_ 행색인
+	 * @return 행
 	 */
 	public JGDatasetRow getRow(int rowIndex_){
 		return _rowData.get(rowIndex_);
 	}
 	
 	/**
+	 * 행상태를 변경합니다.
+	 * @param rowIndex_ 행색인
+	 * @param rowStatus_ 행상태
+	 */
+	public void setRowStatus(int rowIndex_, int rowStatus_){
+		getRow(rowIndex_).setRowStatus(rowStatus_);
+	}
+	
+	/**
 	 * 열값을 설정합니다.<br>
 	 * 열병합여부가 참일 경우, 해당 열이 존재하지 않을 경우 열을 생성합니다.
-	 * @param {@link String} 열명
-	 * @param int 행색인
-	 * @param {@link Object} 열값
-	 * @param boolean 열병합여부
+	 * @param columnName_ 열명
+	 * @param rowIndex_ 행색인
+	 * @param value_ 열값
+	 * @param mergeColumn_ 열병합여부
 	 */
 	public void setColumnValue(String columnName_, int rowIndex_, Object value_, boolean mergeColumn_){
 		int columnIndex_ = indexOfColumn(columnName_);
@@ -338,9 +344,9 @@ public class JGDataset {
 	}
 	/**
 	 * 열값을 설정합니다.<br>
-	 * @param {@link String} 열명
-	 * @param int 행색인
-	 * @param Object 열값
+	 * @param columnName_ 열명
+	 * @param rowIndex_ 행색인
+	 * @param value_ 열값
 	 */
 	public void setColumnValue(String columnName_, int rowIndex_, Object value_){
 		setColumnValue(columnName_, rowIndex_, value_, false);
@@ -348,10 +354,10 @@ public class JGDataset {
 	/**
 	 * 열값을 설정합니다.<br>
 	 * 열병합여부가 참일 경우, 해당 열이 존재하지 않을 경우 열을 생성합니다.
-	 * @param int 열색인
-	 * @param int 행색인
-	 * @param {@link Object} 열값
-	 * @param boolean 열병합여부
+	 * @param columnIndex_ 열색인
+	 * @param rowIndex_ 행색인
+	 * @param value_ 열값
+	 * @param mergeColumn_ 열병합여부
 	 */
 	public void setColumnValue(int columnIndex_, int rowIndex_, Object value_, boolean mergeColumn_){
 		JGDatasetColumn columnItem_ = getColumn(columnIndex_);
@@ -359,9 +365,9 @@ public class JGDataset {
 	}
 	/**
 	 * 열값을 설정합니다.<br>
-	 * @param int 열색인
-	 * @param int 행색인
-	 * @param {@link Object} 열값
+	 * @param columnIndex_ 열색인
+	 * @param rowIndex_ 행색인
+	 * @param value_ 열값
 	 */
 	public void setColumnValue(int columnIndex_, int rowIndex_, Object value_){
 		JGDatasetColumn columnItem_ = getColumn(columnIndex_);
@@ -371,9 +377,9 @@ public class JGDataset {
 	 * 복수의 열값을 설정합니다.<br>
 	 * 열병합여부가 참일 경우, 해당 열이 존재하지 않을 경우 열을 생성합니다.<br>
 	 * *형식 : ["열명1",열값1,"열명2",열값2,...]
-	 * @param {@link Object[]} 복수의 열값
-	 * @param int 행색인
-	 * @param boolean 열병합여부
+	 * @param columnNamesAndValues_ 복수의 열값
+	 * @param rowIndex_ 행색인
+	 * @param mergeColumns_ 열병합여부
 	 */
 	public void setColumnValues(Object[] columnNamesAndValues_, int rowIndex_, boolean mergeColumns_){
 		int count_ = columnNamesAndValues_.length;
@@ -384,8 +390,8 @@ public class JGDataset {
 	/**
 	 * 복수의 열값을 설정합니다.<br>
 	 * *형식 : ["열명1",열값1,"열명2",열값2,...]
-	 * @param {@link Object[]} 복수의 열값
-	 * @param int 행색인
+	 * @param columnNamesAndValues_ 복수의 열값
+	 * @param rowIndex_ 행색인
 	 */
 	public void setColumnValues(Object[] columnNamesAndValues_, int rowIndex_){
 		setColumnValues(columnNamesAndValues_, rowIndex_, false);
@@ -394,34 +400,73 @@ public class JGDataset {
 	/**
 	 * 열값을 반환합니다.
 	 * 
-	 * @param {@link String} 열명
-	 * @param rowIndex_
-	 * @return
+	 * @param columnName_ 열명
+	 * @param rowIndex_ 행색인
+	 * @return 열값
 	 */
 	public Object getColumnValue(String columnName_, int rowIndex_){
 		return getRow(rowIndex_).getColumnValue(columnName_);
 	}
+	/**
+	 * 열값을 반환합니다.
+	 * 
+	 * @param columnIndex_ 열색인
+	 * @param rowIndex_ 행색인
+	 * @return 열값
+	 */
 	public Object getColumnValue(int columnIndex_, int rowIndex_){
 		return getColumnValue(getColumn(columnIndex_)._name, rowIndex_);
 	}
 	
+	/**
+	 * 열 수정여부를 반환합니다.
+	 * @param columnName_ 열명
+	 * @param rowIndex_ 행색인
+	 * @return 열 수정여부
+	 */
 	public boolean isColumnModified(String columnName_, int rowIndex_){
 		return getRow(rowIndex_).isColumnModified(columnName_);
 	}
+	/**
+	 * 열 수정여부를 반환합니다.
+	 * @param columnIndex_ 열색인
+	 * @param rowIndex_ 행색인
+	 * @return 열 수정여부
+	 */
 	public boolean isColumnModified(int columnIndex_, int rowIndex_){
 		return isColumnModified(getColumn(columnIndex_)._name, rowIndex_);
 	}
-	
+	/**
+	 * 삭제된 행을 반환합니다.
+	 * @param rowIndex_ 행색인
+	 * @return 삭제된 행
+	 */
 	public JGDatasetRow getDeletedRow(int rowIndex_){
 		return _deletedRowData.get(rowIndex_);
 	}
+	/**
+	 * 삭제된 행의 행색인을 반환합니다.
+	 * @param rowItem_ 삭제된 행
+	 * @return 행색인
+	 */
 	public int indexOfDeletedRow(JGDatasetRow rowItem_){
 		return _deletedRowData.indexOf(rowItem_);
 	}
+	/**
+	 * 삭제된 행의 열값을 반환합니다.
+	 * 
+	 * @param columnName_ 열명
+	 * @param rowIndex_ 행색인
+	 * @return 열값
+	 */
 	public Object getDeletedColumnValue(String columnName_, int rowIndex_){
 		return getDeletedRow(rowIndex_).getColumnValue(columnName_);
 	}
-	
+	/**
+	 * 데이타셋을 현재시점으로 적용합니다.
+	 * 
+	 * @see #reset()
+	 */
 	public void apply(){
 		int rowCount_ = _rowData.size();
 		for(int rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
@@ -434,6 +479,10 @@ public class JGDataset {
 		_orgColumnInfo.clear();
 		_orgColumnInfo.addAll(_columnInfo);
 	}
+	/**
+	 * 데이타셋을 이전 적용시점으로 복원합니다.
+	 * @see #apply()
+	 */
 	public void reset(){
 		_deletedRowData.clear();
 		_rowData.clear();
@@ -441,18 +490,26 @@ public class JGDataset {
 		_columnInfo.clear();
 		_columnInfo.addAll(_orgColumnInfo);
 	}
+	/**
+	 * 데이타셋을 전체삭제합니다.
+	 * @param deleteColumn_ 열정보 삭제여부
+	 */
 	public void clear(boolean deleteColumn_){
 		if(deleteColumn_) _columnInfo.clear();
 		_rowData.clear();
 		_deletedRowData.clear();
 	}
+	/**
+	 * 데이타셋을 전체삭제합니다.
+	 */
 	public void clear(){
 		clear(true);
 	}
-	public void setRowStatus(int rowIndex_, int rowStatus_){
-		getRow(rowIndex_).setRowStatus(rowStatus_);
-	}
 	
+	/**
+	 * 데이타셋의 변경여부를 반환합니다.
+	 * @return 변경여부
+	 */
 	public boolean isModified(){
 		int rowCount_ = getRowCount();
 		for(int rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
@@ -464,6 +521,11 @@ public class JGDataset {
 		return false;
 	}
 	
+	/**
+	 * 데이타셋을 JSON객체로 반환합니다.
+	 * @param onlyData_ 스카마생략여부
+	 * @return JSON객체
+	 */
 	@SuppressWarnings("unchecked")
 	public Object toJSON(boolean onlyData_){
 		if(onlyData_){
@@ -509,7 +571,7 @@ public class JGDataset {
 					JGDatasetColumn columnItem_ = _columnInfo.get(columnIndex_);
 					
 					HashMap<String, Object> column_ = new HashMap<String, Object>();
-
+					
 					column_.put(STR_VALUE, getColumnValue(columnItem_._name, rowIndex_));
 					column_.put(STR_MODIFY, rowItem_.isColumnModified(columnItem_._name));
 					columns_.put(columnItem_._name, column_);
@@ -543,9 +605,18 @@ public class JGDataset {
 			return new JSONObject(rootObject_);
 		}
 	}
+	/**
+	 * 데이타셋을 JSON객체로 반환합니다.
+	 * @return JSON객체
+	 */
 	public JSONObject toJSON(){
 		return (JSONObject)toJSON(false);
 	}
+	/**
+	 * 데이타셋을 JSON형태의 문자열로 반환합니다.
+	 * @param onlyData_ 스키마생략여부
+	 * @return JSON형태의 문자열
+	 */
 	public String toJSONString(boolean onlyData_){
 		Object result_ = toJSON(onlyData_);
 		
@@ -555,10 +626,17 @@ public class JGDataset {
 			return ((JSONObject)result_).toJSONString();
 		}
 	}
+	/**
+	 * 데이타셋을 JSON형태의 문자열로 반환합니다.
+	 * @return JSON형태의 문자열
+	 */
 	public String toJSONString(){
 		return toJSON().toJSONString();
 	}
-	
+	/**
+	 * 데이타셋을 JSON객체로 적용합니다.
+	 * @param jsonObject_ JSON객체
+	 */
 	public void applyJSON(Object jsonObject_){
 		clear();
 		
@@ -639,6 +717,10 @@ public class JGDataset {
 			}
 		}
 	}
+	/**
+	 * 데이타셋을 JSON형태의 문자열로 적용합니다.
+	 * @param jSONString_ JSON형태의 문자열
+	 */
 	public void applyJSON(String jSONString_){
 		try{
 			applyJSON(new JSONParser().parse(jSONString_));

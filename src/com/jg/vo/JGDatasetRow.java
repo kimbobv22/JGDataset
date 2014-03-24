@@ -2,6 +2,11 @@ package com.jg.vo;
 
 import java.util.HashMap;
 
+/**
+ * JGDatasetRow
+ * @author Hyeong yeon. Kim. kimbobv22@gmail.com
+ * @version 1.1.0
+ */
 public class JGDatasetRow{
 	
 	static public final int ROWSTATUS_NORMAL = 0;

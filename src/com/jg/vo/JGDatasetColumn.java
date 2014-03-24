@@ -1,5 +1,10 @@
 package com.jg.vo;
 
+/**
+ * JGDatasetColumn
+ * @author Hyeong yeon. Kim. kimbobv22@gmail.com
+ * @version 1.1.0
+ */
 public class JGDatasetColumn{
 	protected String _name;
 	protected void setName(String name_){

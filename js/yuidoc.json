@@ -3,8 +3,8 @@
     "description": "JGDataset for JavaScript : jQuery 기반 행열작업 라이브러리",
     "version": "2.0.0",
     "url": "https://github.com/kimbobv22/JGDataset",
-	"logo" : "../logo-small.png",
+	"logo" : "../../logo-small.png",
     "options": {
-        "outdir": "../api"
+        "outdir": "../doc/javaScript"
     }
 }

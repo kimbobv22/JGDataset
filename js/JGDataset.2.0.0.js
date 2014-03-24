@@ -831,7 +831,9 @@
 		return rowItem_;
 	});
 	JGDataset.prototype._insertRow = (function(rowIndex_){
-		this._rowData.insert(this._createRow(_JGKeyword.rowStatus.insert), rowIndex_);
+		var rowItem_ = this._createRow(_JGKeyword.rowStatus.insert);
+		this._rowData.insert(rowItem_, rowIndex_);
+		return rowItem_;
 	});
 	
 	/**
@@ -842,14 +844,14 @@
 	 * @return {JGDatasetRow} 행
 	 */
 	JGDataset.prototype.insertRow = (function(rowIndex_){
-		this._insertRow(rowIndex_);
+		return this._insertRow(rowIndex_);
 		$(this).trigger(_JGKeyword.trigger._rowInserted,[rowIndex_,true]);
 	});
 	/**
 	 * 행을 마지막 색인에 추가합니다.
 	 * 
 	 * @method addRow
-	 * @return {JGDatasetRow} 행
+	 * @return {Number} 행색인
 	 */
 	JGDataset.prototype.addRow = (function(){
 		var rowIndex_ = this._rowData.length;

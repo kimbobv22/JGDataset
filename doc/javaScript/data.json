@@ -4,7 +4,7 @@
         "description": "JGDataset for JavaScript : jQuery 기반 행열작업 라이브러리",
         "version": "2.0.0",
         "url": "https://github.com/kimbobv22/JGDataset",
-        "logo": "../logo-small.png"
+        "logo": "../../logo-small.png"
     },
     "files": {
         "prev/JGDataset.1.0.0.js": {
@@ -142,7 +142,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "JGDataset.2.0.0.js",
-            "line": 1490,
+            "line": 1492,
             "description": "JGDataset을 생성,관리하는 인스턴스 정적객체입니다.<br>\nJGDS의 모든 함수는 아래와 같은 형태로 호출할 수 있습니다.\n\n\tvar result_ = JGDS(\"함수명\",...);",
             "is_constructor": 1,
             "params": [
@@ -1275,7 +1275,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 837,
+            "line": 839,
             "description": "행을 특정 색인에 삽입합니다.",
             "itemtype": "method",
             "name": "insertRow",
@@ -1294,19 +1294,19 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 848,
+            "line": 850,
             "description": "행을 마지막 색인에 추가합니다.",
             "itemtype": "method",
             "name": "addRow",
             "return": {
-                "description": "행",
-                "type": "JGDatasetRow"
+                "description": "행색인",
+                "type": "Number"
             },
             "class": "JGDataset"
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 859,
+            "line": 861,
             "description": "마지막 색인에 복수의 열을 추가합니다.",
             "itemtype": "method",
             "name": "addRows",
@@ -1324,7 +1324,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 886,
+            "line": 888,
             "description": "특정색인의 행을 삭제합니다.",
             "itemtype": "method",
             "name": "removeRow",
@@ -1339,7 +1339,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 896,
+            "line": 898,
             "description": "행을 반환합니다.",
             "itemtype": "method",
             "name": "getRow",
@@ -1358,7 +1358,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 906,
+            "line": 908,
             "description": "행상태를 설정합니다.",
             "itemtype": "method",
             "name": "setRowStatus",
@@ -1378,7 +1378,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 916,
+            "line": 918,
             "description": "행상태를 반환합니다.",
             "itemtype": "method",
             "name": "getRowStatus",
@@ -1397,7 +1397,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 926,
+            "line": 928,
             "description": "삭제행을 반환합니다.",
             "itemtype": "method",
             "name": "getDeletedRow",
@@ -1416,7 +1416,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 937,
+            "line": 939,
             "description": "행간 이동을 수행합니다.",
             "itemtype": "method",
             "name": "moveRow",
@@ -1436,7 +1436,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 949,
+            "line": 951,
             "description": "특정 열값과 정렬함수를 통해 행을 정렬합니다.",
             "itemtype": "method",
             "name": "sortRow",
@@ -1465,7 +1465,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 990,
+            "line": 992,
             "description": "특정 열을 통해 행을 오름차순으로 정렬합니다.",
             "itemtype": "method",
             "name": "sortRowByAsc",
@@ -1480,7 +1480,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1001,
+            "line": 1003,
             "description": "특정 열을 통해 행을 내림차순으로 정렬합니다.",
             "itemtype": "method",
             "name": "sortRowByDesc",
@@ -1495,7 +1495,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1028,
+            "line": 1030,
             "description": "열값을 설정합니다.",
             "itemtype": "method",
             "name": "setColumnValue",
@@ -1526,7 +1526,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1046,
+            "line": 1048,
             "description": "복수의 열값을 설정합니다.",
             "itemtype": "method",
             "name": "setColumnValues",
@@ -1555,7 +1555,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1064,
+            "line": 1066,
             "description": "열값을 반환합니다.",
             "itemtype": "method",
             "name": "getColumnValue",
@@ -1579,7 +1579,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1075,
+            "line": 1077,
             "description": "열의 수정여부를 반환합니다.",
             "itemtype": "method",
             "name": "isColumnModified",
@@ -1603,7 +1603,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1086,
+            "line": 1088,
             "description": "삭제된 행의 열값을 반환합니다.",
             "itemtype": "method",
             "name": "getDeletedColumnValue",
@@ -1627,7 +1627,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1098,
+            "line": 1100,
             "description": "데이타셋을 전체삭제합니다.",
             "itemtype": "method",
             "name": "clear",
@@ -1643,7 +1643,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1113,
+            "line": 1115,
             "description": "데이타셋의 현재상태를 적용합니다.<br>\n현재상태를 적용 시, 모든 행상태는 normal로, 모든 열수정여부는 false로 설정되며 적용 시점까지 열,행 데이터가 저장됩니다.",
             "itemtype": "method",
             "name": "apply",
@@ -1659,7 +1659,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1140,
+            "line": 1142,
             "description": "데이타셋의 이전 적용시점으로 되돌립니다.",
             "itemtype": "method",
             "name": "reset",
@@ -1675,7 +1675,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1164,
+            "line": 1166,
             "description": "데이타셋의 수정여부를 반환합니다.",
             "itemtype": "method",
             "name": "isModified",
@@ -1687,7 +1687,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1181,
+            "line": 1183,
             "description": "열값의 합계값을 반환합니다.",
             "itemtype": "method",
             "name": "sumOfColumnValues",
@@ -1712,7 +1712,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1202,
+            "line": 1204,
             "description": "열값의 평균값을 반환합니다.",
             "itemtype": "method",
             "name": "avgOfColumnValues",
@@ -1737,7 +1737,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1234,
+            "line": 1236,
             "description": "열값의 최대값을 반환합니다.",
             "itemtype": "method",
             "name": "maxOfColumnValues",
@@ -1762,7 +1762,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1245,
+            "line": 1247,
             "description": "열값의 최소값을 반환합니다.",
             "itemtype": "method",
             "name": "minOfColumnValues",
@@ -1786,7 +1786,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1257,
+            "line": 1259,
             "description": "데이타셋을 JSON객체로 반환합니다.",
             "itemtype": "method",
             "name": "toJSON",
@@ -1806,7 +1806,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1341,
+            "line": 1343,
             "description": "데이타셋을 JSON형태의 문자열로 반환합니다.",
             "itemtype": "method",
             "name": "toJSONString",
@@ -1826,7 +1826,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1351,
+            "line": 1353,
             "description": "JSON객체 또는 JSON형태의 문자열을 데이타셋에 적용합니다.",
             "itemtype": "method",
             "name": "applyJSON",
@@ -1846,7 +1846,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1423,
+            "line": 1425,
             "description": "타 데이타셋을 현재 데이타셋에 확장합니다.",
             "itemtype": "method",
             "name": "appendDataset",
@@ -1867,7 +1867,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1450,
+            "line": 1452,
             "description": "JSON객체 또는 JSON형태의 문자열을 현재 데이타셋에 확장합니다.<br>\nJGDataset JSON 포맷과 일치해야 합니다.",
             "itemtype": "method",
             "name": "appendDataset",
@@ -1888,7 +1888,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1463,
+            "line": 1465,
             "description": "삽입,수정,삭제된 정보를 추출하여 데이타셋으로 반환합니다.",
             "itemtype": "method",
             "name": "exportModifiedData",
@@ -1900,7 +1900,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1527,
+            "line": 1529,
             "description": "데이타셋을 생성,반환합니다.<br>\nSelector가 문자열일 때, 해당 이름의 데이타셋이 없을 경우 생성, 있을 경우에 반환합니다.\nSelector가 숫자일 때, 색인의 데이타셋을 반환합니다.",
             "itemtype": "method",
             "name": "dataset",
@@ -1929,7 +1929,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1558,
+            "line": 1560,
             "description": "데이타셋의 색인을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 -1 을 반환합니다.",
             "itemtype": "method",
             "name": "indexOf",
@@ -1951,7 +1951,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1582,
+            "line": 1584,
             "description": "데이타셋명을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 {undefined} 을 반환합니다.",
             "itemtype": "method",
             "name": "datasetName",
@@ -1973,7 +1973,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1602,
+            "line": 1604,
             "description": "데이타셋을 삭제합니다.<br>",
             "itemtype": "method",
             "name": "remove",
@@ -1991,7 +1991,7 @@
         },
         {
             "file": "JGDataset.2.0.0.js",
-            "line": 1615,
+            "line": 1617,
             "description": "복수의 데이타셋을 생성합니다.<br>",
             "itemtype": "method",
             "name": "make",
