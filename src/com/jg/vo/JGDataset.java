@@ -677,6 +677,8 @@ public class JGDataset {
 				columnItem_.setKey(((Boolean)column_.get(STR_ISKEY)).booleanValue());
 			}
 			
+			apply();
+			
 			//apply row data
 			JSONArray rowData_ = (JSONArray)rootObject_.get(STR_ROWDATA);
 			int rowCount_ = rowData_.size();
@@ -711,7 +713,6 @@ public class JGDataset {
 				for(int columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
 					JGDatasetColumn columnItem_ = getColumn(columnIndex_);
 					JSONObject columnValue_ = (JSONObject)row_.get(columnItem_._name);
-					
 					rowItem_.setColumn(columnItem_._name, columnValue_.get(STR_VALUE));
 				}
 			}

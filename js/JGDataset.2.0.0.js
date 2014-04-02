@@ -1323,6 +1323,7 @@
 			var deletedRowData_ = new Array();
 			rowCount_ = this._deletedRowData.length;
 			for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
+				var rowItem_ = this._rowData[rowIndex_];
 				var row_ = {};
 				var columns_ = {};
 				for(var columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
@@ -1387,6 +1388,8 @@
 				columnItem_.isKey(column_[_JGKeyword.key.isKey]);
 			}
 			
+			this.apply(false);
+			
 			//apply row data
 			var rowCount_ = rowData_.length;
 			for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
@@ -1414,8 +1417,9 @@
 					var columnItem_ = this.getColumn(columnIndex_);
 					var columnValue_ = row_[columnItem_.getName()];
 					
-					rowItem_.setColumn(columnItem_.getName(), columnValue_[_JGKeyword.key.value]);
+					rowItem_.setColumn(columnItem_.getName(), columnValue_[_JGKeyword.key.value], columnValue_[_JGKeyword.key.modify]);
 				}
+				rowItem_.setRowStatus(deletedRowData_[rowIndex_][_JGKeyword.key.rowStatus]);
 			}
 		}
 		
