@@ -476,6 +476,22 @@
 					mappedElement_.on("keyup change",commonEventOnChange_);
 				}
 			}
+			//textarea
+			else if(tagName_ === "textarea"){
+				mappedElement_.on("change", function(event_){
+					var target_ = $(event_.target);
+					var rowContent_ = target_._jgDataRowContent();
+					var dataset_ = rowContent_.datasetUI().dataset();
+					var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
+					var rowIndex_ = rowContent_.rowIndex();
+					
+					dataset_.setColumnValue(columnName_, rowIndex_, target_.val(), true);
+				});
+				mappedElement_.on("keyup", function(event_){
+					var target_ = $(event_.target);
+					target_.trigger("change");
+				});
+			}
 			//contenteditable div
 			else if(tagName_ === "div" && mappedElement_.prop("contenteditable")){
 				mappedElement_.on("change", function(event_){
@@ -620,6 +636,12 @@
 				}
 				//input type - exclude checkbox
 				else if(tagName_ === "input"){
+					if(mappedElement_.val() !== columnValue_){
+						mappedElement_.val(columnValue_);
+					}
+				}
+				//textarea
+				else if(tagName_ === "textarea"){
 					if(mappedElement_.val() !== columnValue_){
 						mappedElement_.val(columnValue_);
 					}

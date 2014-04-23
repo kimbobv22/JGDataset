@@ -419,12 +419,6 @@
 	 * @private
 	 */
 	/**
-	 * 원본 열값
-	 * @property _orgColumns
-	 * @type JSON
-	 * @private
-	 */
-	/**
 	 * 열상태
 	 * @property _columnStatus
 	 * @type JSON
@@ -439,7 +433,6 @@
 	 */
 	var JGDatasetRow = (function(){
 		this._columns = {};
-		this._orgColumns = {};
 		this._columnStatus = {};
 		this._rowStatus = _JGKeyword.rowStatus.normal;
 	});
@@ -485,13 +478,7 @@
 	JGDatasetRow.prototype.setColumn = (function(columnName_, value_, isModify_){
 		columnName_ = columnName_.toUpperCase();
 		this._columns[columnName_] = value_;
-		
-		//check modified
-		if(isNull(isModify_)){
-			this._columnStatus[columnName_] = (this._orgColumns[columnName_] !== value_);
-		}else{
-			this._columnStatus[columnName_] = isModify_;
-		}
+		this._columnStatus[columnName_] = NVL(isModify_,true);
 		this._updateRowStatus();
 	});
 	/**
@@ -544,7 +531,6 @@
 	 * @method apply
 	 */
 	JGDatasetRow.prototype.apply = (function(){
-		this._orgColumns = JSON.parse(JSON.stringify(this._columns));
 		this._rowStatus = _JGKeyword.rowStatus.normal;
 		this._columnStatus = {};
 	});
@@ -558,7 +544,6 @@
 	JGDatasetRow.prototype.clone = (function(){
 		var copy_ = new JGDatasetRow();
 		copy_._columns = $.extend(true,{},this._columns);
-		copy_._orgColumns = $.extend(true,{},this._orgColumns);
 		copy_._columnStatus = $.extend(true,{},this._columnStatus);
 		copy_._rowStatus = this._rowStatus;
 		return copy_;
@@ -1013,7 +998,7 @@
 		});
 	});
 	
-	JGDataset.prototype._setColumnValue = (function(columnKey_, rowIndex_, value_, mergeColumn_, fireEvent_){
+	JGDataset.prototype._setColumnValue = (function(columnKey_, rowIndex_, value_, isModify_, mergeColumn_, fireEvent_){
 		if($.type(columnKey_) === "number"){
 			var columnItem_ = this.getColumn(columnKey_);
 			columnKey_ = columnItem_.getName();
@@ -1026,7 +1011,7 @@
 		}
 		
 		var rowItem_ = this.getRow(rowIndex_);
-		rowItem_.setColumn(columnKey_, value_);
+		rowItem_.setColumn(columnKey_, value_, isModify_);
 	});
 	/**
 	 * 열값을 설정합니다.
@@ -1041,7 +1026,8 @@
 		columnKey_ = this._convertColumnKeyToName(columnKey_);
 		
 		var currentValue_ = this.getColumnValue(columnKey_, rowIndex_);
-		this._setColumnValue(columnKey_, rowIndex_, value_, mergeColumn_);
+		var isModify_ = currentValue_ !== value_;
+		this._setColumnValue(columnKey_, rowIndex_, value_, isModify_, mergeColumn_);
 		if(currentValue_ !== value_){
 			$(this).trigger(_JGKeyword.trigger._columnValueChanged,[columnKey_,rowIndex_,true]);
 		}
@@ -1370,7 +1356,7 @@
 			for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
 				this._insertRow(rowIndex_);
 				for(var columnName_ in content_[rowIndex_]){
-					this._setColumnValue(columnName_, rowIndex_, content_[rowIndex_][columnName_], true, false);
+					this._setColumnValue(columnName_, rowIndex_, content_[rowIndex_][columnName_], false, true, false);
 				}
 			}
 			
@@ -1447,8 +1433,7 @@
 			
 			for(var colIndex_=0;colIndex_<colCount_;++colIndex_){
 				var columnName_ = dataset_.getColumn(colIndex_).getName();
-				this._setColumnValue(columnName_, tRowIndex_, tRowItem_.getColumnValue(columnName_), mergeColumn_, false)
-				rowItem_.setColumnModification(columnName_, tRowItem_.isColumnModified(columnName_));
+				this._setColumnValue(columnName_, tRowIndex_, tRowItem_.getColumnValue(columnName_), tRowItem_.isColumnModified(columnName_), mergeColumn_, false);
 			}
 			
 			$(this).trigger(_JGKeyword.trigger._rowInserted,[tRowIndex_,true]);

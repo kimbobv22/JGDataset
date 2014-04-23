@@ -109,6 +109,10 @@
     
 
     
+        <div class="foundat">
+            Defined in: <a href="../files/JGDatasetUI.2.0.1.min.js.html#l196"><code>JGDatasetUI.2.0.1.min.js:196</code></a>
+        </div>
+    
 
     
 
@@ -160,8 +164,12 @@ var result_ = datasetUI_.함수명();</code></pre>
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l196"><code>JGDatasetUI.2.0.1.min.js:196</code></a>
         
         </p>
 
@@ -244,6 +252,20 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                             </li>
                         
                             <li class="index-item event">
+                                <a href="#event_datasetuicolumnrefreshed">datasetuicolumnrefreshed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_datasetuifxrefreshed">datasetuifxrefreshed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
                                 <a href="#event_datasetuifxrefreshed">datasetuifxrefreshed</a>
 
                                 
@@ -258,7 +280,28 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                             </li>
                         
                             <li class="index-item event">
+                                <a href="#event_datasetuimappingreloaded">datasetuimappingreloaded</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
                                 <a href="#event_datasetuirefreshed">datasetuirefreshed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_datasetuirefreshed">datasetuirefreshed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_datasetuirowmapped">datasetuirowmapped</a>
 
                                 
                                 
@@ -305,8 +348,123 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.js.html#l57"><code>JGDatasetUI.2.0.1.js:57</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>특정 행열의 매핑이 새로 고쳐졌을 때 호출됩니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event_</code>
+                        <span class="type">JQuery Event object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jQuery 이벤트 객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">columnName_</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>열명</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">rowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;datasetuicolumnrefreshed&quot;,function(event_, columnName_, rowIndex_){
+    //to do
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="event_datasetuicolumnrefreshed" class="events item">
+    <h3 class="name"><code>datasetuicolumnrefreshed</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l56"><code>JGDatasetUI.2.0.1.min.js:56</code></a>
         
         </p>
 
@@ -412,8 +570,107 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.js.html#l44"><code>JGDatasetUI.2.0.1.js:44</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>매핑된 특정 행의 FX수식이 새로 고쳐졌을 때 발생합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event_</code>
+                        <span class="type">JQuery Event object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jQuery 이벤트 객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">rowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;datasetuifxrefreshed&quot;,function(event_, rowIndex_){
+    //to do
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="event_datasetuifxrefreshed" class="events item">
+    <h3 class="name"><code>datasetuifxrefreshed</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l43"><code>JGDatasetUI.2.0.1.min.js:43</code></a>
         
         </p>
 
@@ -503,8 +760,91 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.js.html#l71"><code>JGDatasetUI.2.0.1.js:71</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>매핑이 재적재되었을 때 발생합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event_</code>
+                        <span class="type">JQuery Event object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jQuery 이벤트 객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;datasetuimappingreloaded&quot;,function(event_){
+    //to do
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="event_datasetuimappingreloaded" class="events item">
+    <h3 class="name"><code>datasetuimappingreloaded</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l70"><code>JGDatasetUI.2.0.1.min.js:70</code></a>
         
         </p>
 
@@ -578,8 +918,107 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.js.html#l31"><code>JGDatasetUI.2.0.1.js:31</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>특정 행의 매핑이 새로 고쳐졌을 때 발생합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event_</code>
+                        <span class="type">JQuery Event object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jQuery 이벤트 객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">rowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;datasetuirefreshed&quot;,function(event_, rowIndex_){
+    //to do
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="event_datasetuirefreshed" class="events item">
+    <h3 class="name"><code>datasetuirefreshed</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l30"><code>JGDatasetUI.2.0.1.min.js:30</code></a>
         
         </p>
 
@@ -669,8 +1108,107 @@ $(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
                 
                 <p>
                 
+                Defined in
+                
             
         
+        
+        <a href="../files/JGDatasetUI.2.0.1.js.html#l18"><code>JGDatasetUI.2.0.1.js:18</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>특정 행과 매핑 시 발생합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event_</code>
+                        <span class="type">JQuery Event object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>jQuery 이벤트 객체</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">rowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;datasetuirowmapped&quot;,function(event_, rowIndex_){
+    //to do
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="event_datasetuirowmapped" class="events item">
+    <h3 class="name"><code>datasetuirowmapped</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.2.0.1.min.js.html#l17"><code>JGDatasetUI.2.0.1.min.js:17</code></a>
         
         </p>
 

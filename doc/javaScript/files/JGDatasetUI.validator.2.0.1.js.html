@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JGDatasetUI.validator.2.0.1.js - JGDataset for JavaScript</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/global.extension.html">global.extension</a></li>
+            
+                <li><a href="../classes/JGDataset.html">JGDataset</a></li>
+            
+                <li><a href="../classes/JGDatasetColumn.html">JGDatasetColumn</a></li>
+            
+                <li><a href="../classes/JGDatasetRow.html">JGDatasetRow</a></li>
+            
+                <li><a href="../classes/JGDS.html">JGDS</a></li>
+            
+                <li><a href="../classes/JGFXElement.html">JGFXElement</a></li>
+            
+                <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
+            
+                <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGSelect.html">jQuery.fn.JGSelect</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: JGDatasetUI.validator.2.0.1.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+(function(window,$,JGDatasetUI){
+	
+	if(JGDatasetUI === undefined){
+		console.error(&quot;can&#x27;t not initialize JGValidator, JGDataset UI not found&quot;);
+		return;
+	}
+	
+	function _jsonDataWithoutCase(object_, key_){
+		for(var tKey_ in object_){
+			if(tKey_.toUpperCase() === key_.toUpperCase()){
+				return object_[tKey_];
+			}
+		}
+		return undefined;
+	}
+	function _jsonDataLength(object_){
+		var length_ = 0;
+		for(var tKey_ in object_){
+			if(object_.hasOwnProperty(tKey_)) ++length_;
+		}
+		
+		return length_;
+	}
+	
+	function _jsonDataAtIndex(object_, index_){
+		var curIndex_ = 0;
+		for(var key_ in object_){
+			if(object_.hasOwnProperty(key_)){
+				if(curIndex_ === index_) return object_[key_];
+				++curIndex_;
+			}
+		}
+		
+		return undefined;
+	}
+	
+	_JGKeyword = $.extend(true,_JGKeyword,{
+		validator : {
+			errorColumn : &quot;jg-error-column&quot;
+		}
+	});
+	
+	/**
+	 * JGDataset이 매핑된 JGDatasetUI의 입력 유효성 검사를 위한 객체입니다.&lt;br&gt;
+	 * JGValidator를 사용하려면 JGDatasetUI가 초기화 되어 있어야합니다.
+	 * 
+	 * 	//1. jQuery Plugin Style
+	 * 	var result_ = $(target_).JGValidator(&quot;함수명&quot;,...);
+	 * 	
+	 * 	//2. normal Style
+	 * 	var validator_ = $(target_).JGValidator();
+	 * 	var result_ = validator_.함수명();
+	 * 
+	 * JGValidator 샘플은 &lt;a href=&quot;http://kimbobv22.github.io/JGDataset/index.html&quot; target=&quot;_blank&quot;&gt;여기&lt;/a&gt;에서 확인할 수 있습니다.
+	 * 
+	 * @class jQuery.fn.JGValidator
+	 * @constructor 
+	 */
+	var JGValidator = window.JGValidator = (function(datasetUI_){
+		this._datasetUI = datasetUI_;
+		this._engine = $.extend(true,{},JGValidator.prototype._engine);
+		this._failedMessages = $.extend(true,{},JGValidator.prototype._failedMessages);
+		this._validators = {};
+		this._cause = {};
+		this._onValidate = false;
+		
+		var that_ = this;
+		var dataset_ = this.dataset();
+		
+		//bind dataset event
+		$(dataset_).on(_JGKeyword.trigger._columnValueChanged, function(event_, columnName_, rowIndex_){
+			if(that_._options.realtimeCheck) that_._singleValidate(columnName_, rowIndex_, function(){});
+		});
+		$(dataset_).on(_JGKeyword.trigger._columnAdded+&quot; &quot;
+						+_JGKeyword.trigger._columnRemoved+&quot; &quot;
+						+_JGKeyword.trigger._rowInserted+&quot; &quot;
+						+_JGKeyword.trigger._rowRemoved+&quot; &quot;
+						+_JGKeyword.trigger._datasetClear+&quot; &quot;
+						+_JGKeyword.trigger._datasetReset, function(event_, columnName_){
+			that_.refresh();
+		});
+		
+		this.refresh();
+	});
+	
+	/**
+	 * 매핑된 JGDatasetUI를 반환합니다.
+	 * 
+	 * @method datasetUI
+	 * @return {JGDatasetUI} JGDatasetUI
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;datasetUI&quot;);
+	 */
+	JGValidator.prototype.datasetUI = (function(){
+		return this._datasetUI;
+	});
+	/**
+	 * 매핑된 데이타셋을 반환합니다.
+	 * 
+	 * @method dataset
+	 * @return {JGDataset} 데이타셋
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;dataset&quot;);
+	 */
+	JGValidator.prototype.dataset = (function(){
+		return this._datasetUI.dataset();
+	});
+	
+	/**
+	 * 매핑된 데이타셋을 반환합니다.
+	 * 
+	 * @method isValid
+	 * @return {Boolean} 유효여부
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;isValid&quot;);
+	 */
+	JGValidator.prototype.isValid = (function(){
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		var validators_ = this._validators;
+		
+		for(var columnName_ in this._validators){
+			var result_ = this._cause[columnName_];
+			if(result_ === undefined) return false;
+			
+			var validator_ = this._validators[columnName_];
+			if(rowCount_ !== result_.length) return false;
+			
+			for(var rowIndex_ in result_){
+				var rowResult_ = result_[rowIndex_];
+				if(isNull(rowResult_) || _jsonDataLength(rowResult_) &gt; 0) return false;
+			}
+		}
+	
+		return true;
+	});
+	/**
+	 * 유효성엔진 설정/반환합니다.&lt;br&gt;
+	 * 매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.
+	 * 
+	 * 	//유효성검사 엔진 포멧
+	 * 	{&quot;custom-validator1&quot; : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+	 * 			//todo
+	 * 		},&quot;custom-validator2&quot; : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+	 * 			//todo
+	 * 		}
+	 * 	};
+	 * 
+	 * @method engine
+	 * @param {Object} 유효성엔진
+	 * @return {Object} 유효성엔진
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;engine&quot;,...);
+	 */
+	JGValidator.prototype.engine = (function(engine_){
+		if(engine_ !== undefined){
+			this._engine = $.extend(true,this._engine,engine_);
+		}
+		return this._engine;
+	});
+	/**
+	 * 유효성검사 실패메세지를 설정/반환합니다.&lt;br&gt;
+	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
+	 * 
+	 * 	//형식
+	 * 	{열명1 : {
+	 * 			유효성명1 : &quot;실패메세지&quot;
+	 * 			,유효성명2 : &quot;실패메세지&quot;
+	 * 		},열명2 : {
+	 * 			유효성명1 : &quot;실패메세지&quot;
+	 * 			,유효성명2 : &quot;실패메세지&quot;
+	 *			,...
+	 * 		},...
+	 * 	}
+	 * 
+	 * @method validator_
+	 * @param {Object} messages_ 유효성 검사 실패메세지
+	 * @return {Object} 유효성 검사 실패메세지
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;failedMessages&quot;,...);
+	 */
+	JGValidator.prototype.failedMessages = (function(messages_){
+		if(messages_ !== undefined){
+			this._failedMessages = $.extend(true,this._failedMessages,messages_);
+		}
+		return this._failedMessages;
+	});
+	
+	/**
+	 * 기본 유효성 검사 실패메세지를 설정/반환합니다.&lt;br&gt;
+	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
+	 * 
+	 * 	//형식
+	 * 	{
+	 * 		유효성명1 : &quot;실패메세지&quot;
+	 * 		,...
+	 * 	}
+	 * 
+	 * @method commonFailedMessages
+	 * @param {Object} [messages_] 실패메세지
+	 * @return {Object} 실패메세지
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;commonFailedMessages&quot;);
+	 */
+	JGValidator.prototype.commonFailedMessages = (function(messages_){
+		if(messages_ !== undefined){
+			this._commonFailedMessages = $.extend(true,this._commonFailedMessages,messages_);
+		}
+		return this._commonFailedMessages;
+	});
+	
+	/**
+	 * 유효성 검사에 대한 실패원인을 반환합니다.
+	 * 
+	 * 	//형식
+	 * 	{
+	 * 	열명1 : {
+	 * 		행색인 : {
+	 * 			유효성명1 : {유효성정보}
+	 * 			,...
+	 * 			}
+	 * 		,...
+	 * 		}
+	 * 	,...
+	 * 	}
+	 * 
+	 * @method cause
+	 * @return {Object} 실패원인
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;cause&quot;);
+	 */
+	JGValidator.prototype.cause = (function(){
+		var cause_ = {};
+		
+		for(var columnName_ in this._cause){
+			cause_[columnName_] = {};
+			
+			for(var rowIndex_=this._cause[columnName_].length-1;rowIndex_&gt;=0;--rowIndex_){
+				if(_jsonDataLength(this._cause[columnName_][rowIndex_]) &gt; 0){
+					cause_[columnName_][rowIndex_] = this._cause[columnName_][rowIndex_];
+				}
+			}
+			
+			if(_jsonDataLength(cause_[columnName_]) === 0){
+				delete cause_[columnName_];
+			}
+		}
+		
+		return cause_;
+	});
+	/**
+	 * 유효성요소를 재적재합니다.
+	 * 
+	 * @method refresh
+	 * @example
+	 * 	$(target_).JGValidator(&quot;refresh&quot;);
+	 */
+	JGValidator.prototype.refresh = (function(){
+		this._validators = {};
+		this._cause = {};
+		
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var originalRowContent_ = datasetUI_._originalRowContent;
+		
+		var colCount_ = dataset_.getColumnCount();
+		for(var colIndex_=0;colIndex_&lt;colCount_;++colIndex_){
+			var columnName_ = dataset_.getColumn(colIndex_).getName();
+			
+			var mappedElements_ = originalRowContent_.find(&quot;*[&quot;+_JGKeyword.ui.attrColumn+&quot;]&quot;).filter(function(){
+				return $(this).attr(_JGKeyword.ui.attrColumn).toUpperCase() === columnName_;
+			});
+			
+			this._validators[columnName_] = {};
+			
+			//add required 
+			var findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;required&quot;) !== undefined;
+			});
+			var count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].required = {
+					name : &quot;required&quot; 
+				};
+			}
+			
+			//add maxLength
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;maxLength&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				this._validators[columnName_].maxLength = {
+					name : &quot;maxLength&quot; 
+					,length : parseInt(mappedElement_.attr(&quot;maxLength&quot;))
+				};
+			}
+			
+			//add minLength
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;minLength&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].minLength = {
+					name : &quot;minLength&quot; 
+					,length : parseInt(mappedElement_.attr(&quot;minLength&quot;))
+				};
+			}
+			
+			//add length
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;length&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].length = {
+					name : &quot;length&quot; 
+					,length : parseInt(mappedElement_.attr(&quot;length&quot;))
+				};
+			}
+			
+			//add equals
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;equals&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].equals = {
+					name : &quot;equals&quot; 
+					,value : mappedElement_.attr(&quot;equals&quot;)
+				};
+			}
+			
+			//add not equals
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;notEquals&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].equals = {
+					name : &quot;notEquals&quot; 
+					,value : mappedElement_.attr(&quot;notEquals&quot;)
+				};
+			}
+			
+			//add range
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;range&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				var range_ = mappedElement_.attr(&quot;range&quot;).split(&quot;,&quot;);
+				this._validators[columnName_].range = {
+					name : &quot;range&quot; 
+					,from : parseInt(range_[0])
+					,to : parseInt(range_[1])
+				};
+			}
+			
+			//add rangeLength
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;rangeLength&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				var range_ = mappedElement_.attr(&quot;rangeLength&quot;).split(&quot;,&quot;);
+				this._validators[columnName_].rangeLength = {
+					name : &quot;rangeLength&quot; 
+					,from : parseInt(range_[0])
+					,to : parseInt(range_[1])
+				};
+			}
+			
+			//add regex
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;pattern&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].pattern = {
+					name : &quot;pattern&quot; 
+					,pattern : mappedElement_.attr(&quot;pattern&quot;)
+				};
+			}
+			
+			//add pattern - word
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternWord&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternWord = {
+					name : &quot;patternWord&quot;
+				};
+			}
+			
+			//add pattern - alphabet
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternAlphabet&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternAlphabet = {
+					name : &quot;patternAlphabet&quot;
+				};
+			}
+			
+			//add pattern - patternAlphanum
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternAlphanum&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternAlphanum = {
+					name : &quot;patternAlphanum&quot;
+				};
+			}
+			
+			//add pattern - email
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternEmail&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternEmail = {
+					name : &quot;patternEmail&quot;
+				};
+			}
+			
+			//add pattern - patternNumber
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternNumber&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternNumber = {
+					name : &quot;patternNumber&quot;
+				};
+			}
+			
+			//add pattern - patternPhone
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;patternPhone&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				this._validators[columnName_].patternPhone = {
+					name : &quot;patternPhone&quot;
+				};
+			}
+			
+			//add column equals
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;columnEquals&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].columnEquals = {
+					name : &quot;columnEquals&quot;
+					,value : mappedElement_.attr(&quot;columnEquals&quot;)
+				};
+			}
+			
+			//add column not equals
+			findedElements_ = mappedElements_.filter(function(){
+				return $(this).attr(&quot;columnNotEquals&quot;) !== undefined;
+			});
+			count_ = findedElements_.length;
+			for(var index_=0;index_&lt;count_;++index_){
+				var mappedElement_ = $(findedElements_.get(index_));
+				
+				this._validators[columnName_].columnNotEquals = {
+					name : &quot;columnNotEquals&quot;
+					,value : mappedElement_.attr(&quot;columnNotEquals&quot;)
+				};
+			}
+			
+			//add custom
+			var that_ = this;
+			findedElements_ = mappedElements_.each(function(){
+				var attrMap_ = $(this).get(0).attributes;
+				var attrMapCount_ = attrMap_.length;
+				for(var attrIndex_=0;attrIndex_&lt;attrMapCount_;++attrIndex_){
+					var attr_ = attrMap_[attrIndex_];
+					var regexpStr_ = &quot;(custom\\-validator\\-)+&quot;;
+					if(new RegExp(regexpStr_, &quot;gi&quot;).test(attr_.name)){
+						var validatorName_ = attr_.name.replace(&quot;custom-validator-&quot;,&quot;&quot;);
+						that_._validators[columnName_][validatorName_] = {
+							name : validatorName_
+							,value : attr_.value
+						};
+					}
+				}
+			});
+			
+			this.validate(function(){});
+		}
+	});
+	
+	JGValidator.prototype._recursiveSingleValidate = (function(columnName_, rowIndex_, valIndex_ ,callback_){
+		var that_ = this;
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var columnValue_ = dataset_.getColumnValue(columnName_, rowIndex_);
+		var validatorElements_ = _jsonDataWithoutCase(this._validators, columnName_);
+		callback_ = NVL(callback_,function(){});
+		
+		var columnValidData_ = this._cause[columnName_] = NVL(this._cause[columnName_],[]);
+		this._cause[columnName_][rowIndex_] = $.extend(true,this._cause[columnName_][rowIndex_],{});
+		
+		if(isNull(validatorElements_)){
+			var cause_ = this.cause()[columnName_];
+			callback_.apply(datasetUI_.element(), [cause_ === undefined ? null : cause_[rowIndex_]]);
+			return;
+		}
+		
+		valIndex_ = NVL(valIndex_,0);
+		var valCount_ = _jsonDataLength(validatorElements_);
+		
+		if(valIndex_ === valCount_){
+			var cause_ = this.cause()[columnName_];
+			callback_.apply(datasetUI_.element(), [cause_ === undefined ? null : cause_[rowIndex_]]);
+			return;
+		}
+		
+		var validatorElement_ = _jsonDataAtIndex(validatorElements_, valIndex_);
+		var validatorName_ = validatorElement_.name.toLowerCase();
+		var validatorEngine_ = _jsonDataWithoutCase(this._engine, validatorName_);
+		
+		if(isNull(validatorEngine_)){
+			this._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
+			return;
+		}
+		
+		validatorEngine_.apply(dataset_, [validatorElement_, columnName_, rowIndex_, columnValue_, function(isValid_){
+			if(!isValid_){
+				var cause_ = {name : validatorElement_.name};
+				
+				columnValidData_[rowIndex_][validatorElement_.name] = cause_;
+				if(that_._options.stepValidation){
+					valIndex_ = valCount_ -1;
+				}
+			}else{
+				delete columnValidData_[rowIndex_][validatorElement_.name];
+			}
+			that_._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
+		}]);
+	});
+	JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
+		var that_ = this;
+		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
+			that_._updateErrorLabels();
+			callback_.apply(that_.datasetUI().element(),arguments);
+		});
+	});
+	JGValidator.prototype._recursiveValidate = (function(columnIndex_, rowIndex_, callback_){
+		var that_ = this;
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var colCount_ = dataset_.getColumnCount();
+		var rowCount_ = dataset_.getRowCount();
+		
+		columnIndex_ = NVL(columnIndex_, 0);
+		rowIndex_ = NVL(rowIndex_,0);
+		callback_ = NVL(callback_,function(){});
+	
+		if(columnIndex_ === colCount_){
+			callback_.apply(datasetUI_.element(), [this.isValid(), this.cause()]);
+			return;
+		}else if(columnIndex_ &lt; colCount_ &amp;&amp; rowIndex_ === rowCount_){
+			this._recursiveValidate(columnIndex_+1, 0, callback_);
+			return;
+		}else{
+			this._singleValidate(dataset_.getColumn(columnIndex_).getName(), rowIndex_, function(result_){
+				that_._recursiveValidate(columnIndex_, rowIndex_+1, callback_);
+			});
+			return;
+		}
+	});
+	/**
+	 * 유효성을 검사합니다.
+	 * 
+	 * @method validate
+	 * @param {Function} [callback_] 콜백함수
+	 * @example
+	 * 	$(dataset_).JGValidator(&quot;validate&quot;,function(isValid_, cause_){
+	 * 		//to do
+	 * 	});
+	 */
+	JGValidator.prototype.validate = (function(callback_){
+		this._recursiveValidate(0,0,callback_);
+	});
+	JGValidator.prototype._updateErrorLabels = (function(){
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		
+		// set blank all error label
+		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
+			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+			if(isNull(rowContent_)){
+				continue;
+			}
+			
+			var errorLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.errorColumn+&quot;]&quot;);
+			errorLabels_.hide();
+			errorLabels_.html(&quot;&quot;);
+		}
+		
+		// set error label with cause
+		var cause_ = this.cause();
+		for(var columnName_ in cause_){
+			var causeRow_ = cause_[columnName_];
+			
+			for(var rowIndex_ in causeRow_){
+				var causeElements_ = causeRow_[rowIndex_];
+				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+				if(isNull(rowContent_)){
+					continue;
+				}
+				
+				var errorLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.errorColumn+&quot;]&quot;).filter(function(){
+					return (columnName_.toUpperCase() === $(this).attr(_JGKeyword.validator.errorColumn).toUpperCase());
+				});
+				
+				for(var causeName_ in causeElements_){
+					var failedMessage_ = &quot;&quot;;
+					var messages_ = _jsonDataWithoutCase(this._failedMessages, columnName_);
+					
+					if(!isNull(messages_)){
+						var message_ = _jsonDataWithoutCase(messages_, causeName_);
+						if(!isNull(message_ )){
+							failedMessage_ = message_;
+						}
+					}
+					if(isNull(failedMessage_) || failedMessage_.length === 0){
+						failedMessage_ = BLK(_jsonDataWithoutCase(this._commonFailedMessages, causeName_));
+					}
+					
+					var makeMessagePattern_ = (function(key_){
+						return new RegExp(&quot;\\{(&quot;+key_+&quot;)\\}&quot;, &quot;gi&quot;);
+					});
+					
+					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnName&quot;),columnName_);
+					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;rowIndex&quot;),rowIndex_);
+					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnValue&quot;),dataset_.getColumnValue(columnName_,rowIndex_));
+					
+					for(var entryName_ in this._validators[columnName_][causeName_]){
+						failedMessage_ = failedMessage_.replace(makeMessagePattern_(entryName_),this._validators[columnName_][causeName_][entryName_]);
+					}
+					
+					if(failedMessage_.length &gt; 0){
+						var errorLabelsLength_ = errorLabels_.length;
+						for(var elIndex_=0;elIndex_&lt;errorLabelsLength_;++elIndex_){
+							var errorLabel_ = $(errorLabels_[elIndex_]);
+							errorLabel_.show();
+							
+							failedMessage_ = $(this._options.errorMessageTag).html(failedMessage_);
+							if(NVL(this._options.appendErrorMessage,false)) errorLabel_.append(failedMessage_);
+							else errorLabel_.html(failedMessage_);
+						}
+					}
+				}
+			}
+		}
+	});
+	
+	JGValidator.prototype._options = {
+		errorMessageTag : &quot;&lt;span style=&#x27;display:block;&#x27; /&gt;&quot;
+		,appendErrorMessage : true
+		,stepValidation : true
+		,realtimeCheck : true
+	};
+	
+	/**
+	 * 옵션을 설정/반환합니다.&lt;br&gt;
+	 * 매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.
+	 * 
+	 * 	//옵션항목
+	 * 	errorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
+	 * 	appendErrorMessage = 실패메세지 확장출력여부
+	 * 	stepValidation = 단계별 유효성검사여부
+	 * 	realtimeCheck = 실시간 유효성검사여부
+	 * 
+	 * @method options
+	 * @param {Object} options_ 옵션명 또는 옵션객체
+	 * @param {Object} [options_] 옵션값
+	 * @return {Object} 옵션
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;options&quot;,...);
+	 * 	var result2_ = $(target_).JGValidator({options : ...});
+	 */
+	JGValidator.prototype.options = (function(){
+		if($.type(arguments[0]) === &quot;string&quot;){
+			if(arguments.length === 2){
+				this._options[arguments[0]] = arguments[1];
+				
+				if(arguments[0] === &quot;errorMessageTag&quot;
+					|| arguments[0] === &quot;appendErrorMessage&quot;){
+					this._updateErrorLabels();
+				}
+			}
+			
+			return this._options[arguments[0]];
+		}else if($.type(arguments[0]) === &quot;object&quot;){
+			this._options = $.extend(true,this._options,arguments[0]);
+			this.refresh();
+		}
+		return this._options;
+	});
+	
+	/**
+	 * 기본 실패매세지입니다.&lt;br&gt;
+	 * 유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.&lt;br&gt;
+	 * *참고 : {{#crossLink &quot;jQuery.fn.JGValidator/commonFailedMessages:method&quot;}}{{/crossLink}}
+	 * 
+	 * @property _commonFailedMessages
+	 * @type Object
+	 */
+	JGValidator.prototype._commonFailedMessages = {
+		required : &quot;field is required&quot;
+		,maxLength : &quot;max length : {length}&quot;
+		,minLength : &quot;min length : {length}&quot;
+		,length : &quot;length : {length}&quot;
+		,range : &quot;range : {from} ~ {to}&quot;
+		,rangeLength : &quot;length : {from} ~ {to}&quot;
+		,equals : &quot;equals : {value}&quot;
+		,notEquals : &quot;not equals : {value}&quot;
+		,pattern : &quot;pattern : {pattern}&quot;
+		,patternWord : &quot;pattern word&quot;
+		,patternAlphabet : &quot;pattern alphabet&quot;
+		,patternAlphanum : &quot;pattern alphanum&quot;
+		,patternEmail : &quot;pattern email&quot;
+		,patternNumber : &quot;pattern number&quot;
+		,patternPhone : &quot;pattern phone&quot;
+		,columnEquals : &quot;column be equals to {value}&quot;
+		,columnNotEquals : &quot;column be not equals to {value}&quot;
+	};
+	
+	function _checkRegexp(pattern_, value_, option_){
+		var regex_ = new RegExp(pattern_, option_);
+		return regex_.test(BLK(value_));
+	}
+	
+	/**
+	 * 유효성 엔진객체입니다.
+	 * 
+	 * @property _engine
+	 * @type Object
+	 */
+	JGValidator.prototype._engine = {
+		_customValidate : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			this[validatorElement_.name](validatorElement_, columnName_, rowIndex_, columnValue_, callback_);
+		},required : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(0 &lt; BLK(columnValue_).length);
+		},maxLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length &gt;= BLK(columnValue_).length);
+		},minLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length &lt;= BLK(columnValue_).length);
+		},length : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length === BLK(columnValue_).length);
+		},range : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var cColumnValue_ = parseInt(columnValue_);
+			callback_(validatorElement_.from &lt;= cColumnValue_ &amp;&amp; validatorElement_.to &gt;= cColumnValue_);
+		},rangeLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var cLength_ = BLK(columnValue_).length;
+			callback_(validatorElement_.from &lt;= cLength_ &amp;&amp; validatorElement_.to &gt;= cLength_);
+		},equals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.value === columnValue_);
+		},notEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.value !== columnValue_);
+		},pattern : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(validatorElement_.pattern, columnValue_));
+		},patternWord : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^[\\w]+$&quot;, columnValue_));
+		},patternAlphabet : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^[a-zA-Z]+$&quot;, columnValue_));
+		},patternAlphanum : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^[0-9a-zA-Z]+$&quot;, columnValue_));
+		},patternEmail : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^[\\w\\-\\.]+\@[\\w\\-\\.]+\\.[\\w]{1,5}$&quot;, columnValue_));
+		},patternNumber : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^[\\-]?[0-9]+$&quot;, columnValue_));
+		},patternPhone : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(_checkRegexp(&quot;^(\\+?\\d{0,2}\\s?\\d{2,3}\\s?\\-?\\s?\\d{3,4}\\s?\\-?\\s?\\d{4})$&quot;, columnValue_));
+		},columnEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var tColumnName_ = validatorElement_.value;
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) === BLK(columnValue_));
+		},columnNotEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var tColumnName_ = validatorElement_.value;
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) !== BLK(columnValue_));
+		}
+	};
+	
+	$.fn._jgValidator = (function(validator_){
+		if(validator_ !== undefined) this.data(&quot;jgdataset_jgValidator&quot;,validator_);
+		return this.data(&quot;jgdataset_jgValidator&quot;);
+	});
+	$.fn._jgValidatorInitialized = (function(bool_){
+		if(bool_ !== undefined) this.data(&quot;jgdataset_jgValidatorInitialized&quot;,bool_);
+		return NVL(this.data(&quot;jgdataset_jgValidatorInitialized&quot;),false);
+	});
+	$.fn.JGValidator = (function(){
+		if(!this._jgValidatorInitialized()){
+			this._jgValidator(new JGValidator(this.JGDatasetUI()));
+			this._jgValidatorInitialized(true);
+		}
+		
+		return JGSelector(this._jgValidator(), arguments);
+	}); 
+	
+})(window,jQuery,JGDatasetUI);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
