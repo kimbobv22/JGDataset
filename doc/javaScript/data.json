@@ -25,16 +25,6 @@
         "JGDatasetUI.2.0.1.js": {
             "name": "JGDatasetUI.2.0.1.js",
             "modules": {},
-            "classes": {},
-            "fors": {
-                "jQuery.fn.JGDatasetUI": 1,
-                "JGDataset": 1
-            },
-            "namespaces": {}
-        },
-        "JGDatasetUI.2.0.1.min.js": {
-            "name": "JGDatasetUI.2.0.1.min.js",
-            "modules": {},
             "classes": {
                 "jQuery.fn.JGDatasetUI": 1,
                 "jQuery.fn.extension": 1,
@@ -69,7 +59,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "JGDataset.2.0.1.js",
-            "line": 552,
+            "line": 567,
             "description": "JGDataset은 행열단위 작업을 보다 편리하게 할 수 있도록 합니다.<br>\n아래는 JGDataset의 JSON 포맷입니다.\n\n\t1. 스키마 포함 JSON 포맷\n\t\t{\"columninfo\":\n\t\t\t[{\"name\":\"열1\",\"isKey\":false}\n\t\t\t,{\"name\":\"열2\",\"isKey\":false}]\n\t\t,\"rowdata\":\n\t\t\t[{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}\n\t\t\t,\"status\":0}\n\t\t\t,{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}\n\t\t\t,\"status\":0}\n\t\t\t,...]\n\t\t,\"deletedRowdata\":\n\t\t\t[{\"row\":{\"열1\":{\"value\":\"열값\"}\n\t\t\t\t,\"열2\":{\"value\":\"열값\"}}}\n\t\t\t,...]\n\t\t}\n\t\n\t2. 스키마 미포함 JSON 포맷\n\t\t[{열1 : 열값, 열2 : 열값, ... }\n\t\t,{열1 : 열값, 열2 : 열값, ... }\n\t\t,...]\n\nJGDataset 샘플은 <a href=\"http://kimbobv22.github.io/JGDataset/index.html\" target=\"_blank\">여기</a>에서 확인할 수 있습니다.",
             "is_constructor": 1,
             "params": [
@@ -138,7 +128,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "JGDataset.2.0.1.js",
-            "line": 1482,
+            "line": 1497,
             "description": "JGDataset을 생성,관리하는 인스턴스 정적객체입니다.<br>\nJGDS의 모든 함수는 아래와 같은 형태로 호출할 수 있습니다.\n\n\tvar result_ = JGDS(\"함수명\",...);",
             "is_constructor": 1,
             "params": [
@@ -169,8 +159,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 196,
+            "file": "JGDatasetUI.2.0.1.js",
+            "line": 197,
             "description": "HTML과 JGDataset의 매핑을 위한 플러그인입니다.<br>\n함수호출 형식은 아래와 같습니다.\n\t\n\t//1. jQuery Plugin Style\n\tvar result_ = $(target_).JGDatasetUI(\"함수명\",...);\n\t\n\t//2. normal Style\n\tvar datasetUI_ = $(target_).JGDatasetUI();\n\tvar result_ = datasetUI_.함수명();\n\nJGDatasetUI 샘플은 <a href=\"http://kimbobv22.github.io/JGDataset/index.html\" target=\"_blank\">여기</a>에서 확인할 수 있습니다.",
             "is_constructor": 1,
             "example": [
@@ -185,8 +175,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 145,
+            "file": "JGDatasetUI.2.0.1.js",
+            "line": 146,
             "description": "jQuery 기능확장함수입니다."
         },
         "JGRowContent": {
@@ -197,8 +187,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 426,
+            "file": "JGDatasetUI.2.0.1.js",
+            "line": 428,
             "description": "JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.<br>\n사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.<br>\n*참고 : {{#crossLink \"jQuery.fn.JGDatasetUI\"}}{{/crossLink}}",
             "is_constructor": 1,
             "params": [
@@ -222,8 +212,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 651,
+            "file": "JGDatasetUI.2.0.1.js",
+            "line": 675,
             "description": "JGDatasetUI에서 FX수식을 위한 객체입니다.<br>\n사용자가 임의로 생성할 수 없으며, JGDatasetUI 매핑 시 생성될 수 있습니다.<br>\n*참고 : {{#crossLink \"jQuery.fn.JGDatasetUI\"}}{{/crossLink}}",
             "is_constructor": 1,
             "params": [
@@ -258,8 +248,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 748,
+            "file": "JGDatasetUI.2.0.1.js",
+            "line": 772,
             "description": "select 태그와 매핑을 위한 객체입니다.<br>\n함수호출 형식은 아래와 같습니다.\n\t\n\t//1. jQuery Plugin Style\n\tvar result_ = $(target_).JGSelect(\"함수명\",...);\n\t\n\t//2. normal Style\n\tvar select_ = $(target_).JGSelect();\n\tvar result_ = select_.함수명();",
             "params": [
                 {
@@ -847,6 +837,17 @@
         {
             "file": "JGDataset.2.0.1.js",
             "line": 421,
+            "description": "원본 열값",
+            "itemtype": "property",
+            "name": "_orgColumns",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "JGDatasetRow"
+        },
+        {
+            "file": "JGDataset.2.0.1.js",
+            "line": 427,
             "description": "열상태",
             "itemtype": "property",
             "name": "_columnStatus",
@@ -857,7 +858,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 427,
+            "line": 433,
             "description": "행상태<br>",
             "itemtype": "property",
             "name": "_rowStatus",
@@ -868,7 +869,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 440,
+            "line": 447,
             "description": "행상태를 반환합니다",
             "itemtype": "method",
             "name": "getRowStatus",
@@ -880,7 +881,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 449,
+            "line": 456,
             "description": "행상태를 설정합니다",
             "itemtype": "method",
             "name": "getRowStatus",
@@ -895,7 +896,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 470,
+            "line": 477,
             "description": "열값을 설정합니다.",
             "itemtype": "method",
             "name": "setColumn",
@@ -920,7 +921,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 484,
+            "line": 497,
             "description": "열을 삭제합니다.",
             "itemtype": "method",
             "name": "removeColumn",
@@ -935,7 +936,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 493,
+            "line": 506,
             "description": "열값을 반환합니다.",
             "itemtype": "method",
             "name": "getColumnValue",
@@ -954,7 +955,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 504,
+            "line": 517,
             "description": "열 수정여부를 반환합니다.",
             "itemtype": "method",
             "name": "isColumnModified",
@@ -973,7 +974,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 516,
+            "line": 529,
             "description": "열 수정여부를 설정합니다.",
             "itemtype": "method",
             "name": "setColumnModification",
@@ -993,7 +994,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 527,
+            "line": 540,
             "description": "현재 행상태를 적용합니다.<br>\n행상태가 normal로 변경됩니다.",
             "itemtype": "method",
             "name": "apply",
@@ -1001,7 +1002,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 538,
+            "line": 552,
             "description": "행을 복사합니다.",
             "itemtype": "method",
             "name": "clone",
@@ -1012,7 +1013,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 587,
+            "line": 602,
             "description": "열정보",
             "itemtype": "property",
             "name": "_columnInfo",
@@ -1021,7 +1022,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 592,
+            "line": 607,
             "description": "원본열정보<br>\n데이타셋을 적용한 시점의 열정보가 이곳에 저장됩니다.",
             "itemtype": "property",
             "name": "_orgColumnInfo",
@@ -1030,7 +1031,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 598,
+            "line": 613,
             "description": "행정보<br>",
             "itemtype": "property",
             "name": "_rowData",
@@ -1039,7 +1040,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 603,
+            "line": 618,
             "description": "원본행정보<br>\n데이타셋을 적용한 시점의 행정보가 이곳에 저장됩니다.",
             "itemtype": "property",
             "name": "_orgRowData",
@@ -1048,7 +1049,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 609,
+            "line": 624,
             "description": "삭제행정보<br>\n삭제한 행정보가 이곳에 저장됩니다.",
             "itemtype": "property",
             "name": "_deletedRowData",
@@ -1057,7 +1058,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 665,
+            "line": 680,
             "description": "데이타셋의 JGDS에 저장된 이름을 반환합니다.",
             "itemtype": "method",
             "name": "getName",
@@ -1069,7 +1070,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 682,
+            "line": 697,
             "description": "열갯수를 반환합니다.",
             "itemtype": "method",
             "name": "getColumnCount",
@@ -1081,7 +1082,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 691,
+            "line": 706,
             "description": "행갯수를 반환합니다.",
             "itemtype": "method",
             "name": "getRowCount",
@@ -1093,7 +1094,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 700,
+            "line": 715,
             "description": "삭제행갯수를 반환합니다.",
             "itemtype": "method",
             "name": "getDeletedRowCount",
@@ -1105,7 +1106,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 710,
+            "line": 725,
             "description": "열을 특정색인에 삽입합니다.<br>",
             "itemtype": "method",
             "name": "insertColumn",
@@ -1135,7 +1136,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 741,
+            "line": 756,
             "description": "열을 마지막 색인에 추가합니다.",
             "itemtype": "method",
             "name": "addColumn",
@@ -1160,7 +1161,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 752,
+            "line": 767,
             "description": "열 마지막 색인에 복수의 열을 추가합니다.",
             "itemtype": "method",
             "name": "addColumns",
@@ -1179,7 +1180,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 766,
+            "line": 781,
             "description": "열을 삭제합니다.",
             "itemtype": "method",
             "name": "removeColumn",
@@ -1194,7 +1195,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 780,
+            "line": 795,
             "description": "열을 반환합니다.",
             "itemtype": "method",
             "name": "getColumn",
@@ -1209,7 +1210,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 791,
+            "line": 806,
             "description": "열의 색인을 반환합니다",
             "itemtype": "method",
             "name": "indexOfColumn",
@@ -1224,7 +1225,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 824,
+            "line": 839,
             "description": "행을 특정 색인에 삽입합니다.",
             "itemtype": "method",
             "name": "insertRow",
@@ -1243,7 +1244,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 836,
+            "line": 851,
             "description": "행을 마지막 색인에 추가합니다.",
             "itemtype": "method",
             "name": "addRow",
@@ -1255,7 +1256,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 847,
+            "line": 862,
             "description": "마지막 색인에 복수의 열을 추가합니다.",
             "itemtype": "method",
             "name": "addRows",
@@ -1273,7 +1274,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 874,
+            "line": 889,
             "description": "특정색인의 행을 삭제합니다.",
             "itemtype": "method",
             "name": "removeRow",
@@ -1288,7 +1289,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 884,
+            "line": 899,
             "description": "행을 반환합니다.",
             "itemtype": "method",
             "name": "getRow",
@@ -1307,7 +1308,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 894,
+            "line": 909,
             "description": "행상태를 설정합니다.",
             "itemtype": "method",
             "name": "setRowStatus",
@@ -1327,7 +1328,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 904,
+            "line": 919,
             "description": "행상태를 반환합니다.",
             "itemtype": "method",
             "name": "getRowStatus",
@@ -1346,7 +1347,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 914,
+            "line": 929,
             "description": "삭제행을 반환합니다.",
             "itemtype": "method",
             "name": "getDeletedRow",
@@ -1365,7 +1366,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 925,
+            "line": 940,
             "description": "행간 이동을 수행합니다.",
             "itemtype": "method",
             "name": "moveRow",
@@ -1385,7 +1386,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 937,
+            "line": 952,
             "description": "특정 열값과 정렬함수를 통해 행을 정렬합니다.",
             "itemtype": "method",
             "name": "sortRow",
@@ -1414,7 +1415,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 978,
+            "line": 993,
             "description": "특정 열을 통해 행을 오름차순으로 정렬합니다.",
             "itemtype": "method",
             "name": "sortRowByAsc",
@@ -1429,7 +1430,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 989,
+            "line": 1004,
             "description": "특정 열을 통해 행을 내림차순으로 정렬합니다.",
             "itemtype": "method",
             "name": "sortRowByDesc",
@@ -1444,7 +1445,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1016,
+            "line": 1031,
             "description": "열값을 설정합니다.",
             "itemtype": "method",
             "name": "setColumnValue",
@@ -1475,7 +1476,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1035,
+            "line": 1049,
             "description": "복수의 열값을 설정합니다.",
             "itemtype": "method",
             "name": "setColumnValues",
@@ -1504,7 +1505,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1053,
+            "line": 1067,
             "description": "열값을 반환합니다.",
             "itemtype": "method",
             "name": "getColumnValue",
@@ -1528,7 +1529,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1064,
+            "line": 1078,
             "description": "열의 수정여부를 반환합니다.",
             "itemtype": "method",
             "name": "isColumnModified",
@@ -1552,7 +1553,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1075,
+            "line": 1089,
             "description": "삭제된 행의 열값을 반환합니다.",
             "itemtype": "method",
             "name": "getDeletedColumnValue",
@@ -1576,7 +1577,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1087,
+            "line": 1101,
             "description": "데이타셋을 전체삭제합니다.",
             "itemtype": "method",
             "name": "clear",
@@ -1592,7 +1593,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1102,
+            "line": 1116,
             "description": "데이타셋의 현재상태를 적용합니다.<br>\n현재상태를 적용 시, 모든 행상태는 normal로, 모든 열수정여부는 false로 설정되며 적용 시점까지 열,행 데이터가 저장됩니다.",
             "itemtype": "method",
             "name": "apply",
@@ -1608,7 +1609,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1129,
+            "line": 1143,
             "description": "데이타셋의 이전 적용시점으로 되돌립니다.",
             "itemtype": "method",
             "name": "reset",
@@ -1624,7 +1625,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1153,
+            "line": 1167,
             "description": "데이타셋의 수정여부를 반환합니다.",
             "itemtype": "method",
             "name": "isModified",
@@ -1636,7 +1637,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1170,
+            "line": 1184,
             "description": "열값의 합계값을 반환합니다.",
             "itemtype": "method",
             "name": "sumOfColumnValues",
@@ -1661,7 +1662,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1191,
+            "line": 1205,
             "description": "열값의 평균값을 반환합니다.",
             "itemtype": "method",
             "name": "avgOfColumnValues",
@@ -1686,7 +1687,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1223,
+            "line": 1237,
             "description": "열값의 최대값을 반환합니다.",
             "itemtype": "method",
             "name": "maxOfColumnValues",
@@ -1711,7 +1712,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1234,
+            "line": 1248,
             "description": "열값의 최소값을 반환합니다.",
             "itemtype": "method",
             "name": "minOfColumnValues",
@@ -1735,7 +1736,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1246,
+            "line": 1260,
             "description": "데이타셋을 JSON객체로 반환합니다.",
             "itemtype": "method",
             "name": "toJSON",
@@ -1755,7 +1756,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1331,
+            "line": 1345,
             "description": "데이타셋을 JSON형태의 문자열로 반환합니다.",
             "itemtype": "method",
             "name": "toJSONString",
@@ -1775,7 +1776,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1341,
+            "line": 1355,
             "description": "JSON객체 또는 JSON형태의 문자열을 데이타셋에 적용합니다.",
             "itemtype": "method",
             "name": "applyJSON",
@@ -1795,7 +1796,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1416,
+            "line": 1430,
             "description": "타 데이타셋을 현재 데이타셋에 확장합니다.",
             "itemtype": "method",
             "name": "appendDataset",
@@ -1816,7 +1817,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1442,
+            "line": 1457,
             "description": "JSON객체 또는 JSON형태의 문자열을 현재 데이타셋에 확장합니다.<br>\nJGDataset JSON 포맷과 일치해야 합니다.",
             "itemtype": "method",
             "name": "appendDataset",
@@ -1837,7 +1838,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1455,
+            "line": 1470,
             "description": "삽입,수정,삭제된 정보를 추출하여 데이타셋으로 반환합니다.",
             "itemtype": "method",
             "name": "exportModifiedData",
@@ -1849,7 +1850,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1519,
+            "line": 1534,
             "description": "데이타셋을 생성,반환합니다.<br>\nSelector가 문자열일 때, 해당 이름의 데이타셋이 없을 경우 생성, 있을 경우에 반환합니다.\nSelector가 숫자일 때, 색인의 데이타셋을 반환합니다.",
             "itemtype": "method",
             "name": "dataset",
@@ -1878,7 +1879,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1550,
+            "line": 1565,
             "description": "데이타셋의 색인을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 -1 을 반환합니다.",
             "itemtype": "method",
             "name": "indexOf",
@@ -1900,7 +1901,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1574,
+            "line": 1589,
             "description": "데이타셋명을 반환합니다.<br>\n데이타셋이 JGDS에 존재하지 않을 겨우 {undefined} 을 반환합니다.",
             "itemtype": "method",
             "name": "datasetName",
@@ -1922,7 +1923,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1594,
+            "line": 1609,
             "description": "데이타셋을 삭제합니다.<br>",
             "itemtype": "method",
             "name": "remove",
@@ -1940,7 +1941,7 @@
         },
         {
             "file": "JGDataset.2.0.1.js",
-            "line": 1607,
+            "line": 1622,
             "description": "복수의 데이타셋을 생성합니다.<br>",
             "itemtype": "method",
             "name": "make",
@@ -2393,437 +2394,6 @@
             "class": "jQuery.fn.JGSelect"
         },
         {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 17,
-            "description": "특정 행과 매핑 시 발생합니다.",
-            "itemtype": "event",
-            "name": "datasetuirowmapped",
-            "params": [
-                {
-                    "name": "event_",
-                    "description": "jQuery 이벤트 객체",
-                    "type": "JQuery Event object"
-                },
-                {
-                    "name": "rowIndex_",
-                    "description": "행색인",
-                    "type": "Number"
-                }
-            ],
-            "example": [
-                "\n\t$(target_).trigger(\"datasetuirowmapped\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 30,
-            "description": "특정 행의 매핑이 새로 고쳐졌을 때 발생합니다.",
-            "itemtype": "event",
-            "name": "datasetuirefreshed",
-            "params": [
-                {
-                    "name": "event_",
-                    "description": "jQuery 이벤트 객체",
-                    "type": "JQuery Event object"
-                },
-                {
-                    "name": "rowIndex_",
-                    "description": "행색인",
-                    "type": "Number"
-                }
-            ],
-            "example": [
-                "\n\t$(target_).trigger(\"datasetuirefreshed\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 43,
-            "description": "매핑된 특정 행의 FX수식이 새로 고쳐졌을 때 발생합니다.",
-            "itemtype": "event",
-            "name": "datasetuifxrefreshed",
-            "params": [
-                {
-                    "name": "event_",
-                    "description": "jQuery 이벤트 객체",
-                    "type": "JQuery Event object"
-                },
-                {
-                    "name": "rowIndex_",
-                    "description": "행색인",
-                    "type": "Number"
-                }
-            ],
-            "example": [
-                "\n\t$(target_).trigger(\"datasetuifxrefreshed\",function(event_, rowIndex_){\n\t\t//to do\n\t});"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 56,
-            "description": "특정 행열의 매핑이 새로 고쳐졌을 때 호출됩니다.",
-            "itemtype": "event",
-            "name": "datasetuicolumnrefreshed",
-            "params": [
-                {
-                    "name": "event_",
-                    "description": "jQuery 이벤트 객체",
-                    "type": "JQuery Event object"
-                },
-                {
-                    "name": "columnName_",
-                    "description": "열명",
-                    "type": "String"
-                },
-                {
-                    "name": "rowIndex_",
-                    "description": "행색인",
-                    "type": "Number"
-                }
-            ],
-            "example": [
-                "\n\t$(target_).trigger(\"datasetuicolumnrefreshed\",function(event_, columnName_, rowIndex_){\n\t\t//to do\n\t});"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 70,
-            "description": "매핑이 재적재되었을 때 발생합니다.",
-            "itemtype": "event",
-            "name": "datasetuimappingreloaded",
-            "params": [
-                {
-                    "name": "event_",
-                    "description": "jQuery 이벤트 객체",
-                    "type": "JQuery Event object"
-                }
-            ],
-            "example": [
-                "\n\t$(target_).trigger(\"datasetuimappingreloaded\",function(event_){\n\t\t//to do\n\t});"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 149,
-            "description": "특정색인에 jQuery Element를 삽입합니다.",
-            "itemtype": "method",
-            "name": "insertAtIndex",
-            "params": [
-                {
-                    "name": "element_",
-                    "description": "삽입대상객체",
-                    "type": "JQuery Object"
-                },
-                {
-                    "name": "index_",
-                    "description": "색인",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "삽입대상",
-                "type": "JQuery Object"
-            },
-            "example": [
-                "\n\t$(target_).insertAtIndex(\"<div>test</div>\",3);"
-            ],
-            "class": "jQuery.fn.extension"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 170,
-            "description": "select 태그의 값을 반환합니다.",
-            "itemtype": "method",
-            "name": "selectValue",
-            "return": {
-                "description": "값",
-                "type": "String"
-            },
-            "example": [
-                "\n\tvar result_ = $(\"<select><option value='testValue'>test</option></select\").selectValue();"
-            ],
-            "class": "jQuery.fn.extension"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 183,
-            "description": "JGDatasetUI의 확장함수입니다.<br>\n데이타셋에 매핑되어 있는 모든 View를 반환합니다.",
-            "itemtype": "method",
-            "name": "datasetUIView",
-            "return": {
-                "description": "배열",
-                "type": "Array"
-            },
-            "class": "JGDataset"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 290,
-            "description": "매핑되어 있는 jQuery 객체를 반환합니다.",
-            "return": {
-                "description": "jQuery 객체",
-                "type": "JQuery Object"
-            },
-            "example": [
-                "\n\tvar element_ = $(target_).JGDatasetUI(\"element\");"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 300,
-            "description": "매핑되어 있는 데이타셋을 반환합니다.",
-            "return": {
-                "description": "데이타셋",
-                "type": "JGDataset"
-            },
-            "example": [
-                "\n\tvar element_ = $(target_).JGDatasetUI(\"dataset\");"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 311,
-            "description": "특정 행색인에 매핑되어 있는 행컨텐츠를 반환합니다.",
-            "params": [
-                {
-                    "name": "rowIndex_",
-                    "description": "행색인",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "행컨텐츠",
-                "type": "JGRowContent"
-            },
-            "example": [
-                "\n\tvar element_ = $(target_).JGDatasetUI(\"rowContent\",rowIndex_);"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 337,
-            "description": "매핑되어 있는 행컨텐츠의 행색인을 반환합니다.",
-            "params": [
-                {
-                    "name": "rowIndex_",
-                    "description": "행컨텐츠",
-                    "type": "JGRowContent"
-                }
-            ],
-            "return": {
-                "description": "행색인",
-                "type": "Number"
-            },
-            "example": [
-                "\n\tvar element_ = $(target_).JGDatasetUI(\"indexOf\",rowContent_);"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 382,
-            "description": "매핑 재적재를 수행합니다.",
-            "example": [
-                "\n\tvar element_ = $(target_).JGDatasetUI(\"reload\");"
-            ],
-            "class": "jQuery.fn.JGDatasetUI"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 549,
-            "description": "매핑되어 있는 JGDatasetUI를 반환합니다.",
-            "itemtype": "method",
-            "name": "datasetUI",
-            "return": {
-                "description": "매핑된 JGDatasetUI",
-                "type": "JGDatasetUI"
-            },
-            "class": "JGRowContent"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 558,
-            "description": "현재 행컨텐츠의 색인을 반환합니다.",
-            "itemtype": "method",
-            "name": "rowIndex",
-            "return": {
-                "description": "색인",
-                "type": "Number"
-            },
-            "class": "JGRowContent"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 567,
-            "description": "원본 행컨텐츠를 반환합니다.",
-            "itemtype": "method",
-            "name": "rowContent",
-            "return": {
-                "description": "jQuery 객체",
-                "type": "JQuery Object"
-            },
-            "class": "JGRowContent"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 576,
-            "description": "열매핑되어 있는 jQuery 객체를 반환합니다.",
-            "itemtype": "method",
-            "name": "mappedElements",
-            "return": {
-                "description": "열매핑되어 있는 jQuery 객체",
-                "type": "Array"
-            },
-            "class": "JGRowContent"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 585,
-            "description": "FX수식매핑되어 있는 jQuery 객체를 반환합니다.",
-            "itemtype": "method",
-            "name": "FXElements",
-            "return": {
-                "description": "FX수식매핑되어 있는 jQuery 객체",
-                "type": "Array"
-            },
-            "class": "JGRowContent"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 682,
-            "description": "매핑되어 있는 행컨텐츠를 반환합니다.",
-            "itemtype": "method",
-            "name": "rowContent",
-            "return": {
-                "description": "행컨텐츠",
-                "type": "JGRowContent"
-            },
-            "class": "JGFXElement"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 691,
-            "description": "매핑되어 있는 jQuery 객체를 반환합니다.",
-            "itemtype": "method",
-            "name": "element",
-            "return": {
-                "description": "jQuery 객체",
-                "type": "JQuery Object"
-            },
-            "class": "JGFXElement"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 700,
-            "description": "매핑되어 있는 속성명을 반환합니다.",
-            "itemtype": "method",
-            "name": "attrName",
-            "return": {
-                "description": "속성명",
-                "type": "String"
-            },
-            "class": "JGFXElement"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 709,
-            "description": "매핑유형을 반환합니다.",
-            "itemtype": "method",
-            "name": "type",
-            "return": {
-                "description": "매핑유형",
-                "type": "Number"
-            },
-            "class": "JGFXElement"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 718,
-            "description": "FX매핑을 새로고침을 수행합니다.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "JGFXElement"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 809,
-            "description": "JGSelect에 매핑되어 있는 jQuery Object를 반환합니다.",
-            "itemtype": "method",
-            "name": "element",
-            "return": {
-                "description": "jQuery 객체",
-                "type": "JQuery Object"
-            },
-            "example": [
-                "\n\tvar result_ = $(target_).JGSelect(\"element\");"
-            ],
-            "class": "jQuery.fn.JGSelect"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 820,
-            "description": "JGSelect에 매핑되어 있는 JGDataset을 반환합니다.",
-            "itemtype": "method",
-            "name": "dataset",
-            "return": {
-                "description": "데이타셋",
-                "type": "JGDataset"
-            },
-            "example": [
-                "\n\tvar result_ = $(target_).JGSelect(\"dataset\");"
-            ],
-            "class": "jQuery.fn.JGSelect"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 831,
-            "description": "JGSelect에 매핑되어 있는 전시열명을 반환합니다.",
-            "itemtype": "method",
-            "name": "displayColumn",
-            "return": {
-                "description": "전시열명",
-                "type": "String"
-            },
-            "example": [
-                "\n\tvar result_ = $(target_).JGSelect(\"displayColumn\");"
-            ],
-            "class": "jQuery.fn.JGSelect"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 843,
-            "description": "JGSelect에 매핑되어 있는 값열명을 반환합니다.",
-            "itemtype": "method",
-            "name": "valueColumn",
-            "return": {
-                "description": "값열명",
-                "type": "String"
-            },
-            "example": [
-                "\n\tvar result_ = $(target_).JGSelect(\"valueColumn\");"
-            ],
-            "class": "jQuery.fn.JGSelect"
-        },
-        {
-            "file": "JGDatasetUI.2.0.1.min.js",
-            "line": 854,
-            "description": "JGSelect에 매핑을 재적재합니다.",
-            "itemtype": "method",
-            "name": "reload",
-            "example": [
-                "\n\tvar result_ = $(target_).JGSelect(\"reload\");"
-            ],
-            "class": "jQuery.fn.JGSelect"
-        },
-        {
             "file": "JGDatasetUI.validator.2.0.1.js",
             "line": 86,
             "description": "매핑된 JGDatasetUI를 반환합니다.",
@@ -3047,26 +2617,6 @@
         {
             "message": "Missing item type\n매핑 재적재를 수행합니다.",
             "line": " JGDatasetUI.2.0.1.js:383"
-        },
-        {
-            "message": "Missing item type\n매핑되어 있는 jQuery 객체를 반환합니다.",
-            "line": " JGDatasetUI.2.0.1.min.js:290"
-        },
-        {
-            "message": "Missing item type\n매핑되어 있는 데이타셋을 반환합니다.",
-            "line": " JGDatasetUI.2.0.1.min.js:300"
-        },
-        {
-            "message": "Missing item type\n특정 행색인에 매핑되어 있는 행컨텐츠를 반환합니다.",
-            "line": " JGDatasetUI.2.0.1.min.js:311"
-        },
-        {
-            "message": "Missing item type\n매핑되어 있는 행컨텐츠의 행색인을 반환합니다.",
-            "line": " JGDatasetUI.2.0.1.min.js:337"
-        },
-        {
-            "message": "Missing item type\n매핑 재적재를 수행합니다.",
-            "line": " JGDatasetUI.2.0.1.min.js:382"
         }
     ]
 }

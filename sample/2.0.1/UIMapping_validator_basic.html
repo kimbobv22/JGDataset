@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>UI Mapping Custom Validator</title>
+<title>UI Mapping Validator</title>
 <!--JQuery -->
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <!-- JGModule -->
-<script src="../../js/JGDataset.2.0.0.min.js"></script>
-<script src="../../js/JGDatasetUI.2.0.0.min.js"></script>
-<script src="../../js/JGDatasetUI.validator.2.0.0.min.js"></script>
+<script src="../../js/JGDataset.2.0.1.min.js"></script>
+<script src="../../js/JGDatasetUI.2.0.1.min.js"></script>
+<script src="../../js/JGDatasetUI.validator.2.0.1.min.js"></script>
 <link rel="stylesheet" href="./res/style.css" />
 <style type="text/css">
 #validationResultLabel{
@@ -19,48 +19,28 @@
 $(function(){
 	var dataset_ = JGDS("dataset","testDataset");
 	
-	dataset_.addRow();
+	dataset_.addRows(3);
 	
-	dataset_.setColumnValue("col1",0,null,true);
-	dataset_.setColumnValue("col2",0,null,true);
+	dataset_.setColumnValue("col1",0,"00001",true);
+	dataset_.setColumnValue("col2",0,true,true);
 	dataset_.setColumnValue("col3",0,null,true);
+	
+	dataset_.setColumnValue("col1",1,"",true);
+	dataset_.setColumnValue("col2",1,false,true);
+	dataset_.setColumnValue("col3",1,"test",true);
+	
+	dataset_.setColumnValue("col1",2,"00005",true);
+	dataset_.setColumnValue("col2",2,true,true);
+	dataset_.setColumnValue("col3",1,"test",true);
 	
 	dataset_.apply();
 	
 	var datasetView_ = $("[jg-dataset='testDataset']");
 	datasetView_.JGDatasetUI();
 	datasetView_.JGValidator();
-	
-	// add custom validator to engines
-	datasetView_.JGValidator("engine",{
-		"type-harry" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(columnValue_ === "harry");
-		},"type-smile" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(columnValue_ === ":)");
-
-		},"ajax" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			$.ajax({
-				url : "./res/sampleData.json"
-				,dataType : "json"
-				,success : function(result_){
-					var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
-					console.log(message_);
-					callback_(message_ !== undefined);
-				},error : function(){
-					callback_(false);
-				}
-			});
-		}
-	});
-	
-	// add error label for custom validator
 	datasetView_.JGValidator("failedMessages",{
-		col1 : {
-			"type-harry" : "type 'harry'"
-		},col2 : {
-			"type-smile" : "type ':)'"
-		},col3 : {
-			ajax : "Allow mike, jhone, harry"
+		col3 : {
+			required : "typing more :("
 		}
 	});
 	
@@ -76,6 +56,7 @@ $(function(){
 		datasetView_.JGValidator("options",{
 			realtimeCheck : $(this).prop("checked")
 		});
+		
 	});
 	
 	validate();
@@ -93,22 +74,22 @@ function validate(){
 </script>
 </head>
 <body>
-	<h2>Example for Custom Validator</h2>
+	<h2>Example for Validator</h2>
 	
 	<div jg-dataset="testDataset">
 		<div>
-			type "harry" : <input type="text" jg-column="col1" custom-validator-type-harry>
+			<input type="text" jg-column="col1" required rangeLength="5,8" >
 			<span jg-error-column="col1"></span><br>
-			type ":)" : <input type="text" jg-column="col2" custom-validator-type-smile>
+			<input type="text" jg-column="col2" patternEmail>
 			<span jg-error-column="col2"></span><br>
-			ajax test : <input type="text" jg-column="col3" custom-validator-ajax>
+			<input type="text" jg-column="col3" required>
 			<span jg-error-column="col3"></span><br>
 			<hr>
 		</div>
 	</div>
 	
-	
 	<p><b>result : <span id="validationResultLabel"></span></b></p>
+	
 	<p><input type="checkbox" id="realtimeCheck" checked/>realtime check</p>
 	<a href="javascript:validate();">validate it(check console)</a>
 	
