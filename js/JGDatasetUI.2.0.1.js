@@ -136,8 +136,9 @@
 		for(var columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
 			var columnItem_ = dataset_.getColumn(columnIndex_);
 			var columnName_ = columnItem_.getName();
-			var columnValue_= dataset_.getColumnValue(columnName_,rowIndex_);
-			targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), NVL(columnValue_, "null"));
+			var columnValue_ = dataset_.getColumnValue(columnName_,rowIndex_);
+			
+			targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), "this.getColumnValue('"+columnName_+"',"+rowIndex_+")");
 		}
 		
 		return targetStr_;

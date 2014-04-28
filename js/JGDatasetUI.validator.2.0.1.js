@@ -76,7 +76,8 @@
 						+_JGKeyword.trigger._rowInserted+" "
 						+_JGKeyword.trigger._rowRemoved+" "
 						+_JGKeyword.trigger._datasetClear+" "
-						+_JGKeyword.trigger._datasetReset, function(event_, columnName_){
+						+_JGKeyword.trigger._datasetReset+" "
+						+_JGKeyword.trigger._datasetChanged, function(event_, columnName_){
 			that_.refresh();
 		});
 		
