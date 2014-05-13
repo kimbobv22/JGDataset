@@ -183,7 +183,7 @@
 	var _JGSelector = window.JGSelector = (function(target_, args_){
 		if(args_.length === 0) return target_;
 		
-		var arguments_ = Array.prototype.slice.call(args_);
+		var arguments_ = Array.prototype.slice.call(args_); 
 		var entry_ = target_[arguments_[0]];
 		if(entry_ === undefined){
 			console.error(arguments_[0]+" is undefined");
@@ -191,7 +191,9 @@
 		}else if($.type(entry_) !== "function"){
 			console.error(arguments_[0]+" is not function");
 			return undefined;
-		}else return entry_.apply(target_,arguments_.slice(1));
+		}
+		
+		return entry_.apply(target_, arguments_.slice(1));
 	});
 	
 	/**

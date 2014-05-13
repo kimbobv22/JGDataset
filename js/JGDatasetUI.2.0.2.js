@@ -1,11 +1,10 @@
-(function(window,$,JGDS){
+(function(window){
 
 	if(JGDS === undefined){
 		console.error("can't not initialize JGDataset UI, JGDataset not found");
 		return;
 	}
 	
-	var _J
 	_JGKeyword = $.extend(true, window._JGKeyword, {
 		ui : {
 			attrDataset : "jg-dataset"
@@ -180,6 +179,13 @@
 	$.fn.selectValue = (function(){
 		if(this.prop("tagName").toLowerCase() !== "select") return undefined;
 		return this.children("option:selected").first().attr("value");
+	});
+	$.fn._jexecute = (function(executeFunc_,arguments_){
+		var result_ = new Array();
+		$.each(this,function(){
+			result_.push(executeFunc_.call($(this),arguments_));
+		});
+		return result_.length > 1 ? result_ : result_[0];
 	});
 	
 	/**
@@ -410,12 +416,14 @@
 		return NVL(this.data("jgdataset_jgDatasetInitialized"),false);
 	});
 	$.fn.JGDatasetUI = (function(){
-		if(!this._jgDatasetUIInitialized()){
-			this._jgDatasetUI(new JGDatasetUI(this, arguments[0]));
-			this._jgDatasetUIInitialized(true);
-		}
-		
-		return JGSelector(this._jgDatasetUI(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgDatasetUIInitialized()){
+				this._jgDatasetUI(new JGDatasetUI(this, arguments_[0]));
+				this._jgDatasetUIInitialized(true);
+			}
+			
+			return JGSelector(this._jgDatasetUI(), arguments_);
+		},arguments);
 	});
 	
 	$.fn._jgDataRowContent = (function(rowContent_){
@@ -553,13 +561,13 @@
 				var attr_ = attrs_[attrIndex_];
 				var attrName_ = attr_.name.toLowerCase();
 				if(attr_.name.toLowerCase() !== "jg-column"
-					&& BLK(attr_.value).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+					&& BLK(attr_.value).replace(/^[\n\t]*/g, "").indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
 					this._FXElements.push(new JGFXElement(this,fxElement_,attrName_,0))
 				}
 			}
 			
 			var textValue_ = fxElement_.html();
-			if(BLK(textValue_).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+			if(BLK(textValue_).replace(/^[\n\t]*/g, "").indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
 				this._FXElements.push(new JGFXElement(this,fxElement_,null,1))
 			}
 		}
@@ -693,10 +701,10 @@
 		
 		switch(type_){
 		case 0: //attribute
-			this._fx = element_.attr(attrName_).substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.attr(attrName_).replace(/^[\n\t]*/g, "").substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		case 1: //node text
-			this._fx = element_.html().substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.html().replace(/^[\n\t]*/g, "").substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		default:
 			console.error("invaild FX Element Type");
@@ -910,12 +918,14 @@
 		return NVL(this.data("jgdatasetJGSelectInitialized"),false);
 	});
 	$.fn.JGSelect = (function(){
-		if(!this._jgSelectInitialized()){
-			this._jgSelect(new JGSelect(this, arguments[0]));
-			this._jgSelectInitialized(true);
-		}
-		
-		return JGSelector(this._jgSelect(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgSelectInitialized()){
+				this._jgSelect(new JGSelect(this, arguments_[0]));
+				this._jgSelectInitialized(true);
+			}
+			
+			return JGSelector(this._jgSelect(), arguments_);
+		},arguments);
 	});
 	
-})(window,jQuery,JGDS);
+})(window);

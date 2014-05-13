@@ -258,7 +258,7 @@ JSON 형식으로 가져오기 또는 내보내기를 수행합니다.
 [JGDataset의 행삽입 함수](#howToInsertRow)로 생성할 수 있습니다.
 
 <a name="forJavascript"></a>
-#JavaScript(V2.0.0)
+#JavaScript(V2.0.2)
 
 JGDataset for JavaScript를 이용하여 Web에서도 행열단위의 작업을 수행할 수 있습니다.<br>
 사용을 위한 필요환경에 대한 정보는 [여기](#environmentForJavascript)를 참고하세요.

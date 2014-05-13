@@ -1,4 +1,4 @@
-(function(window,$,JGDatasetUI){
+(function(window){
 	
 	if(JGDatasetUI === undefined){
 		console.error("can't not initialize JGValidator, JGDataset UI not found");
@@ -36,7 +36,8 @@
 	
 	_JGKeyword = $.extend(true,_JGKeyword,{
 		validator : {
-			errorColumn : "jg-error-column"
+			errorColumn : "jg-error-column",
+			validColumn : "jg-valid-column"
 		}
 	});
 	
@@ -183,6 +184,7 @@
 	JGValidator.prototype.failedMessages = (function(messages_){
 		if(messages_ !== undefined){
 			this._failedMessages = $.extend(true,this._failedMessages,messages_);
+			this._updateErrorLabels();
 		}
 		return this._failedMessages;
 	});
@@ -567,6 +569,7 @@
 		var that_ = this;
 		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
 			that_._updateErrorLabels();
+			that_._updateValidLabels();
 			callback_.apply(that_.datasetUI().element(),arguments);
 		});
 	});
@@ -627,9 +630,13 @@
 		// set error label with cause
 		var cause_ = this.cause();
 		for(var columnName_ in cause_){
+			if(!cause_.hasOwnProperty(columnName_)) continue;
+			
 			var causeRow_ = cause_[columnName_];
 			
 			for(var rowIndex_ in causeRow_){
+				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
+				
 				var causeElements_ = causeRow_[rowIndex_];
 				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
 				if(isNull(rowContent_)){
@@ -680,6 +687,48 @@
 				}
 			}
 		}
+	});
+	
+	JGValidator.prototype._updateValidLabels = (function(){
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		
+		// set blank all valid label
+		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
+			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+			if(isNull(rowContent_)){
+				continue;
+			}
+			
+			var allLabels_ = rowContent_.find("["+_JGKeyword.validator.validColumn+"]");
+			if(allLabels_.length > 0) allLabels_.show();
+		}
+		
+		// hide valid label with cause
+		var cause_ = this.cause();
+		for(var columnName_ in cause_){
+			if(!cause_.hasOwnProperty(columnName_)) continue;
+			
+			var causeRow_ = cause_[columnName_];
+			for(var rowIndex_ in causeRow_){
+				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
+				
+				var causeElements_ = causeRow_[rowIndex_];
+				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+				if(isNull(rowContent_)){
+					continue;
+				}
+				
+				var validLabels_ = rowContent_.find("["+_JGKeyword.validator.validColumn+"]").filter(function(){
+					return (columnName_.toUpperCase() === $(this).attr(_JGKeyword.validator.validColumn).toUpperCase());
+				});
+				if(validLabels_.length > 0){
+					validLabels_.hide();
+				}
+			}
+		}
+		
 	});
 	
 	JGValidator.prototype._options = {
@@ -818,12 +867,13 @@
 		return NVL(this.data("jgdataset_jgValidatorInitialized"),false);
 	});
 	$.fn.JGValidator = (function(){
-		if(!this._jgValidatorInitialized()){
-			this._jgValidator(new JGValidator(this.JGDatasetUI()));
-			this._jgValidatorInitialized(true);
-		}
-		
-		return JGSelector(this._jgValidator(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgValidatorInitialized()){
+				this._jgValidator(new JGValidator(this.JGDatasetUI(), arguments_[0]));
+				this._jgValidatorInitialized(true);
+			}
+			return JGSelector(this._jgValidator(), arguments_);
+		},arguments);
 	}); 
 	
-})(window,jQuery,JGDatasetUI);
+})(window);

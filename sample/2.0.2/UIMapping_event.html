@@ -6,8 +6,8 @@
 <!--JQuery -->
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <!-- JGModule -->
-<script src="../../js/JGDataset.2.0.1.min.js"></script>
-<script src="../../js/JGDatasetUI.2.0.1.min.js"></script>
+<script src="../../js/JGDataset.2.0.2.min.js"></script>
+<script src="../../js/JGDatasetUI.2.0.2.min.js"></script>
 <link rel="stylesheet" href="./res/style.css" />
 <style type="text/css">
 .logger{
@@ -64,7 +64,8 @@ function printIt(str_){
 			<tr>
 				<td><input type="text" jg-column="col1"></td>
 				<td><input type="text" jg-column="col2"></td>
-				<td>##fx:'##col1##' === "sample" ? "OK" : "type 'sample' to COL1"</td>
+				<td>
+				##fx:##col1## === "sample" ? "OK" : "type 'sample' to COL1"</td>
 			</tr>
 		</tbody>
 	</table>
