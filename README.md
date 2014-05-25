@@ -22,6 +22,7 @@
 
 [javascript.JGDataset](#javascript.JGDataset)<br>
 [javascript.JGDatasetUI](#javascript.JGDatasetUI)<br>
+javascript.JGDatasetSumUI<br>
 [javascript.JGDatasetUI.validator](#javascript.JGDatasetUI.validator)<br>
 <br>[API](http://kimbobv22.github.io/JGDataset/doc/javaScript/index.html)<br>
 [Sample page](http://kimbobv22.github.io/JGDataset/index.html)<br>

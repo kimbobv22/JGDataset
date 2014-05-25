@@ -52,6 +52,10 @@ $(function(){
 		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
 	});
 	
+	datasetView_.on("changecolumnvalidation",function(event_, columnName_, rowIndex_, isValid_){
+		console.log(columnName_, rowIndex_, isValid_);
+	});
+	
 	$("#realtimeCheck").on("change",function(){
 		datasetView_.JGValidator("options",{
 			realtimeCheck : $(this).prop("checked")

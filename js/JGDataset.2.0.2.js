@@ -29,7 +29,7 @@
 			,_datasetClear : "_jgDatasetClear"
 			,_datasetReset : "_jgDatasetReset"
 			,_datasetApply : "_jgDatasetApply"
-				/**
+            /**
 				* 행이 삽입되었을 때 호출됩니다.
 				*
 				* @event rowinserted
@@ -1225,7 +1225,7 @@
 		var columnItem_ = this.getColumn(columnKey_);
 		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
 			var tColumnValue_ = this.getColumnValue(columnItem_.getName(),rowIndex_);
-			if(isNull(tColumnValue_) || isNaN(tColumnValue_) || !NVL2(filterFunc_,filterFunc_,function(){return true;})(columnItem_.getName(), rowIndex_)) continue;
+			if(isBlank(tColumnValue_) || isNaN(tColumnValue_) || !NVL2(filterFunc_,filterFunc_,function(){return true;})(columnItem_.getName(), rowIndex_)) continue;
 			
 			if(isNull(columnValue_)
 					|| new Function("return ("+columnValue_+calcChar_+tColumnValue_+");").apply(this)){
@@ -1494,6 +1494,16 @@
 		}
 		
 		return dataset_;
+	});
+	
+	JGDataset.prototype.on = (function(){
+		return $(this).on(arguments);
+	});
+	JGDataset.prototype.bind = (function(){
+		return $(this).bind(arguments);
+	});
+	JGDataset.prototype.trigger = (function(){
+		return $(this).trigger(arguments);
 	});
 	
 	/**

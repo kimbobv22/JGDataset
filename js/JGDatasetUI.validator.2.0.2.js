@@ -37,7 +37,24 @@
 	_JGKeyword = $.extend(true,_JGKeyword,{
 		validator : {
 			errorColumn : "jg-error-column",
-			validColumn : "jg-valid-column"
+			validColumn : "jg-valid-column",
+			trigger : {
+				/**
+				 * 특정 행열값의 유효여부가 변경 시 발생됩니다.
+				 * 
+				 * @event changecolumnvalidation
+				 * @param {jQuery Event object} event_ jQuery 이벤트 객체
+				 * @param {String} columnName_ 열명
+				 * @param {Number} rowIndex_ 행색인
+				 * @param {Boolean} isValid_ 유효여부
+				 * @for jQuery.fn.JGValidator
+				 * @example
+				 * 	$(target_).trigger("changecolumnvalidation",function(event_, columnName_, rowIndex_, isValid_){
+				 * 		//to do
+				 * 	});
+				 */
+				changeColumnValidation : "changecolumnvalidation",
+			}
 		}
 	});
 	
@@ -109,7 +126,7 @@
 	});
 	
 	/**
-	 * 매핑된 데이타셋을 반환합니다.
+	 *  유효여부를 반환합니다.
 	 * 
 	 * @method isValid
 	 * @return {Boolean} 유효여부
@@ -122,20 +139,44 @@
 		var validators_ = this._validators;
 		
 		for(var columnName_ in this._validators){
-			var result_ = this._cause[columnName_];
-			if(result_ === undefined) return false;
-			
-			var validator_ = this._validators[columnName_];
-			if(rowCount_ !== result_.length) return false;
-			
-			for(var rowIndex_ in result_){
-				var rowResult_ = result_[rowIndex_];
-				if(isNull(rowResult_) || _jsonDataLength(rowResult_) > 0) return false;
+			for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
+				if(!this.isColumnValid(columnName_, rowIndex_)){
+					return false;
+				}
 			}
 		}
 	
 		return true;
 	});
+	
+	/**
+	 * 특정행열의 유효여부를 반환합니다.
+	 * 
+	 * @method isColumnValid
+	 * @param {String} columnName_ 열명
+	 * @param {int} rowIndex_ 행색인
+	 * @return {Boolean} 유효여부
+	 * @example
+	 * 	var result_ = $(target_).JGValidator("isColumnValid","COL1",0);
+	 */
+	JGValidator.prototype.isColumnValid = (function(columnName_, rowIndex_){
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		var validators_ = this._validators;
+		
+		var result_ = this._cause[columnName_.toUpperCase()]
+		if(result_ === undefined) return false;
+		
+		var validator_ = this._validators[columnName_];
+		if(rowCount_ !== result_.length) return false;
+		
+		var rowResult_ = result_[rowIndex_];
+		if(isNull(rowResult_) || _jsonDataLength(rowResult_) > 0) return false;
+	
+		return true;
+	});
+	
+	
 	/**
 	 * 유효성엔진 설정/반환합니다.<br>
 	 * 매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.
@@ -562,14 +603,23 @@
 			}else{
 				delete columnValidData_[rowIndex_][validatorElement_.name];
 			}
+			
 			that_._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
 		}]);
 	});
 	JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
 		var that_ = this;
+		
+		var orgColumnIsValid_ = this.isColumnValid(columnName_, rowIndex_);
 		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
 			that_._updateErrorLabels();
 			that_._updateValidLabels();
+			
+			var curColumnIsValid_ = that_.isColumnValid(columnName_, rowIndex_);
+			if(curColumnIsValid_ !== orgColumnIsValid_){
+				that_.datasetUI().element().trigger(_JGKeyword.validator.trigger.changeColumnValidation,[columnName_, rowIndex_, curColumnIsValid_]);
+			}
+			
 			callback_.apply(that_.datasetUI().element(),arguments);
 		});
 	});
@@ -591,7 +641,8 @@
 			this._recursiveValidate(columnIndex_+1, 0, callback_);
 			return;
 		}else{
-			this._singleValidate(dataset_.getColumn(columnIndex_).getName(), rowIndex_, function(result_){
+			var columnName_ = dataset_.getColumn(columnIndex_).getName();
+			this._singleValidate(columnName_, rowIndex_, function(result_){
 				that_._recursiveValidate(columnIndex_, rowIndex_+1, callback_);
 			});
 			return;
