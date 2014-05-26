@@ -2013,6 +2013,8 @@
             "file": "JGDatasetSumUI.1.0.0.js",
             "line": 107,
             "description": "매핑되어 있는 jQuery 객체를 반환합니다.",
+            "itemtype": "method",
+            "name": "element",
             "return": {
                 "description": "jQuery 객체",
                 "type": "JQuery Object"
@@ -2024,8 +2026,10 @@
         },
         {
             "file": "JGDatasetSumUI.1.0.0.js",
-            "line": 117,
+            "line": 118,
             "description": "매핑되어 있는 데이타셋명을 반환합니다.",
+            "itemtype": "method",
+            "name": "datasetName",
             "return": {
                 "description": "데이타셋명",
                 "type": "String"
@@ -2037,8 +2041,10 @@
         },
         {
             "file": "JGDatasetSumUI.1.0.0.js",
-            "line": 127,
+            "line": 129,
             "description": "매핑되어 있는 데이타셋을 반환합니다.",
+            "itemtype": "method",
+            "name": "dataset",
             "return": {
                 "description": "데이타셋",
                 "type": "JGDataset"
@@ -2050,7 +2056,7 @@
         },
         {
             "file": "JGDatasetSumUI.1.0.0.js",
-            "line": 138,
+            "line": 141,
             "description": "FX수식매핑되어 있는 jQuery 객체를 반환합니다.",
             "itemtype": "method",
             "name": "FXElements",
@@ -2062,8 +2068,10 @@
         },
         {
             "file": "JGDatasetSumUI.1.0.0.js",
-            "line": 148,
+            "line": 151,
             "description": "JGDatasetSumUI를 새로고침합니다.",
+            "itemtype": "method",
+            "name": "refresh",
             "example": [
                 "\n\t$(target_).JGDatasetSumUI(\"refresh\");"
             ],
@@ -2766,22 +2774,6 @@
         }
     ],
     "warnings": [
-        {
-            "message": "Missing item type\n매핑되어 있는 jQuery 객체를 반환합니다.",
-            "line": " JGDatasetSumUI.1.0.0.js:107"
-        },
-        {
-            "message": "Missing item type\n매핑되어 있는 데이타셋명을 반환합니다.",
-            "line": " JGDatasetSumUI.1.0.0.js:117"
-        },
-        {
-            "message": "Missing item type\n매핑되어 있는 데이타셋을 반환합니다.",
-            "line": " JGDatasetSumUI.1.0.0.js:127"
-        },
-        {
-            "message": "Missing item type\nJGDatasetSumUI를 새로고침합니다.",
-            "line": " JGDatasetSumUI.1.0.0.js:148"
-        },
         {
             "message": "Missing item type\n매핑되어 있는 jQuery 객체를 반환합니다.",
             "line": " JGDatasetUI.2.0.2.js:362"

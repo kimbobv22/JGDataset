@@ -107,6 +107,7 @@
 	/**
 	 * 매핑되어 있는 jQuery 객체를 반환합니다.
 	 * 
+	 * @method element
 	 * @return {jQuery Object} jQuery 객체
 	 * @example
 	 * 	var element_ = $(target_).JGDatasetSumUI("element");
@@ -117,6 +118,7 @@
 	/**
 	 * 매핑되어 있는 데이타셋명을 반환합니다.
 	 * 
+	 * @method datasetName
 	 * @return {String} 데이타셋명 
 	 * @example
 	 * 	var datasetName_ = $(target_).JGDatasetSumUI("datasetName");
@@ -127,6 +129,7 @@
 	/**
 	 * 매핑되어 있는 데이타셋을 반환합니다.
 	 * 
+	 * @method dataset
 	 * @return {JGDataset} 데이타셋 
 	 * @example
 	 * 	var dataset_ = $(target_).JGDatasetSumUI("dataset");
@@ -148,6 +151,7 @@
 	/**
 	 * JGDatasetSumUI를 새로고침합니다.
 	 *  
+	 * @method refresh
 	 * @example
 	 * 	$(target_).JGDatasetSumUI("refresh");
 	 */
