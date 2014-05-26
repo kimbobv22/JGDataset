@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGDatasetUI.validator.2.0.1.js - JGDataset for JavaScript</title>
+    <title>JGDatasetUI.validator.2.0.2.js - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -56,6 +56,8 @@
                 <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
             
                 <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetSumUI.html">jQuery.fn.JGDatasetSumUI</a></li>
             
                 <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
             
@@ -102,11 +104,11 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: JGDatasetUI.validator.2.0.1.js</h1>
+                        <h1 class="file-heading">File: JGDatasetUI.validator.2.0.2.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function(window,$,JGDatasetUI){
+(function(window){
 	
 	if(JGDatasetUI === undefined){
 		console.error(&quot;can&#x27;t not initialize JGValidator, JGDataset UI not found&quot;);
@@ -144,7 +146,25 @@
 	
 	_JGKeyword = $.extend(true,_JGKeyword,{
 		validator : {
-			errorColumn : &quot;jg-error-column&quot;
+			errorColumn : &quot;jg-error-column&quot;,
+			validColumn : &quot;jg-valid-column&quot;,
+			trigger : {
+				/**
+				 * 특정 행열값의 유효여부가 변경 시 발생됩니다.
+				 * 
+				 * @event changecolumnvalidation
+				 * @param {jQuery Event object} event_ jQuery 이벤트 객체
+				 * @param {String} columnName_ 열명
+				 * @param {Number} rowIndex_ 행색인
+				 * @param {Boolean} isValid_ 유효여부
+				 * @for jQuery.fn.JGValidator
+				 * @example
+				 * 	$(target_).trigger(&quot;changecolumnvalidation&quot;,function(event_, columnName_, rowIndex_, isValid_){
+				 * 		//to do
+				 * 	});
+				 */
+				changeColumnValidation : &quot;changecolumnvalidation&quot;,
+			}
 		}
 	});
 	
@@ -184,7 +204,8 @@
 						+_JGKeyword.trigger._rowInserted+&quot; &quot;
 						+_JGKeyword.trigger._rowRemoved+&quot; &quot;
 						+_JGKeyword.trigger._datasetClear+&quot; &quot;
-						+_JGKeyword.trigger._datasetReset, function(event_, columnName_){
+						+_JGKeyword.trigger._datasetReset+&quot; &quot;
+						+_JGKeyword.trigger._datasetChanged, function(event_, columnName_){
 			that_.refresh();
 		});
 		
@@ -215,7 +236,7 @@
 	});
 	
 	/**
-	 * 매핑된 데이타셋을 반환합니다.
+	 *  유효여부를 반환합니다.
 	 * 
 	 * @method isValid
 	 * @return {Boolean} 유효여부
@@ -228,20 +249,44 @@
 		var validators_ = this._validators;
 		
 		for(var columnName_ in this._validators){
-			var result_ = this._cause[columnName_];
-			if(result_ === undefined) return false;
-			
-			var validator_ = this._validators[columnName_];
-			if(rowCount_ !== result_.length) return false;
-			
-			for(var rowIndex_ in result_){
-				var rowResult_ = result_[rowIndex_];
-				if(isNull(rowResult_) || _jsonDataLength(rowResult_) &gt; 0) return false;
+			for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
+				if(!this.isColumnValid(columnName_, rowIndex_)){
+					return false;
+				}
 			}
 		}
 	
 		return true;
 	});
+	
+	/**
+	 * 특정행열의 유효여부를 반환합니다.
+	 * 
+	 * @method isColumnValid
+	 * @param {String} columnName_ 열명
+	 * @param {int} rowIndex_ 행색인
+	 * @return {Boolean} 유효여부
+	 * @example
+	 * 	var result_ = $(target_).JGValidator(&quot;isColumnValid&quot;,&quot;COL1&quot;,0);
+	 */
+	JGValidator.prototype.isColumnValid = (function(columnName_, rowIndex_){
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		var validators_ = this._validators;
+		
+		var result_ = this._cause[columnName_.toUpperCase()]
+		if(result_ === undefined) return false;
+		
+		var validator_ = this._validators[columnName_];
+		if(rowCount_ !== result_.length) return false;
+		
+		var rowResult_ = result_[rowIndex_];
+		if(isNull(rowResult_) || _jsonDataLength(rowResult_) &gt; 0) return false;
+	
+		return true;
+	});
+	
+	
 	/**
 	 * 유효성엔진 설정/반환합니다.&lt;br&gt;
 	 * 매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.
@@ -290,6 +335,7 @@
 	JGValidator.prototype.failedMessages = (function(messages_){
 		if(messages_ !== undefined){
 			this._failedMessages = $.extend(true,this._failedMessages,messages_);
+			this._updateErrorLabels();
 		}
 		return this._failedMessages;
 	});
@@ -667,13 +713,23 @@
 			}else{
 				delete columnValidData_[rowIndex_][validatorElement_.name];
 			}
+			
 			that_._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
 		}]);
 	});
 	JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
 		var that_ = this;
+		
+		var orgColumnIsValid_ = this.isColumnValid(columnName_, rowIndex_);
 		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
 			that_._updateErrorLabels();
+			that_._updateValidLabels();
+			
+			var curColumnIsValid_ = that_.isColumnValid(columnName_, rowIndex_);
+			if(curColumnIsValid_ !== orgColumnIsValid_){
+				that_.datasetUI().element().trigger(_JGKeyword.validator.trigger.changeColumnValidation,[columnName_, rowIndex_, curColumnIsValid_]);
+			}
+			
 			callback_.apply(that_.datasetUI().element(),arguments);
 		});
 	});
@@ -695,7 +751,8 @@
 			this._recursiveValidate(columnIndex_+1, 0, callback_);
 			return;
 		}else{
-			this._singleValidate(dataset_.getColumn(columnIndex_).getName(), rowIndex_, function(result_){
+			var columnName_ = dataset_.getColumn(columnIndex_).getName();
+			this._singleValidate(columnName_, rowIndex_, function(result_){
 				that_._recursiveValidate(columnIndex_, rowIndex_+1, callback_);
 			});
 			return;
@@ -734,9 +791,13 @@
 		// set error label with cause
 		var cause_ = this.cause();
 		for(var columnName_ in cause_){
+			if(!cause_.hasOwnProperty(columnName_)) continue;
+			
 			var causeRow_ = cause_[columnName_];
 			
 			for(var rowIndex_ in causeRow_){
+				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
+				
 				var causeElements_ = causeRow_[rowIndex_];
 				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
 				if(isNull(rowContent_)){
@@ -787,6 +848,48 @@
 				}
 			}
 		}
+	});
+	
+	JGValidator.prototype._updateValidLabels = (function(){
+		var datasetUI_ = this.datasetUI();
+		var dataset_ = this.dataset();
+		var rowCount_ = dataset_.getRowCount();
+		
+		// set blank all valid label
+		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
+			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+			if(isNull(rowContent_)){
+				continue;
+			}
+			
+			var allLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.validColumn+&quot;]&quot;);
+			if(allLabels_.length &gt; 0) allLabels_.show();
+		}
+		
+		// hide valid label with cause
+		var cause_ = this.cause();
+		for(var columnName_ in cause_){
+			if(!cause_.hasOwnProperty(columnName_)) continue;
+			
+			var causeRow_ = cause_[columnName_];
+			for(var rowIndex_ in causeRow_){
+				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
+				
+				var causeElements_ = causeRow_[rowIndex_];
+				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
+				if(isNull(rowContent_)){
+					continue;
+				}
+				
+				var validLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.validColumn+&quot;]&quot;).filter(function(){
+					return (columnName_.toUpperCase() === $(this).attr(_JGKeyword.validator.validColumn).toUpperCase());
+				});
+				if(validLabels_.length &gt; 0){
+					validLabels_.hide();
+				}
+			}
+		}
+		
 	});
 	
 	JGValidator.prototype._options = {
@@ -925,15 +1028,16 @@
 		return NVL(this.data(&quot;jgdataset_jgValidatorInitialized&quot;),false);
 	});
 	$.fn.JGValidator = (function(){
-		if(!this._jgValidatorInitialized()){
-			this._jgValidator(new JGValidator(this.JGDatasetUI()));
-			this._jgValidatorInitialized(true);
-		}
-		
-		return JGSelector(this._jgValidator(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgValidatorInitialized()){
+				this._jgValidator(new JGValidator(this.JGDatasetUI(), arguments_[0]));
+				this._jgValidatorInitialized(true);
+			}
+			return JGSelector(this._jgValidator(), arguments_);
+		},arguments);
 	}); 
 	
-})(window,jQuery,JGDatasetUI);
+})(window);
     </pre>
 </div>
 

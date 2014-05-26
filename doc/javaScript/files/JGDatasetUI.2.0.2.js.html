@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGDatasetUI.2.0.1.js - JGDataset for JavaScript</title>
+    <title>JGDatasetUI.2.0.2.js - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -56,6 +56,8 @@
                 <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
             
                 <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetSumUI.html">jQuery.fn.JGDatasetSumUI</a></li>
             
                 <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
             
@@ -102,18 +104,17 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: JGDatasetUI.2.0.1.js</h1>
+                        <h1 class="file-heading">File: JGDatasetUI.2.0.2.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-(function(window,$,JGDS){
+(function(window){
 
 	if(JGDS === undefined){
-		console.error(&quot;can&#x27;t not initialize JGDataset UI, JGDataset not found&quot;);
+		console.error(&quot;can&#x27;t not initialize JGDatasetUI, JGDataset not found&quot;);
 		return;
 	}
 	
-	var _J
 	_JGKeyword = $.extend(true, window._JGKeyword, {
 		ui : {
 			attrDataset : &quot;jg-dataset&quot;
@@ -197,58 +198,118 @@
 	})
 	
 	String.prototype._jgFuncConvertToColumnRegexp = (function(){
-		return new RegExp(&quot;\\#\\#(&quot; + this + &quot;)\\#\\#&quot;, &quot;gi&quot;);
+		return new RegExp(&quot;\\#\\#&quot; + this + &quot;\\#\\#&quot;, &quot;gi&quot;);
 	});
+	
 	String.prototype._jgFuncReplaceRegexpByDataset = (function(dataset_, rowIndex_){
 		var targetStr_ = this;
 
-		//replace with row index
-		targetStr_ = targetStr_.replace(&quot;dataset\\.rowIndex&quot;._jgFuncConvertToColumnRegexp(), rowIndex_);
-		
-		//replace with row status
-		targetStr_ = targetStr_.replace(&quot;dataset\\.rowStatus&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowStatus(rowIndex_));
-		
 		//replace with row count
 		targetStr_ = targetStr_.replace(&quot;dataset\\.rowCount&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
 		
 		//replace with column count
 		targetStr_ = targetStr_.replace(&quot;dataset\\.columnCount&quot;._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
 		
-		//replace with row stacked sum
-		var sumRegexp_ = &quot;dataset\\.sum\\([\\s\\w\\#\\@\\-\\+\\*\\/\\%]*\\)&quot;._jgFuncConvertToColumnRegexp();
-		if(sumRegexp_.test(targetStr_)){
+		//replace with column name
+		targetStr_ = targetStr_.replace(&quot;dataset\\.columnName&quot;._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
+		var columnNameRegexp_ = (&quot;dataset\\.columnName\\([0-9]+\\)&quot;)._jgFuncConvertToColumnRegexp();
+		while(found_ = columnNameRegexp_.exec(targetStr_)){
+			var replaceTarget_ = found_[0]
+			var columnIndex_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+			columnIndex_ = columnIndex_.substr(0,columnIndex_.indexOf(&quot;)##&quot;));
+			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.getColumn(&quot;+columnIndex_+&quot;).getName()&quot;);
+		}
+		
+		//replace with row sum
+		var staticticsRegexp_ = &quot;[\\s\\w\\#\\@\\-\\+\\*\\/\\%]*&quot;;
+		var sumRegexp_ = (&quot;dataset\\.sum\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		while(found_ = sumRegexp_.exec(targetStr_)){
+			var replaceTarget_ = found_[0]
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.sumOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+		}
+		
+		//replace with row avg
+		sumRegexp_ = (&quot;dataset\\.avg\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		while(found_ = sumRegexp_.exec(targetStr_)){
+			var replaceTarget_ = found_[0]
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.avgOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+		}
+		
+		//replace with row min
+		sumRegexp_ = (&quot;dataset\\.min\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		while(found_ = sumRegexp_.exec(targetStr_)){
+			var replaceTarget_ = found_[0]
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.minOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+		}
+		
+		//replace with row max
+		sumRegexp_ = (&quot;dataset\\.max\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		while(found_ = sumRegexp_.exec(targetStr_)){
+			var replaceTarget_ = found_[0]
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.maxOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+		}
+		
+		if(rowIndex_ !== undefined){
 			
+			//replace with row plus
+			sumRegexp_ = (&quot;dataset\\.plus\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+			while(found_ = sumRegexp_.exec(targetStr_)){
+				var replaceTarget_ = found_[0]
+				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+				columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+				
+				var columnValueSum_ = 0;
+				for(var tRowIndex_ = 0; tRowIndex_&lt;=rowIndex_;++tRowIndex_){
+					var columnValue_ = parseInt(dataset_.getColumnValue(columnName_,tRowIndex_));
+					columnValueSum_ += columnValue_;
+				}
+				targetStr_ = targetStr_.replace(replaceTarget_,columnValueSum_);
+			}
+			
+			//replace with row minus
+			sumRegexp_ = (&quot;dataset\\.minus\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+			while(found_ = sumRegexp_.exec(targetStr_)){
+				var replaceTarget_ = found_[0]
+				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
+				columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+				
+				var columnValueSum_ = parseInt(dataset_.getColumnValue(columnName_,0));
+				for(var tRowIndex_ = 1; tRowIndex_&lt;=rowIndex_;++tRowIndex_){
+					var columnValue_ = parseInt(dataset_.getColumnValue(columnName_,tRowIndex_));
+					columnValueSum_ -= columnValue_;
+				}
+				targetStr_ = targetStr_.replace(replaceTarget_,columnValueSum_);
+			}
+			
+			//replace with row index
+			targetStr_ = targetStr_.replace(&quot;dataset\\.rowIndex&quot;._jgFuncConvertToColumnRegexp(), rowIndex_);
+			
+			//replace with row status
+			targetStr_ = targetStr_.replace(&quot;dataset\\.rowStatus&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowStatus(rowIndex_));
+			
+			//replace column data
 			var columnCount_ = dataset_.getColumnCount();
 			for(var columnIndex_=0;columnIndex_&lt;columnCount_;++columnIndex_){
 				var columnItem_ = dataset_.getColumn(columnIndex_);
 				var columnName_ = columnItem_.getName();
-				var columnRegexp_ = columnName_._jgFuncConvertToColumnRegexp();
+				var columnValue_ = dataset_.getColumnValue(columnName_,rowIndex_);
 				
-				if(columnRegexp_.test(targetStr_)){
-					var columnValueSum_ = 0;
-					for(var tRowIndex_ = 0; tRowIndex_&lt;=rowIndex_;++tRowIndex_){
-						var columnValue_ = parseInt(dataset_.getColumnValue(columnName_,tRowIndex_));
-						columnValueSum_ += columnValue_;
-					}
-					targetStr_ = targetStr_.replace(columnRegexp_, columnValueSum_);
-				}
+				targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), &quot;this.getColumnValue(&#x27;&quot;+columnName_+&quot;&#x27;,&quot;+rowIndex_+&quot;)&quot;);
 			}
-			
-			targetStr_ = targetStr_.replace(&quot;dataset\\.sum&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
-			targetStr_ = targetStr_.substr(targetStr_.indexOf(&quot;(&quot;)+1);
-			targetStr_ = targetStr_.substr(0,targetStr_.indexOf(&quot;)##&quot;));
-		}
-		
-		//replace column data
-		var columnCount_ = dataset_.getColumnCount();
-		for(var columnIndex_=0;columnIndex_&lt;columnCount_;++columnIndex_){
-			var columnItem_ = dataset_.getColumn(columnIndex_);
-			var columnName_ = columnItem_.getName();
-			var columnValue_= dataset_.getColumnValue(columnName_,rowIndex_);
-			targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), NVL(columnValue_, &quot;null&quot;));
 		}
 		
 		return targetStr_;
+	});
+	String.prototype.replaceBlank = (function(res_){
+		return this.replace(/^[\n\t]*/g, res_);
 	});
 	
 	/**
@@ -287,6 +348,13 @@
 	$.fn.selectValue = (function(){
 		if(this.prop(&quot;tagName&quot;).toLowerCase() !== &quot;select&quot;) return undefined;
 		return this.children(&quot;option:selected&quot;).first().attr(&quot;value&quot;);
+	});
+	$.fn._jexecute = (function(executeFunc_,arguments_){
+		var result_ = new Array();
+		$.each(this,function(){
+			result_.push(executeFunc_.call($(this),arguments_));
+		});
+		return result_.length &gt; 1 ? result_ : result_[0];
 	});
 	
 	/**
@@ -336,6 +404,7 @@
 	 */
 	var JGDatasetUI = window.JGDatasetUI = (function(element_, datasetName_){
 		var that_ = this;
+		this.options = $.extend(true,JGDatasetUI.prototype.options);
 		this._element = element_;
 		this._datasetName = NVL(datasetName_,element_.attr(_JGKeyword.ui.attrDataset));
 		
@@ -396,6 +465,10 @@
 		this.reload();
 	});
 	
+	JGDatasetUI.prototype.options = {
+			blankToNull : false
+		};
+	
 	/**
 	 * 매핑되어 있는 jQuery 객체를 반환합니다.
 	 * 
@@ -441,7 +514,7 @@
 		var rowContent_ = this.rowContent(rowIndex_);
 		rowContent_.rowContent().remove();
 		this._rowContents.remove(rowIndex_);
-		this._refreshFX(rowIndex_);
+		this._refreshFX(0);
 	});
 	/**
 	 * 매핑되어 있는 행컨텐츠의 행색인을 반환합니다.
@@ -513,16 +586,18 @@
 		return this.data(&quot;jgdatasetJGDatasetUI&quot;);
 	});
 	$.fn._jgDatasetUIInitialized = (function(bool_){
-		if(bool_ !== undefined) this.data(&quot;jgdataset_jgDatasetInitialized&quot;,bool_);
-		return NVL(this.data(&quot;jgdataset_jgDatasetInitialized&quot;),false);
+		if(bool_ !== undefined) this.data(&quot;jgdatasetJGDatasetUIInitialized&quot;,bool_);
+		return NVL(this.data(&quot;jgdatasetJGDatasetUIInitialized&quot;),false);
 	});
 	$.fn.JGDatasetUI = (function(){
-		if(!this._jgDatasetUIInitialized()){
-			this._jgDatasetUI(new JGDatasetUI(this, arguments[0]));
-			this._jgDatasetUIInitialized(true);
-		}
-		
-		return JGSelector(this._jgDatasetUI(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgDatasetUIInitialized()){
+				this._jgDatasetUI(new JGDatasetUI(this, arguments_[0]));
+				this._jgDatasetUIInitialized(true);
+			}
+			
+			return JGSelector(this._jgDatasetUI(), arguments_);
+		},arguments);
 	});
 	
 	$.fn._jgDataRowContent = (function(rowContent_){
@@ -560,11 +635,15 @@
 			var commonEventOnChange_ = (function(event_){
 				var target_ = $(event_.target);
 				var rowContent_ = target_._jgDataRowContent();
-				var dataset_ = rowContent_.datasetUI().dataset();
+				var datasetUI_ = rowContent_.datasetUI();
+				var dataset_ = datasetUI_.dataset();
 				var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
 				var rowIndex_ = rowContent_.rowIndex();
+				var columnValue_ = target_.val();
+				if(datasetUI_.options.blankToNull)
+					columnValue_ = BLK(columnValue_,null);
 				
-				dataset_.setColumnValue(columnName_, rowIndex_, target_.val(), true);
+				dataset_.setColumnValue(columnName_, rowIndex_, columnValue_, true);
 			});
 			
 			//input event
@@ -574,7 +653,8 @@
 					mappedElement_.on(&quot;click change&quot;,function(event_){
 						var target_ = $(event_.target);
 						var rowContent_ = target_._jgDataRowContent();
-						var dataset_ = rowContent_.datasetUI().dataset();
+						var datasetUI_ = rowContent_.datasetUI();
+						var dataset_ = datasetUI_.dataset();
 						var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
 						var rowIndex_ = rowContent_.rowIndex();
 						
@@ -589,11 +669,15 @@
 				mappedElement_.on(&quot;change&quot;, function(event_){
 					var target_ = $(event_.target);
 					var rowContent_ = target_._jgDataRowContent();
-					var dataset_ = rowContent_.datasetUI().dataset();
+					var datasetUI_ = rowContent_.datasetUI();
+					var dataset_ = datasetUI_.dataset();
 					var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
 					var rowIndex_ = rowContent_.rowIndex();
+					var columnValue_ = target_.val();
+					if(datasetUI_.options.blankToNull)
+						columnValue_ = BLK(columnValue_,null);
 					
-					dataset_.setColumnValue(columnName_, rowIndex_, target_.val(), true);
+					dataset_.setColumnValue(columnName_, rowIndex_, columnValue_, true);
 				});
 				mappedElement_.on(&quot;keyup&quot;, function(event_){
 					var target_ = $(event_.target);
@@ -605,11 +689,15 @@
 				mappedElement_.on(&quot;change&quot;, function(event_){
 					var target_ = $(event_.target);
 					var rowContent_ = target_._jgDataRowContent();
-					var dataset_ = rowContent_.datasetUI().dataset();
+					var datasetUI_ = rowContent_.datasetUI();
+					var dataset_ = datasetUI_.dataset();
 					var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
 					var rowIndex_ = rowContent_.rowIndex();
+					var columnValue_ = target_.html();
+					if(datasetUI_.options.blankToNull)
+						columnValue_ = BLK(columnValue_,null);
 					
-					dataset_.setColumnValue(columnName_, rowIndex_, target_.html(), true);
+					dataset_.setColumnValue(columnName_, rowIndex_, columnValue_, true);
 				});
 				mappedElement_.on(&quot;keyup&quot;, function(event_){
 					var target_ = $(event_.target);
@@ -659,15 +747,15 @@
 			for(var attrIndex_ =0; attrIndex_&lt;attrCount_;++attrIndex_){
 				var attr_ = attrs_[attrIndex_];
 				var attrName_ = attr_.name.toLowerCase();
-				if(attr_.name.toLowerCase() !== &quot;jg-column&quot;
-					&amp;&amp; BLK(attr_.value).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
-					this._FXElements.push(new JGFXElement(this,fxElement_,attrName_,0))
+				if(attr_.name.toLowerCase() !== _JGKeyword.ui.attrColumn
+					&amp;&amp; BLK(attr_.value).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+					this._FXElements.push(new JGFXElement(fxElement_,attrName_,0))
 				}
 			}
 			
 			var textValue_ = fxElement_.html();
-			if(BLK(textValue_).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
-				this._FXElements.push(new JGFXElement(this,fxElement_,null,1))
+			if(BLK(textValue_).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+				this._FXElements.push(new JGFXElement(fxElement_,null,1))
 			}
 		}
 	});
@@ -720,9 +808,11 @@
 	
 	JGRowContent.prototype._refreshFX = (function(){
 		var fxElements_ = this.FXElements();
+		var dataset_ = this.datasetUI().dataset();
+		var rowIndex_ = this.rowIndex();
 		var fxElementsLength_ = fxElements_.length;
 		for(var fxIndex_=0;fxIndex_&lt;fxElementsLength_;++fxIndex_){
-			fxElements_[fxIndex_].update();
+			fxElements_[fxIndex_].update(dataset_, rowIndex_);
 		}
 	});
 	JGRowContent.prototype._refreshColumn = (function(columnName_, refreshFX_){
@@ -733,7 +823,7 @@
 		var eCount_ = mappedElements_.length;
 		for(eIndex_=0;eIndex_&lt;eCount_;++eIndex_){
 			var mappedElement_ = $(mappedElements_[eIndex_]);
-			if(mappedElement_.attr(&quot;jg-column&quot;).toUpperCase() === columnName_){
+			if(mappedElement_.attr(_JGKeyword.ui.attrColumn).toUpperCase() === columnName_){
 				var tagName_ = mappedElement_.prop(&quot;tagName&quot;).toLowerCase();
 				
 				//input type - checkbox
@@ -792,18 +882,17 @@
 	 * @param {String} [attrName_] FX수식을 매핑할 속성명(Text 매핑 시 생략가능)
 	 * @param {Number} type_ FX수식 매핑 유형(0 - 속성, 1 - Text)
 	 */
-	var JGFXElement = (function(rowContent_, element_, attrName_, type_){
-		this._rowContent = rowContent_;
+	var JGFXElement = window.JGFXElement = (function(element_, attrName_, type_){
 		this._element = element_;
 		this._attrName = attrName_;
 		this._type = type_;
 		
 		switch(type_){
 		case 0: //attribute
-			this._fx = element_.attr(attrName_).substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.attr(attrName_).replaceBlank(&quot;&quot;).substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		case 1: //node text
-			this._fx = element_.html().substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.html().replaceBlank(&quot;&quot;).substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		default:
 			console.error(&quot;invaild FX Element Type&quot;);
@@ -811,15 +900,6 @@
 		}
 	});
 	
-	/**
-	 * 매핑되어 있는 행컨텐츠를 반환합니다.
-	 * 
-	 * @method rowContent
-	 * @return {JGRowContent} 행컨텐츠
-	 */
-	JGFXElement.prototype.rowContent = (function(){
-		return this._rowContent;
-	});
 	/**
 	 * 매핑되어 있는 jQuery 객체를 반환합니다.
 	 * 
@@ -849,14 +929,11 @@
 	});
 	/**
 	 * FX매핑을 새로고침을 수행합니다.
-	 * 
 	 * @method update
+	 * @param {JGDataset} dataset_ 데이타셋
+	 * @param {Number} [rowIndex_] 행색인
 	 */
-	JGFXElement.prototype.update = (function(){
-		var rowContent_ = this.rowContent();
-		var dataset_ = rowContent_.datasetUI().dataset();
-		var rowIndex_ = rowContent_.rowIndex();
-		
+	JGFXElement.prototype.update = (function(dataset_, rowIndex_){
 		var resultStr_ = null;
 		try{
 			resultStr_ = BLK(new Function(&quot;return &quot;+this._fx._jgFuncReplaceRegexpByDataset(dataset_,rowIndex_)+&quot;;&quot;).apply(dataset_));
@@ -1017,15 +1094,17 @@
 		return NVL(this.data(&quot;jgdatasetJGSelectInitialized&quot;),false);
 	});
 	$.fn.JGSelect = (function(){
-		if(!this._jgSelectInitialized()){
-			this._jgSelect(new JGSelect(this, arguments[0]));
-			this._jgSelectInitialized(true);
-		}
-		
-		return JGSelector(this._jgSelect(), arguments);
+		return this._jexecute(function(arguments_){
+			if(!this._jgSelectInitialized()){
+				this._jgSelect(new JGSelect(this, arguments_[0]));
+				this._jgSelectInitialized(true);
+			}
+			
+			return JGSelector(this._jgSelect(), arguments_);
+		},arguments);
 	});
 	
-})(window,jQuery,JGDS);
+})(window);
     </pre>
 </div>
 

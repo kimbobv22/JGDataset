@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGDataset.2.0.1.js - JGDataset for JavaScript</title>
+    <title>JGDataset.2.0.2.js - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -56,6 +56,8 @@
                 <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
             
                 <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetSumUI.html">jQuery.fn.JGDatasetSumUI</a></li>
             
                 <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
             
@@ -102,7 +104,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: JGDataset.2.0.1.js</h1>
+                        <h1 class="file-heading">File: JGDataset.2.0.2.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -137,7 +139,7 @@
 			,_datasetClear : &quot;_jgDatasetClear&quot;
 			,_datasetReset : &quot;_jgDatasetReset&quot;
 			,_datasetApply : &quot;_jgDatasetApply&quot;
-				/**
+            /**
 				* 행이 삽입되었을 때 호출됩니다.
 				*
 				* @event rowinserted
@@ -291,7 +293,7 @@
 	var _JGSelector = window.JGSelector = (function(target_, args_){
 		if(args_.length === 0) return target_;
 		
-		var arguments_ = Array.prototype.slice.call(args_);
+		var arguments_ = Array.prototype.slice.call(args_); 
 		var entry_ = target_[arguments_[0]];
 		if(entry_ === undefined){
 			console.error(arguments_[0]+&quot; is undefined&quot;);
@@ -299,7 +301,9 @@
 		}else if($.type(entry_) !== &quot;function&quot;){
 			console.error(arguments_[0]+&quot; is not function&quot;);
 			return undefined;
-		}else return entry_.apply(target_,arguments_.slice(1));
+		}
+		
+		return entry_.apply(target_, arguments_.slice(1));
 	});
 	
 	/**
@@ -1331,7 +1335,7 @@
 		var columnItem_ = this.getColumn(columnKey_);
 		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
 			var tColumnValue_ = this.getColumnValue(columnItem_.getName(),rowIndex_);
-			if(isNull(tColumnValue_) || isNaN(tColumnValue_) || !NVL2(filterFunc_,filterFunc_,function(){return true;})(columnItem_.getName(), rowIndex_)) continue;
+			if(isBlank(tColumnValue_) || isNaN(tColumnValue_) || !NVL2(filterFunc_,filterFunc_,function(){return true;})(columnItem_.getName(), rowIndex_)) continue;
 			
 			if(isNull(columnValue_)
 					|| new Function(&quot;return (&quot;+columnValue_+calcChar_+tColumnValue_+&quot;);&quot;).apply(this)){
@@ -1600,6 +1604,16 @@
 		}
 		
 		return dataset_;
+	});
+	
+	JGDataset.prototype.on = (function(){
+		return $(this).on(arguments);
+	});
+	JGDataset.prototype.bind = (function(){
+		return $(this).bind(arguments);
+	});
+	JGDataset.prototype.trigger = (function(){
+		return $(this).trigger(arguments);
 	});
 	
 	/**

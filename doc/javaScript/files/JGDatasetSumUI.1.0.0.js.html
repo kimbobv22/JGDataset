@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JGDatasetSumUI.1.0.0.js - JGDataset for JavaScript</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.0.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/global.extension.html">global.extension</a></li>
+            
+                <li><a href="../classes/JGDataset.html">JGDataset</a></li>
+            
+                <li><a href="../classes/JGDatasetColumn.html">JGDatasetColumn</a></li>
+            
+                <li><a href="../classes/JGDatasetRow.html">JGDatasetRow</a></li>
+            
+                <li><a href="../classes/JGDS.html">JGDS</a></li>
+            
+                <li><a href="../classes/JGFXElement.html">JGFXElement</a></li>
+            
+                <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
+            
+                <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetSumUI.html">jQuery.fn.JGDatasetSumUI</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGSelect.html">jQuery.fn.JGSelect</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: JGDatasetSumUI.1.0.0.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+(function(window){
+	
+	if(JGDatasetUI === undefined){
+		console.error(&quot;can&#x27;t not initialize JGDatasetSumUI, JGDatasetUI not found&quot;);
+		return;
+	}
+	
+	window._JGKeyword = $.extend(window._JGKeyword,{
+		sumui : {
+			trigger : {
+				/**
+				 * JGDatasetSumUI가 새로고침시, 발생합니다
+				 * 
+				 * @event jgdatasetsumui
+				 * @param {jQuery Event object} event_ jQuery 이벤트 객체
+				 * @for jQuery.fn.JGDatasetSumUI
+				 * @example
+				 * 	$(target_).trigger(&quot;jgdatasetsumui&quot;,function(event_){
+				 * 		//to do
+				 * 	});
+				 */
+				refresh : &quot;jgdatasetsumui&quot;
+			}
+		}
+	});
+	/**
+	 * HTML과 JGDataset의 통계매핑을 위한 플러그인입니다.&lt;br&gt;
+	 * 함수호출 형식은 아래와 같습니다.
+	 * 	
+	 * 	//1. jQuery Plugin Style
+	 * 	var result_ = $(target_).JGDatasetSumUI(&quot;함수명&quot;,...);
+	 * 	
+	 * 	//2. normal Style
+	 * 	var datasetSumUI_ = $(target_).JGDatasetSumUI();
+	 * 	var result_ = datasetSumUI_.함수명();
+	 * 
+	 * datasetSumUI 샘플은 &lt;a href=&quot;http://kimbobv22.github.io/JGDataset/index.html&quot; target=&quot;_blank&quot;&gt;여기&lt;/a&gt;에서 확인할 수 있습니다.
+	 * 
+	 * @class jQuery.fn.JGDatasetSumUI
+	 * @constructor
+	 * @example
+	 * 	//1. 정의되어 있는 속성값을 이용하여 초기화
+	 * 	&lt;div jg-dataset=&quot;datasetName&quot; id=&quot;target&quot;&gt;
+	 * 		...
+	 * 	&lt;/div&gt;
+	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
+	 * 	$(&quot;#target&quot;).JGDatasetSumUI();
+	 * 	&lt;/script&gt;
+	 * 	
+	 * 	//2. 매개변수를 이용하여 초기화
+	 * 	&lt;div id=&quot;target&quot;&gt;
+	 * 		...
+	 * 	&lt;/div&gt;
+	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
+	 * 	$(&quot;#target&quot;).JGDatasetSumUI(&quot;datasetName&quot;);
+	 * 	&lt;/script&gt;
+	 */
+	var JGDatasetSumUI = window.JGDatasetSumUI = (function(element_, datasetName_){
+		this._element = element_;
+		this._datasetName = NVL(datasetName_,element_.attr(_JGKeyword.ui.attrDataset));
+		this._FXElements = new Array();
+		
+		var fxElements_ = this._element.find(&quot;*&quot;);
+		fxElements_.push(this._element);
+		var fxElementsLength_ = fxElements_.length;
+		for(var fxIndex_=0;fxIndex_&lt;fxElementsLength_;++fxIndex_){
+			var fxElement_ = $(fxElements_[fxIndex_]);
+			var attrs_ = fxElement_[0].attributes;
+			var attrCount_ = attrs_.length;
+			
+			for(var attrIndex_ =0; attrIndex_&lt;attrCount_;++attrIndex_){
+				var attr_ = attrs_[attrIndex_];
+				var attrName_ = attr_.name.toLowerCase();
+				if(attr_.name.toLowerCase() !== _JGKeyword.ui.attrColumn
+					&amp;&amp; BLK(attr_.value).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+					this._FXElements.push(new JGFXElement(fxElement_,attrName_,0))
+				}
+			}
+			
+			var textValue_ = fxElement_.html();
+			if(BLK(textValue_).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+				this._FXElements.push(new JGFXElement(fxElement_,null,1))
+			}
+		}
+		
+		// column added,removed
+		var that_ = this;
+		$(this.dataset()).on(
+				_JGKeyword.trigger._rowInserted+&quot; &quot;
+				+_JGKeyword.trigger._rowRemoved+&quot; &quot;
+				+_JGKeyword.trigger._rowMoved+&quot; &quot;
+				+_JGKeyword.trigger._columnAdded+&quot; &quot;
+				+_JGKeyword.trigger._columnRemoved+&quot; &quot;
+				+_JGKeyword.trigger._columnValueChanged+&quot; &quot;
+				+_JGKeyword.trigger._datasetClear+&quot; &quot;
+				+_JGKeyword.trigger._datasetReset+&quot; &quot;
+				+_JGKeyword.trigger._datasetChanged+&quot; &quot;
+				+_JGKeyword.trigger._datasetSorted+&quot; &quot;
+				+_JGKeyword.trigger._datasetApply
+				,function(event_){
+			that_.refresh();
+		});
+		
+		this._refresh();
+	});
+	
+	/**
+	 * 매핑되어 있는 jQuery 객체를 반환합니다.
+	 * 
+	 * @return {jQuery Object} jQuery 객체
+	 * @example
+	 * 	var element_ = $(target_).JGDatasetSumUI(&quot;element&quot;);
+	 */
+	JGDatasetSumUI.prototype.element = (function(){
+		return this._element;
+	});
+	/**
+	 * 매핑되어 있는 데이타셋명을 반환합니다.
+	 * 
+	 * @return {String} 데이타셋명 
+	 * @example
+	 * 	var datasetName_ = $(target_).JGDatasetSumUI(&quot;datasetName&quot;);
+	 */
+	JGDatasetSumUI.prototype.datasetName = (function(){
+		return this._datasetName;
+	});
+	/**
+	 * 매핑되어 있는 데이타셋을 반환합니다.
+	 * 
+	 * @return {JGDataset} 데이타셋 
+	 * @example
+	 * 	var dataset_ = $(target_).JGDatasetSumUI(&quot;dataset&quot;);
+	 */
+	JGDatasetSumUI.prototype.dataset = (function(){
+		return JGDS(&quot;dataset&quot;,this._datasetName);
+	});
+	
+	/**
+	 * FX수식매핑되어 있는 jQuery 객체를 반환합니다.
+	 * 
+	 * @method FXElements
+	 * @return {Array} FX수식매핑되어 있는 jQuery 객체
+	 */
+	JGDatasetSumUI.prototype.FXElements = (function(){
+		return this._FXElements;
+	});
+	
+	/**
+	 * JGDatasetSumUI를 새로고침합니다.
+	 *  
+	 * @example
+	 * 	$(target_).JGDatasetSumUI(&quot;refresh&quot;);
+	 */
+	JGDatasetSumUI.prototype.refresh = (function(){
+		this._refresh();
+		this._element.trigger(_JGKeyword.sumui.trigger.refresh);
+	});
+	JGDatasetSumUI.prototype._refresh = (function(){
+		var fxElements_ = this.FXElements();
+		var dataset_ = this.dataset();
+		var fxElementsLength_ = fxElements_.length;
+		for(var fxIndex_=0;fxIndex_&lt;fxElementsLength_;++fxIndex_){
+			fxElements_[fxIndex_].update(dataset_);
+		}
+	});
+	
+	$.fn._jgDatasetSumUI = (function(ui_){
+		if(ui_ !== undefined) this.data(&quot;jgdatasetJGDatasetSumUI&quot;,ui_);
+		return this.data(&quot;jgdatasetJGDatasetSumUI&quot;);
+	});
+	$.fn._jgDatasetSumUIInitialized = (function(bool_){
+		if(bool_ !== undefined) this.data(&quot;jgdatasetJGDatasetSumUIInitialized&quot;,bool_);
+		return NVL(this.data(&quot;jgdatasetJGDatasetSumUIInitialized&quot;),false);
+	});
+	$.fn.JGDatasetSumUI = (function(){
+		return this._jexecute(function(arguments_){
+			if(!this._jgDatasetSumUIInitialized()){
+				this._jgDatasetSumUI(new JGDatasetSumUI(this, arguments_[0]));
+				this._jgDatasetSumUIInitialized(true);
+			}
+			
+			return JGSelector(this._jgDatasetSumUI(), arguments_);
+		},arguments);
+	});
+	
+})(window);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
