@@ -8,6 +8,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "JGFXElement",
         "JGRowContent",
         "global.extension",
+        "jQuery.fn.JGDatasetSumUI",
         "jQuery.fn.JGDatasetUI",
         "jQuery.fn.JGSelect",
         "jQuery.fn.JGValidator",

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>JGDataset Summary UI Sample</title>
+<!--JQuery -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- JGModule -->
+<script src="../js/JGDataset.min.js"></script>
+<script src="../js/JGDatasetUI.min.js"></script>
+<script src="../js/JGDatasetSumUI.min.js"></script>
+<link rel="stylesheet" href="./res/style.css" />
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+$(function(){
+	var dataset_ = JGDS("dataset","testDataset");
+	
+	dataset_.addRows(5);
+	
+	dataset_.setColumnValue("col1",0,"Mike",true);
+	dataset_.setColumnValue("col2",0,"have",true);
+	dataset_.setColumnValue("col3",0,1000,true);
+	
+	dataset_.setColumnValue("col1",1,"Jhone",true);
+	dataset_.setColumnValue("col2",1,"have",true);
+	dataset_.setColumnValue("col3",1,1500,true);
+	
+	dataset_.setColumnValue("col1",2,"Sam",true);
+	dataset_.setColumnValue("col2",2,"have",true);
+	dataset_.setColumnValue("col3",2,5000,true);
+	
+	dataset_.setColumnValue("col1",3,"Jane",true);
+	dataset_.setColumnValue("col2",3,"have",true);
+	dataset_.setColumnValue("col3",3,10000,true);
+	
+	dataset_.setColumnValue("col1",4,"Harry",true);
+	dataset_.setColumnValue("col2",4,"have",true);
+	dataset_.setColumnValue("col3",4,100,true);
+	
+	dataset_.apply();
+	
+	var dataView_ = $("#testTable tbody");
+	dataView_.JGDatasetUI();
+	
+	dataView_ = $("#testTable thead");
+	dataView_.JGDatasetSumUI();
+	
+	dataView_ = $("#sumUISampleView");
+	dataView_.JGDatasetSumUI();
+});
+
+function addRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.addRow();
+}
+function removeRow(){
+	var dataset_ = JGDS("dataset","testDataset");
+	dataset_.removeRow(dataset_.getRowCount()-1);
+}
+</script>
+</head>
+<body>
+	<h2>JGDatasetSumUI Sample</h2>
+	
+	<table id="testTable" border="1">
+		<thead jg-dataset="testDataset">
+			<tr>
+				<th>##fx:##dataset.rowCount##</th>
+				<th>##fx:##dataset.columnName(0)##</th>
+				<th>##fx:##dataset.columnName(1)##</th>
+				<th>##fx:##dataset.columnName(2)##</th>
+			</tr>
+		</thead>
+		<tbody jg-dataset="testDataset">
+			<tr>
+				<td>##fx:##dataset.rowIndex##</td>
+				<td jg-column="col1"></td>
+				<td jg-column="col2"></td>
+				<td><input type="number" jg-column="col3"></td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="sumUISampleView" jg-dataset="testDataset">
+		<div>
+			sum : <b><span>##fx:##dataset.sum(col3)##</span></b><br>
+			max : <b><span>##fx:##dataset.max(col3)##</span></b><br>
+			min : <b><span>##fx:##dataset.min(col3)##</span></b><br>
+			avg : <b><span>##fx:##dataset.avg(col3)##</span></b>
+		</div>
+	</div>
+	<div>
+		<a href="javascript:addRow();">addRow</a>
+		<a href="javascript:removeRow();">removeRow</a>
+	</div>
+	
+	<div class="logger"></div>
+</body>
+</html>

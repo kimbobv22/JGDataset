@@ -72,6 +72,11 @@ function apply(){
 				<th>COL4</th>
 				<th>COL3 - COL4</th>
 				<th>sum COL3</th>
+				<th>avg COL3</th>
+				<th>min COL3</th>
+				<th>max COL3</th>
+				<th>plus COL3</th>
+				<th>minus COL3</th>
 			</tr>
 		</thead>
 		<tbody jg-dataset="testDataset">
@@ -79,14 +84,19 @@ function apply(){
 				<td>##fx:##dataset.rowIndex##+1</td>
 				<td>##fx:##dataset.rowStatus## === 0 ? 'normal' : (##dataset.rowStatus## === 1 ? 'insert' : 'update')</td>
 				<td>##fx:##dataset.rowCount##</td>
-				<td>##fx:##dataset.columnCount##</td>
+				<td>##fx:##dataset.columnName(0)##</td>
 				<td jg-column="col1"></td>
 				<td><input type="text" jg-column="col2"></td>
 				<td>##fx:##col2## === "yes" ? ":)" : ":("</td>
 				<td><input type="text" jg-column="col3"></td>
 				<td><input type="text" jg-column="col4"></td>
 				<td>##fx:##col3## - ##col4##</td>
-				<td>##fx:##dataset.sum(##col3##)##</td>
+				<td>##fx:'test:'+##dataset.sum(col3)##</td>
+				<td>##fx:'test:'+##dataset.avg(col3)##</td>
+				<td>##fx:'test:'+##dataset.min(col3)##</td>
+				<td>##fx:'test:'+##dataset.max(col3)##</td>
+				<td>##fx:'test:'+##dataset.plus(col3)##</td>
+				<td>##fx:'test:'+##dataset.minus(col3)##</td>
 			</tr>
 		</tbody>
 	</table></p>
