@@ -41,8 +41,7 @@ $(function(){
 					url : "./res/sampleData.json"
 					,dataType : "json"
 					,success : function(result_){
-						var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
-						console.log(message_);
+						var message_ = result_[NVL(columnValue_,"").toLowerCase()];
 						callback_(message_ !== undefined);
 					},error : function(){
 						callback_(false);
