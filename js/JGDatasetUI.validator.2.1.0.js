@@ -424,11 +424,14 @@
 		
 		// column value changed
 		$(dataset_).on(_JGKeyword.trigger._columnValueChanged,function(event_, columnName_, rowIndex_){
-			if(that_._options.realtimeCheck && !NVL(that_.__realtimeCheckStarted,false)){
-				that_.__realtimeCheckStarted = true;
-				setTimeout(function(){
+			if(that_._options.realtimeCheck){
+				if(!isNull(that_.__realtimeCheckTimeout)){
+					clearTimeout(that_.__realtimeCheckTimeout);
+				}
+				
+				that_.__realtimeCheckTimeout = setTimeout(function(){
 					that_._rows[rowIndex_].validate();
-					that_.__realtimeCheckStarted = false;
+					that_.__realtimeCheckTimeout = null;
 				},BLK(that_._options.realtimeCheckDelay,0));
 			}
 		});
@@ -961,7 +964,7 @@
 			failedMessageTag : "<span style='display:block;' />",
 			stepValidation : true,
 			realtimeCheck : true,
-			realtimeCheckDelay : 100,
+			realtimeCheckDelay : 200,
 			animateFailedLabelShow : function(){
 				this.stop();
 				this.fadeIn();
