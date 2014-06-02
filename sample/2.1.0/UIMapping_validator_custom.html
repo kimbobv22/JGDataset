@@ -35,13 +35,12 @@ $(function(){
 				callback_(columnValue_ === "harry");
 			},"type-smile" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 				callback_(columnValue_ === ":)");
-
 			},"ajax" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
 				$.ajax({
 					url : "./res/sampleData.json"
 					,dataType : "json"
 					,success : function(result_){
-						var message_ = result_[Object.NVL(columnValue_,"").toLowerCase()];
+						var message_ = result_[NVL(columnValue_,"").toLowerCase()];
 						console.log(message_);
 						callback_(message_ !== undefined);
 					},error : function(){
@@ -58,7 +57,8 @@ $(function(){
 				ajax : "Allow mike, jhone, harry"
 			}
 		},options : {
-			failedMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
+			failedMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>",
+			realtimeCheckDelay : 500
 		}
 	});
 	
