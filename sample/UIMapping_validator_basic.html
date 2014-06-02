@@ -19,7 +19,7 @@
 $(function(){
 	var dataset_ = JGDS("dataset","testDataset");
 	
-	dataset_.addRows(3);
+	dataset_.addRows(2);
 	
 	dataset_.setColumnValue("col1",0,"00001",true);
 	dataset_.setColumnValue("col2",0,true,true);
@@ -29,27 +29,30 @@ $(function(){
 	dataset_.setColumnValue("col2",1,false,true);
 	dataset_.setColumnValue("col3",1,"test",true);
 	
-	dataset_.setColumnValue("col1",2,"00005",true);
+	/*dataset_.setColumnValue("col1",2,"00005",true);
 	dataset_.setColumnValue("col2",2,true,true);
-	dataset_.setColumnValue("col3",1,"test",true);
+	dataset_.setColumnValue("col3",2,"test",true);*/
 	
 	dataset_.apply();
 	
 	var datasetView_ = $("[jg-dataset='testDataset']");
 	datasetView_.JGDatasetUI();
-	datasetView_.JGValidator();
-	datasetView_.JGValidator("failedMessages",{
-		col3 : {
-			required : "typing more :("
+	datasetView_.JGValidator({
+		options : {
+			failedMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
+		},failedMessages : {
+			col3 : {
+				required : "typing more :("
+			}
 		}
-	});
-	
-	datasetView_.JGValidator("options",{
-		errorMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
 	});
 	
 	$(dataset_).on("columnvaluechanged",function(){
 		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
+	});
+	
+	datasetView_.on("changecolumnvalidation",function(event_, columnName_, rowIndex_, isValid_){
+		console.log(columnName_, rowIndex_, isValid_);
 	});
 	
 	$("#realtimeCheck").on("change",function(){
@@ -70,20 +73,26 @@ function validate(){
 		$("#validationResultLabel").text(datasetView_.JGValidator("isValid") ? "valid" : "invalid");
 	});
 }
-
+function addRow(){
+	JGDS("dataset","testDataset").addRow();
+}
+function removeRow(){
+	JGDS("dataset","testDataset").removeRow(0);
+}
 </script>
 </head>
 <body>
 	<h2>Example for Validator</h2>
-	
+	<a href="javascript:addRow();">addRow</a>
+	<a href="javascript:removeRow();">removeRow</a>
 	<div jg-dataset="testDataset">
 		<div>
 			<input type="text" jg-column="col1" required rangeLength="5,8" >
-			<span jg-error-column="col1"></span><br>
+			<span jg-failed-column="col1"></span><br>
 			<input type="text" jg-column="col2" patternEmail>
-			<span jg-error-column="col2"></span><br>
+			<span jg-failed-column="col2"></span><br>
 			<input type="text" jg-column="col3" required>
-			<span jg-error-column="col3"></span><br>
+			<span jg-failed-column="col3"></span><span jg-valid-column="col3">valid</span><br>
 			<hr>
 		</div>
 	</div>

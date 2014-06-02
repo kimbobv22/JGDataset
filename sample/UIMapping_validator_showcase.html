@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>UI Mapping Validator Showcase</title>
-<!--JQuery -->
-<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<!-- JGModule -->
-<script src="../js/JGDataset.min.js"></script>
-<script src="../js/JGDatasetUI.min.js"></script>
-<script src="../js/JGDatasetUI.validator.min.js"></script>
-<link rel="stylesheet" href="./res/style.css" />
-<style type="text/css">
-#validationResultLabel{
-	color: red;
-}
-</style>
 <script type="text/javascript">
 $(function(){
 	var dataset_ = JGDS("dataset","testDataset");
@@ -36,20 +19,18 @@ $(function(){
 	
 	var datasetView_ = $("[jg-dataset='testDataset']");
 	datasetView_.JGDatasetUI();
-	datasetView_.JGValidator();
-	
-	datasetView_.JGValidator("options",{
-		errorMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
-	});
-	datasetView_.JGValidator("engine",{
-		"only-smile" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(columnValue_ === ":)" || columnValue_ === ";)"
-				|| columnValue_ === "^^" || columnValue_ === "^_^");
-		}
-	});
-	datasetView_.JGValidator("failedMessages",{
-		"col18" : {
-			"only-smile" : ":) ;) ^^ ^_^"
+	datasetView_.JGValidator({
+		options : {
+			failedMessageTag : "<span style='display:inline; color:red; font-size:12px;'/>"
+		},engine : {
+			"only-smile" : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+				callback_(columnValue_ === ":)" || columnValue_ === ";)"
+					|| columnValue_ === "^^" || columnValue_ === "^_^");
+			}
+		},failedMessages : {
+			"col18" : {
+				"only-smile" : ":) ;) ^^ ^_^"
+			}
 		}
 	});
 	
@@ -83,41 +64,41 @@ function validate(){
 	<div jg-dataset="testDataset">
 		<div>
 			required : <input type="text" jg-column="col1" required>
-			<span jg-error-column="col1"></span><br>
+			<span jg-failed-column="col1"></span><br>
 			maxLength : <input type="text" jg-column="col2" maxLength=8>
-			<span jg-error-column="col2"></span><br>
+			<span jg-failed-column="col2"></span><br>
 			minLength : <input type="text" jg-column="col3" minLength=5>
-			<span jg-error-column="col3"></span><br>
+			<span jg-failed-column="col3"></span><br>
 			length : <input type="text" jg-column="col4" length=8>
-			<span jg-error-column="col4"></span><br>
+			<span jg-failed-column="col4"></span><br>
 			range : <input type="number" jg-column="col5" range="5,8">
-			<span jg-error-column="col5"></span><br>
+			<span jg-failed-column="col5"></span><br>
 			rangeLength : <input type="text" jg-column="col6" rangeLength="5,8">
-			<span jg-error-column="col6"></span><br>
+			<span jg-failed-column="col6"></span><br>
 			equals : <input type="text" jg-column="col7" equals="sample">
-			<span jg-error-column="col7"></span><br>
+			<span jg-failed-column="col7"></span><br>
 			notEquals : <input type="text" jg-column="col8" notEquals="sample">
-			<span jg-error-column="col8"></span><br>
+			<span jg-failed-column="col8"></span><br>
 			pattern : <input type="text" jg-column="col9" pattern="A{5,8}">
-			<span jg-error-column="col9"></span><br>
+			<span jg-failed-column="col9"></span><br>
 			patternWord : <input type="text" jg-column="col10" patternWord>
-			<span jg-error-column="col10"></span><br>
+			<span jg-failed-column="col10"></span><br>
 			patternAlphabet : <input type="text" jg-column="col11" patternAlphabet>
-			<span jg-error-column="col11"></span><br>
+			<span jg-failed-column="col11"></span><br>
 			patternAlphanum : <input type="text" jg-column="col12" patternAlphanum>
-			<span jg-error-column="col12"></span><br>
+			<span jg-failed-column="col12"></span><br>
 			patternEmail : <input type="email" jg-column="col13" patternEmail>
-			<span jg-error-column="col13"></span><br>
+			<span jg-failed-column="col13"></span><br>
 			patternNumber : <input type="number" jg-column="col14" patternNumber>
-			<span jg-error-column="col14"></span><br>
+			<span jg-failed-column="col14"></span><br>
 			patternPhone : <input type="text" jg-column="col15" patternPhone>
-			<span jg-error-column="col15"></span><br>
+			<span jg-failed-column="col15"></span><br>
 			columnEquals : <input type="text" jg-column="col16" columnEquals="col16_c"> === <span jg-column="col16_c" ></span>
-			<span jg-error-column="col16"></span><br>
+			<span jg-failed-column="col16"></span><br>
 			columnNotEquals : <input type="text" jg-column="col17" columnNotEquals="col17_c"> !== <span jg-column="col17_c"></span>
-			<span jg-error-column="col17"></span><br>
-			custom(only-smile) : <input type="text" jg-column="col18" custom-validator-only-smile>
-			<span jg-error-column="col18"></span><br>
+			<span jg-failed-column="col17"></span><br>
+			custom(only-smile) : <input type="text" jg-column="col18" jg-validator-only-smile>
+			<span jg-failed-column="col18"></span><br>
 			<hr>
 		</div>
 	</div>
