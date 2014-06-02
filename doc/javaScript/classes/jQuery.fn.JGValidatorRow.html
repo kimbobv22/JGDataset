@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGRowContent - JGDataset for JavaScript</title>
+    <title>jQuery.fn.JGValidatorRow - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -106,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>JGRowContent Class</h1>
+                        <h1>jQuery.fn.JGValidatorRow Class</h1>
 <div class="box meta">
     
 
@@ -114,7 +114,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/JGDatasetUI.2.1.0.js.html#l489"><code>JGDatasetUI.2.1.0.js:489</code></a>
+            Defined in: <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l75"><code>JGDatasetUI.validator.2.1.0.js:75</code></a>
         </div>
     
 
@@ -126,42 +126,26 @@
 
 
 <div class="box intro">
-    <p>JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.<br>
-사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.<br>
-*참고 : <a href="../classes/jQuery.fn.JGDatasetUI.html" class="crosslink">jQuery.fn.JGDatasetUI</a></p>
+    <p>JGValidator를 구성하는 단위객체입니다</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_JGRowContent" class="method item">
-    <h3 class="name"><code>JGRowContent</code></h3>
+        <div id="method_jQuery.fn.JGValidatorRow" class="method item private">
+    <h3 class="name"><code>jQuery.fn.JGValidatorRow</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>datasetUI_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>rowContent_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
 
     
 
+    
+        <span class="flag private">private</span>
     
 
     
@@ -183,7 +167,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l489"><code>JGDatasetUI.2.1.0.js:489</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l75"><code>JGDatasetUI.validator.2.1.0.js:75</code></a>
         
         </p>
 
@@ -197,46 +181,6 @@
         
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">datasetUI_</code>
-                        <span class="type">JQuery Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>JGDatasetUI가 매핑된 jQuery Object</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">rowContent_</code>
-                        <span class="type">JQuery Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>원본 행컨텐츠</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -270,21 +214,35 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_datasetUI">datasetUI</a>
+                                <a href="#method_dataset">dataset</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_FXElements">FXElements</a>
+                                <a href="#method_isValid">isValid</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_mappedElements">mappedElements</a>
+                                <a href="#method_lastCause">lastCause</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_refresh">refresh</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_reload">reload</a>
 
                                 
                                 
@@ -298,7 +256,14 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_rowIndex">rowIndex</a>
+                                <a href="#method_validate">validate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_validator">validator</a>
 
                                 
                                 
@@ -320,8 +285,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_datasetUI" class="method item">
-    <h3 class="name"><code>datasetUI</code></h3>
+                    <div id="method_dataset" class="method item">
+    <h3 class="name"><code>dataset</code></h3>
 
     
         <span class="paren">()</span>
@@ -329,7 +294,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">JGDatasetUI</span>
+            <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>
         </span>
     
 
@@ -356,7 +321,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l641"><code>JGDatasetUI.2.1.0.js:641</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l101"><code>JGDatasetUI.validator.2.1.0.js:101</code></a>
         
         </p>
 
@@ -367,7 +332,7 @@
     </div>
 
     <div class="description">
-        <p>매핑되어 있는 JGDatasetUI를 반환합니다.</p>
+        <p>매핑된 데이타셋을 반환합니다.</p>
 
     </div>
 
@@ -380,9 +345,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">JGDatasetUI</span>:
+                        <span class="type"><a href="../classes/JGDataset.html" class="crosslink">JGDataset</a></span>:
                     
-                    <p>매핑된 JGDatasetUI</p>
+                    <p>데이타셋</p>
 
                 
             </div>
@@ -393,8 +358,8 @@
 </div>
 
                 
-                    <div id="method_FXElements" class="method item">
-    <h3 class="name"><code>FXElements</code></h3>
+                    <div id="method_isValid" class="method item">
+    <h3 class="name"><code>isValid</code></h3>
 
     
         <span class="paren">()</span>
@@ -402,7 +367,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -429,7 +394,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l677"><code>JGDatasetUI.2.1.0.js:677</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l159"><code>JGDatasetUI.validator.2.1.0.js:159</code></a>
         
         </p>
 
@@ -440,7 +405,7 @@
     </div>
 
     <div class="description">
-        <p>FX수식매핑되어 있는 jQuery 객체를 반환합니다.</p>
+        <p>유효여부를 반환합니다.</p>
 
     </div>
 
@@ -453,9 +418,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Array</span>:
+                        <span class="type">Boolean</span>:
                     
-                    <p>FX수식매핑되어 있는 jQuery 객체</p>
+                    <p>유효여부</p>
 
                 
             </div>
@@ -466,8 +431,8 @@
 </div>
 
                 
-                    <div id="method_mappedElements" class="method item">
-    <h3 class="name"><code>mappedElements</code></h3>
+                    <div id="method_lastCause" class="method item">
+    <h3 class="name"><code>lastCause</code></h3>
 
     
         <span class="paren">()</span>
@@ -475,7 +440,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -502,7 +467,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l668"><code>JGDatasetUI.2.1.0.js:668</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l149"><code>JGDatasetUI.validator.2.1.0.js:149</code></a>
         
         </p>
 
@@ -513,7 +478,7 @@
     </div>
 
     <div class="description">
-        <p>열매핑되어 있는 jQuery 객체를 반환합니다.</p>
+        <p>마지막에 검사된 유효근거를 반환합니다.</p>
 
     </div>
 
@@ -526,13 +491,123 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Array</span>:
+                        <span class="type">Object</span>:
                     
-                    <p>열매핑되어 있는 jQuery 객체</p>
+                    <p>마지막에 검사된 유효근거</p>
 
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_refresh" class="method item">
+    <h3 class="name"><code>refresh</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l255"><code>JGDatasetUI.validator.2.1.0.js:255</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>실패라벨, 유효라벨을 새로고칩니다.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_reload" class="method item">
+    <h3 class="name"><code>reload</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l127"><code>JGDatasetUI.validator.2.1.0.js:127</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>실패라벨, 유효라벨을 재적재합니다.</p>
+
+    </div>
+
+    
+
     
 
     
@@ -543,12 +618,22 @@
     <h3 class="name"><code>rowContent</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[rowContent_]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
         <span class="returns-inline">
-            <span class="type">JQuery Object</span>
+            <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>
         </span>
     
 
@@ -575,7 +660,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l659"><code>JGDatasetUI.2.1.0.js:659</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l111"><code>JGDatasetUI.validator.2.1.0.js:111</code></a>
         
         </p>
 
@@ -586,10 +671,35 @@
     </div>
 
     <div class="description">
-        <p>원본 행컨텐츠를 반환합니다.</p>
+        <p>매핑된 행컨텐츠를 반환/설정합니다.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[rowContent_]</code>
+                        <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행컨텐츠</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -599,9 +709,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">JQuery Object</span>:
+                        <span class="type"><a href="../classes/JGRowContent.html" class="crosslink">JGRowContent</a></span>:
                     
-                    <p>jQuery 객체</p>
+                    <p>행컨텐츠</p>
 
                 
             </div>
@@ -612,8 +722,97 @@
 </div>
 
                 
-                    <div id="method_rowIndex" class="method item">
-    <h3 class="name"><code>rowIndex</code></h3>
+                    <div id="method_validate" class="method item">
+    <h3 class="name"><code>validate</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>callback_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l222"><code>JGDatasetUI.validator.2.1.0.js:222</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>행 유효검사를 수행합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback_</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>콜백함수</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_validator" class="method item">
+    <h3 class="name"><code>validator</code></h3>
 
     
         <span class="paren">()</span>
@@ -621,7 +820,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Number</span>
+            <span class="type"><a href="../classes/jQuery.fn.JGValidator.html" class="crosslink">jQuery.fn.JGValidator</a></span>
         </span>
     
 
@@ -648,7 +847,7 @@
             
         
         
-        <a href="../files/JGDatasetUI.2.1.0.js.html#l650"><code>JGDatasetUI.2.1.0.js:650</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l91"><code>JGDatasetUI.validator.2.1.0.js:91</code></a>
         
         </p>
 
@@ -659,7 +858,7 @@
     </div>
 
     <div class="description">
-        <p>현재 행컨텐츠의 색인을 반환합니다.</p>
+        <p>해당 JGValidator를 반환합니다.</p>
 
     </div>
 
@@ -672,9 +871,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Number</span>:
+                        <span class="type"><a href="../classes/jQuery.fn.JGValidator.html" class="crosslink">jQuery.fn.JGValidator</a></span>:
                     
-                    <p>색인</p>
+                    <p>JGValidator</p>
 
                 
             </div>

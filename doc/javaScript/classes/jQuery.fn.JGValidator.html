@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.2</em>
+            <em>API Docs for: 2.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,8 @@
                 <li><a href="../classes/jQuery.fn.JGSelect.html">jQuery.fn.JGSelect</a></li>
             
                 <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
+            
+                <li><a href="../classes/jQuery.fn.JGValidatorRow.html">jQuery.fn.JGValidatorRow</a></li>
             
             </ul>
 
@@ -112,7 +114,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l61"><code>JGDatasetUI.validator.2.0.2.js:61</code></a>
+            Defined in: <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l363"><code>JGDatasetUI.validator.2.1.0.js:363</code></a>
         </div>
     
 
@@ -171,7 +173,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l61"><code>JGDatasetUI.validator.2.0.2.js:61</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l363"><code>JGDatasetUI.validator.2.1.0.js:363</code></a>
         
         </p>
 
@@ -203,8 +205,6 @@ var result_ = validator_.함수명();</code></pre>
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
         
         
             <li class="api-class-tab events"><a href="#events">Events</a></li>
@@ -220,13 +220,6 @@ var result_ = validator_.함수명();</code></pre>
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_cause">cause</a>
-
-                                
-                                
-                            </li>
                         
                             <li class="index-item method">
                                 <a href="#method_commonFailedMessages">commonFailedMessages</a>
@@ -257,14 +250,14 @@ var result_ = validator_.함수명();</code></pre>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isColumnValid">isColumnValid</a>
+                                <a href="#method_isValid">isValid</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_isValid">isValid</a>
+                                <a href="#method_lastCause">lastCause</a>
 
                                 
                                 
@@ -285,7 +278,21 @@ var result_ = validator_.함수명();</code></pre>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_validate">validate</a>
+                                <a href="#method_refresh">refresh</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_reload">reload</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_reloadRow">reloadRow</a>
 
                                 
                                 
@@ -302,28 +309,6 @@ var result_ = validator_.함수명();</code></pre>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property__commonFailedMessages">_commonFailedMessages</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property__engine">_engine</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -349,99 +334,6 @@ var result_ = validator_.함수명();</code></pre>
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_cause" class="method item">
-    <h3 class="name"><code>cause</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l256"><code>JGDatasetUI.validator.2.0.2.js:256</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성 검사에 대한 실패원인을 반환합니다.</p>
-<pre class="code prettyprint"><code>//형식
-{
-열명1 : {
-    행색인 : {
-        유효성명1 : {유효성정보}
-        ,...
-        }
-    ,...
-    }
-,...
-}</code></pre>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                    <p>실패원인</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;cause&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
 
                 
                     <div id="method_commonFailedMessages" class="method item">
@@ -490,7 +382,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l233"><code>JGDatasetUI.validator.2.0.2.js:233</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l522"><code>JGDatasetUI.validator.2.1.0.js:522</code></a>
         
         </p>
 
@@ -603,7 +495,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l116"><code>JGDatasetUI.validator.2.0.2.js:116</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l451"><code>JGDatasetUI.validator.2.1.0.js:451</code></a>
         
         </p>
 
@@ -658,7 +550,7 @@ var result_ = validator_.함수명();</code></pre>
 
     
         <span class="returns-inline">
-            <span class="type">JGDatasetUI</span>
+            <span class="type"><a href="../classes/jQuery.fn.JGDatasetUI.html" class="crosslink">jQuery.fn.JGDatasetUI</a></span>
         </span>
     
 
@@ -685,7 +577,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l105"><code>JGDatasetUI.validator.2.0.2.js:105</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l440"><code>JGDatasetUI.validator.2.1.0.js:440</code></a>
         
         </p>
 
@@ -709,7 +601,7 @@ var result_ = validator_.함수명();</code></pre>
             <div class="returns-description">
                 
                     
-                        <span class="type">JGDatasetUI</span>:
+                        <span class="type"><a href="../classes/jQuery.fn.JGDatasetUI.html" class="crosslink">jQuery.fn.JGDatasetUI</a></span>:
                     
                     <p>JGDatasetUI</p>
 
@@ -777,7 +669,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l180"><code>JGDatasetUI.validator.2.0.2.js:180</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l463"><code>JGDatasetUI.validator.2.1.0.js:463</code></a>
         
         </p>
 
@@ -854,144 +746,6 @@ var result_ = validator_.함수명();</code></pre>
 </div>
 
                 
-                    <div id="method_isColumnValid" class="method item">
-    <h3 class="name"><code>isColumnValid</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>columnName_</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>rowIndex_</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l152"><code>JGDatasetUI.validator.2.0.2.js:152</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>특정행열의 유효여부를 반환합니다.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">columnName_</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>열명</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">rowIndex_</code>
-                        <span class="type">Int</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>행색인</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Boolean</span>:
-                    
-                    <p>유효여부</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;isColumnValid&quot;,&quot;COL1&quot;,0);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_isValid" class="method item">
     <h3 class="name"><code>isValid</code></h3>
 
@@ -1028,7 +782,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l128"><code>JGDatasetUI.validator.2.0.2.js:128</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l587"><code>JGDatasetUI.validator.2.1.0.js:587</code></a>
         
         </p>
 
@@ -1067,6 +821,100 @@ var result_ = validator_.함수명();</code></pre>
 
             <div class="example-content">
                 <pre class="code prettyprint"><code> var result_ = $(target_).JGValidator(&quot;isValid&quot;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_lastCause" class="method item">
+    <h3 class="name"><code>lastCause</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l554"><code>JGDatasetUI.validator.2.1.0.js:554</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>마지막 유효성 검사에 대한 유효근거를 반환합니다.</p>
+<p>[
+    행색인 : {
+        isValid : 행유효여부 
+        열명1 : {
+            유효성명1 : {유효성정보},
+            유효성명2 : {유효성정보},
+            ...
+        },
+        ...
+    },
+    ...
+]</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>유효근거</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var result_ = $(target_).JGValidator(&quot;cause&quot;);</code></pre>
 
             </div>
         </div>
@@ -1126,7 +974,7 @@ var result_ = validator_.함수명();</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l792"><code>JGDatasetUI.validator.2.0.2.js:792</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l973"><code>JGDatasetUI.validator.2.1.0.js:973</code></a>
         
         </p>
 
@@ -1140,10 +988,13 @@ var result_ = validator_.함수명();</code></pre>
         <p>옵션을 설정/반환합니다.<br>
 매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.</p>
 <pre class="code prettyprint"><code>//옵션항목
-errorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
-appendErrorMessage = 실패메세지 확장출력여부
+failedMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
 stepValidation = 단계별 유효성검사여부
-realtimeCheck = 실시간 유효성검사여부</code></pre>
+realtimeCheck = 실시간 유효성검사여부
+animateFailedLabelHide = 실패라벨숨김 에니메이션
+animateFailedLabelShow = 실패라벨표시 에니메이션
+animateValidLabelHide = 유효라벨숨김 에니메이션
+animateValidLabelShow = 유효라벨표시 에니메이션</code></pre>
 
     </div>
 
@@ -1224,76 +1075,18 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
     <h3 class="name"><code>refresh</code></h3>
 
     
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l295"><code>JGDatasetUI.validator.2.0.2.js:295</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성요소를 재적재합니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;refresh&quot;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_validate" class="method item">
-    <h3 class="name"><code>validate</code></h3>
-
-    
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        <code class="optional">[callback_]</code>
+                        <code>fromRowIndex_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>toRowIndex_</code>
                     
                 </li>
             
@@ -1326,7 +1119,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l651"><code>JGDatasetUI.validator.2.0.2.js:651</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l896"><code>JGDatasetUI.validator.2.1.0.js:896</code></a>
         
         </p>
 
@@ -1337,7 +1130,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
     </div>
 
     <div class="description">
-        <p>유효성을 검사합니다.</p>
+        <p>실패라벨, 유효라벨을 새로고칩니다</p>
 
     </div>
 
@@ -1349,15 +1142,30 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name optional">[callback_]</code>
-                        <span class="type">Function</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                        <code class="param-name">fromRowIndex_</code>
+                        <span class="type">Number</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>콜백함수</p>
+                        <p>시작행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">toRowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>종료행색인</p>
 
                     </div>
 
@@ -1375,9 +1183,346 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>$(dataset_).JGValidator(&quot;validate&quot;,function(isValid_, cause_){
-    //to do
-});</code></pre>
+                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;refresh&quot;,fromRowIndex_,toRowIndex_);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_refresh" class="method item">
+    <h3 class="name"><code>refresh</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fromRowIndex_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>toRowIndex_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l928"><code>JGDatasetUI.validator.2.1.0.js:928</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>요효성검사를 수행합니다</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fromRowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>시작행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">toRowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>종료행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;validate&quot;,fromRowIndex_,toRowIndex_);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_reload" class="method item">
+    <h3 class="name"><code>reload</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[reloadRow_]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l609"><code>JGDatasetUI.validator.2.1.0.js:609</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>JGValidator를 재적재합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[reloadRow_]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>행요소 재적재여부</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;reload&quot;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_reloadRow" class="method item">
+    <h3 class="name"><code>reloadRow</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fromRowIndex_</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>toRowIndex_</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l878"><code>JGDatasetUI.validator.2.1.0.js:878</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>행요소을 재적재합니다.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fromRowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>시작행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">toRowIndex_</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>종료행색인</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>$(target_).JGValidator(&quot;reloadRow&quot;,fromRowIndex_,toRowIndex_);</code></pre>
 
             </div>
         </div>
@@ -1431,7 +1576,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l204"><code>JGDatasetUI.validator.2.0.2.js:204</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l488"><code>JGDatasetUI.validator.2.1.0.js:488</code></a>
         
         </p>
 
@@ -1516,104 +1661,6 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
         
 
         
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property__commonFailedMessages" class="property item">
-    <h3 class="name"><code>_commonFailedMessages</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l829"><code>JGDatasetUI.validator.2.0.2.js:829</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>기본 실패매세지입니다.<br>
-유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.<br>
-*참고 : <a href="../classes/jQuery.fn.JGValidator.html#method_commonFailedMessages" class="crosslink">commonFailedMessages</a></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__engine" class="property item">
-    <h3 class="name"><code>_engine</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l862"><code>JGDatasetUI.validator.2.0.2.js:862</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>유효성 엔진객체입니다.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
 
         
 
@@ -1645,7 +1692,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
         
         
-        <a href="../files/JGDatasetUI.validator.2.0.2.js.html#l42"><code>JGDatasetUI.validator.2.0.2.js:42</code></a>
+        <a href="../files/JGDatasetUI.validator.2.1.0.js.html#l57"><code>JGDatasetUI.validator.2.1.0.js:57</code></a>
         
         </p>
 
@@ -1655,7 +1702,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
     </div>
 
     <div class="description">
-        <p>특정 행열값의 유효여부가 변경 시 발생됩니다.</p>
+        <p>행의 유효성여부가 변경되면 호출됩니다.</p>
 
     </div>
 
@@ -1668,7 +1715,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
                 <li class="param">
                     
                         <code class="param-name">event_</code>
-                        <span class="type">JQuery Event object</span>
+                        <span class="type">JQuery Event Object</span>
                     
 
                     
@@ -1683,14 +1730,14 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             
                 <li class="param">
                     
-                        <code class="param-name">columnName_</code>
-                        <span class="type">String</span>
+                        <code class="param-name">isValid_</code>
+                        <span class="type">Boolean</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>열명</p>
+                        <p>행유효성여부</p>
 
                     </div>
 
@@ -1713,22 +1760,6 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
                     
                 </li>
             
-                <li class="param">
-                    
-                        <code class="param-name">isValid_</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>유효여부</p>
-
-                    </div>
-
-                    
-                </li>
-            
             </ul>
         </div>
     
@@ -1739,7 +1770,7 @@ var result2_ = $(target_).JGValidator({options : ...});</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>$(target_).trigger(&quot;changecolumnvalidation&quot;,function(event_, columnName_, rowIndex_, isValid_){
+                <pre class="code prettyprint"><code>$(target_).trigger(&quot;changecolumnvalidation&quot;,function(event_, isValid_, rowIndex_){
     //to do
 });</code></pre>
 

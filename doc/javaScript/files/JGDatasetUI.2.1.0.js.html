@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGDatasetUI.2.0.2.js - JGDataset for JavaScript</title>
+    <title>JGDatasetUI.2.1.0.js - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.2</em>
+            <em>API Docs for: 2.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -65,6 +65,8 @@
             
                 <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
             
+                <li><a href="../classes/jQuery.fn.JGValidatorRow.html">jQuery.fn.JGValidatorRow</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -104,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: JGDatasetUI.2.0.2.js</h1>
+                        <h1 class="file-heading">File: JGDatasetUI.2.1.0.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -527,35 +529,24 @@
 	JGDatasetUI.prototype.indexOf = (function(rowContent_){
 		return this._rowContents.indexOf(rowContent_);
 	});
-	
-	JGDatasetUI.prototype.__rowRangeRefresh = (function(fromRowIndex_, toRowIndex_, refreshFunc_){
-		var rowCount_ = this.dataset().getRowCount();
-		if(isNull(fromRowIndex_)){
-			fromRowIndex_ = NVL(fromRowIndex_,0);
-			toRowIndex_ = NVL(toRowIndex_,rowCount_-1);
-		}else{
-			toRowIndex_ = NVL(toRowIndex_,fromRowIndex_);
-		}
-		
-		for(var rowIndex_=fromRowIndex_;rowIndex_&lt;=toRowIndex_;++rowIndex_){
-			refreshFunc_(this, rowIndex_);
-		}
-	});
 	JGDatasetUI.prototype._refreshFX = (function(fromRowIndex_, toRowIndex_, fireEvent_){
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refreshFX();
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.FXRefreshed,[rowIndex_]);
 		});
 	});
 	JGDatasetUI.prototype._refreshColumn = (function(columnName_, fromRowIndex_, toRowIndex_, refreshFx_, fireEvent_){
 		refreshFx_ = NVL(refreshFx_,true);
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refreshColumn(columnName_, refreshFx_);
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.columnRefreshed,[columnName_, rowIndex_]);
 		});
 	});
 	JGDatasetUI.prototype._refresh = (function(fromRowIndex_, toRowIndex_, fireEvent_){
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refresh();
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.refreshed,[rowIndex_]);
 		});
@@ -594,9 +585,8 @@
 			if(!this._jgDatasetUIInitialized()){
 				this._jgDatasetUI(new JGDatasetUI(this, arguments_[0]));
 				this._jgDatasetUIInitialized(true);
-			}
-			
-			return JGSelector(this._jgDatasetUI(), arguments_);
+				return this;
+			}else return JGSelector(this._jgDatasetUI(), arguments_);
 		},arguments);
 	});
 	
@@ -1098,9 +1088,8 @@
 			if(!this._jgSelectInitialized()){
 				this._jgSelect(new JGSelect(this, arguments_[0]));
 				this._jgSelectInitialized(true);
-			}
-			
-			return JGSelector(this._jgSelect(), arguments_);
+				return this;
+			}else return JGSelector(this._jgSelect(), arguments_);
 		},arguments);
 	});
 	

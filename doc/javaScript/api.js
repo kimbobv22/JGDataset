@@ -12,6 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "jQuery.fn.JGDatasetUI",
         "jQuery.fn.JGSelect",
         "jQuery.fn.JGValidator",
+        "jQuery.fn.JGValidatorRow",
         "jQuery.fn.extension"
     ],
     "modules": [],
