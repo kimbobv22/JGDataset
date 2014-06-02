@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JGDatasetUI.validator.2.0.2.js - JGDataset for JavaScript</title>
+    <title>JGDatasetUI.validator.2.1.0.js - JGDataset for JavaScript</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.2</em>
+            <em>API Docs for: 2.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -65,6 +65,8 @@
             
                 <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
             
+                <li><a href="../classes/jQuery.fn.JGValidatorRow.html">jQuery.fn.JGValidatorRow</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -104,68 +106,370 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: JGDatasetUI.validator.2.0.2.js</h1>
+                        <h1 class="file-heading">File: JGDatasetUI.validator.2.1.0.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 (function(window){
 	
-	if(JGDatasetUI === undefined){
-		console.error(&quot;can&#x27;t not initialize JGValidator, JGDataset UI not found&quot;);
-		return;
-	}
-	
-	function _jsonDataWithoutCase(object_, key_){
-		for(var tKey_ in object_){
-			if(tKey_.toUpperCase() === key_.toUpperCase()){
-				return object_[tKey_];
+	var JGJSONUtils = {
+		value : function(object_, key_){
+			if($.type(key_) === &quot;number&quot;){
+				var result_;
+				var curIndex_ = 0;
+				$.each(object_,function(tKey_){
+					if(curIndex_ === key_){
+						result_ = object_[tKey_];
+						return false;
+					}
+					++curIndex_;
+				});
+				
+				return result_;
+			}else{
+				var uKey_ = key_.toUpperCase();
+				var result_; 
+				$.each(object_,function(tKey_, value_){
+					if(tKey_.toUpperCase() === uKey_){
+						result_ = object_[tKey_];
+						return false;
+					}
+				});
+				return result_;
 			}
-		}
-		return undefined;
-	}
-	function _jsonDataLength(object_){
-		var length_ = 0;
-		for(var tKey_ in object_){
-			if(object_.hasOwnProperty(tKey_)) ++length_;
-		}
-		
-		return length_;
-	}
-	
-	function _jsonDataAtIndex(object_, index_){
-		var curIndex_ = 0;
-		for(var key_ in object_){
-			if(object_.hasOwnProperty(key_)){
-				if(curIndex_ === index_) return object_[key_];
+		},key : function(object_, index_){
+			var result_;
+			var curIndex_ = 0;
+			$.each(object_,function(tKey_){
+				if(curIndex_ === index_){
+					result_ = tKey_;
+					return false;
+				}
 				++curIndex_;
-			}
+			});
+			
+			return result_;
+		},length : function(object_){
+			var length_ = 0;
+			$.each(object_,function(key_){
+				++length_;
+			});
+			
+			return length_;
 		}
-		
-		return undefined;
-	}
+	};
 	
 	_JGKeyword = $.extend(true,_JGKeyword,{
 		validator : {
-			errorColumn : &quot;jg-error-column&quot;,
+			failedColumn : &quot;jg-failed-column&quot;,
 			validColumn : &quot;jg-valid-column&quot;,
+			failedLabelLastDisplay : &quot;jgValidatorUI_failedLabel_lastDisplay&quot;,
+			validLabelLastDisplay : &quot;jgValidatorUI_validLabel_lastDisplay&quot;,
 			trigger : {
 				/**
-				 * 특정 행열값의 유효여부가 변경 시 발생됩니다.
+				 * 행의 유효성여부가 변경되면 호출됩니다. 
 				 * 
 				 * @event changecolumnvalidation
-				 * @param {jQuery Event object} event_ jQuery 이벤트 객체
-				 * @param {String} columnName_ 열명
+				 * @param {jQuery Event Object} event_ jQuery 이벤트 객체
+				 * @param {Boolean} isValid_ 행유효성여부
 				 * @param {Number} rowIndex_ 행색인
-				 * @param {Boolean} isValid_ 유효여부
 				 * @for jQuery.fn.JGValidator
 				 * @example
-				 * 	$(target_).trigger(&quot;changecolumnvalidation&quot;,function(event_, columnName_, rowIndex_, isValid_){
+				 * 	$(target_).trigger(&quot;changecolumnvalidation&quot;,function(event_, isValid_, rowIndex_){
 				 * 		//to do
 				 * 	});
 				 */
-				changeColumnValidation : &quot;changecolumnvalidation&quot;,
+				rowValidationChange : &quot;rowvalidationchange&quot;
 			}
 		}
+	});
+	
+	/**
+	 * JGValidator를 구성하는 단위객체입니다
+	 * 
+	 * @class jQuery.fn.JGValidatorRow
+	 * @constructor 
+	 * @private
+	 */
+	var JGValidatorRow = window.JGValidatorRow = (function(validator_, rowContent_){
+		this._validator = validator_;
+		this._errorLabels = new Array();
+		this._validLabels = new Array();
+		this._lastCause = null;
+		
+		this.rowContent(rowContent_);
+	});
+	
+	/**
+	 * 해당 JGValidator를 반환합니다.
+	 * 
+	 * @method validator
+	 * @return {jQuery.fn.JGValidator} JGValidator
+	 */
+	JGValidatorRow.prototype.validator = (function(){
+		return this._validator;
+	});
+	
+	/**
+	 * 매핑된 데이타셋을 반환합니다.
+	 * 
+	 * @method dataset
+	 * @return {JGDataset} 데이타셋
+	 */
+	JGValidatorRow.prototype.dataset = (function(){
+		return this._validator.datasetUI().dataset();
+	});
+	
+	/**
+	 * 매핑된 행컨텐츠를 반환/설정합니다.
+	 * 
+	 * @method rowContent
+	 * @param {JGRowContent} [rowContent_] 행컨텐츠
+	 * @return {JGRowContent} 행컨텐츠
+	 */
+	JGValidatorRow.prototype.rowContent = (function(rowContent_){
+		if(rowContent_ !== undefined){
+			this._rowContent = rowContent_;
+			this.reload();
+		}
+		
+		return this._rowContent;
+	});
+	
+	/**
+	 * 실패라벨, 유효라벨을 재적재합니다.
+	 * 
+	 * @method reload
+	 */
+	JGValidatorRow.prototype.reload = (function(){
+		this._errorLabels.removeAll();
+		this._validLabels.removeAll();
+
+		var oRowContent_ = this._rowContent.rowContent();
+
+		var that_ = this;
+		oRowContent_.find(&quot;*[&quot;+_JGKeyword.validator.failedColumn+&quot;]&quot;).each(function(){
+			that_._errorLabels.push($(this));
+		});
+		oRowContent_.find(&quot;*[&quot;+_JGKeyword.validator.validColumn+&quot;]&quot;).each(function(){
+			that_._validLabels.push($(this));
+		});
+		
+		this.validate(function(){});
+	});
+	
+	/**
+	 * 마지막에 검사된 유효근거를 반환합니다.
+	 * 
+	 * @method lastCause
+	 * @return {Object} 마지막에 검사된 유효근거
+	 */
+	JGValidatorRow.prototype.lastCause = (function(){
+		return this._lastCause;
+	});
+	
+	/**
+	 *  유효여부를 반환합니다.
+	 * 
+	 * @method isValid
+	 * @return {Boolean} 유효여부
+	 */
+	JGValidatorRow.prototype.isValid = (function(){
+		var result_ = true;
+		var lastCauseExists_ = (!isNull(this._lastCause) ? true : false);
+
+		if(lastCauseExists_) $.each(this._lastCause, function(columnName_){
+			if(this.length &gt; 0){
+				result_ = false;
+				return result_;
+			}
+		});
+		
+		return (result_ &amp;&amp; lastCauseExists_);
+	});
+	JGValidatorRow.prototype.__rValidate = (function(validator_, dataset_, cause_, colIndex_, valIndex_, callback_){
+		var columnCount_ = JGJSONUtils.length(validator_._validators);
+		if(colIndex_ &gt;= columnCount_){
+			callback_(cause_);
+			return;
+		}	
+
+		var columnName_ = JGJSONUtils.key(validator_._validators, colIndex_);
+		var validatorElements_ = validator_._validators[columnName_];
+		var validatorElementsLength_ = JGJSONUtils.length(validatorElements_);
+
+		if(valIndex_ &gt;= validatorElementsLength_){
+			this.__rValidate(validator_, dataset_, cause_, colIndex_+1, 0, callback_);
+			return;
+		}
+
+		columnName_ = columnName_.toUpperCase();
+		var rowIndex_ = this.rowContent().rowIndex();
+		var columnValue_ = dataset_.getColumnValue(columnName_, rowIndex_);
+		var validatorElement_ = JGJSONUtils.value(validatorElements_, valIndex_);
+		var engine_ = JGJSONUtils.value(validator_._engine, validatorElement_.name);
+		
+		if(!engine_){
+			console.error(&quot;can&#x27;t find validation engine : &quot;+validatorElement_.name);
+			this.__rValidate(validator_, dataset_, cause_, colIndex_, valIndex_+1, callback_);
+			return;
+		}
+		var that_ = this;
+		engine_.apply(dataset_,[validatorElement_, columnName_, rowIndex_, columnValue_, function(isValid_){
+			if(cause_[columnName_] === undefined)
+				cause_[columnName_] = new Array();
+			
+			if(!isValid_) cause_[columnName_].push(validatorElement_.name);
+			if(!isValid_ &amp;&amp; BLK(validator_._options.stepValidation,true)){
+				++colIndex_;
+				valIndex_ = 0;
+			}else{
+				++valIndex_;
+			}
+
+			that_.__rValidate(validator_, dataset_, cause_, colIndex_, valIndex_, callback_);
+		}]);
+	});
+	
+	/**
+	 *  행 유효검사를 수행합니다.
+	 * 
+	 * @method validate
+	 * @param {Function} callback_ 콜백함수
+	 */
+	JGValidatorRow.prototype.validate = (function(callback_){
+		var validator_ = this._validator;
+		var datasetUI_ = validator_.datasetUI();
+		var dataset_ = datasetUI_.dataset();
+		var rowIndex_ = this._rowContent.rowIndex();
+		var validators_ = validator_._validators;
+		var engines_ = validator_._engine;
+		var that_ = this;
+
+		this.__rValidate(validator_, dataset_, {}, 0, 0, function(cause_){
+			var rCause_ = $.extend(true,{},cause_);
+			$.each(cause_, function(columnName_){
+				if(rCause_[columnName_].length === 0)
+					delete rCause_[columnName_];
+			});
+
+			that_._lastCause = rCause_;
+			that_.refresh();
+			var isValid_ = that_.isValid();
+			if(isValid_ !== that_.__lastValid){
+				datasetUI_.element().trigger(_JGKeyword.validator.trigger.rowValidationChange, [isValid_, rowIndex_]);
+			}
+			that_.__lastValid = isValid_;
+			if(!isNull(callback_)) callback_.apply(dataset_, [isValid_, that_._lastCause]);
+		});
+	});
+	
+	/**
+	 * 실패라벨, 유효라벨을 새로고칩니다.
+	 * 
+	 * @method refresh
+	 */
+	JGValidatorRow.prototype.refresh = (function(){
+		var that_ = this;
+		var dataset_ = this.dataset();
+		var validator_ = that_.validator();
+		var rowIndex_ = this.rowContent().rowIndex();
+		var lastCause_ = this.lastCause();
+		$.each(this._errorLabels, function(){
+			var that_ = this;
+			var columnNames_ = this.attr(_JGKeyword.validator.failedColumn);
+
+			if(columnNames_.indexOf(&quot;,&quot;) &gt;= 0){
+				columnNames_ = columnNames_.split(&quot;,&quot;);
+			}else{
+				var temp_ = columnNames_;
+				 columnNames_ = new Array();
+				 columnNames_.push(temp_);
+			}
+
+			var colCount_ = columnNames_.length;
+			for(var colIndex_=0;colIndex_&lt;colCount_;++colIndex_){
+				var columnName_ = columnNames_[colIndex_].toUpperCase();
+				var cause_ = lastCause_[columnName_.toUpperCase()];
+
+				if(cause_ === undefined){
+					var animateFunc_ = validator_._options.animateFailedLabelHide;
+					if(!isNull(animateFunc_) &amp;&amp; BLK(this.data(_JGKeyword.validator.failedLabelLastDisplay),true)){
+						this.data(_JGKeyword.validator.failedLabelLastDisplay,false);
+						animateFunc_.apply(this,[cause_, dataset_, columnName_, rowIndex_]);
+					}
+				}else{
+					var causeCount_ = JGJSONUtils.length(cause_);
+					this.empty();
+					for(var causeIndex_=0;causeIndex_&lt;causeCount_;++causeIndex_){
+						var causeName_ = JGJSONUtils.value(cause_, causeIndex_);
+						var failedMessage_ = validator_.failedMessage(columnName_, causeName_);
+						if(isNull(failedMessage_)){
+							failedMessage_ = NVL(validator_.commonFailedMessage(causeName_),&quot;&quot;);
+						}
+
+						var makeMessagePattern_ = (function(key_){
+							return new RegExp(&quot;\\{(&quot;+key_+&quot;)\\}&quot;, &quot;gi&quot;);
+						});
+						
+						failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnName&quot;),columnName_);
+						failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;rowIndex&quot;),rowIndex_);
+						failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnValue&quot;),dataset_.getColumnValue(columnName_,rowIndex_));
+
+						var validatorElement_ = validator_._validator(columnName_, causeName_);
+						$.each(validatorElement_, function(entryName_, entryValue_){
+							failedMessage_ = failedMessage_.replace(makeMessagePattern_(entryName_), entryValue_);
+						});
+
+						var failedMessageTag_ = $(validator_._options.failedMessageTag);
+						failedMessageTag_.html(failedMessage_);
+						this.append(failedMessageTag_);
+
+						if(NVL(validator_.options.stepValidation,false)) break;
+					}
+
+					var animateFunc_ = validator_._options.animateFailedLabelShow;
+					if(!isNull(animateFunc_) &amp;&amp; !BLK(this.data(_JGKeyword.validator.failedLabelLastDisplay),false)){
+						this.data(_JGKeyword.validator.failedLabelLastDisplay,true);
+						animateFunc_.apply(this,[cause_, dataset_, columnName_, rowIndex_]);
+					}
+				}
+			}
+		});
+
+		$.each(this._validLabels, function(){
+			var that_ = this;
+			var columnNames_ = this.attr(_JGKeyword.validator.validColumn);
+
+			if(columnNames_.indexOf(&quot;,&quot;) &gt;= 0){
+				columnNames_ = columnNames_.split(&quot;,&quot;);
+			}else{
+				var temp_ = columnNames_;
+				 columnNames_ = new Array();
+				 columnNames_.push(temp_);
+			}
+
+			var colCount_ = columnNames_.length;
+			for(var colIndex_=0;colIndex_&lt;colCount_;++colIndex_){
+				var columnName_ = columnNames_[colIndex_].toUpperCase();
+				var cause_ = lastCause_[columnName_];
+
+				if(cause_ === undefined){
+					var animateFunc_ = validator_._options.animateValidLabelShow;
+					if(!isNull(animateFunc_) &amp;&amp; !BLK(this.data(_JGKeyword.validator.validLabelLastDisplay),false)){
+						this.data(_JGKeyword.validator.validLabelLastDisplay,true);
+						animateFunc_.apply(this,[cause_, dataset_, columnName_, rowIndex_]);
+					}
+					
+				}else{
+					var animateFunc_ = validator_._options.animateValidLabelHide;
+					if(!isNull(animateFunc_) &amp;&amp; BLK(this.data(_JGKeyword.validator.validLabelLastDisplay),true)){
+						this.data(_JGKeyword.validator.validLabelLastDisplay,false);
+						animateFunc_.apply(this,[cause_, dataset_, columnName_, rowIndex_]);
+					}
+				}
+			}
+		});
 	});
 	
 	/**
@@ -184,39 +488,72 @@
 	 * @class jQuery.fn.JGValidator
 	 * @constructor 
 	 */
-	var JGValidator = window.JGValidator = (function(datasetUI_){
+	var JGValidator = window.JGValidator = (function(datasetUI_, arg1_){
+		var failedMessages_,commonFailedMessages_,options_,engine_;
+		arg1_ = NVL(arg1_,{});
+		if(!isNull(arg1_.options)){
+			failedMessages_ = arg1_.failedMessages;
+			commonFailedMessages_ = arg1_.commonFailedMessages;
+			options_ = arg1_.options;
+			engine_ = arg1_.engine;
+		}else{
+			options_ = arg1_;
+		}
+
 		this._datasetUI = datasetUI_;
-		this._engine = $.extend(true,{},JGValidator.prototype._engine);
-		this._failedMessages = $.extend(true,{},JGValidator.prototype._failedMessages);
+		this._engine = $.extend(true,JGValidator.prototype._engine,engine_);
+		this._commonFailedMessages = $.extend(true,JGValidator.prototype._commonFailedMessages,commonFailedMessages_);
+		this._failedMessages = $.extend(true,JGValidator.prototype._failedMessages,failedMessages_);
+		this._options = $.extend(true,JGValidator.prototype._options,options_);
 		this._validators = {};
-		this._cause = {};
-		this._onValidate = false;
-		
-		var that_ = this;
+		this._rows = new Array();
+
 		var dataset_ = this.dataset();
-		
-		//bind dataset event
-		$(dataset_).on(_JGKeyword.trigger._columnValueChanged, function(event_, columnName_, rowIndex_){
-			if(that_._options.realtimeCheck) that_._singleValidate(columnName_, rowIndex_, function(){});
+		var that_ = this;
+		// row inserted
+		$(dataset_).on(_JGKeyword.trigger._rowInserted,function(event_, rowIndex_){
+			that_._insertValidatorRow(rowIndex_);
 		});
+		
+		// row removed
+		$(dataset_).on(_JGKeyword.trigger._rowRemoved,function(event_, rowIndex_){
+			that_._removeValidatorRow(rowIndex_);
+		});
+		
+		// row moved
+		$(dataset_).on(_JGKeyword.trigger._rowMoved,function(event_, fromRowIndex_, toRowIndex_){
+			if(fromRowIndex_ &gt; toRowIndex_){
+				that_.refresh(toRowIndex_,fromRowIndex_); 
+			}else that_.refresh(fromRowIndex_,toRowIndex_);
+			
+		});
+		
+		// column added,removed
 		$(dataset_).on(_JGKeyword.trigger._columnAdded+&quot; &quot;
-						+_JGKeyword.trigger._columnRemoved+&quot; &quot;
-						+_JGKeyword.trigger._rowInserted+&quot; &quot;
-						+_JGKeyword.trigger._rowRemoved+&quot; &quot;
-						+_JGKeyword.trigger._datasetClear+&quot; &quot;
-						+_JGKeyword.trigger._datasetReset+&quot; &quot;
-						+_JGKeyword.trigger._datasetChanged, function(event_, columnName_){
+				+_JGKeyword.trigger._columnRemoved,function(event_, columnName_){
 			that_.refresh();
 		});
 		
-		this.refresh();
+		// column value changed
+		$(dataset_).on(_JGKeyword.trigger._columnValueChanged,function(event_, columnName_, rowIndex_){
+			if(that_._options.realtimeCheck) that_._rows[rowIndex_].validate();
+		});
+		
+		// dataset clear,reset,changed,sorted
+		$(dataset_).on(_JGKeyword.trigger._datasetClear+&quot; &quot;
+				+_JGKeyword.trigger._datasetReset+&quot; &quot;
+				+_JGKeyword.trigger._datasetChanged+&quot; &quot;
+				+_JGKeyword.trigger._datasetSorted,function(event_, rowIndex_, oldRowIndex_){
+			that_.reload();
+		});
+		
+		this.reload();
 	});
-	
 	/**
 	 * 매핑된 JGDatasetUI를 반환합니다.
 	 * 
 	 * @method datasetUI
-	 * @return {JGDatasetUI} JGDatasetUI
+	 * @return {jQuery.fn.JGDatasetUI} JGDatasetUI
 	 * @example
 	 * 	var result_ = $(target_).JGValidator(&quot;datasetUI&quot;);
 	 */
@@ -234,59 +571,7 @@
 	JGValidator.prototype.dataset = (function(){
 		return this._datasetUI.dataset();
 	});
-	
-	/**
-	 *  유효여부를 반환합니다.
-	 * 
-	 * @method isValid
-	 * @return {Boolean} 유효여부
-	 * @example
-	 * 	var result_ = $(target_).JGValidator(&quot;isValid&quot;);
-	 */
-	JGValidator.prototype.isValid = (function(){
-		var dataset_ = this.dataset();
-		var rowCount_ = dataset_.getRowCount();
-		var validators_ = this._validators;
-		
-		for(var columnName_ in this._validators){
-			for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
-				if(!this.isColumnValid(columnName_, rowIndex_)){
-					return false;
-				}
-			}
-		}
-	
-		return true;
-	});
-	
-	/**
-	 * 특정행열의 유효여부를 반환합니다.
-	 * 
-	 * @method isColumnValid
-	 * @param {String} columnName_ 열명
-	 * @param {int} rowIndex_ 행색인
-	 * @return {Boolean} 유효여부
-	 * @example
-	 * 	var result_ = $(target_).JGValidator(&quot;isColumnValid&quot;,&quot;COL1&quot;,0);
-	 */
-	JGValidator.prototype.isColumnValid = (function(columnName_, rowIndex_){
-		var dataset_ = this.dataset();
-		var rowCount_ = dataset_.getRowCount();
-		var validators_ = this._validators;
-		
-		var result_ = this._cause[columnName_.toUpperCase()]
-		if(result_ === undefined) return false;
-		
-		var validator_ = this._validators[columnName_];
-		if(rowCount_ !== result_.length) return false;
-		
-		var rowResult_ = result_[rowIndex_];
-		if(isNull(rowResult_) || _jsonDataLength(rowResult_) &gt; 0) return false;
-	
-		return true;
-	});
-	
-	
+
 	/**
 	 * 유효성엔진 설정/반환합니다.&lt;br&gt;
 	 * 매개변수가 존재할 경우 설정, 존재하지 않을 경우 반환합니다.
@@ -311,6 +596,7 @@
 		}
 		return this._engine;
 	});
+	
 	/**
 	 * 유효성검사 실패메세지를 설정/반환합니다.&lt;br&gt;
 	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
@@ -335,11 +621,16 @@
 	JGValidator.prototype.failedMessages = (function(messages_){
 		if(messages_ !== undefined){
 			this._failedMessages = $.extend(true,this._failedMessages,messages_);
-			this._updateErrorLabels();
+			this.refresh();
 		}
 		return this._failedMessages;
 	});
-	
+	JGValidator.prototype.failedMessage = (function(columnName_, validatorName_){
+		var validators_ = JGJSONUtils.value(this._failedMessages, columnName_);
+		if(isNull(validators_)) return undefined;
+		return JGJSONUtils.value(validators_ ,validatorName_);
+	});
+
 	/**
 	 * 기본 유효성 검사 실패메세지를 설정/반환합니다.&lt;br&gt;
 	 * 매개변수가 존재하지 않을 경우 반환, 존재할 경우 설정합니다.
@@ -359,62 +650,87 @@
 	JGValidator.prototype.commonFailedMessages = (function(messages_){
 		if(messages_ !== undefined){
 			this._commonFailedMessages = $.extend(true,this._commonFailedMessages,messages_);
+			this.refresh();
 		}
 		return this._commonFailedMessages;
 	});
-	
+	JGValidator.prototype.commonFailedMessage = (function(validatorName_){
+		return JGJSONUtils.value(this._commonFailedMessages, validatorName_);
+	});
+	JGValidator.prototype._validator = (function(columnName_, causeName_){
+		var cause_ = JGJSONUtils.value(this._validators, columnName_);
+		if(isNull(cause_)) return undefined;
+		return JGJSONUtils.value(cause_, causeName_);
+	});
+
 	/**
-	 * 유효성 검사에 대한 실패원인을 반환합니다.
+	 * 마지막 유효성 검사에 대한 유효근거를 반환합니다.
 	 * 
-	 * 	//형식
-	 * 	{
-	 * 	열명1 : {
-	 * 		행색인 : {
-	 * 			유효성명1 : {유효성정보}
-	 * 			,...
-	 * 			}
-	 * 		,...
-	 * 		}
-	 * 	,...
-	 * 	}
+	 * [
+	 * 	행색인 : {
+	 * 		isValid : 행유효여부 
+	 * 		열명1 : {
+	 * 			유효성명1 : {유효성정보},
+	 * 			유효성명2 : {유효성정보},
+	 * 			...
+	 * 		},
+	 * 		...
+	 * 	},
+	 * 	...
+	 * ]
 	 * 
-	 * @method cause
-	 * @return {Object} 실패원인
+	 * @method lastCause
+	 * @return {Object} 유효근거
 	 * @example
 	 * 	var result_ = $(target_).JGValidator(&quot;cause&quot;);
 	 */
-	JGValidator.prototype.cause = (function(){
-		var cause_ = {};
-		
-		for(var columnName_ in this._cause){
-			cause_[columnName_] = {};
-			
-			for(var rowIndex_=this._cause[columnName_].length-1;rowIndex_&gt;=0;--rowIndex_){
-				if(_jsonDataLength(this._cause[columnName_][rowIndex_]) &gt; 0){
-					cause_[columnName_][rowIndex_] = this._cause[columnName_][rowIndex_];
-				}
-			}
-			
-			if(_jsonDataLength(cause_[columnName_]) === 0){
-				delete cause_[columnName_];
-			}
+	JGValidator.prototype.lastCause = (function(){
+		var lastCause_ = new Array();
+		var vRowCount_ = this._rows.length;
+		for(var vRowIndex_=0;vRowIndex_&lt;vRowCount_;++vRowIndex_){
+			var vRow_ = this._rows[vRowIndex_];
+			lastCause_[vRowIndex_] = $.extend({
+				isValid : vRow_.isValid()
+			},vRow_.lastCause());
 		}
-		
-		return cause_;
+
+		return lastCause_;
 	});
 	/**
-	 * 유효성요소를 재적재합니다.
+	 *  유효여부를 반환합니다.
 	 * 
-	 * @method refresh
+	 * @method isValid
+	 * @return {Boolean} 유효여부
 	 * @example
-	 * 	$(target_).JGValidator(&quot;refresh&quot;);
+	 * 	var result_ = $(target_).JGValidator(&quot;isValid&quot;);
 	 */
-	JGValidator.prototype.refresh = (function(){
-		this._validators = {};
-		this._cause = {};
+	JGValidator.prototype.isValid = (function(){
+		var result_ = true;
+		var lastCause_ = this.lastCause();
 		
-		var datasetUI_ = this.datasetUI();
-		var dataset_ = this.dataset();
+		$.each(lastCause_, function(){
+			if(!this.isValid){
+				result_ = false;
+				return result_;
+			}
+		});
+		
+		return result_;
+	});
+	
+	/**
+	 * JGValidator를 재적재합니다.
+	 * 
+	 * @method reload
+	 * @param {Boolean} [reloadRow_] 행요소 재적재여부
+	 * @example
+	 * 	$(target_).JGValidator(&quot;reload&quot;);
+	 */
+	JGValidator.prototype.reload = (function(reloadRow_){
+		this._validators = {};
+		
+		var datasetUI_ = this._datasetUI;
+		var dataset_ = datasetUI_.dataset();
 		var originalRowContent_ = datasetUI_._originalRowContent;
 		
 		var colCount_ = dataset_.getColumnCount();
@@ -501,7 +817,7 @@
 			for(var index_=0;index_&lt;count_;++index_){
 				var mappedElement_ = $(findedElements_.get(index_));
 				
-				this._validators[columnName_].equals = {
+				this._validators[columnName_].notEquals = {
 					name : &quot;notEquals&quot; 
 					,value : mappedElement_.attr(&quot;notEquals&quot;)
 				};
@@ -652,9 +968,9 @@
 				var attrMapCount_ = attrMap_.length;
 				for(var attrIndex_=0;attrIndex_&lt;attrMapCount_;++attrIndex_){
 					var attr_ = attrMap_[attrIndex_];
-					var regexpStr_ = &quot;(custom\\-validator\\-)+&quot;;
+					var regexpStr_ = &quot;(jg\\-validator\\-)+&quot;;
 					if(new RegExp(regexpStr_, &quot;gi&quot;).test(attr_.name)){
-						var validatorName_ = attr_.name.replace(&quot;custom-validator-&quot;,&quot;&quot;);
+						var validatorName_ = attr_.name.replace(&quot;jg-validator-&quot;,&quot;&quot;);
 						that_._validators[columnName_][validatorName_] = {
 							name : validatorName_
 							,value : attr_.value
@@ -662,241 +978,108 @@
 					}
 				}
 			});
-			
-			this.validate(function(){});
 		}
+		 
+		if(NVL(reloadRow_,true)){
+			this.reloadRow();
+		}
+		
+		this.validate(function(){});
 	});
 	
-	JGValidator.prototype._recursiveSingleValidate = (function(columnName_, rowIndex_, valIndex_ ,callback_){
+	/**
+	 * 행요소을 재적재합니다.
+	 * 
+	 * @method reloadRow
+	 * @param {Number} fromRowIndex_ 시작행색인
+	 * @param {Number} toRowIndex_ 종료행색인
+	 * @example
+	 * 	$(target_).JGValidator(&quot;reloadRow&quot;,fromRowIndex_,toRowIndex_);
+	 * 
+	 */
+	JGValidator.prototype.reloadRow = (function(fromRowIndex_, toRowIndex_){
 		var that_ = this;
-		var datasetUI_ = this.datasetUI();
-		var dataset_ = this.dataset();
-		var columnValue_ = dataset_.getColumnValue(columnName_, rowIndex_);
-		var validatorElements_ = _jsonDataWithoutCase(this._validators, columnName_);
-		callback_ = NVL(callback_,function(){});
-		
-		var columnValidData_ = this._cause[columnName_] = NVL(this._cause[columnName_],[]);
-		this._cause[columnName_][rowIndex_] = $.extend(true,this._cause[columnName_][rowIndex_],{});
-		
-		if(isNull(validatorElements_)){
-			var cause_ = this.cause()[columnName_];
-			callback_.apply(datasetUI_.element(), [cause_ === undefined ? null : cause_[rowIndex_]]);
-			return;
-		}
-		
-		valIndex_ = NVL(valIndex_,0);
-		var valCount_ = _jsonDataLength(validatorElements_);
-		
-		if(valIndex_ === valCount_){
-			var cause_ = this.cause()[columnName_];
-			callback_.apply(datasetUI_.element(), [cause_ === undefined ? null : cause_[rowIndex_]]);
-			return;
-		}
-		
-		var validatorElement_ = _jsonDataAtIndex(validatorElements_, valIndex_);
-		var validatorName_ = validatorElement_.name.toLowerCase();
-		var validatorEngine_ = _jsonDataWithoutCase(this._engine, validatorName_);
-		
-		if(isNull(validatorEngine_)){
-			this._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
-			return;
-		}
-		
-		validatorEngine_.apply(dataset_, [validatorElement_, columnName_, rowIndex_, columnValue_, function(isValid_){
-			if(!isValid_){
-				var cause_ = {name : validatorElement_.name};
-				
-				columnValidData_[rowIndex_][validatorElement_.name] = cause_;
-				if(that_._options.stepValidation){
-					valIndex_ = valCount_ -1;
-				}
-			}else{
-				delete columnValidData_[rowIndex_][validatorElement_.name];
-			}
-			
-			that_._recursiveSingleValidate(columnName_, rowIndex_, valIndex_+1 ,callback_);
-		}]);
-	});
-	JGValidator.prototype._singleValidate = (function(columnName_, rowIndex_, callback_){
-		var that_ = this;
-		
-		var orgColumnIsValid_ = this.isColumnValid(columnName_, rowIndex_);
-		this._recursiveSingleValidate(columnName_.toUpperCase(), rowIndex_, 0, function(){
-			that_._updateErrorLabels();
-			that_._updateValidLabels();
-			
-			var curColumnIsValid_ = that_.isColumnValid(columnName_, rowIndex_);
-			if(curColumnIsValid_ !== orgColumnIsValid_){
-				that_.datasetUI().element().trigger(_JGKeyword.validator.trigger.changeColumnValidation,[columnName_, rowIndex_, curColumnIsValid_]);
-			}
-			
-			callback_.apply(that_.datasetUI().element(),arguments);
+		that_._rows.removeAll();
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
+			that_._insertValidatorRow(rowIndex_);
 		});
 	});
-	JGValidator.prototype._recursiveValidate = (function(columnIndex_, rowIndex_, callback_){
-		var that_ = this;
-		var datasetUI_ = this.datasetUI();
-		var dataset_ = this.dataset();
-		var colCount_ = dataset_.getColumnCount();
-		var rowCount_ = dataset_.getRowCount();
-		
-		columnIndex_ = NVL(columnIndex_, 0);
-		rowIndex_ = NVL(rowIndex_,0);
-		callback_ = NVL(callback_,function(){});
 	
-		if(columnIndex_ === colCount_){
-			callback_.apply(datasetUI_.element(), [this.isValid(), this.cause()]);
-			return;
-		}else if(columnIndex_ &lt; colCount_ &amp;&amp; rowIndex_ === rowCount_){
-			this._recursiveValidate(columnIndex_+1, 0, callback_);
-			return;
-		}else{
-			var columnName_ = dataset_.getColumn(columnIndex_).getName();
-			this._singleValidate(columnName_, rowIndex_, function(result_){
-				that_._recursiveValidate(columnIndex_, rowIndex_+1, callback_);
-			});
+	/**
+	 * 실패라벨, 유효라벨을 새로고칩니다
+	 * 
+	 * @method refresh
+	 * @param {Number} fromRowIndex_ 시작행색인
+	 * @param {Number} toRowIndex_ 종료행색인
+	 * @example
+	 * 	$(target_).JGValidator(&quot;refresh&quot;,fromRowIndex_,toRowIndex_);
+	 * 
+	 */
+	JGValidator.prototype.refresh = (function(fromIndex_, toIndex_){
+		var that_ = this;
+		this.dataset().each(fromIndex_, toIndex_, function(rowIndex_){
+			that_._rows[rowIndex_].refresh();
+		});
+	});
+
+	JGValidator.prototype.__rValidate = (function(rowIndex_, cause_, callback_){
+		var rowCount_ = this.dataset().getRowCount();
+
+		if(rowIndex_ &gt;= rowCount_){
+			callback_(cause_);
 			return;
 		}
+		var that_ = this;
+		this._rows[rowIndex_].validate(function(isValid_, rowCause_){
+			cause_[rowIndex_] = $.extend({},rowCause_);
+			cause_[rowIndex_].isValid = isValid_;
+			that_.__rValidate(rowIndex_+1, cause_, callback_);
+		});
 	});
+	
 	/**
-	 * 유효성을 검사합니다.
+	 * 요효성검사를 수행합니다
 	 * 
-	 * @method validate
-	 * @param {Function} [callback_] 콜백함수
+	 * @method refresh
+	 * @param {Number} fromRowIndex_ 시작행색인
+	 * @param {Number} toRowIndex_ 종료행색인
 	 * @example
-	 * 	$(dataset_).JGValidator(&quot;validate&quot;,function(isValid_, cause_){
-	 * 		//to do
-	 * 	});
+	 * 	$(target_).JGValidator(&quot;validate&quot;,fromRowIndex_,toRowIndex_);
 	 */
 	JGValidator.prototype.validate = (function(callback_){
-		this._recursiveValidate(0,0,callback_);
-	});
-	JGValidator.prototype._updateErrorLabels = (function(){
-		var datasetUI_ = this.datasetUI();
-		var dataset_ = this.dataset();
-		var rowCount_ = dataset_.getRowCount();
-		
-		// set blank all error label
-		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
-			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-			if(isNull(rowContent_)){
-				continue;
-			}
-			
-			var errorLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.errorColumn+&quot;]&quot;);
-			errorLabels_.hide();
-			errorLabels_.html(&quot;&quot;);
-		}
-		
-		// set error label with cause
-		var cause_ = this.cause();
-		for(var columnName_ in cause_){
-			if(!cause_.hasOwnProperty(columnName_)) continue;
-			
-			var causeRow_ = cause_[columnName_];
-			
-			for(var rowIndex_ in causeRow_){
-				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
-				
-				var causeElements_ = causeRow_[rowIndex_];
-				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-				if(isNull(rowContent_)){
-					continue;
-				}
-				
-				var errorLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.errorColumn+&quot;]&quot;).filter(function(){
-					return (columnName_.toUpperCase() === $(this).attr(_JGKeyword.validator.errorColumn).toUpperCase());
-				});
-				
-				for(var causeName_ in causeElements_){
-					var failedMessage_ = &quot;&quot;;
-					var messages_ = _jsonDataWithoutCase(this._failedMessages, columnName_);
-					
-					if(!isNull(messages_)){
-						var message_ = _jsonDataWithoutCase(messages_, causeName_);
-						if(!isNull(message_ )){
-							failedMessage_ = message_;
-						}
-					}
-					if(isNull(failedMessage_) || failedMessage_.length === 0){
-						failedMessage_ = BLK(_jsonDataWithoutCase(this._commonFailedMessages, causeName_));
-					}
-					
-					var makeMessagePattern_ = (function(key_){
-						return new RegExp(&quot;\\{(&quot;+key_+&quot;)\\}&quot;, &quot;gi&quot;);
-					});
-					
-					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnName&quot;),columnName_);
-					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;rowIndex&quot;),rowIndex_);
-					failedMessage_ = failedMessage_.replace(makeMessagePattern_(&quot;columnValue&quot;),dataset_.getColumnValue(columnName_,rowIndex_));
-					
-					for(var entryName_ in this._validators[columnName_][causeName_]){
-						failedMessage_ = failedMessage_.replace(makeMessagePattern_(entryName_),this._validators[columnName_][causeName_][entryName_]);
-					}
-					
-					if(failedMessage_.length &gt; 0){
-						var errorLabelsLength_ = errorLabels_.length;
-						for(var elIndex_=0;elIndex_&lt;errorLabelsLength_;++elIndex_){
-							var errorLabel_ = $(errorLabels_[elIndex_]);
-							errorLabel_.show();
-							
-							failedMessage_ = $(this._options.errorMessageTag).html(failedMessage_);
-							if(NVL(this._options.appendErrorMessage,false)) errorLabel_.append(failedMessage_);
-							else errorLabel_.html(failedMessage_);
-						}
-					}
-				}
-			}
-		}
+		var that_ = this;
+		this.__rValidate(0, new Array(), function(cause_){
+			that_._lastCause = cause_;
+			callback_(that_.isValid(), cause_);
+		});
 	});
 	
-	JGValidator.prototype._updateValidLabels = (function(){
-		var datasetUI_ = this.datasetUI();
-		var dataset_ = this.dataset();
-		var rowCount_ = dataset_.getRowCount();
-		
-		// set blank all valid label
-		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
-			var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-			if(isNull(rowContent_)){
-				continue;
-			}
-			
-			var allLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.validColumn+&quot;]&quot;);
-			if(allLabels_.length &gt; 0) allLabels_.show();
-		}
-		
-		// hide valid label with cause
-		var cause_ = this.cause();
-		for(var columnName_ in cause_){
-			if(!cause_.hasOwnProperty(columnName_)) continue;
-			
-			var causeRow_ = cause_[columnName_];
-			for(var rowIndex_ in causeRow_){
-				if(!causeRow_.hasOwnProperty(rowIndex_)) continue;
-				
-				var causeElements_ = causeRow_[rowIndex_];
-				var rowContent_ = datasetUI_.rowContent(rowIndex_).rowContent();
-				if(isNull(rowContent_)){
-					continue;
-				}
-				
-				var validLabels_ = rowContent_.find(&quot;[&quot;+_JGKeyword.validator.validColumn+&quot;]&quot;).filter(function(){
-					return (columnName_.toUpperCase() === $(this).attr(_JGKeyword.validator.validColumn).toUpperCase());
-				});
-				if(validLabels_.length &gt; 0){
-					validLabels_.hide();
-				}
-			}
-		}
-		
+	JGValidator.prototype._insertValidatorRow = (function(rowIndex_){
+		this._rows.insert(new JGValidatorRow(this, this._datasetUI.rowContent(rowIndex_)),rowIndex_);
+		this.refresh(rowIndex_);
+	});
+	JGValidator.prototype._removeValidatorRow = (function(rowIndex_){
+		this._rows.remove(rowIndex_);
+		this.refresh(rowIndex_);
 	});
 	
 	JGValidator.prototype._options = {
-		errorMessageTag : &quot;&lt;span style=&#x27;display:block;&#x27; /&gt;&quot;
-		,appendErrorMessage : true
-		,stepValidation : true
-		,realtimeCheck : true
+			failedMessageTag : &quot;&lt;span style=&#x27;display:block;&#x27; /&gt;&quot;,
+			stepValidation : true,
+			realtimeCheck : true,
+			animateFailedLabelShow : function(){
+				this.stop();
+				this.fadeIn();
+			},animateFailedLabelHide : function(){
+				this.stop();
+				this.fadeOut();
+			},animateValidLabelShow : function(){
+				this.stop();
+				this.fadeIn();
+			},animateValidLabelHide : function(){
+				this.stop();
+				this.fadeOut();
+			}	
 	};
 	
 	/**
@@ -904,10 +1087,13 @@
 	 * 매개변수가 옵션명 하나만 존재할 경우 반환, 그렇지 않을 경우 설정합니다.
 	 * 
 	 * 	//옵션항목
-	 * 	errorMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
-	 * 	appendErrorMessage = 실패메세지 확장출력여부
+	 * 	failedMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
 	 * 	stepValidation = 단계별 유효성검사여부
 	 * 	realtimeCheck = 실시간 유효성검사여부
+	 * 	animateFailedLabelHide = 실패라벨숨김 에니메이션
+	 * 	animateFailedLabelShow = 실패라벨표시 에니메이션
+	 * 	animateValidLabelHide = 유효라벨숨김 에니메이션
+	 * 	animateValidLabelShow = 유효라벨표시 에니메이션
 	 * 
 	 * @method options
 	 * @param {Object} options_ 옵션명 또는 옵션객체
@@ -922,9 +1108,8 @@
 			if(arguments.length === 2){
 				this._options[arguments[0]] = arguments[1];
 				
-				if(arguments[0] === &quot;errorMessageTag&quot;
-					|| arguments[0] === &quot;appendErrorMessage&quot;){
-					this._updateErrorLabels();
+				if(arguments[0] === &quot;failedMessageTag&quot;){
+					this.refresh();
 				}
 			}
 			
@@ -935,15 +1120,48 @@
 		}
 		return this._options;
 	});
-	
-	/**
-	 * 기본 실패매세지입니다.&lt;br&gt;
-	 * 유효성의 별도로 실패메세지를 설정하지 않을 경우 기본 출력됩니다.&lt;br&gt;
-	 * *참고 : {{#crossLink &quot;jQuery.fn.JGValidator/commonFailedMessages:method&quot;}}{{/crossLink}}
-	 * 
-	 * @property _commonFailedMessages
-	 * @type Object
-	 */
+
+	JGValidator.prototype._engine = {
+		required : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(0 &lt; BLK(columnValue_).length);
+		},maxLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length &gt;= BLK(columnValue_).length);
+		},minLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length &lt;= BLK(columnValue_).length);
+		},length : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.length === BLK(columnValue_).length);
+		},range : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var cColumnValue_ = parseInt(columnValue_);
+			callback_(validatorElement_.from &lt;= cColumnValue_ &amp;&amp; validatorElement_.to &gt;= cColumnValue_);
+		},rangeLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var cLength_ = BLK(columnValue_).length;
+			callback_(validatorElement_.from &lt;= cLength_ &amp;&amp; validatorElement_.to &gt;= cLength_);
+		},equals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.value === columnValue_);
+		},notEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(validatorElement_.value !== columnValue_);
+		},pattern : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(validatorElement_.pattern).test(BLK(columnValue_)));
+		},patternWord : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^[\\w]+$&quot;).test(BLK(columnValue_)));
+		},patternAlphabet : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^[a-zA-Z]+$&quot;).test(BLK(columnValue_)));
+		},patternAlphanum : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^[0-9a-zA-Z]+$&quot;).test(BLK(columnValue_)));
+		},patternEmail : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^[\\w\\-\\.]+\@[\\w\\-\\.]+\\.[\\w]{1,5}$&quot;).test(BLK(columnValue_)));
+		},patternNumber : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^[\\-]?[0-9]+$&quot;).test(BLK(columnValue_)));
+		},patternPhone : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			callback_(new RegExp(&quot;^(\\+?\\d{0,2}\\s?\\d{2,3}\\s?\\-?\\s?\\d{3,4}\\s?\\-?\\s?\\d{4})$&quot;).test(BLK(columnValue_)));
+		},columnEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var tColumnName_ = validatorElement_.value;
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) === BLK(columnValue_));
+		},columnNotEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
+			var tColumnName_ = validatorElement_.value;
+			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) !== BLK(columnValue_));
+		}
+	};
 	JGValidator.prototype._commonFailedMessages = {
 		required : &quot;field is required&quot;
 		,maxLength : &quot;max length : {length}&quot;
@@ -963,62 +1181,7 @@
 		,columnEquals : &quot;column be equals to {value}&quot;
 		,columnNotEquals : &quot;column be not equals to {value}&quot;
 	};
-	
-	function _checkRegexp(pattern_, value_, option_){
-		var regex_ = new RegExp(pattern_, option_);
-		return regex_.test(BLK(value_));
-	}
-	
-	/**
-	 * 유효성 엔진객체입니다.
-	 * 
-	 * @property _engine
-	 * @type Object
-	 */
-	JGValidator.prototype._engine = {
-		_customValidate : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			this[validatorElement_.name](validatorElement_, columnName_, rowIndex_, columnValue_, callback_);
-		},required : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(0 &lt; BLK(columnValue_).length);
-		},maxLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length &gt;= BLK(columnValue_).length);
-		},minLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length &lt;= BLK(columnValue_).length);
-		},length : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.length === BLK(columnValue_).length);
-		},range : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			var cColumnValue_ = parseInt(columnValue_);
-			callback_(validatorElement_.from &lt;= cColumnValue_ &amp;&amp; validatorElement_.to &gt;= cColumnValue_);
-		},rangeLength : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			var cLength_ = BLK(columnValue_).length;
-			callback_(validatorElement_.from &lt;= cLength_ &amp;&amp; validatorElement_.to &gt;= cLength_);
-		},equals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.value === columnValue_);
-		},notEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(validatorElement_.value !== columnValue_);
-		},pattern : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(validatorElement_.pattern, columnValue_));
-		},patternWord : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^[\\w]+$&quot;, columnValue_));
-		},patternAlphabet : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^[a-zA-Z]+$&quot;, columnValue_));
-		},patternAlphanum : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^[0-9a-zA-Z]+$&quot;, columnValue_));
-		},patternEmail : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^[\\w\\-\\.]+\@[\\w\\-\\.]+\\.[\\w]{1,5}$&quot;, columnValue_));
-		},patternNumber : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^[\\-]?[0-9]+$&quot;, columnValue_));
-		},patternPhone : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			callback_(_checkRegexp(&quot;^(\\+?\\d{0,2}\\s?\\d{2,3}\\s?\\-?\\s?\\d{3,4}\\s?\\-?\\s?\\d{4})$&quot;, columnValue_));
-		},columnEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			var tColumnName_ = validatorElement_.value;
-			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) === BLK(columnValue_));
-		},columnNotEquals : function(validatorElement_, columnName_, rowIndex_, columnValue_, callback_){
-			var tColumnName_ = validatorElement_.value;
-			callback_(BLK(this.getColumnValue(tColumnName_, rowIndex_)) !== BLK(columnValue_));
-		}
-	};
-	
+
 	$.fn._jgValidator = (function(validator_){
 		if(validator_ !== undefined) this.data(&quot;jgdataset_jgValidator&quot;,validator_);
 		return this.data(&quot;jgdataset_jgValidator&quot;);
@@ -1032,10 +1195,10 @@
 			if(!this._jgValidatorInitialized()){
 				this._jgValidator(new JGValidator(this.JGDatasetUI(), arguments_[0]));
 				this._jgValidatorInitialized(true);
-			}
-			return JGSelector(this._jgValidator(), arguments_);
+				return this;
+			}else return JGSelector(this._jgValidator(), arguments_);
 		},arguments);
-	}); 
+	});
 	
 })(window);
     </pre>

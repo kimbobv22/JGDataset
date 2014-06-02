@@ -259,7 +259,7 @@ JSON 형식으로 가져오기 또는 내보내기를 수행합니다.
 [JGDataset의 행삽입 함수](#howToInsertRow)로 생성할 수 있습니다.
 
 <a name="forJavascript"></a>
-#JavaScript(V2.0.2)
+#JavaScript(V2.1.0)
 
 JGDataset for JavaScript를 이용하여 Web에서도 행열단위의 작업을 수행할 수 있습니다.<br>
 사용을 위한 필요환경에 대한 정보는 [여기](#environmentForJavascript)를 참고하세요.
@@ -603,20 +603,20 @@ JGDataset의 유효성 여부는 데이타셋의 값이 변경될 때마다 수�
 	
 ###오류라벨과 오류메세지
 JGDataset.validator는 오류라벨을 지원합니다.<br>행이 매핑된 HTML태그 안에 에러라벨태그를 정의하면 됩니다.<br>
-유효성 검사 대상 열과 매핑하기 위해서 오류라벨태그에 jg-error-column 속성값을 정의하여 열명과 일치시킵니다.<br>
+유효성 검사 대상 열과 매핑하기 위해서 오류라벨태그에 jg-failed-column 속성값을 정의하여 열명과 일치시킵니다.<br>
 
 
 	<div jg-dataset="매핑데이타셋">
 	<p>
 		<input type="text" jg-column="열명" required>
-		<labal jg-error-column="열명"></label>
+		<labal jg-failed-column="열명"></label>
 	</p>	
 	</div>
 	
-JGDataset.validator의 기본옵션 errorMessageTag 를 변경하여 원하는 오류라벨을 재정의할 수 있습니다.
+JGDataset.validator의 기본옵션 failedMessageTag 를 변경하여 원하는 오류라벨을 재정의할 수 있습니다.
 
 	유효성검사가매핑된데이타셋.validator("options",{
-		"errorMessageTag","<span></span>"
+		"failedMessageTag","<span></span>"
 	});
 	
 JGDataset.validator가 유효성검사를 수행하고 유효하지 않는 값에 대한 오류메세지를 오류라벨에 표기합니다.<br>

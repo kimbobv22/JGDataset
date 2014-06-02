@@ -1496,6 +1496,33 @@
 		return dataset_;
 	});
 	
+	/**
+	 * 해당범위 행색인만큼의 행반복실행을 수행합니다.
+	 * 
+	 * @method each
+	 * @param {Number} fromRowIndex_ 시작행색인
+	 * @param {Number} toRowIndex_ 종료행색인
+	 * @param {Function} logicFunc_ 수행함수
+	 * @example
+	 * 	dataset_.each(fromRowIndex_, toRowIndex_, function(rowIndex_){
+	 * 		//todo
+	 * 	});
+	 */
+	JGDataset.prototype.each = (function(fromRowIndex_,toRowIndex_,logicFunc_){
+		if(isNull(fromRowIndex_)){
+			fromRowIndex_ = NVL(fromRowIndex_,0);
+			toRowIndex_ = NVL(toRowIndex_,this.getRowCount()-1);
+		}else{
+			toRowIndex_ = NVL(toRowIndex_,fromRowIndex_);
+		}
+		
+		logicFunc_ = NVL(logicFunc_,function(){});
+		
+		for(var rowIndex_=fromRowIndex_;rowIndex_<=toRowIndex_;++rowIndex_){
+			if(logicFunc_.apply(this, [rowIndex_]) === false) break;
+		}
+	});
+	
 	JGDataset.prototype.on = (function(){
 		return $(this).on(arguments);
 	});

@@ -9,8 +9,8 @@
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 <!-- JGModule -->
-<script src="../../js/JGDataset.2.0.2.min.js"></script>
-<script src="../../js/JGDatasetUI.2.0.2.min.js"></script>
+<script src="../../js/JGDataset.2.1.0.min.js"></script>
+<script src="../../js/JGDatasetUI.2.1.0.min.js"></script>
 <link rel="stylesheet" href="./res/style.css" />
 <script type="text/javascript">
 $(document).on("pagebeforecreate",function(){
@@ -75,7 +75,7 @@ function removeRow(){
 		<div jg-dataset="testDataset">
 			<div class="ui-grid-d ui-responsive">
 				<div class="ui-block-a"><input type="text" jg-column="col1"></div>
-				<div class="ui-block-b"><label>##fx:'fx label : ##col1##'</label></div>
+				<div class="ui-block-b"><label>##fx:'fx label : ' + ##col1##</label></div>
 				<div class="ui-block-c"><label>Checkbox<input type="checkbox" jg-column="col2"></label></div>
 				<div class="ui-block-d"><select jg-column="col3" jg-bind-dataset="selectDataset" jg-display-column="nm" jg-value-column="id"></select></div>
 				<div class="ui-block-e"><input jg-column="col3"></input></div>

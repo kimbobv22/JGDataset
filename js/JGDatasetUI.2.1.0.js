@@ -1,128 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JGDatasetUI.2.0.2.js - JGDataset for JavaScript</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../../../logo-small.png" title="JGDataset for JavaScript"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.2</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/global.extension.html">global.extension</a></li>
-            
-                <li><a href="../classes/JGDataset.html">JGDataset</a></li>
-            
-                <li><a href="../classes/JGDatasetColumn.html">JGDatasetColumn</a></li>
-            
-                <li><a href="../classes/JGDatasetRow.html">JGDatasetRow</a></li>
-            
-                <li><a href="../classes/JGDS.html">JGDS</a></li>
-            
-                <li><a href="../classes/JGFXElement.html">JGFXElement</a></li>
-            
-                <li><a href="../classes/JGRowContent.html">JGRowContent</a></li>
-            
-                <li><a href="../classes/jQuery.fn.extension.html">jQuery.fn.extension</a></li>
-            
-                <li><a href="../classes/jQuery.fn.JGDatasetSumUI.html">jQuery.fn.JGDatasetSumUI</a></li>
-            
-                <li><a href="../classes/jQuery.fn.JGDatasetUI.html">jQuery.fn.JGDatasetUI</a></li>
-            
-                <li><a href="../classes/jQuery.fn.JGSelect.html">jQuery.fn.JGSelect</a></li>
-            
-                <li><a href="../classes/jQuery.fn.JGValidator.html">jQuery.fn.JGValidator</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: JGDatasetUI.2.0.2.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 (function(window){
 
 	if(JGDS === undefined){
-		console.error(&quot;can&#x27;t not initialize JGDatasetUI, JGDataset not found&quot;);
+		console.error("can't not initialize JGDatasetUI, JGDataset not found");
 		return;
 	}
 	
 	_JGKeyword = $.extend(true, window._JGKeyword, {
 		ui : {
-			attrDataset : &quot;jg-dataset&quot;
-			,attrColumn : &quot;jg-column&quot;
-			,attrBindDataset : &quot;jg-bind-dataset&quot;
-			,attrDisplayColumn : &quot;jg-display-column&quot;
-			,attrValueColumn : &quot;jg-value-column&quot;
-			,keyFXPrefix : &quot;##fx:&quot;
+			attrDataset : "jg-dataset"
+			,attrColumn : "jg-column"
+			,attrBindDataset : "jg-bind-dataset"
+			,attrDisplayColumn : "jg-display-column"
+			,attrValueColumn : "jg-value-column"
+			,keyFXPrefix : "##fx:"
 			,trigger : {
 				/**
 				 * 특정 행과 매핑 시 발생합니다.
@@ -132,11 +22,11 @@
 				 * @param {Number} rowIndex_ 행색인
 				 * @for jQuery.fn.JGDatasetUI
 				 * @example
-				 * 	$(target_).trigger(&quot;datasetuirowmapped&quot;,function(event_, rowIndex_){
+				 * 	$(target_).trigger("datasetuirowmapped",function(event_, rowIndex_){
 				 * 		//to do
 				 * 	});
 				 */
-				rowMapped : &quot;datasetuirowmapped&quot;
+				rowMapped : "datasetuirowmapped"
 				/**
 				 * 특정 행의 매핑이 새로 고쳐졌을 때 발생합니다.
 				 * 
@@ -145,11 +35,11 @@
 				 * @param {Number} rowIndex_ 행색인
 				 * @for jQuery.fn.JGDatasetUI
 				 * @example
-				 * 	$(target_).trigger(&quot;datasetuirefreshed&quot;,function(event_, rowIndex_){
+				 * 	$(target_).trigger("datasetuirefreshed",function(event_, rowIndex_){
 				 * 		//to do
 				 * 	});
 				 */
-				,refreshed : &quot;datasetuirefreshed&quot;
+				,refreshed : "datasetuirefreshed"
 				/**
 				 * 매핑된 특정 행의 FX수식이 새로 고쳐졌을 때 발생합니다.
 				 * 
@@ -158,11 +48,11 @@
 				 * @param {Number} rowIndex_ 행색인
 				 * @for jQuery.fn.JGDatasetUI
 				 * @example
-				 * 	$(target_).trigger(&quot;datasetuifxrefreshed&quot;,function(event_, rowIndex_){
+				 * 	$(target_).trigger("datasetuifxrefreshed",function(event_, rowIndex_){
 				 * 		//to do
 				 * 	});
 				 */
-				,FXRefreshed : &quot;datasetuifxrefreshed&quot;
+				,FXRefreshed : "datasetuifxrefreshed"
 				/**
 				 * 특정 행열의 매핑이 새로 고쳐졌을 때 호출됩니다.
 				 * 
@@ -172,11 +62,11 @@
 				 * @param {Number} rowIndex_ 행색인
 				 * @for jQuery.fn.JGDatasetUI
 				 * @example
-				 * 	$(target_).trigger(&quot;datasetuicolumnrefreshed&quot;,function(event_, columnName_, rowIndex_){
+				 * 	$(target_).trigger("datasetuicolumnrefreshed",function(event_, columnName_, rowIndex_){
 				 * 		//to do
 				 * 	});
 				 */
-				,columnRefreshed : &quot;datasetuicolumnrefreshed&quot;
+				,columnRefreshed : "datasetuicolumnrefreshed"
 				/**
 				 * 매핑이 재적재되었을 때 발생합니다.
 				 * 
@@ -184,90 +74,90 @@
 				 * @param {jQuery Event object} event_ jQuery 이벤트 객체
 				 * @for jQuery.fn.JGDatasetUI
 				 * @example
-				 * 	$(target_).trigger(&quot;datasetuimappingreloaded&quot;,function(event_){
+				 * 	$(target_).trigger("datasetuimappingreloaded",function(event_){
 				 * 		//to do
 				 * 	});
 				 */
-				,mappingReloaded : &quot;datasetuimappingreloaded&quot;
+				,mappingReloaded : "datasetuimappingreloaded"
 			}
 		},select : {
 			trigger : {
-				selectReloaded : &quot;selectreloaded&quot;
+				selectReloaded : "selectreloaded"
 			}
 		}
 	})
 	
 	String.prototype._jgFuncConvertToColumnRegexp = (function(){
-		return new RegExp(&quot;\\#\\#&quot; + this + &quot;\\#\\#&quot;, &quot;gi&quot;);
+		return new RegExp("\\#\\#" + this + "\\#\\#", "gi");
 	});
 	
 	String.prototype._jgFuncReplaceRegexpByDataset = (function(dataset_, rowIndex_){
 		var targetStr_ = this;
 
 		//replace with row count
-		targetStr_ = targetStr_.replace(&quot;dataset\\.rowCount&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
+		targetStr_ = targetStr_.replace("dataset\\.rowCount"._jgFuncConvertToColumnRegexp(), dataset_.getRowCount());
 		
 		//replace with column count
-		targetStr_ = targetStr_.replace(&quot;dataset\\.columnCount&quot;._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
+		targetStr_ = targetStr_.replace("dataset\\.columnCount"._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
 		
 		//replace with column name
-		targetStr_ = targetStr_.replace(&quot;dataset\\.columnName&quot;._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
-		var columnNameRegexp_ = (&quot;dataset\\.columnName\\([0-9]+\\)&quot;)._jgFuncConvertToColumnRegexp();
+		targetStr_ = targetStr_.replace("dataset\\.columnName"._jgFuncConvertToColumnRegexp(), dataset_.getColumnCount());
+		var columnNameRegexp_ = ("dataset\\.columnName\\([0-9]+\\)")._jgFuncConvertToColumnRegexp();
 		while(found_ = columnNameRegexp_.exec(targetStr_)){
 			var replaceTarget_ = found_[0]
-			var columnIndex_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-			columnIndex_ = columnIndex_.substr(0,columnIndex_.indexOf(&quot;)##&quot;));
-			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.getColumn(&quot;+columnIndex_+&quot;).getName()&quot;);
+			var columnIndex_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+			columnIndex_ = columnIndex_.substr(0,columnIndex_.indexOf(")##"));
+			targetStr_ = targetStr_.replace(replaceTarget_,"this.getColumn("+columnIndex_+").getName()");
 		}
 		
 		//replace with row sum
-		var staticticsRegexp_ = &quot;[\\s\\w\\#\\@\\-\\+\\*\\/\\%]*&quot;;
-		var sumRegexp_ = (&quot;dataset\\.sum\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		var staticticsRegexp_ = "[\\s\\w\\#\\@\\-\\+\\*\\/\\%]*";
+		var sumRegexp_ = ("dataset\\.sum\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 		while(found_ = sumRegexp_.exec(targetStr_)){
 			var replaceTarget_ = found_[0]
-			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
-			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.sumOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
+			targetStr_ = targetStr_.replace(replaceTarget_,"this.sumOfColumnValues('"+columnName_+"')");
 		}
 		
 		//replace with row avg
-		sumRegexp_ = (&quot;dataset\\.avg\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		sumRegexp_ = ("dataset\\.avg\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 		while(found_ = sumRegexp_.exec(targetStr_)){
 			var replaceTarget_ = found_[0]
-			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
-			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.avgOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
+			targetStr_ = targetStr_.replace(replaceTarget_,"this.avgOfColumnValues('"+columnName_+"')");
 		}
 		
 		//replace with row min
-		sumRegexp_ = (&quot;dataset\\.min\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		sumRegexp_ = ("dataset\\.min\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 		while(found_ = sumRegexp_.exec(targetStr_)){
 			var replaceTarget_ = found_[0]
-			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
-			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.minOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
+			targetStr_ = targetStr_.replace(replaceTarget_,"this.minOfColumnValues('"+columnName_+"')");
 		}
 		
 		//replace with row max
-		sumRegexp_ = (&quot;dataset\\.max\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+		sumRegexp_ = ("dataset\\.max\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 		while(found_ = sumRegexp_.exec(targetStr_)){
 			var replaceTarget_ = found_[0]
-			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-			columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
-			targetStr_ = targetStr_.replace(replaceTarget_,&quot;this.maxOfColumnValues(&#x27;&quot;+columnName_+&quot;&#x27;)&quot;);
+			var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+			columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
+			targetStr_ = targetStr_.replace(replaceTarget_,"this.maxOfColumnValues('"+columnName_+"')");
 		}
 		
 		if(rowIndex_ !== undefined){
 			
 			//replace with row plus
-			sumRegexp_ = (&quot;dataset\\.plus\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+			sumRegexp_ = ("dataset\\.plus\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 			while(found_ = sumRegexp_.exec(targetStr_)){
 				var replaceTarget_ = found_[0]
-				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-				columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+				columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
 				
 				var columnValueSum_ = 0;
-				for(var tRowIndex_ = 0; tRowIndex_&lt;=rowIndex_;++tRowIndex_){
+				for(var tRowIndex_ = 0; tRowIndex_<=rowIndex_;++tRowIndex_){
 					var columnValue_ = parseInt(dataset_.getColumnValue(columnName_,tRowIndex_));
 					columnValueSum_ += columnValue_;
 				}
@@ -275,14 +165,14 @@
 			}
 			
 			//replace with row minus
-			sumRegexp_ = (&quot;dataset\\.minus\\(&quot;+staticticsRegexp_+&quot;\\)&quot;)._jgFuncConvertToColumnRegexp();
+			sumRegexp_ = ("dataset\\.minus\\("+staticticsRegexp_+"\\)")._jgFuncConvertToColumnRegexp();
 			while(found_ = sumRegexp_.exec(targetStr_)){
 				var replaceTarget_ = found_[0]
-				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf(&quot;(&quot;)+1);
-				columnName_ = columnName_.substr(0,columnName_.indexOf(&quot;)##&quot;));
+				var columnName_ = replaceTarget_.substr(replaceTarget_.indexOf("(")+1);
+				columnName_ = columnName_.substr(0,columnName_.indexOf(")##"));
 				
 				var columnValueSum_ = parseInt(dataset_.getColumnValue(columnName_,0));
-				for(var tRowIndex_ = 1; tRowIndex_&lt;=rowIndex_;++tRowIndex_){
+				for(var tRowIndex_ = 1; tRowIndex_<=rowIndex_;++tRowIndex_){
 					var columnValue_ = parseInt(dataset_.getColumnValue(columnName_,tRowIndex_));
 					columnValueSum_ -= columnValue_;
 				}
@@ -290,19 +180,19 @@
 			}
 			
 			//replace with row index
-			targetStr_ = targetStr_.replace(&quot;dataset\\.rowIndex&quot;._jgFuncConvertToColumnRegexp(), rowIndex_);
+			targetStr_ = targetStr_.replace("dataset\\.rowIndex"._jgFuncConvertToColumnRegexp(), rowIndex_);
 			
 			//replace with row status
-			targetStr_ = targetStr_.replace(&quot;dataset\\.rowStatus&quot;._jgFuncConvertToColumnRegexp(), dataset_.getRowStatus(rowIndex_));
+			targetStr_ = targetStr_.replace("dataset\\.rowStatus"._jgFuncConvertToColumnRegexp(), dataset_.getRowStatus(rowIndex_));
 			
 			//replace column data
 			var columnCount_ = dataset_.getColumnCount();
-			for(var columnIndex_=0;columnIndex_&lt;columnCount_;++columnIndex_){
+			for(var columnIndex_=0;columnIndex_<columnCount_;++columnIndex_){
 				var columnItem_ = dataset_.getColumn(columnIndex_);
 				var columnName_ = columnItem_.getName();
 				var columnValue_ = dataset_.getColumnValue(columnName_,rowIndex_);
 				
-				targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), &quot;this.getColumnValue(&#x27;&quot;+columnName_+&quot;&#x27;,&quot;+rowIndex_+&quot;)&quot;);
+				targetStr_ = targetStr_.replace(columnName_._jgFuncConvertToColumnRegexp(), "this.getColumnValue('"+columnName_+"',"+rowIndex_+")");
 			}
 		}
 		
@@ -324,15 +214,15 @@
 	 * @param {Number} index_ 색인
 	 * @return {jQuery Object} 삽입대상
 	 * @example
-	 * 	$(target_).insertAtIndex(&quot;&lt;div&gt;test&lt;/div&gt;&quot;,3);
+	 * 	$(target_).insertAtIndex("<div>test</div>",3);
 	 */
 	$.fn.insertAtIndex = (function(element_,index_){
 		var lastIndex_ = this.children().size();
-		if(index_ &lt; 0){
+		if(index_ < 0){
 			index_ = Math.max(0, lastIndex_ + 1 + index_);
 		}
 		this.append(element_);
-		if(index_&lt;lastIndex_){
+		if(index_<lastIndex_){
 			this.children().eq(index_).before(this.children().last());
 		}
 		return this;
@@ -343,22 +233,22 @@
 	 * @method selectValue
 	 * @return {String} 값
 	 * @example
-	 * 	var result_ = $(&quot;&lt;select&gt;&lt;option value=&#x27;testValue&#x27;&gt;test&lt;/option&gt;&lt;/select&quot;).selectValue();
+	 * 	var result_ = $("<select><option value='testValue'>test</option></select").selectValue();
 	 */
 	$.fn.selectValue = (function(){
-		if(this.prop(&quot;tagName&quot;).toLowerCase() !== &quot;select&quot;) return undefined;
-		return this.children(&quot;option:selected&quot;).first().attr(&quot;value&quot;);
+		if(this.prop("tagName").toLowerCase() !== "select") return undefined;
+		return this.children("option:selected").first().attr("value");
 	});
 	$.fn._jexecute = (function(executeFunc_,arguments_){
 		var result_ = new Array();
 		$.each(this,function(){
 			result_.push(executeFunc_.call($(this),arguments_));
 		});
-		return result_.length &gt; 1 ? result_ : result_[0];
+		return result_.length > 1 ? result_ : result_[0];
 	});
 	
 	/**
-	 * JGDatasetUI의 확장함수입니다.&lt;br&gt;
+	 * JGDatasetUI의 확장함수입니다.<br>
 	 * 데이타셋에 매핑되어 있는 모든 View를 반환합니다.
 	 * 
 	 * @method datasetUIView
@@ -366,41 +256,41 @@
 	 * @for JGDataset
 	 */
 	JGDataset.prototype.datasetUIView = (function(){
-		return $(document).find(&quot;[&quot;+_JGKeyword.ui.attrDataset+&quot;=&#x27;&quot;+this.getName()+&quot;&#x27;]&quot;).filter(function(){
+		return $(document).find("["+_JGKeyword.ui.attrDataset+"='"+this.getName()+"']").filter(function(){
 			return $(this)._jgDatasetUIInitialized();
 		}); 
 	});
 	/**
-	 * HTML과 JGDataset의 매핑을 위한 플러그인입니다.&lt;br&gt;
+	 * HTML과 JGDataset의 매핑을 위한 플러그인입니다.<br>
 	 * 함수호출 형식은 아래와 같습니다.
 	 * 	
 	 * 	//1. jQuery Plugin Style
-	 * 	var result_ = $(target_).JGDatasetUI(&quot;함수명&quot;,...);
+	 * 	var result_ = $(target_).JGDatasetUI("함수명",...);
 	 * 	
 	 * 	//2. normal Style
 	 * 	var datasetUI_ = $(target_).JGDatasetUI();
 	 * 	var result_ = datasetUI_.함수명();
 	 * 
-	 * JGDatasetUI 샘플은 &lt;a href=&quot;http://kimbobv22.github.io/JGDataset/index.html&quot; target=&quot;_blank&quot;&gt;여기&lt;/a&gt;에서 확인할 수 있습니다.
+	 * JGDatasetUI 샘플은 <a href="http://kimbobv22.github.io/JGDataset/index.html" target="_blank">여기</a>에서 확인할 수 있습니다.
 	 * 
 	 * @class jQuery.fn.JGDatasetUI
 	 * @constructor
 	 * @example
 	 * 	//1. 정의되어 있는 속성값을 이용하여 초기화
-	 * 	&lt;div jg-dataset=&quot;datasetName&quot; id=&quot;target&quot;&gt;
+	 * 	<div jg-dataset="datasetName" id="target">
 	 * 		...
-	 * 	&lt;/div&gt;
-	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
-	 * 	$(&quot;#target&quot;).JGDatasetUI();
-	 * 	&lt;/script&gt;
+	 * 	</div>
+	 * 	<script type="text/javascript">
+	 * 	$("#target").JGDatasetUI();
+	 * 	</script>
 	 * 	
 	 * 	//2. 매개변수를 이용하여 초기화
-	 * 	&lt;div id=&quot;target&quot;&gt;
+	 * 	<div id="target">
 	 * 		...
-	 * 	&lt;/div&gt;
-	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
-	 * 	$(&quot;#target&quot;).JGDatasetUI(&quot;datasetName&quot;);
-	 * 	&lt;/script&gt;
+	 * 	</div>
+	 * 	<script type="text/javascript">
+	 * 	$("#target").JGDatasetUI("datasetName");
+	 * 	</script>
 	 */
 	var JGDatasetUI = window.JGDatasetUI = (function(element_, datasetName_){
 		var that_ = this;
@@ -409,7 +299,7 @@
 		this._datasetName = NVL(datasetName_,element_.attr(_JGKeyword.ui.attrDataset));
 		
 		if(isNull(this.dataset())){
-			console.error(&quot;can&#x27;t find JGDataset&quot;);
+			console.error("can't find JGDataset");
 			return;
 		}
 		
@@ -430,14 +320,14 @@
 		
 		// row moved
 		$(dataset_).on(_JGKeyword.trigger._rowMoved,function(event_, fromRowIndex_, toRowIndex_){
-			if(fromRowIndex_ &gt; toRowIndex_){
+			if(fromRowIndex_ > toRowIndex_){
 				that_._refresh(toRowIndex_,fromRowIndex_); 
 			}else that_._refresh(fromRowIndex_,toRowIndex_);
 			
 		});
 		
 		// column added,removed
-		$(dataset_).on(_JGKeyword.trigger._columnAdded+&quot; &quot;
+		$(dataset_).on(_JGKeyword.trigger._columnAdded+" "
 				+_JGKeyword.trigger._columnRemoved,function(event_, columnName_){
 			that_._refreshColumn(columnName_, undefined, undefined, false);
 			that_._refreshFX();
@@ -450,9 +340,9 @@
 		});
 		
 		// dataset clear,reset,changed,sorted
-		$(dataset_).on(_JGKeyword.trigger._datasetClear+&quot; &quot;
-				+_JGKeyword.trigger._datasetReset+&quot; &quot;
-				+_JGKeyword.trigger._datasetChanged+&quot; &quot;
+		$(dataset_).on(_JGKeyword.trigger._datasetClear+" "
+				+_JGKeyword.trigger._datasetReset+" "
+				+_JGKeyword.trigger._datasetChanged+" "
 				+_JGKeyword.trigger._datasetSorted,function(event_, rowIndex_, oldRowIndex_){
 			that_.reload();
 		});
@@ -474,7 +364,7 @@
 	 * 
 	 * @return {jQuery Object} jQuery 객체
 	 * @example
-	 * 	var element_ = $(target_).JGDatasetUI(&quot;element&quot;);
+	 * 	var element_ = $(target_).JGDatasetUI("element");
 	 */
 	JGDatasetUI.prototype.element = (function(){
 		return this._element;
@@ -484,10 +374,10 @@
 	 * 
 	 * @return {JGDataset} 데이타셋
 	 * @example
-	 * 	var element_ = $(target_).JGDatasetUI(&quot;dataset&quot;);
+	 * 	var element_ = $(target_).JGDatasetUI("dataset");
 	 */
 	JGDatasetUI.prototype.dataset = (function(){
-		return JGDS(&quot;dataset&quot;,this._datasetName);
+		return JGDS("dataset",this._datasetName);
 	});
 	
 	/**
@@ -496,7 +386,7 @@
 	 * @param {Number} rowIndex_ 행색인
 	 * @return {JGRowContent} 행컨텐츠
 	 * @example
-	 * 	var element_ = $(target_).JGDatasetUI(&quot;rowContent&quot;,rowIndex_);
+	 * 	var element_ = $(target_).JGDatasetUI("rowContent",rowIndex_);
 	 */
 	JGDatasetUI.prototype.rowContent = (function(rowIndex_){
 		return this._rowContents[rowIndex_];
@@ -522,40 +412,29 @@
 	 * @param {JGRowContent} rowIndex_ 행컨텐츠
 	 * @return {Number} 행색인
 	 * @example
-	 * 	var element_ = $(target_).JGDatasetUI(&quot;indexOf&quot;,rowContent_);
+	 * 	var element_ = $(target_).JGDatasetUI("indexOf",rowContent_);
 	 */
 	JGDatasetUI.prototype.indexOf = (function(rowContent_){
 		return this._rowContents.indexOf(rowContent_);
 	});
-	
-	JGDatasetUI.prototype.__rowRangeRefresh = (function(fromRowIndex_, toRowIndex_, refreshFunc_){
-		var rowCount_ = this.dataset().getRowCount();
-		if(isNull(fromRowIndex_)){
-			fromRowIndex_ = NVL(fromRowIndex_,0);
-			toRowIndex_ = NVL(toRowIndex_,rowCount_-1);
-		}else{
-			toRowIndex_ = NVL(toRowIndex_,fromRowIndex_);
-		}
-		
-		for(var rowIndex_=fromRowIndex_;rowIndex_&lt;=toRowIndex_;++rowIndex_){
-			refreshFunc_(this, rowIndex_);
-		}
-	});
 	JGDatasetUI.prototype._refreshFX = (function(fromRowIndex_, toRowIndex_, fireEvent_){
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refreshFX();
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.FXRefreshed,[rowIndex_]);
 		});
 	});
 	JGDatasetUI.prototype._refreshColumn = (function(columnName_, fromRowIndex_, toRowIndex_, refreshFx_, fireEvent_){
 		refreshFx_ = NVL(refreshFx_,true);
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refreshColumn(columnName_, refreshFx_);
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.columnRefreshed,[columnName_, rowIndex_]);
 		});
 	});
 	JGDatasetUI.prototype._refresh = (function(fromRowIndex_, toRowIndex_, fireEvent_){
-		this.__rowRangeRefresh(fromRowIndex_, toRowIndex_,function(that_, rowIndex_){
+		var that_ = this;
+		this.dataset().each(fromRowIndex_, toRowIndex_, function(rowIndex_){
 			that_.rowContent(rowIndex_)._refresh();
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.refreshed,[rowIndex_]);
 		});
@@ -565,7 +444,7 @@
 	 * 매핑 재적재를 수행합니다.
 	 * 
 	 * @example
-	 * 	var element_ = $(target_).JGDatasetUI(&quot;reload&quot;);
+	 * 	var element_ = $(target_).JGDatasetUI("reload");
 	 */
 	JGDatasetUI.prototype.reload = (function(){
 		this.element().empty();
@@ -574,7 +453,7 @@
 		var rowCount_ = dataset_.getRowCount();
 		
 		var tempIndex_ = 0;
-		while(tempIndex_ &lt; rowCount_){
+		while(tempIndex_ < rowCount_){
 			this._insertRowContent(this._rowContents.length);
 			++tempIndex_;
 		}
@@ -582,36 +461,35 @@
 	});
 	
 	$.fn._jgDatasetUI = (function(ui_){
-		if(ui_ !== undefined) this.data(&quot;jgdatasetJGDatasetUI&quot;,ui_);
-		return this.data(&quot;jgdatasetJGDatasetUI&quot;);
+		if(ui_ !== undefined) this.data("jgdatasetJGDatasetUI",ui_);
+		return this.data("jgdatasetJGDatasetUI");
 	});
 	$.fn._jgDatasetUIInitialized = (function(bool_){
-		if(bool_ !== undefined) this.data(&quot;jgdatasetJGDatasetUIInitialized&quot;,bool_);
-		return NVL(this.data(&quot;jgdatasetJGDatasetUIInitialized&quot;),false);
+		if(bool_ !== undefined) this.data("jgdatasetJGDatasetUIInitialized",bool_);
+		return NVL(this.data("jgdatasetJGDatasetUIInitialized"),false);
 	});
 	$.fn.JGDatasetUI = (function(){
 		return this._jexecute(function(arguments_){
 			if(!this._jgDatasetUIInitialized()){
 				this._jgDatasetUI(new JGDatasetUI(this, arguments_[0]));
 				this._jgDatasetUIInitialized(true);
-			}
-			
-			return JGSelector(this._jgDatasetUI(), arguments_);
+				return this;
+			}else return JGSelector(this._jgDatasetUI(), arguments_);
 		},arguments);
 	});
 	
 	$.fn._jgDataRowContent = (function(rowContent_){
-		if(rowContent_ === undefined) return this.data(&quot;jgdataset_rowContent&quot;);
-		this.data(&quot;jgdataset_rowContent&quot;,rowContent_);
-		return this.data(&quot;jgdataset_rowContent&quot;);
+		if(rowContent_ === undefined) return this.data("jgdataset_rowContent");
+		this.data("jgdataset_rowContent",rowContent_);
+		return this.data("jgdataset_rowContent");
 	});
 	$.fn._jgDataJGDataset = (function(){
 		return this._jgDataRowContent().datasetUI().dataset();
 	});
 	/**
-	 * JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.&lt;br&gt;
-	 * 사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.&lt;br&gt;
-	 * *참고 : {{#crossLink &quot;jQuery.fn.JGDatasetUI&quot;}}{{/crossLink}}
+	 * JGDatasetUI 매핑 시 각 행에 대한 매핑정보를 적재하고 있습니다.<br>
+	 * 사용자가 임의로 생성할 수 없으며 매핑 시 자동으로 생성됩니다.<br>
+	 * *참고 : {{#crossLink "jQuery.fn.JGDatasetUI"}}{{/crossLink}}
 	 * 
 	 * @class JGRowContent
 	 * @constructor
@@ -624,11 +502,11 @@
 		this._mappedElements = new Array();
 		this._FXElements = new Array();
 		
-		var mappedElements_ = this._rowContent.find(&quot;*[&quot;+_JGKeyword.ui.attrColumn+&quot;]&quot;);
+		var mappedElements_ = this._rowContent.find("*["+_JGKeyword.ui.attrColumn+"]");
 		var mappedElementsLength_ = mappedElements_.length;
-		for(var mapIndex_=0;mapIndex_&lt;mappedElementsLength_;++mapIndex_){
+		for(var mapIndex_=0;mapIndex_<mappedElementsLength_;++mapIndex_){
 			var mappedElement_ = $(mappedElements_[mapIndex_]);
-			var tagName_ = mappedElement_.prop(&quot;tagName&quot;).toLowerCase();
+			var tagName_ = mappedElement_.prop("tagName").toLowerCase();
 			mappedElement_._jgDataRowContent(this);
 			this._mappedElements.push(mappedElement_);
 			
@@ -647,10 +525,10 @@
 			});
 			
 			//input event
-			if(tagName_ === &quot;input&quot;){
-				var inputType_ = NVL(mappedElement_.attr(&quot;type&quot;), &quot;text&quot;);
-				if(inputType_ === &quot;checkbox&quot;){
-					mappedElement_.on(&quot;click change&quot;,function(event_){
+			if(tagName_ === "input"){
+				var inputType_ = NVL(mappedElement_.attr("type"), "text");
+				if(inputType_ === "checkbox"){
+					mappedElement_.on("click change",function(event_){
 						var target_ = $(event_.target);
 						var rowContent_ = target_._jgDataRowContent();
 						var datasetUI_ = rowContent_.datasetUI();
@@ -658,15 +536,15 @@
 						var columnName_ = target_.attr(_JGKeyword.ui.attrColumn);
 						var rowIndex_ = rowContent_.rowIndex();
 						
-						dataset_.setColumnValue(columnName_, rowIndex_, target_.prop(&quot;checked&quot;), true);
+						dataset_.setColumnValue(columnName_, rowIndex_, target_.prop("checked"), true);
 					});
 				}else{
-					mappedElement_.on(&quot;keyup change&quot;,commonEventOnChange_);
+					mappedElement_.on("keyup change",commonEventOnChange_);
 				}
 			}
 			//textarea
-			else if(tagName_ === &quot;textarea&quot;){
-				mappedElement_.on(&quot;change&quot;, function(event_){
+			else if(tagName_ === "textarea"){
+				mappedElement_.on("change", function(event_){
 					var target_ = $(event_.target);
 					var rowContent_ = target_._jgDataRowContent();
 					var datasetUI_ = rowContent_.datasetUI();
@@ -679,14 +557,14 @@
 					
 					dataset_.setColumnValue(columnName_, rowIndex_, columnValue_, true);
 				});
-				mappedElement_.on(&quot;keyup&quot;, function(event_){
+				mappedElement_.on("keyup", function(event_){
 					var target_ = $(event_.target);
-					target_.trigger(&quot;change&quot;);
+					target_.trigger("change");
 				});
 			}
 			//contenteditable div
-			else if(tagName_ === &quot;div&quot; &amp;&amp; mappedElement_.prop(&quot;contenteditable&quot;)){
-				mappedElement_.on(&quot;change&quot;, function(event_){
+			else if(tagName_ === "div" && mappedElement_.prop("contenteditable")){
+				mappedElement_.on("change", function(event_){
 					var target_ = $(event_.target);
 					var rowContent_ = target_._jgDataRowContent();
 					var datasetUI_ = rowContent_.datasetUI();
@@ -699,18 +577,18 @@
 					
 					dataset_.setColumnValue(columnName_, rowIndex_, columnValue_, true);
 				});
-				mappedElement_.on(&quot;keyup&quot;, function(event_){
+				mappedElement_.on("keyup", function(event_){
 					var target_ = $(event_.target);
-					target_.trigger(&quot;change&quot;);
+					target_.trigger("change");
 				});
 			}
 			//select event
-			else if(tagName_ === &quot;select&quot;){
+			else if(tagName_ === "select"){
 				if(!isNull(mappedElement_.attr(_JGKeyword.ui.attrBindDataset))){
 					mappedElement_.JGSelect();
 				}
 				
-				mappedElement_.on(&quot;change&quot;,function(event_){
+				mappedElement_.on("change",function(event_){
 					var target_ = $(event_.target);
 					var rowContent_ = target_._jgDataRowContent();
 					var dataset_ = rowContent_.datasetUI().dataset();
@@ -736,25 +614,25 @@
 			}
 		}
 		
-		var fxElements_ = this._rowContent.find(&quot;*&quot;);
+		var fxElements_ = this._rowContent.find("*");
 		fxElements_.push(this._rowContent);
 		var fxElementsLength_ = fxElements_.length;
-		for(var fxIndex_=0;fxIndex_&lt;fxElementsLength_;++fxIndex_){
+		for(var fxIndex_=0;fxIndex_<fxElementsLength_;++fxIndex_){
 			var fxElement_ = $(fxElements_[fxIndex_]);
 			var attrs_ = fxElement_[0].attributes;
 			var attrCount_ = attrs_.length;
 			
-			for(var attrIndex_ =0; attrIndex_&lt;attrCount_;++attrIndex_){
+			for(var attrIndex_ =0; attrIndex_<attrCount_;++attrIndex_){
 				var attr_ = attrs_[attrIndex_];
 				var attrName_ = attr_.name.toLowerCase();
 				if(attr_.name.toLowerCase() !== _JGKeyword.ui.attrColumn
-					&amp;&amp; BLK(attr_.value).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+					&& BLK(attr_.value).replaceBlank("").indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
 					this._FXElements.push(new JGFXElement(fxElement_,attrName_,0))
 				}
 			}
 			
 			var textValue_ = fxElement_.html();
-			if(BLK(textValue_).replaceBlank(&quot;&quot;).indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
+			if(BLK(textValue_).replaceBlank("").indexOf(_JGKeyword.ui.keyFXPrefix) === 0){
 				this._FXElements.push(new JGFXElement(fxElement_,null,1))
 			}
 		}
@@ -811,7 +689,7 @@
 		var dataset_ = this.datasetUI().dataset();
 		var rowIndex_ = this.rowIndex();
 		var fxElementsLength_ = fxElements_.length;
-		for(var fxIndex_=0;fxIndex_&lt;fxElementsLength_;++fxIndex_){
+		for(var fxIndex_=0;fxIndex_<fxElementsLength_;++fxIndex_){
 			fxElements_[fxIndex_].update(dataset_, rowIndex_);
 		}
 	});
@@ -821,31 +699,31 @@
 		var columnValue_ = this.datasetUI().dataset().getColumnValue(columnName_, this.rowIndex());
 		var mappedElements_ = this.mappedElements();
 		var eCount_ = mappedElements_.length;
-		for(eIndex_=0;eIndex_&lt;eCount_;++eIndex_){
+		for(eIndex_=0;eIndex_<eCount_;++eIndex_){
 			var mappedElement_ = $(mappedElements_[eIndex_]);
 			if(mappedElement_.attr(_JGKeyword.ui.attrColumn).toUpperCase() === columnName_){
-				var tagName_ = mappedElement_.prop(&quot;tagName&quot;).toLowerCase();
+				var tagName_ = mappedElement_.prop("tagName").toLowerCase();
 				
 				//input type - checkbox
-				if(tagName_ === &quot;input&quot; &amp;&amp; mappedElement_.attr(&quot;type&quot;) === &quot;checkbox&quot;){
-					columnValue_ = (columnValue_ === true || columnValue_ === &quot;true&quot;);
-					if(mappedElement_.prop(&quot;checked&quot;) !== columnValue_) 
-						mappedElement_.prop(&quot;checked&quot;, columnValue_);
+				if(tagName_ === "input" && mappedElement_.attr("type") === "checkbox"){
+					columnValue_ = (columnValue_ === true || columnValue_ === "true");
+					if(mappedElement_.prop("checked") !== columnValue_) 
+						mappedElement_.prop("checked", columnValue_);
 				}
 				//input type - exclude checkbox
-				else if(tagName_ === &quot;input&quot;){
+				else if(tagName_ === "input"){
 					if(mappedElement_.val() !== columnValue_){
 						mappedElement_.val(columnValue_);
 					}
 				}
 				//textarea
-				else if(tagName_ === &quot;textarea&quot;){
+				else if(tagName_ === "textarea"){
 					if(mappedElement_.val() !== columnValue_){
 						mappedElement_.val(columnValue_);
 					}
 				}
 				//select
-				else if(tagName_ === &quot;select&quot;){
+				else if(tagName_ === "select"){
 					if(mappedElement_.val() !== columnValue_){
 						mappedElement_.val(columnValue_);
 					}
@@ -863,7 +741,7 @@
 	JGRowContent.prototype._refresh = (function(){
 		var dataset_ = this.datasetUI().dataset();
 		var colCount_ = dataset_.getColumnCount();
-		for(var colIndex_=0;colIndex_&lt;colCount_;++colIndex_){
+		for(var colIndex_=0;colIndex_<colCount_;++colIndex_){
 			this._refreshColumn(dataset_.getColumn(colIndex_).getName(), false);
 		}
 		
@@ -871,9 +749,9 @@
 	});
 	
 	/**
-	 * JGDatasetUI에서 FX수식을 위한 객체입니다.&lt;br&gt;
-	 * 사용자가 임의로 생성할 수 없으며, JGDatasetUI 매핑 시 생성될 수 있습니다.&lt;br&gt;
-	 * *참고 : {{#crossLink &quot;jQuery.fn.JGDatasetUI&quot;}}{{/crossLink}}
+	 * JGDatasetUI에서 FX수식을 위한 객체입니다.<br>
+	 * 사용자가 임의로 생성할 수 없으며, JGDatasetUI 매핑 시 생성될 수 있습니다.<br>
+	 * *참고 : {{#crossLink "jQuery.fn.JGDatasetUI"}}{{/crossLink}}
 	 * 
 	 * @class JGFXElement
 	 * @constructor
@@ -889,13 +767,13 @@
 		
 		switch(type_){
 		case 0: //attribute
-			this._fx = element_.attr(attrName_).replaceBlank(&quot;&quot;).substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.attr(attrName_).replaceBlank("").substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		case 1: //node text
-			this._fx = element_.html().replaceBlank(&quot;&quot;).substr(_JGKeyword.ui.keyFXPrefix.length);
+			this._fx = element_.html().replaceBlank("").substr(_JGKeyword.ui.keyFXPrefix.length);
 			break;
 		default:
-			console.error(&quot;invaild FX Element Type&quot;);
+			console.error("invaild FX Element Type");
 			break;
 		}
 	});
@@ -936,9 +814,9 @@
 	JGFXElement.prototype.update = (function(dataset_, rowIndex_){
 		var resultStr_ = null;
 		try{
-			resultStr_ = BLK(new Function(&quot;return &quot;+this._fx._jgFuncReplaceRegexpByDataset(dataset_,rowIndex_)+&quot;;&quot;).apply(dataset_));
+			resultStr_ = BLK(new Function("return "+this._fx._jgFuncReplaceRegexpByDataset(dataset_,rowIndex_)+";").apply(dataset_));
 		}catch(ex_){
-			resultStr_ = &quot;##fx Exception: &quot;+ex_.toString()+&quot;, statement: &quot;+this._fx+&quot;##&quot;;
+			resultStr_ = "##fx Exception: "+ex_.toString()+", statement: "+this._fx+"##";
 		}
 		
 		switch(this.type()){
@@ -949,17 +827,17 @@
 			this.element().html(resultStr_);
 			break;
 		default:
-			console.error(&quot;invaild FX Element Type&quot;);
+			console.error("invaild FX Element Type");
 			break;
 		}
 	});
 	
 	/**
-	 * select 태그와 매핑을 위한 객체입니다.&lt;br&gt;
+	 * select 태그와 매핑을 위한 객체입니다.<br>
 	 * 함수호출 형식은 아래와 같습니다.
 	 * 	
 	 * 	//1. jQuery Plugin Style
-	 * 	var result_ = $(target_).JGSelect(&quot;함수명&quot;,...);
+	 * 	var result_ = $(target_).JGSelect("함수명",...);
 	 * 	
 	 * 	//2. normal Style
 	 * 	var select_ = $(target_).JGSelect();
@@ -970,20 +848,20 @@
 	 * @constructor
 	 * @example
 	 * 	//1. 미리 정의된 속성값을 이용하여 초기화
-	 * 	&lt;select jg-bind-dataset=&quot;datasetName&quot;
-	 * 			jg-display-column=&quot;nm&quot;
-	 * 			jg-value-column=&quot;id&quot;&gt;&lt;/select&gt;
-	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
+	 * 	<select jg-bind-dataset="datasetName"
+	 * 			jg-display-column="nm"
+	 * 			jg-value-column="id"></select>
+	 * 	<script type="text/javascript">
 	 * 	$(target_).JGSelect();
-	 * 	&lt;/script&gt;
+	 * 	</script>
 	 * 	
 	 * 	//2. 매개변수를 이용하여 초기화
-	 * 	&lt;select&gt;&lt;/select&gt;
-	 * 	&lt;script type=&quot;text/javascript&quot;&gt;
-	 * 	$(target_).JGSelect({datasetName : &quot;datasetName&quot;
-	 * 						,displayColumn : &quot;nm&quot;
-	 * 						,valueColumn : &quot;id&quot;});
-	 * 	&lt;/script&gt;
+	 * 	<select></select>
+	 * 	<script type="text/javascript">
+	 * 	$(target_).JGSelect({datasetName : "datasetName"
+	 * 						,displayColumn : "nm"
+	 * 						,valueColumn : "id"});
+	 * 	</script>
 	 */
 	var JGSelect = (function(element_, options_){
 		var that_ = this;
@@ -999,15 +877,15 @@
 		var dataset_ = this.dataset();
 		
 		// dataset data event
-		$(dataset_).on(_JGKeyword.trigger._rowInserted+&quot; &quot;
-				+_JGKeyword.trigger._rowRemoved+&quot; &quot;
-				+_JGKeyword.trigger._rowMoved+&quot; &quot;
-				+_JGKeyword.trigger._columnAdded+&quot; &quot;
-				+_JGKeyword.trigger._columnRemoved+&quot; &quot;
-				+_JGKeyword.trigger._columnValueChanged+&quot; &quot;
-				+_JGKeyword.trigger._datasetClear+&quot; &quot;
-				+_JGKeyword.trigger._datasetReset+&quot; &quot;
-				+_JGKeyword.trigger._datasetChanged+&quot; &quot;
+		$(dataset_).on(_JGKeyword.trigger._rowInserted+" "
+				+_JGKeyword.trigger._rowRemoved+" "
+				+_JGKeyword.trigger._rowMoved+" "
+				+_JGKeyword.trigger._columnAdded+" "
+				+_JGKeyword.trigger._columnRemoved+" "
+				+_JGKeyword.trigger._columnValueChanged+" "
+				+_JGKeyword.trigger._datasetClear+" "
+				+_JGKeyword.trigger._datasetReset+" "
+				+_JGKeyword.trigger._datasetChanged+" "
 				+_JGKeyword.trigger._datasetSorted, function(event_, rowIndex_){
 			that_.reload();
 		});
@@ -1021,7 +899,7 @@
 	 * @method element
 	 * @return {jQuery Object} jQuery 객체
 	 * @example
-	 * 	var result_ = $(target_).JGSelect(&quot;element&quot;);
+	 * 	var result_ = $(target_).JGSelect("element");
 	 */
 	JGSelect.prototype.element = (function(){
 		return this._element;
@@ -1032,10 +910,10 @@
 	 * @method dataset
 	 * @return {JGDataset} 데이타셋
 	 * @example
-	 * 	var result_ = $(target_).JGSelect(&quot;dataset&quot;);
+	 * 	var result_ = $(target_).JGSelect("dataset");
 	 */
 	JGSelect.prototype.dataset = (function(){
-		return JGDS(&quot;dataset&quot;,this._datasetName);
+		return JGDS("dataset",this._datasetName);
 	});
 	/**
 	 * JGSelect에 매핑되어 있는 전시열명을 반환합니다.
@@ -1043,7 +921,7 @@
 	 * @method displayColumn
 	 * @return {String} 전시열명
 	 * @example
-	 * 	var result_ = $(target_).JGSelect(&quot;displayColumn&quot;);
+	 * 	var result_ = $(target_).JGSelect("displayColumn");
 	 */
 	JGSelect.prototype.displayColumn = (function(){
 		return this._displayColumn;
@@ -1055,7 +933,7 @@
 	 * @method valueColumn
 	 * @return {String} 값열명
 	 * @example
-	 * 	var result_ = $(target_).JGSelect(&quot;valueColumn&quot;);
+	 * 	var result_ = $(target_).JGSelect("valueColumn");
 	 */
 	JGSelect.prototype.valueColumn = (function(){
 		return this._valueColumn;
@@ -1065,18 +943,18 @@
 	 * 
 	 * @method reload
 	 * @example
-	 * 	var result_ = $(target_).JGSelect(&quot;reload&quot;);
+	 * 	var result_ = $(target_).JGSelect("reload");
 	 */
 	JGSelect.prototype.reload = (function(){
 		var element_ = this.element();
 		element_.empty();
 		function createOptionElement_(display_,value_){
-			return $(&quot;&lt;option value=&#x27;&quot;+value_+&quot;&#x27;&gt;&quot;+display_+&quot;&lt;/option&gt;&quot;);
+			return $("<option value='"+value_+"'>"+display_+"</option>");
 		};
 		
 		var dataset_ = this.dataset();
 		var rowCount_ = dataset_.getRowCount();
-		for(var rowIndex_=0;rowIndex_&lt;rowCount_;++rowIndex_){
+		for(var rowIndex_=0;rowIndex_<rowCount_;++rowIndex_){
 			element_.append(createOptionElement_(
 				dataset_.getColumnValue(this.displayColumn(),rowIndex_)
 				,dataset_.getColumnValue(this.valueColumn(),rowIndex_)
@@ -1086,41 +964,21 @@
 	});
 	
 	$.fn._jgSelect = (function(select_){
-		if(select_ !== undefined) this.data(&quot;jgdatasetJGSelect&quot;,select_);
-		return this.data(&quot;jgdatasetJGSelect&quot;);
+		if(select_ !== undefined) this.data("jgdatasetJGSelect",select_);
+		return this.data("jgdatasetJGSelect");
 	});
 	$.fn._jgSelectInitialized = (function(bool_){
-		if(bool_ !== undefined) this.data(&quot;jgdatasetJGSelectInitialized&quot;,bool_);
-		return NVL(this.data(&quot;jgdatasetJGSelectInitialized&quot;),false);
+		if(bool_ !== undefined) this.data("jgdatasetJGSelectInitialized",bool_);
+		return NVL(this.data("jgdatasetJGSelectInitialized"),false);
 	});
 	$.fn.JGSelect = (function(){
 		return this._jexecute(function(arguments_){
 			if(!this._jgSelectInitialized()){
 				this._jgSelect(new JGSelect(this, arguments_[0]));
 				this._jgSelectInitialized(true);
-			}
-			
-			return JGSelector(this._jgSelect(), arguments_);
+				return this;
+			}else return JGSelector(this._jgSelect(), arguments_);
 		},arguments);
 	});
 	
 })(window);
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>
