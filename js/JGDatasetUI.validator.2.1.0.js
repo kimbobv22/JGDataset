@@ -424,7 +424,13 @@
 		
 		// column value changed
 		$(dataset_).on(_JGKeyword.trigger._columnValueChanged,function(event_, columnName_, rowIndex_){
-			if(that_._options.realtimeCheck) that_._rows[rowIndex_].validate();
+			if(that_._options.realtimeCheck && !NVL(that_.__realtimeCheckStarted,false)){
+				that_.__realtimeCheckStarted = true;
+				setTimeout(function(){
+					that_._rows[rowIndex_].validate();
+					that_.__realtimeCheckStarted = false;
+				},BLK(that_._options.realtimeCheckDelay,0));
+			}
 		});
 		
 		// dataset clear,reset,changed,sorted
@@ -955,6 +961,7 @@
 			failedMessageTag : "<span style='display:block;' />",
 			stepValidation : true,
 			realtimeCheck : true,
+			realtimeCheckDelay : 100,
 			animateFailedLabelShow : function(){
 				this.stop();
 				this.fadeIn();
@@ -978,6 +985,7 @@
 	 * 	failedMessageTag = 실패메세지를 출력할 HTML 태그 문자열값 
 	 * 	stepValidation = 단계별 유효성검사여부
 	 * 	realtimeCheck = 실시간 유효성검사여부
+	 * 	realtimeCheckDelay = 수정여부에 따른 실시간 유효검사 지연시간
 	 * 	animateFailedLabelHide = 실패라벨숨김 에니메이션
 	 * 	animateFailedLabelShow = 실패라벨표시 에니메이션
 	 * 	animateValidLabelHide = 유효라벨숨김 에니메이션
