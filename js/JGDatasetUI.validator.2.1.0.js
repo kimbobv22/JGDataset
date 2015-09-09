@@ -1,4 +1,4 @@
-(function(window){
+(function(window, $){
 	
 	var JGJSONUtils = {
 		value : function(object_, key_){
@@ -1099,4 +1099,4 @@
 		},arguments);
 	});
 	
-})(window);
+})(window, $);

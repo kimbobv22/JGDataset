@@ -1,4 +1,4 @@
-(function(window){
+(function(window, $){
 
 	if($ === undefined || $ === null){
 		console.error("can't not initialize JGDataset, JQuery not found");
@@ -1509,6 +1509,7 @@
 	 * 	});
 	 */
 	JGDataset.prototype.each = (function(fromRowIndex_,toRowIndex_,logicFunc_){
+		var rowCount_ = this.getRowCount();
 		if(isNull(fromRowIndex_)){
 			fromRowIndex_ = NVL(fromRowIndex_,0);
 			toRowIndex_ = NVL(toRowIndex_,this.getRowCount()-1);
@@ -1517,8 +1518,8 @@
 		}
 		
 		logicFunc_ = NVL(logicFunc_,function(){});
-		
-		for(var rowIndex_=fromRowIndex_;rowIndex_<=toRowIndex_;++rowIndex_){
+
+		for(var rowIndex_=fromRowIndex_;rowIndex_<=toRowIndex_ && rowIndex_ < rowCount_;++rowIndex_){
 			if(logicFunc_.apply(this, [rowIndex_]) === false) break;
 		}
 	});
@@ -1678,4 +1679,4 @@
 		}
 	};
 	
-})(window);
+})(window, $);

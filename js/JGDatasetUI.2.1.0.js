@@ -1,4 +1,4 @@
-(function(window){
+(function(window, $){
 
 	if(JGDS === undefined){
 		console.error("can't not initialize JGDatasetUI, JGDataset not found");
@@ -292,9 +292,9 @@
 	 * 	$("#target").JGDatasetUI("datasetName");
 	 * 	</script>
 	 */
-	var JGDatasetUI = window.JGDatasetUI = (function(element_, datasetName_){
+	var JGDatasetUI = window.JGDatasetUI = (function(element_, datasetName_, options_){
 		var that_ = this;
-		this.options = $.extend(true,JGDatasetUI.prototype.options);
+		this.options = $.extend(true,JGDatasetUI.prototype.options, options_);
 		this._element = element_;
 		this._datasetName = NVL(datasetName_,element_.attr(_JGKeyword.ui.attrDataset));
 		
@@ -311,11 +311,13 @@
 		// row inserted
 		$(dataset_).on(_JGKeyword.trigger._rowInserted,function(event_, rowIndex_){
 			that_._insertRowContent(rowIndex_);
+			that_._randerNoRow();
 		});
 		
 		// row removed
 		$(dataset_).on(_JGKeyword.trigger._rowRemoved,function(event_, rowIndex_){
 			that_._removeRowContent(rowIndex_);
+			that_._randerNoRow();
 		});
 		
 		// row moved
@@ -345,6 +347,7 @@
 				+_JGKeyword.trigger._datasetChanged+" "
 				+_JGKeyword.trigger._datasetSorted,function(event_, rowIndex_, oldRowIndex_){
 			that_.reload();
+			that_._randerNoRow();
 		});
 		
 		// dataset changed
@@ -356,7 +359,8 @@
 	});
 	
 	JGDatasetUI.prototype.options = {
-			blankToNull : false
+			blankToNull : false,
+			noRowContent : null
 		};
 	
 	/**
@@ -439,6 +443,22 @@
 			if(NVL(fireEvent_,true)) $(that_.element()).trigger(_JGKeyword.ui.trigger.refreshed,[rowIndex_]);
 		});
 	});
+	JGDatasetUI.prototype._randerNoRow = (function(){
+		if(this._noRowElement !== undefined && this._noRowElement !== null){
+			this._noRowElement.remove();
+			this._noRowElement = null;
+		}
+
+		var rowCount_ = this.dataset().getRowCount();
+
+		if(rowCount_ <= 0){
+			var noRowContent_ = NVL(this.options.noRowContent,"");
+			if(noRowContent_ !== ""){
+				this._noRowElement = $(noRowContent_);
+				this.element().append(this._noRowElement);
+			}
+		}
+	});
 	
 	/**
 	 * 매핑 재적재를 수행합니다.
@@ -457,6 +477,7 @@
 			this._insertRowContent(this._rowContents.length);
 			++tempIndex_;
 		}
+		
 		$(this.element()).trigger(_JGKeyword.ui.trigger.mappingReloaded);
 	});
 	
@@ -468,10 +489,19 @@
 		if(bool_ !== undefined) this.data("jgdatasetJGDatasetUIInitialized",bool_);
 		return NVL(this.data("jgdatasetJGDatasetUIInitialized"),false);
 	});
-	$.fn.JGDatasetUI = (function(){
+	$.fn.JGDatasetUI = (function(options_){
 		return this._jexecute(function(arguments_){
 			if(!this._jgDatasetUIInitialized()){
-				this._jgDatasetUI(new JGDatasetUI(this, arguments_[0]));
+				var datasetName_, options_;
+
+				if($.type(arguments_[0]) === "object"){
+					options_ = arguments_[0];
+				}else{
+					datasetName_ = arguments_[0];
+					options_ = arguments_[1];
+				}
+
+				this._jgDatasetUI(new JGDatasetUI(this, datasetName_,options_));
 				this._jgDatasetUIInitialized(true);
 				return this;
 			}else return JGSelector(this._jgDatasetUI(), arguments_);
@@ -981,4 +1011,4 @@
 		},arguments);
 	});
 	
-})(window);
+})(window, $);

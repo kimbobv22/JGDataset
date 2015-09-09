@@ -1,4 +1,4 @@
-(function(window){
+(function(window, $){
 	
 	if(JGDatasetUI === undefined){
 		console.error("can't not initialize JGDatasetSumUI, JGDatasetUI not found");
@@ -187,4 +187,4 @@
 		},arguments);
 	});
 	
-})(window);
+})(window, $);
