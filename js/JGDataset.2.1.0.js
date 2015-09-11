@@ -1679,4 +1679,4 @@
 		}
 	};
 	
-})(window, $);
+})(window, jQuery);

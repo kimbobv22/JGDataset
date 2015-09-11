@@ -1099,4 +1099,4 @@
 		},arguments);
 	});
 	
-})(window, $);
+})(window, jQuery);

@@ -187,4 +187,4 @@
 		},arguments);
 	});
 	
-})(window, $);
+})(window, jQuery);
