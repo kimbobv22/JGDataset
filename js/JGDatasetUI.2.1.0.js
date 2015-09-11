@@ -444,12 +444,14 @@
 		});
 	});
 	JGDatasetUI.prototype._randerNoRow = (function(){
+
 		if(this._noRowElement !== undefined && this._noRowElement !== null){
 			this._noRowElement.remove();
 			this._noRowElement = null;
 		}
 
 		var rowCount_ = this.dataset().getRowCount();
+
 
 		if(rowCount_ <= 0){
 			var noRowContent_ = NVL(this.options.noRowContent,"");
@@ -489,7 +491,7 @@
 		if(bool_ !== undefined) this.data("jgdatasetJGDatasetUIInitialized",bool_);
 		return NVL(this.data("jgdatasetJGDatasetUIInitialized"),false);
 	});
-	$.fn.JGDatasetUI = (function(options_){
+	$.fn.JGDatasetUI = (function(){
 		return this._jexecute(function(arguments_){
 			if(!this._jgDatasetUIInitialized()){
 				var datasetName_, options_;

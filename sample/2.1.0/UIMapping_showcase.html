@@ -47,7 +47,9 @@ $(function(){
 	datasetView_.on("datasetuirowmapped",function(event_, rowIndex_){
 		console.log("row mapped : "+rowIndex_);
 	});
-	datasetView_.JGDatasetUI();
+	datasetView_.JGDatasetUI({
+		noRowContent : "<tr><td colspan='8'>no rows</td></tr>"
+	});
 	
 	printIt();
 });
